@@ -10660,17 +10660,18 @@
 									"model": {
 										"$ref": "AAAAAAGZgtE6unOSL2E="
 									},
-									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 1725,
-									"top": 417,
+									"left": 1656,
+									"top": 416,
+									"width": 75.50537109375,
 									"height": 13,
-									"alpha": -0.5235987755982988,
-									"distance": 30,
+									"alpha": -0.2530756939589809,
+									"distance": 59.90826320300064,
 									"hostEdge": {
 										"$ref": "AAAAAAGZgtE6u3OUw0M="
-									}
+									},
+									"text": "+Mis_niveles"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -10702,17 +10703,18 @@
 									"model": {
 										"$ref": "AAAAAAGZgtE6unOSL2E="
 									},
-									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 1729,
+									"left": 1720,
 									"top": 444,
+									"width": 19.5126953125,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
 									"hostEdge": {
 										"$ref": "AAAAAAGZgtE6u3OUw0M="
-									}
+									},
+									"text": "0..*"
 								},
 								{
 									"_type": "UMLQualifierCompartmentView",
@@ -10923,15 +10925,17 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 1826,
-									"top": 444,
+									"left": 2360,
+									"top": 639,
+									"width": 19.5126953125,
 									"height": 13,
-									"alpha": -0.5235987755982988,
-									"distance": 25,
+									"alpha": -0.34995767330651656,
+									"distance": 601.1322649800126,
 									"hostEdge": {
 										"$ref": "AAAAAAGZgtIP9nXqN8I="
 									},
-									"edgePosition": 2
+									"edgePosition": 2,
+									"text": "1..*"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -10942,17 +10946,18 @@
 									"model": {
 										"$ref": "AAAAAAGZgtIP9XXo+eM="
 									},
-									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 2411,
-									"top": 647,
+									"left": 2306,
+									"top": 631,
+									"width": 92.85986328125,
 									"height": 13,
-									"alpha": -0.5235987755982988,
-									"distance": 30,
+									"alpha": -5.44577290243854,
+									"distance": 60.14149981501958,
 									"hostEdge": {
 										"$ref": "AAAAAAGZgtIP9nXqN8I="
-									}
+									},
+									"text": "+Mis_Entidades"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -10984,17 +10989,18 @@
 									"model": {
 										"$ref": "AAAAAAGZgtIP9XXo+eM="
 									},
-									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 2383,
+									"left": 2374,
 									"top": 651,
+									"width": 19.5126953125,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
 									"hostEdge": {
 										"$ref": "AAAAAAGZgtIP9nXqN8I="
-									}
+									},
+									"text": "1..*"
 								},
 								{
 									"_type": "UMLQualifierCompartmentView",
@@ -13849,17 +13855,18 @@
 									"model": {
 										"$ref": "AAAAAAGZgubROL4y8LU="
 									},
-									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 2606,
-									"top": 507,
+									"left": 2528,
+									"top": 503,
+									"width": 99.34716796875,
 									"height": 13,
-									"alpha": -0.5235987755982988,
-									"distance": 30,
+									"alpha": -0.31628618165955036,
+									"distance": 57.87054518492115,
 									"hostEdge": {
 										"$ref": "AAAAAAGZgubROL40PkI="
-									}
+									},
+									"text": "+Mi_fabricaSkins"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -14581,6 +14588,7 @@
 								"_parent": {
 									"$ref": "AAAAAAGZgubRN74wAh0="
 								},
+								"name": "Mi_fabricaSkins",
 								"reference": {
 									"$ref": "AAAAAAGZguX2CLVjcHQ="
 								},
@@ -15501,10 +15509,12 @@
 								"_parent": {
 									"$ref": "AAAAAAGZgtIP9XXmB6w="
 								},
+								"name": "Mis_Entidades",
 								"reference": {
 									"$ref": "AAAAAAGZgrHmN2eSJzs="
 								},
-								"navigable": "navigable"
+								"navigable": "navigable",
+								"multiplicity": "1..*"
 							}
 						}
 					],
@@ -15609,10 +15619,12 @@
 								"_parent": {
 									"$ref": "AAAAAAGZgtE6unOQpvQ="
 								},
+								"name": "Mis_niveles",
 								"reference": {
 									"$ref": "AAAAAAGZgsrv8XIn6h4="
 								},
-								"navigable": "navigable"
+								"navigable": "navigable",
+								"multiplicity": "0..*"
 							}
 						}
 					]
@@ -15759,6 +15771,5 @@
 				}
 			]
 		}
-	],
-	"documentVersion": 1
+	]
 }
