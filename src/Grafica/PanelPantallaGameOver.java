@@ -2,13 +2,14 @@ package Grafica;
 
 import javax.swing.JButton;
 
-public class PanelPantallaGameOver {
+public class PanelPantallaGameOver extends PanelVista{
 
     //Atributos
-    protected JButton BotonVolverMenu;
+    protected JButton botonVolverMenu;
 
     //Constructor
-    public PanelPantallaGameOver(ControladorVistas c){
-
+    public PanelPantallaGameOver(ControladorVistas c,JButton botonvolvermenu){
+        controlaVistas=c;
+        botonVolverMenu=botonvolvermenu;
     }
 }
