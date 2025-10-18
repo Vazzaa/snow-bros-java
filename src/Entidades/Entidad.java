@@ -1,6 +1,8 @@
 package Entidades;
+import Grafica.*;
+import Juego.ModoDeJuego;
 
-abstract public class Entidad implements EntidadLogica {
+public abstract class Entidad implements EntidadLogica {
 	
 	// Atributos
 	protected Skin[] aspecto;
