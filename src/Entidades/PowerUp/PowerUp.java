@@ -1,7 +1,8 @@
 package Entidades.PowerUp;
 import Entidades.Entidad;
+import Visitors.Colisionable;
 
-abstract class PowerUp extends Entidad {
+abstract class PowerUp extends Entidad implements Colisionable {
     protected int puntaje;
     protected float tiempoDeVida; // en segundos
 

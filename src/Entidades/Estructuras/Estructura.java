@@ -1,5 +1,7 @@
 package Entidades.Estructuras;
 
-abstract class Estructura {
+import Visitors.Colisionable;
+
+abstract class Estructura implements Colisionable{
     
 }

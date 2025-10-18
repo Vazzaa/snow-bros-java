@@ -1,13 +1,15 @@
 package Entidades.Enemigos;
 
-abstract class Enemigo{
+import Visitors.Colisionable;
+
+abstract class Enemigo implements Colisionable{
     protected int vida;
     protected EstadoEnemigo estado;
 
     public Enemigo(int vida){
         this.vida = vida;
         this.estado = new EstadoEnemigo(this);
-    }   
+    }  
     public abstract void atacar(Enemigo enemigo);
 
     public abstract void atacar(Jugador jugador);
