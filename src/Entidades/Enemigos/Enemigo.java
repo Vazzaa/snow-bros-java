@@ -1,6 +1,6 @@
 package Entidades.Enemigos;
 
-abstract class Enemigo{
+abstract class Enemigo {
     protected int vida;
     protected EstadoEnemigo estado;
 

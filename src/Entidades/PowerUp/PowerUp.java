@@ -1,5 +1,6 @@
 package Entidades.PowerUp;
 import Entidades.Entidad;
+import Entidades.Jugador.Jugador;
 
 abstract class PowerUp extends Entidad {
     protected int puntaje;
