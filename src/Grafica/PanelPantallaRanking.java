@@ -2,13 +2,14 @@ package Grafica;
 
 import javax.swing.JButton;
 
-public class PanelPantallaRanking {
+public class PanelPantallaRanking extends PanelVista{
     
     //Atributos
-    protected JButton BotonParaAtr;
+    protected JButton botonParaAtr;
 
     //Constructor
-    public PanelPantallaRanking(ControladorVistas c){
-
+    public PanelPantallaRanking(ControladorVistas c,JButton botonparaatras){
+        controlaVistas=c;
+        botonParaAtr=botonparaatras;
     }
 }
