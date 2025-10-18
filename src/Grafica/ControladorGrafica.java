@@ -8,6 +8,9 @@ public interface ControladorGrafica {
 	public void mostrarPantallaPrincipal();
 	public void mostrarPantallaNivel();
 	public void mostrarPantallaGameOver();
+	public void mostrarPantallaRanking();
+	public void mostrarPantallaElegirDominio();
+	public void mostrarPantallaElegirModoJuego();
 	public Observer registrarEntidad(EntidadLogica e);
 	public Observer registrarJugador(EntidadJugador e);
 	public void sacarEntidad(EntidadLogica e);

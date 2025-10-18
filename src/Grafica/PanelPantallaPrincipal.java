@@ -2,14 +2,16 @@ package Grafica;
 
 import javax.swing.JButton;
 
-public class PanelPantallaPrincipal {
+public class PanelPantallaPrincipal extends PanelVista{
     
     //Atributos
-    protected JButton BotonEmpezarJue;
-    protected JButton BotonRank;
+    protected JButton botonEmpezarJue;
+    protected JButton botonRank;
 
     //Constructor
-    public PanelPantallaPrincipal(ControladorVistas c){
-
+    public PanelPantallaPrincipal(ControladorVistas c,JButton botonranking, JButton botonempezarjuego){
+        controlaVistas=c;
+        botonEmpezarJue=botonempezarjuego;
+        botonRank=botonranking;
     }
 }

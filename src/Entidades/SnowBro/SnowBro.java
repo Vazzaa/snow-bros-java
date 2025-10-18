@@ -5,9 +5,6 @@ import Entidades.Hitbox;
 import Grafica.Observer;
 import Entidades.Skin;
 import Visitors.Colisionable;
-import Entidades.Enemigos.Enemigo;
-import Entidades.PowerUp.PowerUp;
-import Entidades.Estructuras.Estructura;
 import Grafica.ObserverJugador;
 
 public class SnowBro {
