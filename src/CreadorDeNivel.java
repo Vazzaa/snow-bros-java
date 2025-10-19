@@ -1,3 +1,6 @@
+import Fabricas.FabricaSkin;
+import Juego.ModoDeJuego;
+
 public class CreadorDeNivel {
 
     protected ModoDeJuego crearNaModo;

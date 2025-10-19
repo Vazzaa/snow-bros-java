@@ -1,5 +1,8 @@
 package Juego;
+
 import Grafica.*;
+import Juego.Nivel;
+import Juego.Ranking;
 
 public abstract class ModoDeJuego implements ControladorJuego {
     
@@ -26,4 +29,21 @@ public abstract class ModoDeJuego implements ControladorJuego {
 		// No hay ningún método en ControladorGrafica que controle la dirección de un jugador:
 	 	// registrarJugador() recibe un jugador y lo registra, y verificarColisiones() verifica las colisiones, no los movimientos.
 	}
+
+	public Nivel getNivel(){
+		return miNivel;
+	}
+
+	public void setNivel(Nivel n){
+		miNivel = n;
+	}
+
+	public void activarDominio1(){
+
+	}
+
+	public void activarDominio2(){
+		
+	}
+
 }

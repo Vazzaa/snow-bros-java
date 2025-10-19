@@ -1,3 +1,4 @@
+package Juego;
 import Entidades.Entidad;
 import Fabricas.FabricaEntidades;
 

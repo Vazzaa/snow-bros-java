@@ -1,8 +1,10 @@
 package Entidades.Enemigos;
 
+import Entidades.SnowBro.SnowBro;
 import Visitors.Colisionable;
 
 abstract class Enemigo implements Colisionable{
+
     protected int vida;
     protected EstadoEnemigo estado;
 
@@ -10,11 +12,13 @@ abstract class Enemigo implements Colisionable{
         this.vida = vida;
         this.estado = new EstadoEnemigo(this);
     }  
-    public abstract void atacar(Enemigo enemigo);
+    public abstract void atacar(Enemigo e);
 
-    public abstract void atacar(Jugador jugador);
+    public abstract void atacar(SnowBro s);
 
     public abstract void moverse();
+
+    public abstract void chocar(Colisionable c);
     
     public abstract void recibirDisparo();
 

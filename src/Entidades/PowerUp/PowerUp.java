@@ -28,7 +28,7 @@ abstract class PowerUp extends Entidad implements Colisionable {
         this.tiempoDeVida = tiempoDeVida;
     }
 
-    public abstract void afectar(Jugador jugador);
+    public abstract void afectar(SnowBro snowBro);
 
     public abstract void afectar(Enemigo enemigo);
 
