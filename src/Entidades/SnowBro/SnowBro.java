@@ -1,40 +1,57 @@
 package Entidades.SnowBro;
+
 import Entidades.Jugador.Jugador;
+import EstadoMovimiento.EstadoMovimietoSnowBro;
 import Fabricas.FabricaEntidades;
+import Entidades.Entidad;
 import Entidades.Hitbox;
 import Grafica.Observer;
 import Entidades.Skin;
 import Visitors.Colisionable;
 import Grafica.ObserverJugador;
 
-public class SnowBro {
+public class SnowBro extends Entidad{
     //Atributos de instancia
     
-    protected Jugador jug;
+    protected Jugador jugador;
+    protected EstadoMovimietoSnowBro estadoMovimiento;
+    protected FabricaEntidades crearNieve;
+
     protected int puntaje;
     protected int vida;
-    protected Skin aspecto;
-    protected EstadoDireccion estadoDireccion;
-    protected ObserverJugador observer;
-    protected Hitbox checkpos;
     protected int velocidad;
-    protected FabricaEntidades crearNieve;
 
     //Constructor
 
-    public SnowBro (Skin aspecto_) {
-        jug = ;
-        puntaje = 0;
+    public SnowBro (Skin aspectos, float x, float y, Jugador jug) {
+        super(aspectos, x, y);
+        velocidad = 100;
+        jugador = jug;
         vida = 3;
-        aspecto = aspecto_;
-        estadoDireccion = ;
-        observer = ;
-        checkpos = ;
-        velocidad = ;
-        crearNieve = ;
+        puntaje = 0;
+        jugador = jug;
+        estadoMovimiento = new EstadoMovimietoSnowBro(this);
     }
 
     //Comandos
+
+    public int getVida() {
+        return vida;
+    }
+
+    public int getPuntaje() {
+        return puntaje;
+    }
+
+    public Jugador getJugador() {
+        return jugador;
+    }
+
+    public int getVelocidad(){
+        return velocidad;
+    }
+
+
     public void setVida(int v) {
         vida = v;
     }
@@ -44,7 +61,11 @@ public class SnowBro {
     }
 
     public void setJugador(Jugador j) {
-        jug = j;
+        jugador = j;
+    }
+
+    public void setVelocidad(int v){
+        velocidad = v;
     }
 
     public void disparar() {
@@ -52,6 +73,9 @@ public class SnowBro {
     }
 
     public void moverse() {
+        estadoMovimiento.mover();
+        notificarObserver();
+
 
     }
 
@@ -79,26 +103,12 @@ public class SnowBro {
 
     }
 
-    public void setDireccion (int direccion) {
-        estadoDireccion = direccion;
-    }
 
     public void reiniciar() {
 
     }
 
     //Consultas
-    public int getVida() {
-        return vida;
-    }
-
-    public int getPuntaje() {
-        return puntaje;
-    }
-
-    public Jugador getJugador() {
-        return jug;
-    }
 
     public int getClaveRepreEstado() {
 

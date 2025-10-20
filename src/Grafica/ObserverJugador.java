@@ -1,4 +1,4 @@
-package Grafica.ObserverJugador;
+package Grafica;
 import Entidades.EntidadJugador;
 
 public class ObserverJugador {

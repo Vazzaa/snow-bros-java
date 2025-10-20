@@ -3,7 +3,7 @@ package Entidades.Enemigos;
 import Entidades.SnowBro.SnowBro;
 import Visitors.Colisionable;
 
-abstract class Enemigo implements Colisionable{
+public abstract class Enemigo implements Colisionable{
 
     protected int vida;
     protected EstadoEnemigo estado;

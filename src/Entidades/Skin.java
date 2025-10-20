@@ -8,9 +8,9 @@ public class Skin {
 	protected int estadoActual;
 	
 	// Comandos
-	public Skin(Map<Integer, String> mie, int ea) {
-		mapeoImagenEstado = mie;
-		estadoActual = ea;
+	public Skin(Map<Integer, String> mapero_estado_imagen, int estado_actual) {
+		mapeoImagenEstado = mapero_estado_imagen;
+		estadoActual = estado_actual;
 	}
 	
 	public void setEstadoActual(int ea) {
@@ -18,7 +18,6 @@ public class Skin {
 	}
 	
 	public String getRutaImagenActual() {
-		// TODO: ver que argumento hay que pasar.
-		return null;
+		return mapeoImagenEstado.get(estadoActual);
 	}
 }

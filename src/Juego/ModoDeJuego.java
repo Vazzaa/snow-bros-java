@@ -9,7 +9,7 @@ public abstract class ModoDeJuego implements ControladorJuego {
 	// Atributos
 	protected Ranking rank;
 	protected ControladorGrafica controlaGrafica;
-	protected Nivel miNivel;
+	protected Nivel nivelActual;
 	
 	// Comandos
 	public ModoDeJuego() {
@@ -31,11 +31,11 @@ public abstract class ModoDeJuego implements ControladorJuego {
 	}
 
 	public Nivel getNivel(){
-		return miNivel;
+		return nivelActual;
 	}
 
 	public void setNivel(Nivel n){
-		miNivel = n;
+		nivelActual = n;
 	}
 
 	public void activarDominio1(){
@@ -44,6 +44,10 @@ public abstract class ModoDeJuego implements ControladorJuego {
 
 	public void activarDominio2(){
 		
+	}
+
+	public void moverJugador(){
+		nivelActual.getSnowBro().moverse();
 	}
 
 }
