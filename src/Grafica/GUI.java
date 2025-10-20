@@ -18,9 +18,15 @@ public class GUI implements ControladorGrafica {
 	protected PanelPantallaElegirModoDeJuego panelElegirModoJuego;
 	protected JFrame ventana;
 	protected ControladorJuego controlarJuego;
+	protected ConstantesTeclado keyListener;
 
 	public GUI(JFrame jf){
 		ventana=jf;
+
+		keyListener = new ConstantesTeclado();
+		ventana.addKeyListener(keyListener);
+		ventana.setFocusable(true);
+		ventana.requestFocusInWindow();
 	}
 
 	public void setPanelRanking(PanelPantallaRanking pr){
@@ -85,8 +91,7 @@ public class GUI implements ControladorGrafica {
 
 	@Override
 	public void mostrarPantallaNivel() {
-		// TODO Auto-generated method stub
-		
+		ventana.requestFocusInWindow();
 	}
 
 	@Override

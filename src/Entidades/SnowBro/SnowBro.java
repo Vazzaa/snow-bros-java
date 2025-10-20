@@ -119,6 +119,6 @@ public class SnowBro extends Entidad{
     //Consultas
 
     public int getClaveRepreEstado() {
-
+        return 0;
     }
 }
