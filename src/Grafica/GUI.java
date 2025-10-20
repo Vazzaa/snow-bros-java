@@ -7,20 +7,32 @@ import Entidades.EntidadJugador;
 import Entidades.EntidadLogica;
 import Juego.ControladorJuego;
 
-public class GUI implements ControladorGrafica {
+public class GUI implements ControladorGrafica, ControladorVistas {
 
 	//Atributos
-	protected PanelPantallaRanking panelRanking;
 	protected PanelPantallaPrincipal panelPrincipal;
+	protected PanelPantallaRanking panelRanking;
+	protected PanelPantallaElegirModoDeJuego panelElegirModoJuego;
 	protected PanelPantallaElegirDominio panelElegirDominio;
 	protected PanelPantallaNivel panelNivel;
 	protected PanelPantallaGameOver panelGameOver;
-	protected PanelPantallaElegirModoDeJuego panelElegirModoJuego;
 	protected JFrame ventana;
 	protected ControladorJuego controlarJuego;
 
-	public GUI(JFrame jf){
-		ventana=jf;
+	public GUI(){
+		panelPrincipal = new PanelPantallaPrincipal(this);
+		panelRanking = new PanelPantallaRanking(null, null);
+		panelElegirModoJuego = new PanelPantallaElegirModoDeJuego(null, null, null, null);
+		panelElegirDominio = new PanelPantallaElegirDominio(null, null, null);
+		panelNivel = new PanelPantallaNivel(null);
+		panelGameOver = new PanelPantallaGameOver(null, null);
+		configurarVentana();
+		//registrarOyenteVentana();
+	}
+
+	protected void configurarVentana(){
+		ventana = new JFrame("Tdp : SnowBros");
+		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	public void setPanelRanking(PanelPantallaRanking pr){
@@ -135,6 +147,48 @@ public class GUI implements ControladorGrafica {
 	public void mostrarPantallaElegirModoJuego() {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'mostrarPantallaElegirModoJuego'");
+	}
+
+	@Override
+	public void accionarInicioJuego() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void accionarPantallaElegirDominio() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void accionarPantallaElegirModoJuego() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void accionarPantallaGameOver() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void accionarPantallaNivel() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void accionarPantallaPrincipal() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void accionarPantallaRanking() {
+		// TODO Auto-generated method stub
+		
 	}
     
 }
