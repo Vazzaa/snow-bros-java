@@ -30,4 +30,5 @@ replay_pid*
 .github
 .project
 .classpath
+.settings
 /bin/

@@ -1,6 +1,6 @@
 package Entidades.Proyectiles;
 
-public class Bomba extends Proyectil{
+public class ProyectilBomba extends Proyectil{
     
     protected float Alcance;
     protected int Daño;
@@ -8,7 +8,7 @@ public class Bomba extends Proyectil{
     protected Skin Aspecto;
     protected Hitbox hb;
 
-    public Bomba(Skin s, Hitbox h) {
+    public ProyectilBomba(Skin s, Hitbox h) {
         Alcance = 0;
         Daño = 0;
         Velocidad = 0;

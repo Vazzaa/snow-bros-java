@@ -1,14 +1,14 @@
 package Entidades.Proyectiles;
 
-public class Nieve extends Proyectil{
-    
-    protected float Alcance;    
+public class ProyectilFuego extends Proyectil{
+
+    protected float Alcance;
     protected int Daño;
     protected int Velocidad;
     protected Skin Aspecto;
     protected Hitbox hb;
 
-    public Nieve (Skin s, Hitbox h) {
+    public ProyectilFuego (Skin s, Hitbox h) {
         Alcance = 0;
         Daño = 0;
         Velocidad = 0;

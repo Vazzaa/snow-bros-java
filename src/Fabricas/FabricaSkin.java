@@ -23,6 +23,7 @@ abstract class FabricaSkin {
     abstract Skin crearSkinEscalera();
     abstract Skin crearSkinPared();
     abstract Skin crearSkinSueloResbaladizo();
+    abstract Skin crearSkinPlataforma();
     abstract Skin crearSkinPlatQuebradiza();
     abstract Skin crearSkinPlatMovil();
     abstract Skin crearSkinProyectilBomba();

@@ -1,11 +1,17 @@
 package Entidades.Estructuras;
+
+import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
 import Visitors.Colisionable;
+import Entidades.Skin;
+import Entidades.Entidad;
 
-public abstract class Estructura implements Colisionable{
+public abstract class Estructura extends Entidad implements Colisionable{
 
-    protected int Puntaje;
 
+    public Estructura(Skin skins, int x, int y){
+        super(skins, x, y);
+    }
 
     public void afectar(SnowBro s);
 

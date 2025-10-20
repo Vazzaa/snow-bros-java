@@ -18,3 +18,6 @@ public class Escalera extends Obstaculo{
 
     }
 }
+
+
+
