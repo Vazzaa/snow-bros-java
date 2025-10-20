@@ -1,10 +1,14 @@
 package Entidades.SnowBro;
 
 import Entidades.Jugador.Jugador;
+import Entidades.Estructuras.Estructura;
+import Entidades.PowerUp.PowerUp;
+import Entidades.Enemigos.Enemigo;
 import EstadoMovimiento.EstadoMovimietoSnowBro;
 import Fabricas.FabricaEntidades;
 import Entidades.Entidad;
 import Entidades.Hitbox;
+import Grafica.ConstantesTeclado;
 import Grafica.Observer;
 import Entidades.Skin;
 import Visitors.Colisionable;
@@ -69,11 +73,15 @@ public class SnowBro extends Entidad{
     }
 
     public void disparar() {
-
+    	
     }
 
     public void moverse() {
-        estadoMovimiento.mover();
+    	boolean derecha = ConstantesTeclado.estaPresionada(ConstantesTeclado.DERECHA);
+    	boolean izquierda = ConstantesTeclado.estaPresionada(ConstantesTeclado.IZQUIEDA);
+    	boolean salto = ConstantesTeclado.estaPresionada(ConstantesTeclado.SALTAR);
+    	
+        estadoMovimiento.mover(derecha, izquierda, salto);
         notificarObserver();
 
 

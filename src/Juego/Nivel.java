@@ -92,12 +92,9 @@ public class Nivel {
         misProyectiles.addLast(p);
     }
 
-
-
     public void moverSnowBro(){
-
+    	snowBro.moverse();
     }
-
 
     public void moverEntidad(Entidad e){
         

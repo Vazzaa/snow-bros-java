@@ -19,13 +19,39 @@ public class EstadoMovimietoSnowBro {
     public EstadoMovimietoSnowBro(SnowBro snowBro){
         this.snowBro = snowBro;
     }
+    
+    public void mover(boolean derecha, boolean izquierda, boolean salto) {
+    	if (derecha) {
+    		moverDerecha();
+    	} else if (izquierda) {
+    		moverIzquierda();
+    	} else {
+    		detenerMovimientoHorizontal();
+    	}
+    	
+    	if (salto) {
+    		saltar();
+    	}
+    	
+    	actualizar();
     }
-    public void moverDerecha() {
+
+    protected void moverDerecha() {
         this.velocidadHorizontal = VELOCIDAD_MOVIMIENTO;
     }
 
-    public void moverIzquierda() {
+    protected void moverIzquierda() {
         this.velocidadHorizontal = -VELOCIDAD_MOVIMIENTO;
+    }
+    
+    protected void saltar() {
+    	if (enElSuelo()) {
+    		this.velocidadVertical = FUERZA_SALTO;
+    	}
+    }
+    
+    protected boolean enElSuelo() {
+    	return velocidadVertical >= 0;
     }
 
     public void detenerMovimientoHorizontal() {
