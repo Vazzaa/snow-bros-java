@@ -29,7 +29,7 @@ public class SnowBro extends Entidad{
 
     public SnowBro (Skin aspectos, float x, float y, Jugador jug) {
         super(aspectos, x, y);
-        velocidad = 100;
+        velocidad = 20;
         jugador = jug;
         vida = 3;
         puntaje = 0;
@@ -107,7 +107,7 @@ public class SnowBro extends Entidad{
 
     }
 
-    public void afectar(Estructura es) {
+    public void afectar(Estructura e) {
 
     }
 

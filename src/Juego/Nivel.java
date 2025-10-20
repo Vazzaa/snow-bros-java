@@ -22,10 +22,11 @@ public class Nivel {
     protected FabricaEntidades miFabrica;
 
 
-    public Nivel(int num){
+    public Nivel(int num, List<Estructura> misEstructuras, List<Enemigo> misEnemigos, SnowBro snowBro){
         numero = num;
-        misEstructuras = new LinkedList<Estructura>();
-        misEnemigos = new LinkedList<Enemigo>();
+        this.snowBro = snowBro;
+        this.misEstructuras = misEstructuras;
+        this.misEnemigos = misEnemigos;
         misPowerUps = new LinkedList<PowerUp>();
         misProyectiles = new LinkedList<Proyectil>();
         miFabrica = new FabricaEntidades();

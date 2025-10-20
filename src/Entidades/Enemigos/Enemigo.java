@@ -1,20 +1,44 @@
 package Entidades.Enemigos;
 
+import EstadoMovimiento.EstadoEnemigo;
+import Entidades.Entidad;
 import Entidades.SnowBro.SnowBro;
 import Visitors.Colisionable;
+import Entidades.Skin;
 
-public abstract class Enemigo implements Colisionable{
+public abstract class Enemigo extends Entidad implements Colisionable{
 
     protected int vida;
-    protected EstadoEnemigo estado;
-    protected int posX, posY;
+    protected int posX;
+    protected int posY;
+    protected int puntaje;
+    protected EstadoEnemigo estadoEnemigo;
 
-    public Enemigo(int vida, int posX, int posY){
-        this.vida = vida;
-        this.estado = new EstadoEnemigo(this);
-        this.posX = posX;
-        this.posY = posY;
-    }  
+
+    public Enemigo(Skin skins, int posX, int posY, int v, int p){
+        super(skins,posX,posY);
+        int vida = v;
+        int puntaje = p;
+
+    }
+
+    public void setVida(int v){
+        vida = v;
+    }
+
+    public void setPuntaje(int p){
+        puntaje = p;
+    }
+
+    public int getVida(){
+        return vida;
+    }
+
+    public int getPuntaje(){
+        return puntaje;
+    }
+    
+    
     public abstract void atacar(Enemigo e);
 
     public abstract void atacar(SnowBro s);

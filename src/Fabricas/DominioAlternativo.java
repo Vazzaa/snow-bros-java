@@ -1,6 +1,5 @@
+package Fabricas;
 <<<<<<< HEAD
-import Fabricas.FabricaSkin;
-=======
 import Entidades.Skin;
 >>>>>>> 1c5c8ed79a29ee564a8468f0b70f065b74e314bf
 
