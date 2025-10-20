@@ -41,6 +41,7 @@ public class CreadorDeNivel {
         List<Estructura> plataformas = new ArrayList<>();
         List<Enemigo> enemigos = new ArrayList<>();
         SnowBro jugador = null;
+        int numeroNivel;
         
         try (BufferedReader reader = new BufferedReader(new FileReader(rutaArchivo))){
             String  linea;
@@ -52,6 +53,12 @@ public class CreadorDeNivel {
                     int posY = fila * ALTO_TILE;
 
                     switch (caracter) {
+                        case '1':
+                            numeroNivel = 1;
+                            break;
+                        case '2':
+                            numeroNivel = 2;
+                            break;
                         case 'P':
                             plataformas.add(new PlatMovil(posX, posY, fabSkins.crearSkinPlatMovil()));
                             break;
@@ -98,7 +105,6 @@ public class CreadorDeNivel {
             //TODO: crear LevelLoadException
             throw new LevelLoadException("Error al leer el archivo de nivel: " + e.getMessage());
         }
-        return new Nivel(plataformas, enemigos, jugador);
+        return new Nivel(numeroNivel, plataformas, enemigos, jugador);
     }
-    
 }
