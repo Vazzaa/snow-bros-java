@@ -13,14 +13,12 @@ public abstract class Entidad implements EntidadLogica {
 	protected ModoDeJuego miJuego;
 	protected ObserverGrafico observer;
 	protected Hitbox miHitbox;
-	protected float posX;
-	protected float posY;
 
 	protected Entidad(Skin skins, float x, float y){
 		misAspectos = skins;
 		listaObservadores = new LinkedList<Observer>();
-		posX = x;
-		posY = y;
+		miHitbox.setPosX(x);
+		miHitbox.setPosY(y);
 	}
 
 	public Skin getSkin(){
@@ -28,19 +26,19 @@ public abstract class Entidad implements EntidadLogica {
 	}
 
 	public float getPosX(){
-		return posX;
+		return miHitbox.getPosX();
 	}
 
 	public float getPosY(){
-		return posY;
+		return miHitbox.getPosY();
 	}
 
 	public void setPosX(float x){
-		posX = x;
+		miHitbox.setPosX(x);
 	}
 
 	public void setPosY(float y){
-		posY = y;
+		miHitbox.setPosY(y);;
 	}
 
 	public void registrarObserver(Observer obs){

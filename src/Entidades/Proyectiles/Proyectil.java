@@ -11,33 +11,18 @@ public abstract class Proyectil extends Entidad{
     protected int daño;
     protected float alcance;
 
-    public Proyectil();
+    public Proyectil(Skin skins, int x, int y, int v, int d, int a){
+        super(skins, x, y);
+        velocidad = v;
+        daño = d;
+        alcance = a;
+    }
 
     public void afectar(SnowBro snowNBro);
 
     public void afectar(Enemigo enemigo);
 
     public void afectar(Estructura estructura);
-
-    @Override
-    public float getPosX() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public float getPosY() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public Skin getSkin() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-
 
 
 }

@@ -1,13 +1,18 @@
 package Entidades.PowerUp;
+
+import Entidades.Skin;
 import Entidades.Entidad;
-import Entidades.Jugador.Jugador;
 import Visitors.Colisionable;
+import Entidades.SnowBro.SnowBro;
+import Entidades.Enemigos.Enemigo;
 
 public abstract class PowerUp extends Entidad implements Colisionable {
-    protected int puntaje;
-    protected float tiempoDeVida; // en segundos
 
-    public PowerUp(int puntaje, float tiempoDeVida) {
+    protected int puntaje;
+    protected float tiempoDeVida; 
+
+    public PowerUp(Skin skins, int posX, int posY,int puntaje, float tiempoDeVida) {
+        super(skins, posX, posY);
         this.puntaje = puntaje;
         this.tiempoDeVida = tiempoDeVida;
     }

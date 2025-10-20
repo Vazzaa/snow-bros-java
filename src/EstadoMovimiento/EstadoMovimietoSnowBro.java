@@ -19,7 +19,6 @@ public class EstadoMovimietoSnowBro {
     public EstadoMovimietoSnowBro(SnowBro snowBro){
         this.snowBro = snowBro;
     }
-    }
     public void moverDerecha() {
         this.velocidadHorizontal = VELOCIDAD_MOVIMIENTO;
     }
