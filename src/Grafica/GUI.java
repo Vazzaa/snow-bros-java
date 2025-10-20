@@ -18,7 +18,9 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	protected PanelPantallaGameOver panelGameOver;
 	protected JFrame ventana;
 	protected ControladorJuego controlarJuego;
+	protected ConstantesTeclado keyListener;
 
+<<<<<<< HEAD
 	public GUI(){
 		panelPrincipal = new PanelPantallaPrincipal(this);
 		panelRanking = new PanelPantallaRanking(null, null);
@@ -33,6 +35,15 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	protected void configurarVentana(){
 		ventana = new JFrame("Tdp : SnowBros");
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+=======
+	public GUI(JFrame jf){
+		ventana=jf;
+
+		keyListener = new ConstantesTeclado();
+		ventana.addKeyListener(keyListener);
+		ventana.setFocusable(true);
+		ventana.requestFocusInWindow();
+>>>>>>> e0d924c2c6a77edc3391b2dc9116ad30c76d78e0
 	}
 
 	public void setPanelRanking(PanelPantallaRanking pr){
@@ -97,8 +108,7 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 
 	@Override
 	public void mostrarPantallaNivel() {
-		// TODO Auto-generated method stub
-		
+		ventana.requestFocusInWindow();
 	}
 
 	@Override
