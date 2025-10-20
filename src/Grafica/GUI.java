@@ -20,7 +20,6 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	protected ControladorJuego controlarJuego;
 	protected ConstantesTeclado keyListener;
 
-<<<<<<< HEAD
 	public GUI(){
 		panelPrincipal = new PanelPantallaPrincipal(this);
 		panelRanking = new PanelPantallaRanking(null, null);
@@ -30,20 +29,21 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 		panelGameOver = new PanelPantallaGameOver(null, null);
 		configurarVentana();
 		//registrarOyenteVentana();
-	}
-
-	protected void configurarVentana(){
-		ventana = new JFrame("Tdp : SnowBros");
-		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-=======
-	public GUI(JFrame jf){
-		ventana=jf;
 
 		keyListener = new ConstantesTeclado();
 		ventana.addKeyListener(keyListener);
 		ventana.setFocusable(true);
 		ventana.requestFocusInWindow();
->>>>>>> e0d924c2c6a77edc3391b2dc9116ad30c76d78e0
+	}
+
+	protected void configurarVentana(){
+		ventana = new JFrame("Tdp : SnowBros");
+		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		ventana.setSize(ConstantesVistas.VENTANA_ANCHO, ConstantesVistas.VENTANA_ALTO);
+		ventana.setLocationRelativeTo(null);
+		ventana.setVisible(true);
+		ventana.setFocusable(true);
+		mostrarPantallaPrincipal();
 	}
 
 	public void setPanelRanking(PanelPantallaRanking pr){
@@ -96,14 +96,13 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 
 	@Override
 	public void registrarControladorJuego(ControladorJuego cj) {
-		// TODO Auto-generated method stub
+		this.controlarJuego = cj;
 		
 	}
 
 	@Override
 	public void mostrarPantallaPrincipal() {
-		// TODO Auto-generated method stub
-		
+		ventana.setContentPane(panelPrincipal);
 	}
 
 	@Override

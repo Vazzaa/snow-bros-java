@@ -35,7 +35,7 @@ public class PanelPantallaPrincipal extends PanelVista{
 
     protected void agregarImagenFondo() {
 		imagenFondo = new JLabel();
-		ImageIcon iconoImagen = new ImageIcon(this.getClass().getResource("images.jpg"));
+		ImageIcon iconoImagen = new ImageIcon(this.getClass().getResource("/Imagenes/Background/Fondo1.png"));
 		Image imagenEscalada = iconoImagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
 		Icon iconoImagenEscalada = new ImageIcon(imagenEscalada);
 	    imagenFondo.setIcon(iconoImagenEscalada);
