@@ -88,7 +88,10 @@ public class FabricaDominio1 extends FabricaSkin {
     public Skin crearSkinProyectilNieve(){
         return new Skin(get_mapeo_estado_imagen("ProyectilNieve", 4), 1);
     }
-    public Skin crearSkinBolaNieve(){
+    public Skin crearSkinBolaDeNieve(){
         return new Skin(get_mapeo_estado_imagen("BolaDeNieve", 10), 1);
+    }
+    Skin crearSkinParedDestructible() {
+        return new Skin(get_mapeo_estado_imagen("ParedDestructible", 0), 1);//Falta
     }
 }

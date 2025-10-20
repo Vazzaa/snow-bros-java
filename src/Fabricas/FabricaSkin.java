@@ -1,11 +1,8 @@
-<<<<<<< HEAD:src/Fabricas/FabricaSkin.java
 package Fabricas;
-public class FabricaSkin {
-=======
-import Entidades.Skin;
->>>>>>> 1c5c8ed79a29ee564a8468f0b70f065b74e314bf:src/FabricaSkin.java
 
-abstract class FabricaSkin {
+import Entidades.Skin;
+
+public abstract class FabricaSkin {
 
     abstract Skin crearSkinDemonioRojo();
     abstract Skin crearSkinTrollAmarillo();
@@ -30,4 +27,5 @@ abstract class FabricaSkin {
     abstract Skin crearSkinProyectilFuego();
     abstract Skin crearSkinProyectilNieve();
     abstract Skin crearSkinBolaDeNieve();
+    abstract Skin crearSkinParedDestructible();
 }
