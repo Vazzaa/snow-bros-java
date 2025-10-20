@@ -3,14 +3,17 @@ package Entidades.Enemigos;
 import Entidades.SnowBro.SnowBro;
 import Visitors.Colisionable;
 
-abstract class Enemigo implements Colisionable{
+public abstract class Enemigo implements Colisionable{
 
     protected int vida;
     protected EstadoEnemigo estado;
+    protected int posX, posY;
 
-    public Enemigo(int vida){
+    public Enemigo(int vida, int posX, int posY){
         this.vida = vida;
         this.estado = new EstadoEnemigo(this);
+        this.posX = posX;
+        this.posY = posY;
     }  
     public abstract void atacar(Enemigo e);
 
