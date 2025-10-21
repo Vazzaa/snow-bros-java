@@ -25,6 +25,10 @@ public class ModoDeJuego implements ControladorJuego {
 		miFabricaEntidades = new FabricaEntidades(fabricaSkinsActuales);
 		miCreadorNivel = new CreadorDeNivel(fabricaSkinsActuales);
 	}
+
+	public ControladorGrafica getControladoraGrafica(){
+		return controlaGrafica;
+	}
 	
 	public void configurar(){
 		controlaGrafica.mostrarPantallaPrincipal();

@@ -21,6 +21,10 @@ public abstract class Entidad implements EntidadLogica {
 		miHitbox.setPosY(y);
 	}
 
+	public ObserverGrafico getObserverGrafico(){
+		return observer;
+	}
+
 	public Skin getSkin(){
 		return misAspectos;
 	}

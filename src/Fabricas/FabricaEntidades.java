@@ -8,23 +8,34 @@ import Entidades.Proyectiles.*;
 import Entidades.SnowBro.SnowBro;
 import Entidades.*;
 import Fabricas.FabricaSkin;
-import Entidades.BolaDeNieve;
-import Entidades.Proyectiles.ProyectilBomba;
+import Grafica.Observer;
+import Grafica.ObserverGrafico;
+//import Entidades.BolaDeNieve;
+//import Entidades.Proyectiles.ProyectilBomba;
+import Juego.ModoDeJuego;
+
 public class FabricaEntidades {
 
-//atributos de instancia
+
 protected FabricaSkin fabricaSkin;
-protected Jugador player;
+protected Jugador miJugador;
+protected ModoDeJuego miJuego;
 
-//constructor
-public FabricaEntidades (FabricaSkin fb) {
+
+public FabricaEntidades (FabricaSkin fb, ModoDeJuego juego) {
     fabricaSkin = fb;
+    miJuego = juego;
 }
 
-//Consultas
+
 public SnowBro getSnowBro(int x, int y) {
-    return new SnowBro(this.fabricaSkin.crearSkinSnowBro(), x, y,new Jugador(null, y));
-}
+    SnowBro s = new SnowBro(this.fabricaSkin.crearSkinSnowBro(), x, y,new Jugador("Pepe", 0));
+    ObserverGrafico o = new ObserverGrafico(s);
+    s.registrarObserver(o);
+    miJuego.getControladoraGrafica().getPanelPantallaPrincipal().add(o);
+    return s;
+};
+
 
 public DemonioRojo getDemonioRojo(int x, int y) {
     return new DemonioRojo(this.fabricaSkin.crearSkinDemonioRojo(), x, y);
