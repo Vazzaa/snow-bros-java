@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class ConstantesTeclado implements KeyListener {
     public static int DERECHA = 10;
-    public static int IZQUIEDA = 20;
+    public static int IZQUIERDA = 20;
     public static int SALTAR = 30;
     
     private static Set<Integer> teclasPresionadas = new HashSet<>();

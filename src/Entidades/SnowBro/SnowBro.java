@@ -78,7 +78,7 @@ public class SnowBro extends Entidad{
 
     public void moverse() {
     	boolean derecha = ConstantesTeclado.estaPresionada(ConstantesTeclado.DERECHA);
-    	boolean izquierda = ConstantesTeclado.estaPresionada(ConstantesTeclado.IZQUIEDA);
+    	boolean izquierda = ConstantesTeclado.estaPresionada(ConstantesTeclado.IZQUIERDA);
     	boolean salto = ConstantesTeclado.estaPresionada(ConstantesTeclado.SALTAR);
     	
         estadoMovimiento.mover(derecha, izquierda, salto);
@@ -86,6 +86,12 @@ public class SnowBro extends Entidad{
 
 
     }
+
+    public void setDireccion(int direccion){
+		estadoMovimiento.cambiar_direccion(direccion);
+		misAspectos.setEstadoActual(getClaveRepreEstado());
+		notificarObserver();
+	}
 
     public void morir() {
 

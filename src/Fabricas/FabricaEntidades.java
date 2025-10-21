@@ -17,14 +17,13 @@ protected FabricaSkin fabricaSkin;
 protected Jugador player;
 
 //constructor
-public FabricaEntidades (FabricaSkin fb,Jugador pla) {
+public FabricaEntidades (FabricaSkin fb) {
     fabricaSkin = fb;
-    player=pla;
 }
 
 //Consultas
 public SnowBro getSnowBro(int x, int y) {
-    return new SnowBro(this.fabricaSkin.crearSkinSnowBro(), x, y,player);
+    return new SnowBro(this.fabricaSkin.crearSkinSnowBro(), x, y,new Jugador(null, y));
 }
 
 public DemonioRojo getDemonioRojo(int x, int y) {
