@@ -6,6 +6,7 @@ import java.util.List;
 import Entidades.Entidad;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.FabricaEntidades;
+import Fabricas.FabricaSkin;
 import Entidades.Enemigos.*;
 import Entidades.PowerUp.*;
 import Entidades.Proyectiles.Proyectil;
@@ -22,14 +23,14 @@ public class Nivel {
     protected FabricaEntidades miFabrica;
 
 
-    public Nivel(int num, List<Estructura> misEstructuras, List<Enemigo> misEnemigos, SnowBro snowBro){
+    public Nivel(int num, List<Estructura> misEstructuras, List<Enemigo> misEnemigos, SnowBro snowBro, FabricaEntidades miFabrica) {
         numero = num;
         this.snowBro = snowBro;
         this.misEstructuras = misEstructuras;
         this.misEnemigos = misEnemigos;
         misPowerUps = new LinkedList<PowerUp>();
         misProyectiles = new LinkedList<Proyectil>();
-        miFabrica = new FabricaEntidades(,snowBro.getJugador());
+        this.miFabrica = miFabrica;
     }
 
     
