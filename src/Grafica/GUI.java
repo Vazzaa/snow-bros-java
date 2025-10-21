@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import Entidades.Entidad;
 import Entidades.EntidadJugador;
 import Entidades.EntidadLogica;
+import Entidades.SnowBro.SnowBro;
 import Juego.ControladorJuego;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -123,6 +124,7 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	@Override
 	public void mostrarPantallaPrincipal() {
 		ventana.setContentPane(panelPrincipal);
+		
 	}
 
 	@Override
@@ -146,6 +148,13 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	public Observer registrarJugador(EntidadJugador e) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public Observer registrar_silueta(EntidadLogica silueta) {
+		Observer observer_silueta = panelPrincipal.incorporarSilueta(silueta);
+		ventana.revalidate();
+		ventana.repaint();
+		return observer_silueta;
 	}
 
 	@Override

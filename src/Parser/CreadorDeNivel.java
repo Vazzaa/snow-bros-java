@@ -8,6 +8,7 @@ import java.util.List;
 import Entidades.Jugador.Jugador;
 import Entidades.SnowBro.SnowBro;
 import Excepciones.LevelLoadException;
+import Fabricas.FabricaEntidades;
 import Fabricas.FabricaSkin;
 import Juego.ModoDeJuego;
 import Juego.Nivel;
@@ -109,6 +110,6 @@ public class CreadorDeNivel {
             //TODO: crear LevelLoadException
             throw new LevelLoadException("Error al leer el archivo de nivel. ", e);
         }
-        return new Nivel(numeroNivel, plataformas, enemigos, jugador);
+        return new Nivel(numeroNivel, plataformas, enemigos, jugador, new FabricaEntidades(fabSkins));
     }
 }

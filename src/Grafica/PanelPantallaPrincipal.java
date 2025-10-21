@@ -17,12 +17,14 @@ import javax.swing.JPanel;
 
 
 import Entidades.EntidadJugador;
+import Entidades.EntidadLogica;
 
 public class PanelPantallaPrincipal extends PanelVista{
     
     private JButton botonIniciar;
     private JButton botonRanking;
     private JLabel imagenFondo;
+    private JPanel panelPrincipal;
 
     public PanelPantallaPrincipal(ControladorVistas c){
         controlaVistas = c;
@@ -54,7 +56,13 @@ public class PanelPantallaPrincipal extends PanelVista{
 		actualizar_info_jugador(entidad_jugador);
 		return observer_jugador;
 	}
-
+    public Observer incorporarSilueta(EntidadLogica entidad_logica) {
+        ObserverGrafico observer_silueta = new ObserverGrafico(entidad_logica);
+        imagenFondo.setIcon(new ImageIcon(getClass().getClassLoader().getResource(entidad_logica.getSkin().getRutaImagenActual())));
+        imagenFondo.setBounds(0,0, imagenFondo.getIcon().getIconWidth(), imagenFondo.getIcon().getIconHeight());
+        panelPrincipal.setPreferredSize(new Dimension(imagenFondo.getIcon().getIconWidth(), imagenFondo.getIcon().getIconHeight()));
+        return observer_silueta;
+    }
     	protected void actualizar_info_jugador(EntidadJugador jugador) {
 		actualizar_labels_informacion(jugador);
 	}
