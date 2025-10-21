@@ -7,9 +7,18 @@ import Juego.ModoDeJuego;
 
 public class Launcher {
 
-    public static void main(String[] args) {
-        // Esta línea crea la ventana y arranca toda la interfaz gráfica.
-        new GUI();
-    }
-
+	public static void main(String [] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ControladorGrafica controlador_grafica = new GUI();
+					ModoDeJuego juego = new ModoDeJuego(controlador_grafica);
+					controlador_grafica.registrarControladorJuego(juego);
+					juego.configurar();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 }

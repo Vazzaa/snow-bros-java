@@ -6,6 +6,8 @@ import Entidades.Entidad;
 import Entidades.EntidadJugador;
 import Entidades.EntidadLogica;
 import Juego.ControladorJuego;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class GUI implements ControladorGrafica, ControladorVistas {
 
@@ -44,6 +46,22 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 		ventana.setVisible(true);
 		ventana.setFocusable(true);
 		mostrarPantallaPrincipal();
+	}
+
+		protected void registrar_oyente_ventana() {
+		ventana.addKeyListener(new KeyAdapter(){
+			public void keyPressed(KeyEvent e){
+				if (e.getKeyCode() == KeyEvent.VK_A){
+					controlarJuego.cambiarDireccionJugador(ConstantesTeclado.IZQUIERDA);
+				}
+				if (e.getKeyCode() == KeyEvent.VK_D){
+					controlarJuego.cambiarDireccionJugador(ConstantesTeclado.DERECHA);
+				}
+				if (e.getKeyCode() == KeyEvent.VK_SPACE){
+					controlarJuego.lanzarProyectil();
+				}
+			}
+		});
 	}
 
 	public void setPanelRanking(PanelPantallaRanking pr){

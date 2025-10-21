@@ -13,11 +13,25 @@ public class EstadoMovimietoSnowBro {
 
     private int velocidadHorizontal = 0;
     private int velocidadVertical = 0;
+    protected int [] deriva_x; 
+    protected int direccion;
 
 
     
     public EstadoMovimietoSnowBro(SnowBro snowBro){
         this.snowBro = snowBro;
+        deriva_x = new int[] {-1, 1};
+        direccion=0;
+    }
+
+     public void cambiar_direccion(int direccion){
+        if (direccion == ConstantesTeclado.DERECHA){
+            direccion = 0;
+        }else{
+            if (direccion == ConstantesTeclado.IZQUIERDA){
+                direccion=180;
+            }   
+        }
     }
     
     public void mover(boolean derecha, boolean izquierda, boolean salto) {
