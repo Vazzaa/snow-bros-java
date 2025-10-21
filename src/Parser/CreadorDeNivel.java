@@ -43,7 +43,7 @@ public class CreadorDeNivel {
         List<Estructura> plataformas = new ArrayList<>();
         List<Enemigo> enemigos = new ArrayList<>();
         SnowBro jugador = null;
-        int numeroNivel;
+        int numeroNivel= 0;
         
         try (BufferedReader reader = new BufferedReader(new FileReader(rutaArchivo))){
             String  linea;
@@ -53,7 +53,6 @@ public class CreadorDeNivel {
                     char caracter = linea.charAt(col);
                     int posX = col * ANCHO_TILE;
                     int posY = fila * ALTO_TILE;
-
                     switch (caracter) {
                         case '1':
                             numeroNivel = 1;
@@ -62,43 +61,43 @@ public class CreadorDeNivel {
                             numeroNivel = 2;
                             break;
                         case 'P':
-                            plataformas.add(new PlatMovil(posX, posY, fabSkins.crearSkinPlatMovil()));
+                            //plataformas.add(new PlatMovil(posX, posY, fabSkins.crearSkinPlatMovil()));
                             break;
                         case 'Q':
-                            plataformas.add(new PlatQuebradiza(posX, posY, fabSkins.crearSkinPlatQuebradiza()));
+                            //plataformas.add(new PlatQuebradiza(posX, posY, fabSkins.crearSkinPlatQuebradiza()));
                             break;
                         case 'R':
-                            plataformas.add(new SueloResbaladizo(posX, posY, fabSkins.crearSkinSueloResbaladizo()));
+                            //plataformas.add(new SueloResbaladizo(posX, posY, fabSkins.crearSkinSueloResbaladizo()));
                             break;
                         case 'A':
-                            plataformas.add(new Pared(posX, posY, fabSkins.crearSkinPared()));
+                            //plataformas.add(new Pared(posX, posY, fabSkins.crearSkinPared()));
                             break;
                         case 'D':
-                            plataformas.add(new ParedDestructible(posX, posY, fabSkins.crearSkinParedDestructible()));
+                            //plataformas.add(new ParedDestructible(posX, posY, fabSkins.crearSkinParedDestructible()));
                             break;
                         case 'I':
-                            plataformas.add(new Pincho(posX, posY, fabSkins.crearSkinPincho()));
+                            //plataformas.add(new Pincho(posX, posY, fabSkins.crearSkinPincho()));
                             break;
                         case 'C':
-                            plataformas.add(new Escalera(posX, posY, fabSkins.crearSkinEscalera()));
+                            //plataformas.add(new Escalera(posX, posY, fabSkins.crearSkinEscalera()));
                             break;
                         case 'J':
-                            jugador = new SnowBro(posX, posY, fabSkins.crearSkinSnowBro());
+                            jugador = new SnowBro(fabSkins.crearSkinSnowBro(), posX, posY, new Jugador("Jorge", 0));
                             break;
                         case 'E':
-                            enemigos.add(new DemonioRojo(posX, posY, fabSkins.crearSkinDemonioRojo()));
+                            enemigos.add(new DemonioRojo(fabSkins.crearSkinDemonioRojo(), posX, posY));
                             break;
                         case 'T':
-                            enemigos.add(new TrollAmarillo(posX, posY, fabSkins.crearSkinTrollAmarillo()));
+                            //enemigos.add(new TrollAmarillo(posX, posY, fabSkins.crearSkinTrollAmarillo()));
                             break;
                         case 'G':
-                            enemigos.add(new RanaDeFuego(posX, posY, fabSkins.crearSkinRanaDeFuego()));
+                            //enemigos.add(new RanaDeFuego(posX, posY, fabSkins.crearSkinRanaDeFuego()));
                             break;
                         case 'B':
-                            enemigos.add(new Calabaza(posX, posY, fabSkins.crearSkinCalabaza()));
+                            //enemigos.add(new Calabaza(posX, posY, fabSkins.crearSkinCalabaza()));
                             break;
                         case 'M':
-                            enemigos.add(new Moghera(posX, posY, fabSkins.crearSkinMoghera()));
+                            //enemigos.add(new Moghera(posX, posY, fabSkins.crearSkinMoghera()));
                             break;
                     }
                 }
