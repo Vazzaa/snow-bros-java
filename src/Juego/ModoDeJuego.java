@@ -5,6 +5,7 @@ import Fabricas.FabricaDominio1;
 import Fabricas.FabricaEntidades;
 import Fabricas.FabricaSkin;
 import Grafica.*;
+import Hilos.HiloJugador;
 import Juego.Nivel;
 import Juego.Ranking;
 import Parser.CreadorDeNivel;
@@ -22,8 +23,12 @@ public class ModoDeJuego implements ControladorJuego {
 	public ModoDeJuego(ControladorGrafica controlador_grafica) {
 		this.controlaGrafica = controlador_grafica;
 		FabricaSkin fabricaSkinsActuales= new FabricaDominio1();
-		miFabricaEntidades = new FabricaEntidades(fabricaSkinsActuales);
+		miFabricaEntidades = new FabricaEntidades(fabricaSkinsActuales, this);
 		miCreadorNivel = new CreadorDeNivel(fabricaSkinsActuales);
+		miCreadorNivel.setFrabricaEntidades(miFabricaEntidades);
+		nivelActual = miCreadorNivel.leerArchivo("crearnivel1.txt");
+		HiloJugador hiloJugador = new HiloJugador(nivelActual);
+		hiloJugador.start();
 	}
 
 	public ControladorGrafica getControladoraGrafica(){
@@ -31,6 +36,7 @@ public class ModoDeJuego implements ControladorJuego {
 	}
 	
 	public void configurar(){
+
 		controlaGrafica.mostrarPantallaPrincipal();
 	}
 	

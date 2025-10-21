@@ -36,6 +36,7 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 		keyListener = new ConstantesTeclado();
 		ventana.addKeyListener(keyListener);
 		ventana.setFocusable(true);
+		panelPrincipal.incorporar_entidad_jugador(null);
 		ventana.requestFocusInWindow();
 	}
 

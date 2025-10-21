@@ -40,7 +40,9 @@ public class CreadorDeNivel {
         this.fabSkins = fabricaSkins;
 
     }
-
+    public void setFrabricaEntidades(FabricaEntidades fabEntidades){
+        this.fabEntidades = fabEntidades;
+    }
     public Nivel leerArchivo(String rutaArchivo){
         List<Estructura> plataformas = new ArrayList<>();
         List<Enemigo> enemigos = new ArrayList<>();
@@ -66,7 +68,7 @@ public class CreadorDeNivel {
                             plataformas.add(fabEntidades.getPlatMovil(posX, posY));
                             break;
                         case 'L':
-                            plataformas.add(fabEntidades.getPlataforma(posX, posY));//Flata
+                            //plataformas.add(fabEntidades.getPlataforma(posX, posY));//Flata
                             break;
                         case 'Q':
                             plataformas.add(fabEntidades.getPlatQuebradiza(posX, posY));
@@ -78,7 +80,7 @@ public class CreadorDeNivel {
                             plataformas.add(fabEntidades.getPared(posX, posY));
                             break;
                         case 'D':
-                            plataformas.add(fabEntidades.getParedDestructible(posX, posY));//Falta
+                            //plataformas.add(fabEntidades.getParedDestructible(posX, posY));//Falta
                             break;
                         case 'I':
                             plataformas.add(fabEntidades.getPincho(posX, posY));
@@ -111,6 +113,6 @@ public class CreadorDeNivel {
             //TODO: crear LevelLoadException
             throw new LevelLoadException("Error al leer el archivo de nivel. ", e);
         }
-        return new Nivel(numeroNivel, plataformas, enemigos, jugador, new FabricaEntidades(fabSkins));
+        return new Nivel(numeroNivel, plataformas, enemigos, jugador, fabEntidades);
     }
 }
