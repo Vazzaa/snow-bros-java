@@ -32,6 +32,7 @@ public class CreadorDeNivel {
 
     protected ModoDeJuego crearNaModo;
     protected FabricaSkin fabSkins;
+    protected FabricaEntidades fabEntidades;
     private final int ANCHO_TILE = 32;
     private final int ALTO_TILE = 32;
 
@@ -62,46 +63,46 @@ public class CreadorDeNivel {
                             numeroNivel = 2;
                             break;
                         case 'P':
-                            plataformas.add(new PlatMovil(fabSkins.crearSkinPlatMovil(), posX, posY));
+                            plataformas.add(fabEntidades.getPlatMovil(posX, posY));
                             break;
                         case 'L':
-                            plataformas.add(new Plataforma(fabSkins.crearSkinPlataforma(), posX, posY));
+                            plataformas.add(fabEntidades.getPlataforma(posX, posY));//Flata
                             break;
                         case 'Q':
-                            plataformas.add(new PlatQuebradiza(fabSkins.crearSkinPlatQuebradiza(), posX, posY ));
+                            plataformas.add(fabEntidades.getPlatQuebradiza(posX, posY));
                             break;
                         case 'R':
-                            plataformas.add(new SueloResbaladizo(fabSkins.crearSkinSueloResbaladizo(), posX, posY));
+                            plataformas.add(fabEntidades.getSueloResbaladizo(posX, posY));
                             break;
                         case 'A':
-                            plataformas.add(new Pared(fabSkins.crearSkinPared(), posX, posY));
+                            plataformas.add(fabEntidades.getPared(posX, posY));
                             break;
                         case 'D':
-                            plataformas.add(new ParedDestructible(fabSkins.crearSkinParedDestructible(), posX, posY));
+                            plataformas.add(fabEntidades.getParedDestructible(posX, posY));//Falta
                             break;
                         case 'I':
-                            plataformas.add(new Pincho(fabSkins.crearSkinPincho(), posX, posY));
+                            plataformas.add(fabEntidades.getPincho(posX, posY));
                             break;
                         case 'C':
-                            plataformas.add(new Escalera(fabSkins.crearSkinEscalera(), posX, posY));
+                            plataformas.add(fabEntidades.getEscalera(posX, posY));
                             break;
                         case 'J':
-                            jugador = new SnowBro(fabSkins.crearSkinSnowBro(), posX, posY, new Jugador("Jorge", 0));
+                            jugador = fabEntidades.getSnowBro(posX, posY);
                             break;
                         case 'E':
-                            enemigos.add(new DemonioRojo(fabSkins.crearSkinDemonioRojo(), posX, posY));
+                            enemigos.add(fabEntidades.getDemonioRojo(posX, posY));
                             break;
                         case 'T':
-                            enemigos.add(new TrollAmarillo(fabSkins.crearSkinTrollAmarillo(), posX, posY));
+                            enemigos.add(fabEntidades.getTrollAmarillo(posX, posY));
                             break;
                         case 'G':
-                            enemigos.add(new RanaDeFuego(fabSkins.crearSkinRanaDeFuego(), posX, posY));
+                            enemigos.add(fabEntidades.getRanaDeFuego(posX, posY));
                             break;
                         case 'B':
-                            enemigos.add(new Calabaza(fabSkins.crearSkinCalabaza(), posX, posY));
+                            enemigos.add(fabEntidades.getCalabaza(posX, posY));
                             break;
                         case 'M':
-                            enemigos.add(new Moghera(fabSkins.crearSkinMoghera(), posX, posY));
+                            enemigos.add(fabEntidades.getMoghera(posX, posY));
                             break;
                     }
                 }
