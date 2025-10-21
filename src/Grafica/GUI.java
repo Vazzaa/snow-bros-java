@@ -141,14 +141,16 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 
 	@Override
 	public Observer registrarEntidad(EntidadLogica e) {
-		// TODO Auto-generated method stub
-		return null;
+		Observer observerEntidad=panelPrincipal.incorporarEntidad(e);
+		refrescar();
+		return observerEntidad;
 	}
 
 	@Override
-	public Observer registrarJugador(EntidadJugador e) {
-		// TODO Auto-generated method stub
-		return null;
+	public Observer registrarJugador(EntidadJugador entidadJuga) {
+		Observer observerJugador = panelPrincipal.incorporar_entidad_jugador(entidadJuga);
+		refrescar();
+		return observerJugador;
 	}
 
 	public Observer registrar_silueta(EntidadLogica silueta) {
@@ -228,6 +230,11 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	public void accionarPantallaRanking() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	protected void refrescar(){
+		ventana.revalidate();
+		ventana.repaint();
 	}
     
 }

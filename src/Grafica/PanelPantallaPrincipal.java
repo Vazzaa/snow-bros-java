@@ -7,7 +7,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -50,12 +49,19 @@ public class PanelPantallaPrincipal extends PanelVista{
 	}
 
     // todo esto seria para panel nivel
+    public Observer incorporarEntidad(EntidadLogica entidadLogic){
+        ObserverGrafico observer_grafico = new ObserverGrafico(entidadLogic);
+		imagenFondo.add(observer_grafico);	
+		return observer_grafico;
+	}
+
     public Observer incorporar_entidad_jugador(EntidadJugador entidad_jugador) {
 		ObserverJugador observer_jugador = new ObserverJugador(entidad_jugador, null);
 		imagenFondo.add(observer_jugador);
 		actualizar_info_jugador(entidad_jugador);
 		return observer_jugador;
 	}
+
     public Observer incorporarSilueta(EntidadLogica entidad_logica) {
         ObserverGrafico observer_silueta = new ObserverGrafico(entidad_logica);
         imagenFondo.setIcon(new ImageIcon(getClass().getClassLoader().getResource(entidad_logica.getSkin().getRutaImagenActual())));
@@ -63,6 +69,7 @@ public class PanelPantallaPrincipal extends PanelVista{
         panelPrincipal.setPreferredSize(new Dimension(imagenFondo.getIcon().getIconWidth(), imagenFondo.getIcon().getIconHeight()));
         return observer_silueta;
     }
+
     	protected void actualizar_info_jugador(EntidadJugador jugador) {
 		actualizar_labels_informacion(jugador);
 	}

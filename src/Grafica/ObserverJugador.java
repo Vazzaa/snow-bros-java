@@ -4,12 +4,13 @@ import Entidades.EntidadJugador;
 public class ObserverJugador extends ObserverGrafico{
     //Atributos de instancia
     EntidadJugador entidadObservada;
-    PanelPantallaNivel panelNivel;
+    //PanelPantallaNivel panelNivel;
+    PanelPantallaPrincipal panelPrincipal;
 
     //Constructor
-    public ObserverJugador (EntidadJugador ent, PanelPantallaNivel pn) {
+    public ObserverJugador (EntidadJugador ent, PanelPantallaPrincipal pn) {
         super(ent);
-        panelNivel = pn;
+        panelPrincipal = pn;
     }
 
     //Comandos

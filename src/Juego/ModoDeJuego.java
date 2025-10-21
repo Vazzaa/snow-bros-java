@@ -26,9 +26,9 @@ public class ModoDeJuego implements ControladorJuego {
 		miFabricaEntidades = new FabricaEntidades(fabricaSkinsActuales, this);
 		miCreadorNivel = new CreadorDeNivel(fabricaSkinsActuales);
 		miCreadorNivel.setFrabricaEntidades(miFabricaEntidades);
-		nivelActual = miCreadorNivel.leerArchivo("crearnivel1.txt");
+		nivelActual = miCreadorNivel.leerArchivo("src/nivel_simple.txt");
 		HiloJugador hiloJugador = new HiloJugador(nivelActual);
-		hiloJugador.start();
+		hiloJugador.run();
 	}
 
 	public ControladorGrafica getControladoraGrafica(){
