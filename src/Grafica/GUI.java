@@ -44,11 +44,13 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 		ventana.setSize(ConstantesVistas.VENTANA_ANCHO, ConstantesVistas.VENTANA_ALTO);
 		ventana.setLocationRelativeTo(null);
 		ventana.setVisible(true);
+		ventana.setResizable(false);
 		ventana.setFocusable(true);
+		registrar_oyente_ventana();
 		mostrarPantallaPrincipal();
 	}
 
-		protected void registrar_oyente_ventana() {
+	protected void registrar_oyente_ventana() {
 		ventana.addKeyListener(new KeyAdapter(){
 			public void keyPressed(KeyEvent e){
 				if (e.getKeyCode() == KeyEvent.VK_A){

@@ -13,6 +13,10 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+
+import Entidades.EntidadJugador;
 
 public class PanelPantallaPrincipal extends PanelVista{
     
@@ -41,6 +45,21 @@ public class PanelPantallaPrincipal extends PanelVista{
 	    imagenFondo.setIcon(iconoImagenEscalada);
 		imagenFondo.setBounds(0,0, ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
 		add(imagenFondo);
+	}
+
+    // todo esto seria para panel nivel
+    public Observer incorporar_entidad_jugador(EntidadJugador entidad_jugador) {
+		ObserverJugador observer_jugador = new ObserverJugador(entidad_jugador, null);
+		imagenFondo.add(observer_jugador);
+		actualizar_info_jugador(entidad_jugador);
+		return observer_jugador;
+	}
+
+    	protected void actualizar_info_jugador(EntidadJugador jugador) {
+		actualizar_labels_informacion(jugador);
+	}
+    
+    protected void actualizar_labels_informacion(EntidadJugador jugador) {
 	}
 
     protected void agregarBotonIniciar(){
