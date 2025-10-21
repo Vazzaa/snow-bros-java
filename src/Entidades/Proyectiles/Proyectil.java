@@ -2,6 +2,7 @@ package Entidades.Proyectiles;
 
 import Entidades.Entidad;
 import Entidades.Skin;
+import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
 import Entidades.Estructuras.Estructura;
 
@@ -18,11 +19,11 @@ public abstract class Proyectil extends Entidad{
         alcance = a;
     }
 
-    public void afectar(SnowBro snowNBro);
+    public void afectar(SnowBro snowNBro){};
 
-    public void afectar(Enemigo enemigo);
+    public void afectar(Enemigo enemigo){};
 
-    public void afectar(Estructura estructura);
+    public void afectar(Estructura estructura){};
 
 
 }

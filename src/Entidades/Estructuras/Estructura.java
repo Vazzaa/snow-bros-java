@@ -13,7 +13,7 @@ public abstract class Estructura extends Entidad implements Colisionable{
         super(skins, x, y);
     }
 
-    public void afectar(SnowBro s);
+    public void afectar(SnowBro s){};
 
-    public void afectar (Enemigo e);
+    public void afectar (Enemigo e){};
 }

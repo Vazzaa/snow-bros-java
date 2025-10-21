@@ -1,9 +1,15 @@
 package Entidades.Enemigos;
 
+import Entidades.Skin;
 import Entidades.SnowBro.SnowBro;
+import EstadoMovimiento.EstadoEnemigo;
 import Visitors.Colisionable;
 
 public class Moghera extends Enemigo{
+
+    public Moghera(Skin skins, int posX, int posY){
+        super(skins, posX, posY, 5,300);
+    }
 
     @Override
     public void atacar(Enemigo e) {
@@ -50,7 +56,7 @@ public class Moghera extends Enemigo{
     @Override
     public void setEstado(EstadoEnemigo estado) {
         // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("Unimplemented method 'setEstado'");
     }
 
 }

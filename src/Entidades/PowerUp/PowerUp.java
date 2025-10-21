@@ -9,9 +9,9 @@ import Entidades.Enemigos.Enemigo;
 public abstract class PowerUp extends Entidad implements Colisionable {
 
     protected int puntaje;
-    protected float tiempoDeVida; 
+    protected int tiempoDeVida; 
 
-    public PowerUp(Skin skins, int posX, int posY,int puntaje, float tiempoDeVida) {
+    public PowerUp(Skin skins, int posX, int posY,int puntaje, int tiempoDeVida) {
         super(skins, posX, posY);
         this.puntaje = puntaje;
         this.tiempoDeVida = tiempoDeVida;
@@ -29,7 +29,7 @@ public abstract class PowerUp extends Entidad implements Colisionable {
         this.puntaje = puntaje;
     }
 
-    public void setTiempoDeVida(float tiempoDeVida) {
+    public void setTiempoDeVida(int tiempoDeVida) {
         this.tiempoDeVida = tiempoDeVida;
     }
 

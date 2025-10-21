@@ -1,5 +1,5 @@
 package EstadoMovimiento;
 
-public class EstadoEnemigo {
+public interface EstadoEnemigo {
 
 }

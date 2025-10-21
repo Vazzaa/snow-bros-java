@@ -1,11 +1,18 @@
 package Entidades.Enemigos;
 
+import Entidades.Skin;
 import Entidades.SnowBro.SnowBro;
+import EstadoMovimiento.EstadoEnemigo;
+import Fabricas.FabricaEntidades;
 import Visitors.Colisionable;
 
-public class Fantasma extends Enemigo implements EstadoMovimiento{
+public class Fantasma extends Enemigo implements EstadoEnemigo{
     
     protected FabricaEntidades fabParaCalabaza;
+
+    public Fantasma(Skin skins, int posX, int posY){
+        super(skins, posX, posY, 0,300);
+    }
 
     @Override
     public void atacar(Enemigo e) {

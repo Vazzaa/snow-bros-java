@@ -1,9 +1,15 @@
 package Entidades.Enemigos;
 
+import Entidades.Skin;
 import Entidades.SnowBro.SnowBro;
+import EstadoMovimiento.EstadoEnemigo;
 import Visitors.Colisionable;
 
-public class Calabaza extends Enemigo implements EstadoMovimiento {
+public class Calabaza extends Enemigo implements EstadoEnemigo{
+
+    public Calabaza(Skin skins, int posX, int posY){
+        super(skins, posX, posY, 0,300);
+    }
 
     @Override
     public void atacar(Enemigo e) {

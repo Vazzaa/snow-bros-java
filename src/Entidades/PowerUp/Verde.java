@@ -1,5 +1,10 @@
 package Entidades.PowerUp;
 
+import Entidades.Hitbox;
+import Entidades.Skin;
+import Entidades.Enemigos.Enemigo;
+import Entidades.SnowBro.SnowBro;
+
 public class Verde extends PowerUp {
 
     protected int puntaje;
@@ -7,7 +12,7 @@ public class Verde extends PowerUp {
     protected int duracionSnowBro;
 
     public Verde(Skin s, float x, float y, Hitbox h) {
-        super(s,x,y);
+        super(s,(int) x,(int)y, 300, 10);
         puntaje = 300;
         tiempoDeVida = 10;
         duracionSnowBro = 10;
@@ -33,7 +38,7 @@ public class Verde extends PowerUp {
 
     
     public void setSkin(Skin s) {
-        this.skin = s;
+        misAspectos = s;
     }
 
     public void detenerEnemigos() {

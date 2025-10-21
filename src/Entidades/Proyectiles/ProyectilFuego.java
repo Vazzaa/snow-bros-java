@@ -1,5 +1,11 @@
 package Entidades.Proyectiles;
 
+import Entidades.Hitbox;
+import Entidades.Skin;
+import Entidades.Enemigos.Enemigo;
+import Entidades.Estructuras.Estructura;
+import Entidades.SnowBro.SnowBro;
+
 public class ProyectilFuego extends Proyectil{
 
     protected float Alcance;
@@ -9,11 +15,7 @@ public class ProyectilFuego extends Proyectil{
     protected Hitbox hb;
 
     public ProyectilFuego (Skin s, Hitbox h) {
-        Alcance = 0;
-        Daño = 0;
-        Velocidad = 0;
-        Aspecto = s;
-        hb = h;
+        super(s, 5, 10, 100, 100, 12);
     }
 
     public void afectar(SnowBro s) {

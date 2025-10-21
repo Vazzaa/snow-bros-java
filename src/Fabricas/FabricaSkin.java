@@ -10,6 +10,7 @@ public abstract class FabricaSkin {
     abstract Skin crearSkinFantasma();
     abstract Skin crearSkinMoghera();
     abstract Skin crearSkinKamakichi();
+    abstract Skin crearSkinRanaDeFuego();
     abstract Skin crearSkinPowerUpAzul();
     abstract Skin crearSkinPowerUpRojo();
     abstract Skin crearSkinPowerUpVerde();

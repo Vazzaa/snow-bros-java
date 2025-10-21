@@ -1,9 +1,15 @@
 package Entidades.Enemigos;
 
+import Entidades.Skin;
 import Entidades.SnowBro.SnowBro;
+import EstadoMovimiento.EstadoEnemigo;
 import Visitors.Colisionable;
 
-public class TrollAmarillo extends Enemigo implements EstadoMovimiento{
+public class TrollAmarillo extends Enemigo implements EstadoEnemigo{
+
+    public TrollAmarillo(Skin skins, int posX, int posY){
+        super(skins, posX, posY, 3,300);
+    }
 
     @Override
     public void atacar(Enemigo e) {
