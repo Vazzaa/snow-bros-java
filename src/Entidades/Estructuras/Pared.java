@@ -7,8 +7,8 @@ import Entidades.SnowBro.SnowBro;
 
 public class Pared extends Obstaculo{
 
-    public Pared(Skin s, Hitbox h) {
-        super(s,h);
+     public Pared(Skin s, int x, int y) {
+        super(s, x, y);
     }
 
     public void afectar(SnowBro s) {

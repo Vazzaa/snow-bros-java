@@ -8,7 +8,8 @@ import Entidades.Proyectiles.*;
 import Entidades.SnowBro.SnowBro;
 import Entidades.*;
 import Fabricas.FabricaSkin;
-
+import Entidades.BolaDeNieve;
+import Entidades.Proyectiles.ProyectilBomba;
 public class FabricaEntidades {
 
 //atributos de instancia

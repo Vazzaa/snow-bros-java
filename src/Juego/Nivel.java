@@ -29,7 +29,7 @@ public class Nivel {
         this.misEnemigos = misEnemigos;
         misPowerUps = new LinkedList<PowerUp>();
         misProyectiles = new LinkedList<Proyectil>();
-        miFabrica = new FabricaEntidades();
+        miFabrica = new FabricaEntidades(,snowBro.getJugador());
     }
 
     

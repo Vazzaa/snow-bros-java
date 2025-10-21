@@ -1,9 +1,14 @@
 package Entidades.Estructuras;
+import Entidades.Hitbox;
+import Entidades.Skin;
+import Entidades.Enemigos.Enemigo;
+import Entidades.SnowBro.SnowBro;
+import Entidades.Proyectiles.ProyectilNieve;
 
 public class Pincho extends Obstaculo{
 
-    public Pincho(Skin s, Hitbox h) {
-        super(s, h);
+    public Pincho(Skin s, int x, int y) {
+        super(s, x, y);
     }
     
     public void afectar(SnowBro s) {
@@ -14,7 +19,7 @@ public class Pincho extends Obstaculo{
 
     }
 
-    public void destruir (Nieve n) {
+    public void destruir (ProyectilNieve n) {
 
     }
 

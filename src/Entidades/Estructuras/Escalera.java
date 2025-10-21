@@ -7,8 +7,8 @@ import Entidades.SnowBro.SnowBro;
 
 public class Escalera extends Obstaculo{
 
-    public Escalera(Skin s, Hitbox h) {
-        super(s,h);
+    public Escalera(Skin s, int x, int y) {
+        super(s, x, y);
     }
 
     public void afectar(SnowBro s) {

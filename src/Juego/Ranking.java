@@ -12,7 +12,6 @@ public class Ranking {
 
     public void agregarJugador(Jugador jug){
         if (cantJugadores < 5 || jug.getPuntaje() > puntajes[4].getPuntaje()) {
-            int i = 0;
             int PosAAgregar = cantJugadores;
             for (int i = 0; i < cantJugadores; i++) {
                 if (puntajes[i].getPuntaje() < jug.getPuntaje()) {
@@ -26,10 +25,10 @@ public class Ranking {
             else {
                 limite = 4;
             }
-            for (int i = limite - 1; i >= posicionAInsertar; i--) {
+            for (int i = limite - 1; i >= PosAAgregar; i--) {
                 puntajes[i + 1] = puntajes[i];
             }
-            puntajes[posicionAInsertar] = jug;
+            puntajes[PosAAgregar] = jug;
             if (cantJugadores < 5) {
                 cantJugadores++;
             }

@@ -1,9 +1,13 @@
 package Entidades.Estructuras;
+import Entidades.Hitbox;
+import Entidades.Skin;
+import Entidades.Enemigos.Enemigo;
+import Entidades.SnowBro.SnowBro;
 
 public class SueloResbaladizo extends Obstaculo {
 
-    public Pared(Skin s, Hitbox h) {
-        super(s,h);
+     public SueloResbaladizo(Skin s, int x, int y) {
+        super(s, x, y);
     }
 
     public void afectar(SnowBro s) {

@@ -1,12 +1,16 @@
 package Entidades.Estructuras;
+import Entidades.Hitbox;
+import Entidades.Skin;
+import Entidades.Enemigos.Enemigo;
+import Entidades.SnowBro.SnowBro;
 
 public class PlatQuebradiza extends Plataforma{
 
     protected int puntaje;
     protected int Vida;
 
-    public PlatQuebradiza(Skin s, Hitbox h) {
-        super(s,h);
+     public PlatQuebradiza(Skin s, int x, int y) {
+        super(s, x, y);
         puntaje = 300;
         Vida = 1;
     }
@@ -20,7 +24,7 @@ public class PlatQuebradiza extends Plataforma{
     }
 
     public void setSkin(Skin s) {
-        this.skin = s;
+       
     }
 
     public int getPuntaje() {

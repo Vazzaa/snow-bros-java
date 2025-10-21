@@ -8,7 +8,6 @@ import Entidades.Entidad;
 
 public abstract class Estructura extends Entidad implements Colisionable{
 
-
     public Estructura(Skin skins, int x, int y){
         super(skins, x, y);
     }

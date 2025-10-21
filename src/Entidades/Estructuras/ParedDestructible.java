@@ -1,12 +1,16 @@
 package Entidades.Estructuras;
+import Entidades.Hitbox;
+import Entidades.Skin;
+import Entidades.Enemigos.Enemigo;
+import Entidades.SnowBro.SnowBro;
 
 public class ParedDestructible extends Pared {
 
     protected int Vida;
     protected int puntaje;
 
-    public ParedDestructible(Skin s, Hitbox h) {
-        super(s,h);
+     public ParedDestructible(Skin s, int x, int y) {
+        super(s, x, y);
         Vida = 1;
         puntaje = 150;
     }

@@ -61,25 +61,28 @@ public class CreadorDeNivel {
                             numeroNivel = 2;
                             break;
                         case 'P':
-                            //plataformas.add(new PlatMovil(posX, posY, fabSkins.crearSkinPlatMovil()));
+                            plataformas.add(new PlatMovil(fabSkins.crearSkinPlatMovil(), posX, posY));
+                            break;
+                        case 'L':
+                            plataformas.add(new Plataforma(fabSkins.crearSkinPlataforma(), posX, posY));
                             break;
                         case 'Q':
-                            //plataformas.add(new PlatQuebradiza(posX, posY, fabSkins.crearSkinPlatQuebradiza()));
+                            plataformas.add(new PlatQuebradiza(fabSkins.crearSkinPlatQuebradiza(), posX, posY ));
                             break;
                         case 'R':
-                            //plataformas.add(new SueloResbaladizo(posX, posY, fabSkins.crearSkinSueloResbaladizo()));
+                            plataformas.add(new SueloResbaladizo(fabSkins.crearSkinSueloResbaladizo(), posX, posY));
                             break;
                         case 'A':
-                            //plataformas.add(new Pared(posX, posY, fabSkins.crearSkinPared()));
+                            plataformas.add(new Pared(fabSkins.crearSkinPared(), posX, posY));
                             break;
                         case 'D':
-                            //plataformas.add(new ParedDestructible(posX, posY, fabSkins.crearSkinParedDestructible()));
+                            plataformas.add(new ParedDestructible(fabSkins.crearSkinParedDestructible(), posX, posY));
                             break;
                         case 'I':
-                            //plataformas.add(new Pincho(posX, posY, fabSkins.crearSkinPincho()));
+                            plataformas.add(new Pincho(fabSkins.crearSkinPincho(), posX, posY));
                             break;
                         case 'C':
-                            //plataformas.add(new Escalera(posX, posY, fabSkins.crearSkinEscalera()));
+                            plataformas.add(new Escalera(fabSkins.crearSkinEscalera(), posX, posY));
                             break;
                         case 'J':
                             jugador = new SnowBro(fabSkins.crearSkinSnowBro(), posX, posY, new Jugador("Jorge", 0));
@@ -88,16 +91,16 @@ public class CreadorDeNivel {
                             enemigos.add(new DemonioRojo(fabSkins.crearSkinDemonioRojo(), posX, posY));
                             break;
                         case 'T':
-                            //enemigos.add(new TrollAmarillo(posX, posY, fabSkins.crearSkinTrollAmarillo()));
+                            enemigos.add(new TrollAmarillo(fabSkins.crearSkinTrollAmarillo(), posX, posY));
                             break;
                         case 'G':
-                            //enemigos.add(new RanaDeFuego(posX, posY, fabSkins.crearSkinRanaDeFuego()));
+                            enemigos.add(new RanaDeFuego(fabSkins.crearSkinRanaDeFuego(), posX, posY));
                             break;
                         case 'B':
-                            //enemigos.add(new Calabaza(posX, posY, fabSkins.crearSkinCalabaza()));
+                            enemigos.add(new Calabaza(fabSkins.crearSkinCalabaza(), posX, posY));
                             break;
                         case 'M':
-                            //enemigos.add(new Moghera(posX, posY, fabSkins.crearSkinMoghera()));
+                            enemigos.add(new Moghera(fabSkins.crearSkinMoghera(), posX, posY));
                             break;
                     }
                 }
