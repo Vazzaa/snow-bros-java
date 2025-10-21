@@ -6,6 +6,7 @@ public abstract class FabricaSkin {
 
     public abstract Skin crearSkinDemonioRojo();
     public abstract Skin crearSkinTrollAmarillo();
+    public abstract Skin crearSkinRanaDeFuego();
     public abstract Skin crearSkinCalabaza();
     public abstract Skin crearSkinFantasma();
     public abstract Skin crearSkinMoghera();
