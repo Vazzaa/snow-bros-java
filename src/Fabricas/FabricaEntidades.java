@@ -33,6 +33,7 @@ public SnowBro getSnowBro(int x, int y) {
     ObserverGrafico o = new ObserverGrafico(s);
     s.registrarObserver(o);
     miJuego.getControladoraGrafica().getPanelPantallaPrincipal().add(o);
+    miJuego.getControladoraGrafica().getPanelPantallaPrincipal().incorporarSilueta(s);
     return s;
 };
 

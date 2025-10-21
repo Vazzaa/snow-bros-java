@@ -45,6 +45,7 @@ public class PanelPantallaPrincipal extends PanelVista{
 		Icon iconoImagenEscalada = new ImageIcon(imagenEscalada);
 	    imagenFondo.setIcon(iconoImagenEscalada);
 		imagenFondo.setBounds(0,0, ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
+        imagenFondo.setLayout(null);
 		add(imagenFondo);
 	}
 

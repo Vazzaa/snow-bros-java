@@ -36,7 +36,6 @@ public class ModoDeJuego implements ControladorJuego {
 	}
 	
 	public void configurar(){
-
 		controlaGrafica.mostrarPantallaPrincipal();
 	}
 	
