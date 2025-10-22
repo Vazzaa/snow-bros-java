@@ -41,4 +41,9 @@ public class VidaExtra extends PowerUp {
         misAspectos = s;
     }
 
+    @Override
+    public Skin getSkins() {
+        return misAspectos;
+    }
+
 }

@@ -34,4 +34,9 @@ public class ProyectilFuego extends Proyectil{
         
     }
 
+    @Override
+    public Skin getSkins() {
+        return misAspectos;
+    }
+
 }

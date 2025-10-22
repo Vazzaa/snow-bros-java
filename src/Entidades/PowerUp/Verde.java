@@ -45,4 +45,8 @@ public class Verde extends PowerUp {
 
     }
  
+    @Override
+    public Skin getSkins() {
+        return misAspectos;
+    }
 }

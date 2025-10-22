@@ -21,4 +21,9 @@ public class Plataforma extends Estructura{
     public void setSkin (Skin s) {
 
     }
+
+    @Override
+    public Skin getSkins() {
+        return misAspectos;
+    }
 }

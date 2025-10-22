@@ -34,4 +34,9 @@ public class ProyectilNieve extends Proyectil{
         
     }
 
+    @Override
+    public Skin getSkins() {
+        return misAspectos;
+    }
+
 }

@@ -22,5 +22,10 @@ public class Pared extends Obstaculo{
     public void setSkin (Skin s) {
 
     }
+    
+    @Override
+    public Skin getSkins() {
+        return misAspectos;
+    }
 }
 
