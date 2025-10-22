@@ -59,7 +59,7 @@ public class PanelPantallaNivel extends PanelVista{
 
     protected void agregarPanelNivelconImagenFondo() {
         imagenFondo = new JLabel();
-        java.net.URL url = this.getClass().getResource("/Imagenes/pantalla-inicial.png");
+        java.net.URL url = this.getClass().getResource("Imagenes/pantalla-inicial.png");
         if (url == null) {
             System.err.println("No se encontró pantalla-inicial.png en classpath: " + url);
         }

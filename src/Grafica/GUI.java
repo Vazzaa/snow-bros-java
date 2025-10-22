@@ -123,12 +123,13 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	@Override
 	public void mostrarPantallaPrincipal() {
 		ventana.setContentPane(panelPrincipal);
-		
+		refrescar();
 	}
 
 	@Override
 	public void mostrarPantallaNivel() {
-		ventana.requestFocusInWindow();
+		ventana.setContentPane(panelNivel);
+		refrescar();
 	}
 
 	@Override
@@ -196,44 +197,37 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	@Override
 	public void accionarPantallaElegirDominio() {
 		ventana.setContentPane(panelElegirDominio);
-		ventana.revalidate();
-    	ventana.repaint();
-		
+		refrescar();
 	}
 
 	@Override
 	public void accionarPantallaElegirModoJuego() {
-		// TODO Auto-generated method stub
-		
+		ventana.setContentPane(panelElegirModoJuego);
+		refrescar();
 	}
 
 	@Override
 	public void accionarPantallaGameOver() {
 		ventana.setContentPane(panelGameOver);
-		ventana.revalidate();
-    	ventana.repaint();
-		
+		refrescar();
 	}
 
 	@Override
 	public void accionarPantallaNivel() {
-		// TODO Auto-generated method stub
-		
+		ventana.setContentPane(panelNivel);
+		refrescar();
 	}
 
 	@Override
 	public void accionarPantallaPrincipal() {
 		ventana.setContentPane(panelPrincipal);
-		ventana.revalidate();
-    	ventana.repaint();
-		
+		refrescar();
 	}
 
 	@Override
 	public void accionarPantallaRanking() {
 		ventana.setContentPane(panelRanking);
-		ventana.revalidate();
-    	ventana.repaint();
+		refrescar();
 		
 	}
 
