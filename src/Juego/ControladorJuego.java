@@ -1,5 +1,4 @@
 package Juego;
-import Entidades.Entidad;
 
 public interface ControladorJuego {
 	

@@ -6,15 +6,16 @@ import Entidades.PowerUp.PowerUp;
 import Entidades.Enemigos.Enemigo;
 import EstadoMovimiento.EstadoMovimietoSnowBro;
 import Fabricas.FabricaEntidades;
-import Entidades.Entidad;
-import Entidades.Hitbox;
+import Fabricas.Skin;
 import Grafica.ConstantesTeclado;
 import Grafica.Observer;
-import Entidades.Skin;
 import Visitors.Colisionable;
 import Grafica.ObserverJugador;
+import Juego.Entidad;
+import Juego.EntidadJugador;
+import Juego.Hitbox;
 
-public class SnowBro extends Entidad{
+public class SnowBro extends Entidad implements EntidadJugador {
     //Atributos de instancia
     
     protected Jugador jugador;

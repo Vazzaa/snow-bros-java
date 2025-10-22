@@ -11,7 +11,7 @@ public class PanelPantallaElegirModoDeJuego extends PanelVista{
 
     //Constructor
     public PanelPantallaElegirModoDeJuego(ControladorVistas c,JButton botonsupervivencia,JButton botonclasico, JButton botoncontra){
-        controlaVistas=c;
+        super(c);
         botonJugarSuper=botonsupervivencia;
         botonJugarContra=botoncontra;
         botonJugarClas=botonclasico;

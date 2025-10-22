@@ -1,4 +1,4 @@
-package Entidades;
+package Fabricas;
 import java.util.Map;
 
 public class Skin {

@@ -1,7 +1,5 @@
 package Fabricas;
 
-import Entidades.Skin;
-
 public abstract class FabricaSkin {
 
     public abstract Skin crearSkinDemonioRojo();

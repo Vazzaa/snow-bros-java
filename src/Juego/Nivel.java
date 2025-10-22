@@ -3,7 +3,6 @@ package Juego;
 import java.util.LinkedList;
 import java.util.List;
 
-import Entidades.Entidad;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.FabricaEntidades;
 import Fabricas.FabricaSkin;

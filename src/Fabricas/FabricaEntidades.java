@@ -10,6 +10,7 @@ import Entidades.*;
 import Fabricas.FabricaSkin;
 import Grafica.Observer;
 import Grafica.ObserverGrafico;
+import Juego.Hitbox;
 //import Entidades.BolaDeNieve;
 //import Entidades.Proyectiles.ProyectilBomba;
 import Juego.ModoDeJuego;
@@ -32,8 +33,8 @@ public SnowBro getSnowBro(int x, int y) {
     SnowBro s = new SnowBro(this.fabricaSkin.crearSkinSnowBro(), x, y,new Jugador("Pepe", 0));
     ObserverGrafico o = new ObserverGrafico(s);
     s.registrarObserver(o);
-    miJuego.getControladoraGrafica().getPanelPantallaPrincipal().add(o);
     miJuego.getControladoraGrafica().getPanelPantallaPrincipal().incorporarSilueta(s);
+    //miJuego.getControladoraGrafica().getPanelPantallaPrincipal().add(o);
     return s;
 };
 

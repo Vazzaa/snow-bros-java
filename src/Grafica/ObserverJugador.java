@@ -1,21 +1,24 @@
 package Grafica;
-import Entidades.EntidadJugador;
+
+import Juego.EntidadJugador;
 
 public class ObserverJugador extends ObserverGrafico{
-    //Atributos de instancia
-    EntidadJugador entidadObservada;
-    //PanelPantallaNivel panelNivel;
-    PanelPantallaPrincipal panelPrincipal;
 
-    //Constructor
-    public ObserverJugador (EntidadJugador ent, PanelPantallaPrincipal pn) {
-        super(ent);
-        panelPrincipal = pn;
-    }
-
-    //Comandos
-
-    public void actualizar() {
-        
-    }
+	private static final long serialVersionUID = 7017967195998406908L;
+	private PanelPantallaNivel panelPantallaNivel;
+	private EntidadJugador jugador_observado;
+	
+	public ObserverJugador(PanelPantallaNivel panelPantallaNivel, EntidadJugador jugador_observado) {
+		super(jugador_observado);
+		this.panelPantallaNivel = panelPantallaNivel;
+		this.jugador_observado = jugador_observado;
+		actualizar();
+	}
+	
+	public void actualizar() {
+		super.actualizar();
+		/*if (panelPantallaNivel != null){
+			panelPantallaNivel.actualizar_scroll_hacia_jugador(jugador_observado);
+		}*/
+	}
 }

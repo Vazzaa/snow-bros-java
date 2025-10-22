@@ -2,9 +2,9 @@ package Entidades.Estructuras;
 
 import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
+import Fabricas.Skin;
+import Juego.Entidad;
 import Visitors.Colisionable;
-import Entidades.Skin;
-import Entidades.Entidad;
 
 public abstract class Estructura extends Entidad implements Colisionable{
 

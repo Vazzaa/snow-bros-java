@@ -1,7 +1,5 @@
 package Juego;
 
-import Entidades.Entidad;
-
 public class ContraReloj extends ModoDeJuego{
 
 protected float Timer;

@@ -1,9 +1,9 @@
 package Entidades.PowerUp;
 
-import Entidades.Skin;
-import Entidades.Entidad;
 import Visitors.Colisionable;
 import Entidades.SnowBro.SnowBro;
+import Fabricas.Skin;
+import Juego.Entidad;
 import Entidades.Enemigos.Enemigo;
 
 public abstract class PowerUp extends Entidad implements Colisionable {

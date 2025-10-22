@@ -1,10 +1,10 @@
 package Entidades.Proyectiles;
 
-import Entidades.Hitbox;
-import Entidades.Skin;
 import Entidades.Enemigos.Enemigo;
 import Entidades.Estructuras.Estructura;
 import Entidades.SnowBro.SnowBro;
+import Fabricas.Skin;
+import Juego.Hitbox;
 
 public class ProyectilNieve extends Proyectil{
     

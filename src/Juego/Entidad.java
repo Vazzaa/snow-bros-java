@@ -1,10 +1,10 @@
-package Entidades;
+package Juego;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import Fabricas.Skin;
 import Grafica.*;
-import Juego.ModoDeJuego;
 
 public abstract class Entidad implements EntidadLogica {
 	
@@ -17,10 +17,7 @@ public abstract class Entidad implements EntidadLogica {
 	protected Entidad(Skin skins, float x, float y){
 		misAspectos = skins;
 		listaObservadores = new LinkedList<Observer>();
-		miHitbox.setPosX(x);
-		miHitbox.setPosY(y);
 	}
-
 	public ObserverGrafico getObserverGrafico(){
 		return observer;
 	}
@@ -29,11 +26,11 @@ public abstract class Entidad implements EntidadLogica {
 		return misAspectos;
 	}
 
-	public float getPosX(){
+	public int getPosX(){
 		return miHitbox.getPosX();
 	}
 
-	public float getPosY(){
+	public int getPosY(){
 		return miHitbox.getPosY();
 	}
 

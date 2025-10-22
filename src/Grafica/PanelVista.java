@@ -2,6 +2,10 @@ package Grafica;
 
 import javax.swing.JPanel;
 
-abstract class PanelVista extends JPanel{
-    protected ControladorVistas controlaVistas;
+public abstract class PanelVista extends JPanel {
+    protected ControladorVistas controladorVistas;
+
+    protected PanelVista (ControladorVistas controladorVistas){
+        this.controladorVistas = controladorVistas;
+    }
 }

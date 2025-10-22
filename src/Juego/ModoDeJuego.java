@@ -1,6 +1,8 @@
 package Juego;
 
-import Entidades.Entidad;
+import java.util.LinkedList;
+
+import Entidades.SnowBro.SnowBro;
 import Fabricas.FabricaDominio1;
 import Fabricas.FabricaEntidades;
 import Fabricas.FabricaSkin;
@@ -26,7 +28,10 @@ public class ModoDeJuego implements ControladorJuego {
 		miFabricaEntidades = new FabricaEntidades(fabricaSkinsActuales, this);
 		miCreadorNivel = new CreadorDeNivel(fabricaSkinsActuales);
 		miCreadorNivel.setFrabricaEntidades(miFabricaEntidades);
-		nivelActual = miCreadorNivel.leerArchivo("src/nivel_simple.txt");
+		SnowBro s = miFabricaEntidades.getSnowBro(100, 100);
+		Nivel n = new Nivel(1, new LinkedList<>(), new LinkedList<>(), s, miFabricaEntidades);
+        this.setNivel(n);
+		//nivelActual = miCreadorNivel.leerArchivo("src/nivel_simple.txt");
 		HiloJugador hiloJugador = new HiloJugador(nivelActual);
 		hiloJugador.run();
 	}
