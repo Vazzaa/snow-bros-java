@@ -59,4 +59,9 @@ public class TrollAmarillo extends Enemigo implements EstadoEnemigo{
         
     }
 
+    @Override
+    public Skin getSkins() {
+        return misAspectos;
+    }
+    
 }

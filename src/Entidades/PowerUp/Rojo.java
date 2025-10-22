@@ -43,5 +43,9 @@ public class Rojo extends PowerUp {
         throw new UnsupportedOperationException("Unimplemented method 'afectar'");
     }
 
+    @Override
+    public Skin getSkins() {
+        return misAspectos;
+    }
 
 }

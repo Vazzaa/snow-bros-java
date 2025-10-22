@@ -59,4 +59,8 @@ public class Moghera extends Enemigo{
         throw new UnsupportedOperationException("Unimplemented method 'setEstado'");
     }
 
+    @Override
+    public Skin getSkins() {
+        return misAspectos;
+    }
 }

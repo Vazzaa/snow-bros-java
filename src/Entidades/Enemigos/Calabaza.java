@@ -59,4 +59,9 @@ public class Calabaza extends Enemigo implements EstadoEnemigo{
         
     }
 
+    @Override
+    public Skin getSkins() {
+        return misAspectos;
+    }
+
 }

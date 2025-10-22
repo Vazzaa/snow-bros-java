@@ -62,4 +62,8 @@ public class Fantasma extends Enemigo implements EstadoEnemigo{
         
     }
 
+    @Override
+    public Skin getSkins() {
+        return misAspectos;
+    }
 }

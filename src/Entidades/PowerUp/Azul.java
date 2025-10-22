@@ -21,10 +21,7 @@ public class Azul extends PowerUp {
     public int getPuntaje() {
         return puntaje;
     }
-    
- 
-    
-    
+      
     public void setSkin(Skin s) {
         misAspectos = s;
     }
@@ -43,5 +40,10 @@ public class Azul extends PowerUp {
     
     public void afectar(PowerUp p) {
         
+    }
+
+    @Override
+    public Skin getSkins() {
+        return misAspectos;
     }
 }
