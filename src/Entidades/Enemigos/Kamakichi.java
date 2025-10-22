@@ -63,7 +63,7 @@ public class Kamakichi extends Enemigo {
     }
 
     @Override
-    public Skin getSkins() {
+    public Skin getSkin() {
         return misAspectos;
     }
 }

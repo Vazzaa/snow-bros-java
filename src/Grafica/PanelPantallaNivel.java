@@ -59,8 +59,8 @@ public class PanelPantallaNivel extends PanelVista{
 
     protected void agregarPanelNivelconImagenFondo() {
         imagenFondo = new JLabel();
-        java.net.URL url = this.getClass().getResource("/Imagenes/Background/FondoNivel.png");
-        if (url == null) System.err.println("No se encontró FondoNivel.png en classpath");
+        java.net.URL url = this.getClass().getResource("src/main/resources/Imagenes/Background/Fondol.png");
+        if (url == null) System.err.println("No se encontró Fondol.png en classpath");
         ImageIcon iconoImagen = new ImageIcon(url);
         imagenFondo.setIcon(iconoImagen);
         imagenFondo.setBounds(0,0, ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);

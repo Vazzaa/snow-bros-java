@@ -60,7 +60,7 @@ public class Moghera extends Enemigo{
     }
 
     @Override
-    public Skin getSkins() {
+    public Skin getSkin() {
         return misAspectos;
     }
 }
