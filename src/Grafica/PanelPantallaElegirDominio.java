@@ -56,7 +56,7 @@ public class PanelPantallaElegirDominio extends PanelVista{
     protected void registrarOyenteBotonDominio1() {
         botonDominio1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                controladorVistas.accionarInicioJuego();
+                controladorVistas.accionarPantallaElegirModoJuego();
             }
         });
     }
@@ -64,7 +64,7 @@ public class PanelPantallaElegirDominio extends PanelVista{
     protected void registrarOyenteBotonDominio2() {
         botonDominio2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                controladorVistas.accionarPantallaRanking();
+                controladorVistas.accionarPantallaElegirModoJuego();
             }
         });
     }

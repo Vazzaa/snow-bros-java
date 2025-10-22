@@ -8,9 +8,7 @@ import EstadoMovimiento.EstadoMovimietoSnowBro;
 import Fabricas.FabricaEntidades;
 import Fabricas.Skin;
 import Grafica.ConstantesTeclado;
-import Grafica.Observer;
 import Visitors.Colisionable;
-import Grafica.ObserverJugador;
 import Juego.Entidad;
 import Juego.EntidadJugador;
 

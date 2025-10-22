@@ -3,7 +3,6 @@ package Entidades.Estructuras;
 import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
-import Juego.Hitbox;
 
 public class Pared extends Obstaculo{
 
@@ -24,7 +23,7 @@ public class Pared extends Obstaculo{
     }
     
     @Override
-    public Skin getSkins() {
+    public Skin getSkin() {
         return misAspectos;
     }
 }

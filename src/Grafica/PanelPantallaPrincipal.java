@@ -1,7 +1,5 @@
 package Grafica;
 
-import javax.print.DocFlavor.URL;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -33,8 +31,8 @@ public class PanelPantallaPrincipal extends PanelVista{
     
     protected void agregarImagenFondo() {
 		imagenFondo = new JLabel();
-		java.net.URL url = this.getClass().getResource("/Imagenes/Background/Fondo1.png");
-        if (url == null) System.err.println("No se encontró Fondo1.png en classpath");
+		java.net.URL url = this.getClass().getResource("Imagenes/pantalla-inicial.png");
+        if (url == null) System.err.println("No se encontró pantalla-inicial.png en classpath");
         ImageIcon iconoImagen = new ImageIcon(url);
         Image imagenEscalada = iconoImagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
         Icon iconoImagenEscalada = new ImageIcon(imagenEscalada);
@@ -61,7 +59,7 @@ public class PanelPantallaPrincipal extends PanelVista{
     protected void registrarOyenteBotonInicio() {
         botonIniciar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                controladorVistas.accionarInicioJuego();
+                controladorVistas.accionarPantallaElegirDominio();
             }
         });
     }

@@ -8,8 +8,7 @@ public class PanelPantallaGameOver extends PanelVista{
     protected JButton botonVolverMenu;
 
     //Constructor
-    public PanelPantallaGameOver(ControladorVistas c,JButton botonvolvermenu){
+    public PanelPantallaGameOver(ControladorVistas c){
         super(c);
-        botonVolverMenu=botonvolvermenu;
     }
 }

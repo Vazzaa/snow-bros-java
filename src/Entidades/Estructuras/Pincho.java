@@ -2,7 +2,6 @@ package Entidades.Estructuras;
 import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
-import Juego.Hitbox;
 import Entidades.Proyectiles.ProyectilNieve;
 
 public class Pincho extends Obstaculo{
@@ -28,7 +27,7 @@ public class Pincho extends Obstaculo{
     }
     
     @Override
-    public Skin getSkins() {
+    public Skin getSkin() {
         return misAspectos;
     }
 

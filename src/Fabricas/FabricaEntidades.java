@@ -30,15 +30,7 @@ public FabricaEntidades (FabricaSkin fb, ModoDeJuego juego) {
 
 
 public SnowBro getSnowBro(int x, int y) {
-<<<<<<< HEAD
     SnowBro s = new SnowBro(this.fabricaSkin.crearSkinSnowBro(), x, y, new Jugador("Pepe", 0));
-=======
-    SnowBro s = new SnowBro(this.fabricaSkin.crearSkinSnowBro(), x, y,new Jugador("Pepe", 0));
-    ObserverGrafico o = new ObserverGrafico(s);
-    s.registrarObserver(o);
-    miJuego.getControladoraGrafica().getPanelPantallaPrincipal().incorporarSilueta(s);
-    //miJuego.getControladoraGrafica().getPanelPantallaPrincipal().add(o);
->>>>>>> 51f699d2de716d101f88fa86d3875ac74f8ec612
     return s;
 };
 
