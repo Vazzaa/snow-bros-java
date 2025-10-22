@@ -2,7 +2,6 @@ package Entidades.Estructuras;
 import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
-import Juego.Hitbox;
 
 public class SueloResbaladizo extends Obstaculo {
 

@@ -8,8 +8,7 @@ public class PanelPantallaRanking extends PanelVista{
     protected JButton botonParaAtr;
 
     //Constructor
-    public PanelPantallaRanking(ControladorVistas c,JButton botonparaatras){
+    public PanelPantallaRanking(ControladorVistas c){
         super(c);
-        botonParaAtr=botonparaatras;
     }
 }

@@ -25,13 +25,13 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 
 	public GUI(){
 		panelPrincipal = new PanelPantallaPrincipal(this);
-		panelRanking = new PanelPantallaRanking(null, null);
-		panelElegirModoJuego = new PanelPantallaElegirModoDeJuego(null);
-		panelElegirDominio = new PanelPantallaElegirDominio(null);
-		panelNivel = new PanelPantallaNivel(null);
-		panelGameOver = new PanelPantallaGameOver(null, null);
+		panelRanking = new PanelPantallaRanking(this);
+		panelElegirModoJuego = new PanelPantallaElegirModoDeJuego(this);
+		panelElegirDominio = new PanelPantallaElegirDominio(this);
+		panelNivel = new PanelPantallaNivel(this);
+		panelGameOver = new PanelPantallaGameOver(this);
 		configurarVentana();
-		//registrarOyenteVentana();
+		registrarOyenteVentana();
 
 		keyListener = new ConstantesTeclado();
 		ventana.addKeyListener(keyListener);
@@ -47,7 +47,6 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 		ventana.setVisible(true);
 		ventana.setResizable(false);
 		ventana.setFocusable(true);
-		registrarOyenteVentana();
 		mostrarPantallaPrincipal();
 	}
 
@@ -190,13 +189,15 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 
 	@Override
 	public void accionarInicioJuego() {
-		// TODO Auto-generated method stub
+		controlarJuego.iniciar();
 		
 	}
 
 	@Override
 	public void accionarPantallaElegirDominio() {
-		// TODO Auto-generated method stub
+		ventana.setContentPane(panelElegirDominio);
+		ventana.revalidate();
+    	ventana.repaint();
 		
 	}
 
@@ -230,15 +231,15 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 		
 	}
 
-	protected void refrescar(){
-		ventana.revalidate();
-		ventana.repaint();
-	}
-
 	@Override
 	public void sacarJugador(EntidadJugador e) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'sacarJugador'");
+	}
+
+	protected void refrescar(){
+		ventana.revalidate();
+		ventana.repaint();
 	}
     
 }

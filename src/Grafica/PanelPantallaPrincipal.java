@@ -1,7 +1,5 @@
 package Grafica;
 
-import javax.print.DocFlavor.URL;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -61,7 +59,7 @@ public class PanelPantallaPrincipal extends PanelVista{
     protected void registrarOyenteBotonInicio() {
         botonIniciar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                controladorVistas.accionarInicioJuego();
+                controladorVistas.accionarPantallaElegirDominio();
             }
         });
     }
