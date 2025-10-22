@@ -7,17 +7,8 @@ import Entidades.Enemigos.Enemigo;
 import EstadoMovimiento.EstadoMovimietoSnowBro;
 import Fabricas.FabricaEntidades;
 import Fabricas.Skin;
-<<<<<<< HEAD
-=======
-import Entidades.Entidad;
-import Entidades.EntidadJugador;
-=======
-import Entidades.Hitbox;
->>>>>>> 62f540095611f22e997e646416a3916da3795f5f
 import Grafica.ConstantesTeclado;
-import Grafica.Observer;
 import Visitors.Colisionable;
-import Grafica.ObserverJugador;
 import Juego.Entidad;
 import Juego.EntidadJugador;
 
@@ -137,7 +128,7 @@ public class SnowBro extends Entidad implements EntidadJugador {
     }
 
     @Override
-    public Skin getSkins() {
+    public Skin getSkin() {
         return misAspectos;
     }
     

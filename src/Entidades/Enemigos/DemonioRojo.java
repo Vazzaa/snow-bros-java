@@ -60,7 +60,7 @@ public class DemonioRojo extends Enemigo implements EstadoEnemigo{
     }
 
     @Override
-    public Skin getSkins() {
+    public Skin getSkin() {
         return misAspectos;
     }
 

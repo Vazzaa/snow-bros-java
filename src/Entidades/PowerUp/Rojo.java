@@ -44,7 +44,7 @@ public class Rojo extends PowerUp {
     }
 
     @Override
-    public Skin getSkins() {
+    public Skin getSkin() {
         return misAspectos;
     }
 

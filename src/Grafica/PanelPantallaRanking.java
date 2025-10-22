@@ -21,6 +21,7 @@ public class PanelPantallaRanking extends PanelVista{
     //Constructor
     public PanelPantallaRanking(ControladorVistas c){
         super(c);
+<<<<<<< HEAD
         iniciarComponentes();
     }
 
@@ -87,5 +88,7 @@ public class PanelPantallaRanking extends PanelVista{
                 controladorVistas.accionarPantallaPrincipal();
             }
         });
+=======
+>>>>>>> 2978b5f8077939d5e7fcd2c3ba23ef6c892d6478
     }
 }

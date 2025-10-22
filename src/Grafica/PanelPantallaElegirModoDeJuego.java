@@ -74,7 +74,7 @@ public class PanelPantallaElegirModoDeJuego extends PanelVista{
     protected void registrarOyenteBotonContrareloj() {
         botonJugarContrareloj.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                controladorVistas.accionarPantallaRanking();
+                controladorVistas.accionarInicioJuego();
             }
         });
     }
@@ -82,7 +82,7 @@ public class PanelPantallaElegirModoDeJuego extends PanelVista{
     protected void registrarOyenteBotonSupervivencia() {
         botonJugarSupervivencia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                controladorVistas.accionarPantallaRanking();
+                controladorVistas.accionarInicioJuego();
             }
         });
     }

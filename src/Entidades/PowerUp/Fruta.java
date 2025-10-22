@@ -40,7 +40,7 @@ public class Fruta extends PowerUp{
     }
 
     @Override
-    public Skin getSkins() {
+    public Skin getSkin() {
         return misAspectos;
     }
 
