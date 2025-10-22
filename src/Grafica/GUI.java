@@ -203,7 +203,9 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 
 	@Override
 	public void accionarPantallaElegirModoJuego() {
-		// TODO Auto-generated method stub
+		ventana.setContentPane(panelElegirModoJuego);
+        ventana.revalidate();
+        ventana.repaint();
 		
 	}
 

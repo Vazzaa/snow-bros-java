@@ -7,11 +7,11 @@ public class FabricaDominio1 extends FabricaSkin {
     protected String rutaCarpetaImagenes;
     public FabricaDominio1() {
         super();
-        this.rutaCarpetaImagenes = "src/Imagenes/SkinsOriginales/";
+        this.rutaCarpetaImagenes = "Imagenes/SkinsOriginales/";
     }
     private Map<Integer,String> get_mapeo_estado_imagen(String imagen, int cantidad_estados){
         Map<Integer,String> mapeo_estado_imagen = new HashMap<Integer,String>();
-        String rutaImagen = rutaCarpetaImagenes + "/" + imagen;
+        String rutaImagen = rutaCarpetaImagenes + imagen;
         for (int estado = 1; estado <= cantidad_estados; estado++){
             mapeo_estado_imagen.put(estado, rutaImagen + estado + ".png");
         }

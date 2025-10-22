@@ -1,4 +1,5 @@
 package Grafica;
+import javax.print.DocFlavor.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import Juego.Entidad;
@@ -22,7 +23,13 @@ public class ObserverGrafico extends JLabel implements Observer {
 	
 	protected void actualizarImagen() {
 		String rutaImagen = entidadObservada.getSkin().getRutaImagenActual();
-		ImageIcon icono = new ImageIcon(getClass().getClassLoader().getResource(rutaImagen));
+		System.out.println("Intentando cargar imagen desde: " + rutaImagen);
+    	java.net.URL url = getClass().getClassLoader().getResource(rutaImagen);
+    	if (url == null) {
+        	System.err.println("No se pudo encontrar la imagen en: " + rutaImagen);
+        	return;
+    	}
+    	ImageIcon icono = new ImageIcon(url);
 		setIcon(icono);
 	}
 	
