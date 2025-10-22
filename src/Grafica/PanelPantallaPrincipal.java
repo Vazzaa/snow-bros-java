@@ -33,8 +33,8 @@ public class PanelPantallaPrincipal extends PanelVista{
     
     protected void agregarImagenFondo() {
 		imagenFondo = new JLabel();
-		java.net.URL url = this.getClass().getResource("/Imagenes/Background/Fondo1.png");
-        if (url == null) System.err.println("No se encontró Fondo1.png en classpath");
+		java.net.URL url = this.getClass().getResource("/Imagenes/pantalla-inicial.png");
+        if (url == null) System.err.println("No se encontró pantalla-inicial.png en classpath");
         ImageIcon iconoImagen = new ImageIcon(url);
         Image imagenEscalada = iconoImagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
         Icon iconoImagenEscalada = new ImageIcon(imagenEscalada);
