@@ -1,7 +1,6 @@
 package Grafica;
 
-import Entidades.Entidad;
-import javax.swing.JLabel;
+import Juego.Entidad;
 
 public interface Observer  {
 

@@ -1,9 +1,8 @@
 package Entidades.Estructuras;
 
-import Entidades.Hitbox;
-import Entidades.Skin;
 import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
+import Fabricas.Skin;
 
 abstract class Obstaculo extends Estructura{
 

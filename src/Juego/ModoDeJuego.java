@@ -3,7 +3,6 @@ package Juego;
 import java.awt.List;
 import java.util.LinkedList;
 
-import Entidades.Entidad;
 import Entidades.Enemigos.Enemigo;
 import Entidades.Estructuras.Estructura;
 import Entidades.SnowBro.SnowBro;
@@ -33,7 +32,6 @@ public class ModoDeJuego implements ControladorJuego {
 		miCreadorNivel = new CreadorDeNivel(fabricaSkinsActuales);
 		miCreadorNivel.setFrabricaEntidades(miFabricaEntidades);
 	}
-
 	public ControladorGrafica getControladoraGrafica(){
 		return controlaGrafica;
 	}

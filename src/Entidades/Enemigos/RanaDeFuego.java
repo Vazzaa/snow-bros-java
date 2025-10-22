@@ -1,9 +1,9 @@
 package Entidades.Enemigos;
 
-import Entidades.Skin;
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.EstadoEnemigo;
 import Fabricas.FabricaEntidades;
+import Fabricas.Skin;
 import Visitors.Colisionable;
 
 public class RanaDeFuego extends Enemigo implements EstadoEnemigo {
@@ -60,6 +60,11 @@ public class RanaDeFuego extends Enemigo implements EstadoEnemigo {
     public void setEstado(EstadoEnemigo estado) {
         // TODO Auto-generated method stub
         
+    }
+
+    @Override
+    public Skin getSkins() {
+        return misAspectos;
     }
 
 }

@@ -1,0 +1,85 @@
+1. Nombres y Nomenclatura 📛
+
+El nombre de una variable, función o clase debe decirte qué hace o qué es sin necesidad de un comentario.
+
+    Nombres Significativos: Evita nombres de una sola letra (excepto en bucles cortos como i) o abreviaturas crípticas.
+
+        ❌ Mal: int d; (¿Días? ¿Distancia? ¿Datos?)
+
+        ✅ Bien: int diasTranscurridos; o int distanciaEnMetros;
+
+    Convenciones de Mayúsculas/Minúsculas:
+
+        Variables y Métodos (camelCase): La primera palabra va en minúscula y las siguientes empiezan con mayúscula. (Este es el estilo cantDias que mencionaste).
+
+            int numeroDeIntentos;
+
+            void calcularImpuestos();
+
+        Clases e Interfaces (PascalCase): Todas las palabras empiezan con mayúscula.
+
+            class GestorDeArchivos;
+
+            interface Jugador;
+
+        Constantes (UPPER_CASE_SNAKE_CASE): Todo en mayúsculas, separado por guiones bajos.
+
+            static final int VELOCIDAD_MAXIMA = 100;
+
+    Nombres de Funciones/Métodos: Deben ser verbos o frases verbales que describan la acción que realizan.
+
+        ❌ Mal: void datos()
+
+        ✅ Bien: void guardarDatosEnCache(); o Usuario obtenerUsuario();
+
+2. Formato y Legibilidad 👓
+
+El código debe estar "limpio" visualmente, como un libro bien maquetado.
+
+    Indentación (Sangría): ¡Fundamental! Usa una indentación consistente (generalmente 4 espacios o 1 tab) para definir claramente los bloques de código (dentro de un if, for, while, método, etc.).
+    Java
+
+    // Código bien indentado
+    public void revisarInventario(int maxItems) {
+        if (inventario.estaLleno()) {
+            for (int i = 0; i < maxItems; i++) {
+                // ...hacer algo
+            }
+        }
+    }
+
+    Espaciado (Whitespace):
+
+        Operadores: Usa espacios alrededor de los operadores (=, +, -, *, /, ==, !=, &&, ||, etc.). (Como mencionaste con el =).
+
+            ❌ Mal: x=y+z*2;
+
+            ✅ Bien: x = y + (z * 2);
+
+        Comas: Pon un espacio después de cada coma.
+
+            ✅ Bien: miMetodo(parametro1, parametro2);
+
+    Líneas en Blanco (Espaciado Vertical): Usa líneas en blanco para separar "párrafos" de código, es decir, grupos de líneas que realizan una tarea lógica relacionada.
+
+    Longitud de Línea: Evita líneas de código excesivamente largas que obliguen a hacer scroll horizontal. Un límite común es de 80 a 120 caracteres.
+
+3. Funciones y Métodos ⚙️
+
+    Pequeños y Enfocados: La regla de oro: una función debe hacer una sola cosa y hacerla bien.
+
+    Pocos Argumentos: Intenta que tus funciones tengan la menor cantidad de argumentos (parámetros) posible. Cero, uno o dos es ideal. Si necesitas más de 3, probablemente deberías agruparlos en un objeto.
+
+    Evita "Efectos Secundarios" (Side Effects): Una función que dice getNombre() no debería, además, modificar el estado de otra variable global. Debe limitarse a obtener el nombre.
+
+4. Comentarios 💬
+
+    El código debe auto-documentarse: El mejor comentario es un buen nombre de variable o función.
+
+    Comenta el "Por qué", no el "Qué":
+
+        ❌ Mal: i++; // Incrementa i en 1 (Esto es obvio).
+
+        ✅ Bien: // Usamos una tolerancia para evitar errores de precisión decimal
+
+    No dejes código "muerto": Borra el código comentado que ya no se usa. Para eso está el control de versiones (como Git).

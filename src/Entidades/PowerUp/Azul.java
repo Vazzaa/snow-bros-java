@@ -1,9 +1,9 @@
 package Entidades.PowerUp;
 
-import Entidades.Hitbox;
-import Entidades.Skin;
 import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
+import Fabricas.Skin;
+import Juego.Hitbox;
 
 public class Azul extends PowerUp {
 
@@ -21,10 +21,7 @@ public class Azul extends PowerUp {
     public int getPuntaje() {
         return puntaje;
     }
-    
- 
-    
-    
+      
     public void setSkin(Skin s) {
         misAspectos = s;
     }
@@ -43,5 +40,10 @@ public class Azul extends PowerUp {
     
     public void afectar(PowerUp p) {
         
+    }
+
+    @Override
+    public Skin getSkins() {
+        return misAspectos;
     }
 }

@@ -1,4 +1,4 @@
-package Entidades;
+package Juego;
 
 public class Hitbox {
 	

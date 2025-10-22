@@ -1,4 +1,4 @@
-package Entidades;
+package Entidades.Proyectiles;
 
 public class BolaDeNieve {
     

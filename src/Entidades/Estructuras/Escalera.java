@@ -1,9 +1,9 @@
 package Entidades.Estructuras;
 
-import Entidades.Hitbox;
-import Entidades.Skin;
 import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
+import Fabricas.Skin;
+import Juego.Hitbox;
 
 public class Escalera extends Obstaculo{
 
@@ -21,6 +21,11 @@ public class Escalera extends Obstaculo{
 
     public void setSkin (Skin s) {
 
+    }
+    @Override
+    
+    public Skin getSkins() {
+        return misAspectos;
     }
 }
 

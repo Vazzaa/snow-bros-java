@@ -1,19 +1,110 @@
 package Grafica;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PanelPantallaElegirModoDeJuego extends PanelVista{
     
     //Atributos
-    protected JButton botonJugarClas;
-    protected JButton botonJugarContra;
-    protected JButton botonJugarSuper;
+    protected JButton botonJugarClasico;
+    protected JButton botonJugarContrareloj;
+    protected JButton botonJugarSupervivencia;
+    protected JLabel imagenFondo;
 
     //Constructor
-    public PanelPantallaElegirModoDeJuego(ControladorVistas c,JButton botonsupervivencia,JButton botonclasico, JButton botoncontra){
-        controlaVistas=c;
-        botonJugarSuper=botonsupervivencia;
-        botonJugarContra=botoncontra;
-        botonJugarClas=botonclasico;
+    public PanelPantallaElegirModoDeJuego(ControladorVistas c){
+        super(c);
+        iniciarComponentes();
     }
+
+   protected void iniciarComponentes(){
+        setSize(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
+        setLayout(null);
+        agregarImagenFondo();
+        agregarBotonClasico();
+        agregarBotonContrareloj();
+        agregarBotonSupervivencia();
+    }
+
+    protected void agregarImagenFondo(){
+        imagenFondo = new JLabel();
+		ImageIcon iconoImagen = new ImageIcon(this.getClass().getResource("/Imagenes/pantalla-elegirmodo.png"));
+		Image imagenEscalada = iconoImagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
+		Icon iconoImagenEscalada = new ImageIcon(imagenEscalada);
+	    imagenFondo.setIcon(iconoImagenEscalada);
+		imagenFondo.setBounds(0,0, ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
+		add(imagenFondo);
+    }
+    
+    protected void agregarBotonClasico(){
+        botonJugarClasico = new JButton();
+        decorarBotonClasico();
+        registrarOyenteBotonClasico();
+        add(botonJugarClasico);
+    }
+
+    protected void agregarBotonContrareloj(){
+        botonJugarContrareloj = new JButton();
+        decorarBotonContrareloj();
+        registrarOyenteBotonContrareloj();
+        add(botonJugarContrareloj);
+    }
+
+    protected void agregarBotonSupervivencia(){
+        botonJugarSupervivencia = new JButton();
+        decorarBotonSupervivencia();
+        registrarOyenteBotonSupervivencia();
+        add(botonJugarSupervivencia);
+    }
+
+
+     protected void registrarOyenteBotonClasico() {
+        botonJugarClasico.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                controladorVistas.accionarInicioJuego();
+            }
+        });
+    }
+
+    protected void registrarOyenteBotonContrareloj() {
+        botonJugarContrareloj.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                controladorVistas.accionarPantallaRanking();
+            }
+        });
+    }
+
+    protected void registrarOyenteBotonSupervivencia() {
+        botonJugarSupervivencia.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                controladorVistas.accionarPantallaRanking();
+            }
+        });
+    }
+
+    protected void transparentarBoton(JButton boton) {
+        boton.setOpaque(false);
+        boton.setContentAreaFilled(false);
+        boton.setBorderPainted(false);
+    }
+
+    protected void decorarBotonClasico() {
+		transparentarBoton(botonJugarClasico);
+		botonJugarClasico.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 100 ,250, 200 , 50);
+	}
+	
+	protected void decorarBotonContrareloj() {
+		transparentarBoton(botonJugarContrareloj);
+		botonJugarContrareloj.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 130 ,350, 260 , 50);
+	}
+    
+    protected void decorarBotonSupervivencia() {
+		transparentarBoton(botonJugarSupervivencia);
+		botonJugarSupervivencia.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 130 ,450, 260 , 50);
+	}
 }

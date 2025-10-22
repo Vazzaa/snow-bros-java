@@ -1,10 +1,10 @@
 package Entidades.Enemigos;
 
 import EstadoMovimiento.EstadoEnemigo;
-import Entidades.Entidad;
+import Fabricas.Skin;
+import Juego.Entidad;
 import Entidades.SnowBro.SnowBro;
 import Visitors.Colisionable;
-import Entidades.Skin;
 
 public abstract class Enemigo extends Entidad implements Colisionable{
 

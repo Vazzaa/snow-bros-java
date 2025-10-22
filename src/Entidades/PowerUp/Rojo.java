@@ -1,9 +1,9 @@
 package Entidades.PowerUp;
 
-import Entidades.Hitbox;
-import Entidades.Skin;
 import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
+import Fabricas.Skin;
+import Juego.Hitbox;
 
 public class Rojo extends PowerUp {
     
@@ -43,5 +43,9 @@ public class Rojo extends PowerUp {
         throw new UnsupportedOperationException("Unimplemented method 'afectar'");
     }
 
+    @Override
+    public Skin getSkin() {
+        return misAspectos;
+    }
 
 }

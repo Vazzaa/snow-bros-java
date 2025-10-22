@@ -3,8 +3,6 @@ package Fabricas;
 import java.util.HashMap;
 import java.util.Map;
 
-import Entidades.Skin;
-
 public class FabricaDominio1 extends FabricaSkin {
     protected String rutaCarpetaImagenes;
     public FabricaDominio1() {

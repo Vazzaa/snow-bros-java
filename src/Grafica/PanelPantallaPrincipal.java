@@ -4,30 +4,22 @@ import javax.print.DocFlavor.URL;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 
-import Entidades.EntidadJugador;
-import Entidades.EntidadLogica;
 
 public class PanelPantallaPrincipal extends PanelVista{
     
     private JButton botonIniciar;
     private JButton botonRanking;
     private JLabel imagenFondo;
-    private JPanel panelPrincipal;
 
     public PanelPantallaPrincipal(ControladorVistas c){
-        controlaVistas = c;
+        super(c);
         iniciarComponentes();
     }
 
@@ -38,7 +30,7 @@ public class PanelPantallaPrincipal extends PanelVista{
         agregarBotonIniciar();
         agregarBotonRanking();
     }
-
+    
     protected void agregarImagenFondo() {
 		imagenFondo = new JLabel();
 		java.net.URL url = this.getClass().getResource("/Imagenes/Background/Fondo1.png");
@@ -54,31 +46,48 @@ public class PanelPantallaPrincipal extends PanelVista{
 
     protected void agregarBotonIniciar(){
         botonIniciar = new JButton();
+        decorarBotonInicio();
         registrarOyenteBotonInicio();
         add(botonIniciar);
     }
 
     protected void agregarBotonRanking(){
         botonRanking = new JButton();
+        decorarBotonRanking();
         registrarOyenteBotonRanking();
         add(botonRanking);
     }
 
     protected void registrarOyenteBotonInicio() {
-		botonIniciar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				controlaVistas.accionarInicioJuego();
-			}
-		});
-	}
+        botonIniciar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                controladorVistas.accionarInicioJuego();
+            }
+        });
+    }
 
     protected void registrarOyenteBotonRanking() {
-		botonRanking.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				controlaVistas.accionarPantallaRanking();
-			}
-		});
-	}
+        botonRanking.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                controladorVistas.accionarPantallaRanking();
+            }
+        });
+    }
 
+    protected void transparentarBoton(JButton boton) {
+        boton.setOpaque(false);
+        boton.setContentAreaFilled(false);
+        boton.setBorderPainted(false);
+    }
+
+    protected void decorarBotonInicio() {
+		transparentarBoton(botonIniciar);
+		botonIniciar.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 100 ,ConstantesVistas.PANEL_ALTO - 150, 200 , 50);
+	}
+	
+	protected void decorarBotonRanking() {
+		transparentarBoton(botonRanking);
+		botonRanking.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 130 ,ConstantesVistas.PANEL_ALTO - 90, 260 , 50);
+	}
 }
 

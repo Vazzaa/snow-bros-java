@@ -2,11 +2,11 @@ package Grafica;
 
 import javax.swing.JFrame;
 
-import Entidades.Entidad;
-import Entidades.EntidadJugador;
-import Entidades.EntidadLogica;
-import Entidades.SnowBro.SnowBro;
 import Juego.ControladorJuego;
+import Juego.Entidad;
+import Juego.EntidadJugador;
+import Juego.EntidadLogica;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -26,8 +26,8 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	public GUI(){
 		panelPrincipal = new PanelPantallaPrincipal(this);
 		panelRanking = new PanelPantallaRanking(null, null);
-		panelElegirModoJuego = new PanelPantallaElegirModoDeJuego(null, null, null, null);
-		panelElegirDominio = new PanelPantallaElegirDominio(null, null, null);
+		panelElegirModoJuego = new PanelPantallaElegirModoDeJuego(null);
+		panelElegirDominio = new PanelPantallaElegirDominio(null);
 		panelNivel = new PanelPantallaNivel(null);
 		panelGameOver = new PanelPantallaGameOver(null, null);
 		configurarVentana();
@@ -36,7 +36,6 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 		keyListener = new ConstantesTeclado();
 		ventana.addKeyListener(keyListener);
 		ventana.setFocusable(true);
-		panelPrincipal.incorporar_entidad_jugador(null);
 		ventana.requestFocusInWindow();
 	}
 
@@ -48,11 +47,11 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 		ventana.setVisible(true);
 		ventana.setResizable(false);
 		ventana.setFocusable(true);
-		registrar_oyente_ventana();
+		registrarOyenteVentana();
 		mostrarPantallaPrincipal();
 	}
 
-	protected void registrar_oyente_ventana() {
+	protected void registrarOyenteVentana() {
 		ventana.addKeyListener(new KeyAdapter(){
 			public void keyPressed(KeyEvent e){
 				if (e.getKeyCode() == KeyEvent.VK_A){

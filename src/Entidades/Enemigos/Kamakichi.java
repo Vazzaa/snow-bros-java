@@ -1,9 +1,9 @@
 package Entidades.Enemigos;
 
-import Entidades.Skin;
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.EstadoEnemigo;
 import Fabricas.FabricaEntidades;
+import Fabricas.Skin;
 import Visitors.Colisionable;
 
 public class Kamakichi extends Enemigo {
@@ -62,4 +62,8 @@ public class Kamakichi extends Enemigo {
         
     }
 
+    @Override
+    public Skin getSkins() {
+        return misAspectos;
+    }
 }

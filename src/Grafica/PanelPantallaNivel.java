@@ -2,13 +2,15 @@ package Grafica;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.ResourceBundle.Control;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Entidades.EntidadJugador;
-import Entidades.EntidadLogica;
+import Juego.Entidad;
+import Juego.EntidadJugador;
+import Juego.EntidadLogica;
 
 public class PanelPantallaNivel extends PanelVista{
     private static final long serialVersionUID = 1L;
@@ -16,7 +18,7 @@ public class PanelPantallaNivel extends PanelVista{
     private JLabel imagenFondo;
 
     public PanelPantallaNivel(ControladorVistas c){
-        controlaVistas = c;
+        super(c);
         iniciarComponentes();
     }
     public void iniciarComponentes(){
@@ -26,14 +28,14 @@ public class PanelPantallaNivel extends PanelVista{
         agregarPanelNivelconImagenFondo();
 
     }
-     public Observer incorporarEntidad(EntidadLogica entidadLogic){
-        ObserverGrafico observer_grafico = new ObserverGrafico(entidadLogic);
+     public Observer incorporarEntidad(EntidadLogica e){
+        ObserverGrafico observer_grafico = new ObserverGrafico(e);
 		imagenFondo.add(observer_grafico);	
 		return observer_grafico;
 	}
 
     public Observer incorporarEntidadJugador(EntidadJugador entidad_jugador) {
-		ObserverJugador observer_jugador = new ObserverJugador(entidad_jugador, this);
+		ObserverJugador observer_jugador = new ObserverJugador(this, entidad_jugador);
 		imagenFondo.add(observer_jugador);
 		actualizar_info_jugador(entidad_jugador);
 		return observer_jugador;

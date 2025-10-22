@@ -9,7 +9,7 @@ public class PanelPantallaGameOver extends PanelVista{
 
     //Constructor
     public PanelPantallaGameOver(ControladorVistas c,JButton botonvolvermenu){
-        controlaVistas=c;
+        super(c);
         botonVolverMenu=botonvolvermenu;
     }
 }

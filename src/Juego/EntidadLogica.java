@@ -1,4 +1,6 @@
-package Entidades;
+package Juego;
+
+import Fabricas.Skin;
 
 public interface EntidadLogica {
 

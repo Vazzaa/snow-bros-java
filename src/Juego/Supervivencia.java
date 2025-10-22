@@ -1,7 +1,5 @@
 package Juego;
 
-import Entidades.Entidad;
-
 public class Supervivencia extends ModoDeJuego {
 
 protected int NumOleada;

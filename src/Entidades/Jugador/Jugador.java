@@ -14,7 +14,7 @@ public class Jugador {
         nombre = n;
     }
 
-    public void setPuntaje (int p) {
+    public void sumarPuntaje (int p) {
         puntaje += p;
     }
 

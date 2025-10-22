@@ -1,7 +1,5 @@
 package Juego;
 
-import Entidades.Entidad;
-
 public class Clasico extends ModoDeJuego {
 
 public Clasico () {

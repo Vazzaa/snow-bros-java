@@ -6,14 +6,13 @@ import Entidades.PowerUp.PowerUp;
 import Entidades.Enemigos.Enemigo;
 import EstadoMovimiento.EstadoMovimietoSnowBro;
 import Fabricas.FabricaEntidades;
-import Entidades.Entidad;
-import Entidades.EntidadJugador;
-import Entidades.Hitbox;
+import Fabricas.Skin;
 import Grafica.ConstantesTeclado;
 import Grafica.Observer;
-import Entidades.Skin;
 import Visitors.Colisionable;
 import Grafica.ObserverJugador;
+import Juego.Entidad;
+import Juego.EntidadJugador;
 
 public class SnowBro extends Entidad implements EntidadJugador {
     //Atributos de instancia
@@ -126,10 +125,13 @@ public class SnowBro extends Entidad implements EntidadJugador {
         
     }
     
-    //Consultas
-    
     public int getClaveRepreEstado() {
         return 0;
+    }
+
+    @Override
+    public Skin getSkin() {
+        return misAspectos;
     }
     
 }

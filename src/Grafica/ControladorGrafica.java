@@ -1,6 +1,8 @@
 package Grafica;
-import Entidades.*;
 import Juego.ControladorJuego;
+import Juego.Entidad;
+import Juego.EntidadJugador;
+import Juego.EntidadLogica;
 
 public interface ControladorGrafica {
 	
@@ -16,5 +18,4 @@ public interface ControladorGrafica {
 	public void sacarEntidad(EntidadLogica e);
 	public void sacarJugador(EntidadJugador e);
 	public boolean verificarColisiones(Entidad e);
-	
 }
