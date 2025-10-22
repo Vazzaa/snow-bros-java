@@ -47,7 +47,7 @@ public class CreadorDeNivel {
 public Nivel crearNivelHarcodeando(){
     List<Estructura> plataformas = new ArrayList<>();
     List<Enemigo> enemigos = new ArrayList<>();
-    SnowBro jugador = fabEntidades.getSnowBro(10, 10);
+    SnowBro jugador = fabEntidades.getSnowBro(10, 8000);
 
     //plataformas.add(fabEntidades.getPlatMovil(100, 400));
     //plataformas.add(fabEntidades.getPlatQuebradiza(200, 350));
@@ -56,7 +56,7 @@ public Nivel crearNivelHarcodeando(){
     //plataformas.add(fabEntidades.getPincho(150, 480));
     //plataformas.add(fabEntidades.getEscalera(300, 450));
 
-    enemigos.add(fabEntidades.getDemonioRojo(100, 100));
+    enemigos.add(fabEntidades.getDemonioRojo(100, 8000));
     //enemigos.add(fabEntidades.getTrollAmarillo(500, 300));
     //enemigos.add(fabEntidades.getRanaDeFuego(600, 300));
     //enemigos.add(fabEntidades.getCalabaza(700, 300));
