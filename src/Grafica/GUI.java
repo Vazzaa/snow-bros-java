@@ -209,7 +209,9 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 
 	@Override
 	public void accionarPantallaGameOver() {
-		// TODO Auto-generated method stub
+		ventana.setContentPane(panelGameOver);
+		ventana.revalidate();
+    	ventana.repaint();
 		
 	}
 
@@ -221,13 +223,17 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 
 	@Override
 	public void accionarPantallaPrincipal() {
-		// TODO Auto-generated method stub
+		ventana.setContentPane(panelPrincipal);
+		ventana.revalidate();
+    	ventana.repaint();
 		
 	}
 
 	@Override
 	public void accionarPantallaRanking() {
-		// TODO Auto-generated method stub
+		ventana.setContentPane(panelRanking);
+		ventana.revalidate();
+    	ventana.repaint();
 		
 	}
 

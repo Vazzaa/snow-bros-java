@@ -17,6 +17,7 @@ public class PanelPantallaGameOver extends PanelVista{
     //Constructor
     public PanelPantallaGameOver(ControladorVistas c){
         super(c);
+        iniciarComponentes();
     }
 
     protected void iniciarComponentes(){
@@ -45,7 +46,7 @@ public class PanelPantallaGameOver extends PanelVista{
 
     protected void decorarBotonVolverMenu(){
         transparentarBoton(botonVolverMenu);
-        botonVolverMenu.setBounds(300, 400, 260, 50);
+        botonVolverMenu.setBounds(400, 520, 260, 50);
     }
 
     protected void transparentarBoton(JButton boton){
