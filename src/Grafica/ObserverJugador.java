@@ -5,12 +5,12 @@ public class ObserverJugador extends ObserverGrafico{
     //Atributos de instancia
     EntidadJugador entidadObservada;
     //PanelPantallaNivel panelNivel;
-    PanelPantallaPrincipal panelPrincipal;
+    PanelPantallaNivel panelNivel;
 
     //Constructor
-    public ObserverJugador (EntidadJugador ent, PanelPantallaPrincipal pn) {
+    public ObserverJugador (EntidadJugador ent, PanelPantallaNivel panelPantalla) {
         super(ent);
-        panelPrincipal = pn;
+        panelNivel = panelPantalla;
     }
 
     //Comandos

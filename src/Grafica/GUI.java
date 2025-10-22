@@ -141,22 +141,21 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 
 	@Override
 	public Observer registrarEntidad(EntidadLogica e) {
-		Observer observerEntidad=panelPrincipal.incorporarEntidad(e);
+		Observer observerEntidad=panelNivel.incorporarEntidad(e);
 		refrescar();
 		return observerEntidad;
 	}
 
 	@Override
 	public Observer registrarJugador(EntidadJugador entidadJuga) {
-		Observer observerJugador = panelPrincipal.incorporar_entidad_jugador(entidadJuga);
+		Observer observerJugador = panelNivel.incorporarEntidadJugador(entidadJuga);
 		refrescar();
 		return observerJugador;
 	}
 
 	public Observer registrar_silueta(EntidadLogica silueta) {
-		Observer observer_silueta = panelPrincipal.incorporarSilueta(silueta);
-		ventana.revalidate();
-		ventana.repaint();
+		Observer observer_silueta = panelNivel.incorporarSilueta(silueta);
+		refrescar();
 		return observer_silueta;
 	}
 
@@ -235,6 +234,12 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	protected void refrescar(){
 		ventana.revalidate();
 		ventana.repaint();
+	}
+
+	@Override
+	public void sacarJugador(EntidadJugador e) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'sacarJugador'");
 	}
     
 }

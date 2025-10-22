@@ -43,6 +43,28 @@ public class CreadorDeNivel {
     public void setFrabricaEntidades(FabricaEntidades fabEntidades){
         this.fabEntidades = fabEntidades;
     }
+
+public Nivel crearNivelHarcodeando(){
+    List<Estructura> plataformas = new ArrayList<>();
+    List<Enemigo> enemigos = new ArrayList<>();
+    SnowBro jugador = fabEntidades.getSnowBro(50, 300);
+
+    //plataformas.add(fabEntidades.getPlatMovil(100, 400));
+    //plataformas.add(fabEntidades.getPlatQuebradiza(200, 350));
+    //plataformas.add(fabEntidades.getSueloResbaladizo(0, 500));
+    //plataformas.add(fabEntidades.getPared(0, 0));
+    //plataformas.add(fabEntidades.getPincho(150, 480));
+    //plataformas.add(fabEntidades.getEscalera(300, 450));
+
+    //enemigos.add(fabEntidades.getDemonioRojo(400, 300));
+    //enemigos.add(fabEntidades.getTrollAmarillo(500, 300));
+    //enemigos.add(fabEntidades.getRanaDeFuego(600, 300));
+    //enemigos.add(fabEntidades.getCalabaza(700, 300));
+    //enemigos.add(fabEntidades.getMoghera(800, 300));
+
+    return new Nivel(1, plataformas, enemigos, jugador, fabEntidades);
+}
+
     public Nivel leerArchivo(String rutaArchivo){
         List<Estructura> plataformas = new ArrayList<>();
         List<Enemigo> enemigos = new ArrayList<>();

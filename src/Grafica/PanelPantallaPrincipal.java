@@ -1,5 +1,6 @@
 package Grafica;
 
+import javax.print.DocFlavor.URL;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -40,42 +41,15 @@ public class PanelPantallaPrincipal extends PanelVista{
 
     protected void agregarImagenFondo() {
 		imagenFondo = new JLabel();
-		ImageIcon iconoImagen = new ImageIcon(this.getClass().getResource("/Imagenes/Background/Fondo1.png"));
-		Image imagenEscalada = iconoImagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
-		Icon iconoImagenEscalada = new ImageIcon(imagenEscalada);
-	    imagenFondo.setIcon(iconoImagenEscalada);
-		imagenFondo.setBounds(0,0, ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
+		java.net.URL url = this.getClass().getResource("/Imagenes/Background/Fondo1.png");
+        if (url == null) System.err.println("No se encontró Fondo1.png en classpath");
+        ImageIcon iconoImagen = new ImageIcon(url);
+        Image imagenEscalada = iconoImagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
+        Icon iconoImagenEscalada = new ImageIcon(imagenEscalada);
+        imagenFondo.setIcon(iconoImagenEscalada);
+        imagenFondo.setBounds(0,0, ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
         imagenFondo.setLayout(null);
-		add(imagenFondo);
-	}
-
-    // todo esto seria para panel nivel
-    public Observer incorporarEntidad(EntidadLogica entidadLogic){
-        ObserverGrafico observer_grafico = new ObserverGrafico(entidadLogic);
-		imagenFondo.add(observer_grafico);	
-		return observer_grafico;
-	}
-
-    public Observer incorporar_entidad_jugador(EntidadJugador entidad_jugador) {
-		ObserverJugador observer_jugador = new ObserverJugador(entidad_jugador, null);
-		imagenFondo.add(observer_jugador);
-		actualizar_info_jugador(entidad_jugador);
-		return observer_jugador;
-	}
-
-    public Observer incorporarSilueta(EntidadLogica entidad_logica) {
-        ObserverGrafico observer_silueta = new ObserverGrafico(entidad_logica);
-        imagenFondo.setIcon(new ImageIcon(getClass().getClassLoader().getResource(entidad_logica.getSkin().getRutaImagenActual())));
-        imagenFondo.setBounds(0,0, imagenFondo.getIcon().getIconWidth(), imagenFondo.getIcon().getIconHeight());
-        panelPrincipal.setPreferredSize(new Dimension(imagenFondo.getIcon().getIconWidth(), imagenFondo.getIcon().getIconHeight()));
-        return observer_silueta;
-    }
-
-    	protected void actualizar_info_jugador(EntidadJugador jugador) {
-		actualizar_labels_informacion(jugador);
-	}
-    
-    protected void actualizar_labels_informacion(EntidadJugador jugador) {
+        add(imagenFondo);
 	}
 
     protected void agregarBotonIniciar(){

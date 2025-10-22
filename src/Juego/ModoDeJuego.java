@@ -1,6 +1,12 @@
 package Juego;
 
+import java.awt.List;
+import java.util.LinkedList;
+
 import Entidades.Entidad;
+import Entidades.Enemigos.Enemigo;
+import Entidades.Estructuras.Estructura;
+import Entidades.SnowBro.SnowBro;
 import Fabricas.FabricaDominio1;
 import Fabricas.FabricaEntidades;
 import Fabricas.FabricaSkin;
@@ -26,9 +32,6 @@ public class ModoDeJuego implements ControladorJuego {
 		miFabricaEntidades = new FabricaEntidades(fabricaSkinsActuales, this);
 		miCreadorNivel = new CreadorDeNivel(fabricaSkinsActuales);
 		miCreadorNivel.setFrabricaEntidades(miFabricaEntidades);
-		nivelActual = miCreadorNivel.leerArchivo("src/nivel_simple.txt");
-		HiloJugador hiloJugador = new HiloJugador(nivelActual);
-		hiloJugador.run();
 	}
 
 	public ControladorGrafica getControladoraGrafica(){
@@ -75,8 +78,35 @@ public class ModoDeJuego implements ControladorJuego {
 
 	@Override
 	public void iniciar() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'iniciar'");
+		//nivelActual = miCreadorNivel.leerArchivo("src/nivel_simple.txt");
+		nivelActual = miCreadorNivel.crearNivelHarcodeando();
+		registrarObservers();
+		controlaGrafica.mostrarPantallaNivel();
+		HiloJugador hiloJugador = new HiloJugador(nivelActual);
+	}
+
+	protected void registrarObservers() {
+		registrarObserverJugador(nivelActual.getSnowBro());
+		registrarObserverEnemigos(nivelActual.getMisEnemigos());
+		registrarObserversEstructuras(nivelActual.getMisEstructuras());
+	}
+	protected void registrarObserverJugador(SnowBro jugador) {
+		Observer observerJugador = controlaGrafica.registrarJugador(jugador);
+		jugador.registrarObserver(observerJugador);
+		
+	}
+
+	protected void registrarObserverEnemigos(java.util.List<Enemigo> enemigos) {
+		for (Enemigo e : enemigos) {
+			Observer observerEnemigo =controlaGrafica.registrarEntidad(e);
+			e.registrarObserver(observerEnemigo);
+		}
+	}
+	protected void registrarObserversEstructuras(java.util.List<Estructura> estructuras) {
+		for (Estructura es : estructuras) {
+			Observer observerEstructura = controlaGrafica.registrarEntidad(es);
+			es.registrarObserver(observerEstructura);
+		}
 	}
 
 	@Override
