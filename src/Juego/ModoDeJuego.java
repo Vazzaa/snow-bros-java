@@ -81,6 +81,7 @@ public class ModoDeJuego implements ControladorJuego {
 		registrarObservers();
 		controlaGrafica.mostrarPantallaNivel();
 		HiloJugador hiloJugador = new HiloJugador(nivelActual);
+		hiloJugador.start();
 	}
 
 	protected void registrarObservers() {

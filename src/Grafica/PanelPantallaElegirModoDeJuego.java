@@ -95,16 +95,16 @@ public class PanelPantallaElegirModoDeJuego extends PanelVista{
 
     protected void decorarBotonClasico() {
 		transparentarBoton(botonJugarClasico);
-		botonJugarClasico.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 100 ,250, 200 , 50);
+		botonJugarClasico.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 100 ,220, 200 , 50);
 	}
 	
 	protected void decorarBotonContrareloj() {
 		transparentarBoton(botonJugarContrareloj);
-		botonJugarContrareloj.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 130 ,350, 260 , 50);
+		botonJugarContrareloj.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 150 ,450, 300 , 50);
 	}
     
     protected void decorarBotonSupervivencia() {
 		transparentarBoton(botonJugarSupervivencia);
-		botonJugarSupervivencia.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 130 ,450, 260 , 50);
+		botonJugarSupervivencia.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 160 ,330, 350 , 50);
 	}
 }

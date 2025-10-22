@@ -72,7 +72,7 @@ public class PanelPantallaRanking extends PanelVista{
 
     protected void decorarBotonParaAtr(){
         transparentarBoton(botonParaAtr);
-        botonParaAtr.setBounds(350, 550, 100, 30);
+        botonParaAtr.setBounds(220, 500, 350, 50);
     }
 
     protected void transparentarBoton(JButton boton){

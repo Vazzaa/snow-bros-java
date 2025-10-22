@@ -31,7 +31,7 @@ public class PanelPantallaPrincipal extends PanelVista{
     
     protected void agregarImagenFondo() {
 		imagenFondo = new JLabel();
-		java.net.URL url = this.getClass().getResource("src/main/resources/Imagenes/pantalla-inicial.png");
+		java.net.URL url = this.getClass().getResource("/Imagenes/pantalla-inicial.png");
         if (url == null) System.err.println("No se encontró pantalla-inicial.png en classpath");
         ImageIcon iconoImagen = new ImageIcon(url);
         Image imagenEscalada = iconoImagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
@@ -80,12 +80,12 @@ public class PanelPantallaPrincipal extends PanelVista{
 
     protected void decorarBotonInicio() {
 		transparentarBoton(botonIniciar);
-		botonIniciar.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 100 ,ConstantesVistas.PANEL_ALTO - 150, 200 , 50);
+		botonIniciar.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 130 ,ConstantesVistas.PANEL_ALTO - 200, 250 , 50);
 	}
 	
 	protected void decorarBotonRanking() {
 		transparentarBoton(botonRanking);
-		botonRanking.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 130 ,ConstantesVistas.PANEL_ALTO - 90, 260 , 50);
+		botonRanking.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 130 ,ConstantesVistas.PANEL_ALTO - 100, 250 , 50);
 	}
 }
 

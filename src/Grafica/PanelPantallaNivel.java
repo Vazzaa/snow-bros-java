@@ -2,8 +2,10 @@ package Grafica;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.util.ResourceBundle.Control;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -59,12 +61,14 @@ public class PanelPantallaNivel extends PanelVista{
 
     protected void agregarPanelNivelconImagenFondo() {
         imagenFondo = new JLabel();
-        java.net.URL url = this.getClass().getResource("Imagenes/pantalla-inicial.png");
+        java.net.URL url = this.getClass().getResource("/Imagenes/Fondo1.png");
         if (url == null) {
             System.err.println("No se encontró pantalla-inicial.png en classpath: " + url);
         }
         ImageIcon iconoImagen = new ImageIcon(url);
-        imagenFondo.setIcon(iconoImagen);
+        Image imagenEscalada = iconoImagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
+        Icon iconoImagenEscalada = new ImageIcon(imagenEscalada);
+        imagenFondo.setIcon(iconoImagenEscalada);
         imagenFondo.setBounds(0,0, ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
         imagenFondo.setLayout(null);
         panelNivel = new JPanel();

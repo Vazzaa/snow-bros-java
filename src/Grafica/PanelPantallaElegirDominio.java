@@ -3,10 +3,13 @@ package Grafica;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 
 
@@ -15,6 +18,7 @@ public class PanelPantallaElegirDominio extends PanelVista{
     private JButton botonDominio1;
     private JButton botonDominio2;
     private JLabel imagenFondo;
+    private JTextField campoNombre;
 
     public PanelPantallaElegirDominio(ControladorVistas c){
         super(c);
@@ -27,6 +31,7 @@ public class PanelPantallaElegirDominio extends PanelVista{
         agregarImagenFondo();
         agregarBotonDominio1();
         agregarBotonDominio2();
+        agregarCampoNombre();
     }
     
     protected void agregarImagenFondo() {
@@ -53,6 +58,13 @@ public class PanelPantallaElegirDominio extends PanelVista{
         add(botonDominio2);
     }
 
+    protected void agregarCampoNombre(){
+        campoNombre = new JTextField();
+        campoNombre.setBounds(273, 180, 220, 40);
+        transparentarCampoTexto(campoNombre);
+        add(campoNombre);
+    }
+
     protected void registrarOyenteBotonDominio1() {
         botonDominio1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -75,14 +87,23 @@ public class PanelPantallaElegirDominio extends PanelVista{
         boton.setBorderPainted(false);
     }
 
+    protected void transparentarCampoTexto(JTextField campo) {
+        campo.setBorder(null);
+        Font fuenteEstandar = new Font("Monospaced", Font.BOLD, 24);
+        campoNombre.setFont(fuenteEstandar);
+        campoNombre.setForeground(new Color(255, 0, 0)); 
+        campoNombre.setCaretColor(new Color(255, 0, 0)); 
+    }
+
     protected void decorarBotonDominio1() {
 		transparentarBoton(botonDominio1);
-		botonDominio1.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 50 ,ConstantesVistas.PANEL_ALTO - 150, 200 , 50);
+		botonDominio1.setBounds(100 ,ConstantesVistas.PANEL_ALTO - 190, 200 , 50);
 	}
 	
 	protected void decorarBotonDominio2 () {
 		transparentarBoton(botonDominio2);
-		botonDominio2.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 150 ,ConstantesVistas.PANEL_ALTO - 150, 260 , 50);
+		botonDominio2.setBounds(500 ,ConstantesVistas.PANEL_ALTO - 190, 200 , 50);
 	}
+
 }
 
