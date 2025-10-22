@@ -3,13 +3,13 @@ package Entidades;
 public class Hitbox {
 	
 	// Atributos
-	protected float ancho;
-	protected float alto;
-	protected float posicionX;
-	protected float posicionY;
+	protected int ancho;
+	protected int alto;
+	protected int posicionX;
+	protected int posicionY;
 	
 	// Constructor
-	public Hitbox(float anch, float alt, float posX, float posY) {
+	public Hitbox(int anch, int alt, int posX, int posY) {
 		ancho = anch;
 		alto = alt;
 		posicionX = posX;
@@ -17,35 +17,35 @@ public class Hitbox {
 	}
 	
 	// Comandos	
-	public void setAncho(float a) {
+	public void setAncho(int a) {
 		ancho = a;
 	}
 	
-	public void setAlto(float al) {
+	public void setAlto(int al) {
 		alto = al;
 	}
 	
-	public void setPosX(float x) {
+	public void setPosX(int x) {
 		posicionX = x;
 	}
 	
-	public void setPosY(float y) {
+	public void setPosY(int y) {
 		posicionY = y;
 	}
 	
-	public float getAncho() {
+	public int getAncho() {
 		return ancho;
 	}
 	
-	public float getAlto() {
+	public int getAlto() {
 		return alto;
 	}
 	
-	public float getPosX() {
+	public int getPosX() {
 		return posicionX;
 	}
 	
-	public float getPosY() {
+	public int getPosY() {
 		return posicionY;
 	}
 }

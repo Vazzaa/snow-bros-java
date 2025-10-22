@@ -14,7 +14,7 @@ public abstract class Entidad implements EntidadLogica {
 	protected ObserverGrafico observer;
 	protected Hitbox miHitbox;
 
-	protected Entidad(Skin skins, float x, float y){
+	protected Entidad(Skin skins, int x, int y){
 		misAspectos = skins;
 		listaObservadores = new LinkedList<Observer>();
 		miHitbox.setPosX(x);
@@ -29,20 +29,20 @@ public abstract class Entidad implements EntidadLogica {
 		return misAspectos;
 	}
 
-	public float getPosX(){
+	public int getPosX(){
 		return miHitbox.getPosX();
 	}
 
-	public float getPosY(){
+	public int getPosY(){
 		return miHitbox.getPosY();
 	}
 
-	public void setPosX(float x){
+	public void setPosX(int x){
 		miHitbox.setPosX(x);
 	}
 
-	public void setPosY(float y){
-		miHitbox.setPosY(y);;
+	public void setPosY(int y){
+		miHitbox.setPosY(y);
 	}
 
 	public void registrarObserver(Observer obs){

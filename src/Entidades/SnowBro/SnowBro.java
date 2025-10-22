@@ -7,6 +7,7 @@ import Entidades.Enemigos.Enemigo;
 import EstadoMovimiento.EstadoMovimietoSnowBro;
 import Fabricas.FabricaEntidades;
 import Entidades.Entidad;
+import Entidades.EntidadJugador;
 import Entidades.Hitbox;
 import Grafica.ConstantesTeclado;
 import Grafica.Observer;
@@ -14,20 +15,20 @@ import Entidades.Skin;
 import Visitors.Colisionable;
 import Grafica.ObserverJugador;
 
-public class SnowBro extends Entidad{
+public class SnowBro extends Entidad implements EntidadJugador {
     //Atributos de instancia
     
     protected Jugador jugador;
     protected EstadoMovimietoSnowBro estadoMovimiento;
     protected FabricaEntidades crearNieve;
 
+    
     protected int puntaje;
     protected int vida;
     protected int velocidad;
-
+    
     //Constructor
-
-    public SnowBro (Skin aspectos, float x, float y, Jugador jug) {
+    public SnowBro (Skin aspectos, int x, int y, Jugador jug) {
         super(aspectos, x, y);
         velocidad = 20;
         jugador = jug;
@@ -38,7 +39,7 @@ public class SnowBro extends Entidad{
     }
 
     //Comandos
-
+    
     public int getVida() {
         return vida;
     }
@@ -54,7 +55,10 @@ public class SnowBro extends Entidad{
     public int getVelocidad(){
         return velocidad;
     }
-
+    
+    public String getNombre() {
+        return jugador.getNombre();
+    }
 
     public void setVida(int v) {
         vida = v;
@@ -67,64 +71,65 @@ public class SnowBro extends Entidad{
     public void setJugador(Jugador j) {
         jugador = j;
     }
-
+    
     public void setVelocidad(int v){
         velocidad = v;
     }
-
+    
     public void disparar() {
-    	
+        
     }
-
+    
     public void moverse() {
-    	boolean derecha = ConstantesTeclado.estaPresionada(ConstantesTeclado.DERECHA);
+        boolean derecha = ConstantesTeclado.estaPresionada(ConstantesTeclado.DERECHA);
     	boolean izquierda = ConstantesTeclado.estaPresionada(ConstantesTeclado.IZQUIERDA);
     	boolean salto = ConstantesTeclado.estaPresionada(ConstantesTeclado.SALTAR);
     	
         estadoMovimiento.mover(derecha, izquierda, salto);
         notificarObserver();
-
-
+        
+        
     }
-
+    
     public void setDireccion(int direccion){
-		estadoMovimiento.cambiar_direccion(direccion);
+        estadoMovimiento.cambiar_direccion(direccion);
 		misAspectos.setEstadoActual(getClaveRepreEstado());
 		notificarObserver();
 	}
-
+    
     public void morir() {
-
+        
     }
     
     public void disminuirVida() {
-
+        
     }
-
+    
     public void chocar(Colisionable c) {
-
+        
     }
-
+    
     public void afectar(Enemigo e) {
-
+        
     }
-
+    
     public void afectar(PowerUp p) {
-
+        
     }
-
+    
     public void afectar(Estructura e) {
-
+        
     }
-
-
+    
+    
     public void reiniciar() {
-
+        
     }
-
+    
     //Consultas
-
+    
     public int getClaveRepreEstado() {
         return 0;
     }
+    
 }

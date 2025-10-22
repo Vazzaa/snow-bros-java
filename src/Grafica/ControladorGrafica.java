@@ -14,7 +14,7 @@ public interface ControladorGrafica {
 	public Observer registrarEntidad(EntidadLogica e);
 	public Observer registrarJugador(EntidadJugador e);
 	public void sacarEntidad(EntidadLogica e);
+	public void sacarJugador(EntidadJugador e);
 	public boolean verificarColisiones(Entidad e);
-	public PanelPantallaPrincipal getPanelPantallaPrincipal();
 	
 }
