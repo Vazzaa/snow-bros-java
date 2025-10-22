@@ -23,6 +23,7 @@ public class ModoDeJuego implements ControladorJuego {
 	protected Nivel nivelActual;
 	protected FabricaEntidades miFabricaEntidades;
 	protected CreadorDeNivel miCreadorNivel;
+	protected String nombreJugador;
 	
 	// Comandos
 	public ModoDeJuego(ControladorGrafica controlador_grafica) {
@@ -62,6 +63,10 @@ public class ModoDeJuego implements ControladorJuego {
 		nivelActual = n;
 	}
 
+	public void setNombreJugador(String nombre){
+		nombreJugador = nombre;
+	}
+
 	public void activarDominio1(){
 
 	}
@@ -78,6 +83,7 @@ public class ModoDeJuego implements ControladorJuego {
 	public void iniciar() {
 		//nivelActual = miCreadorNivel.leerArchivo("src/nivel_simple.txt");
 		nivelActual = miCreadorNivel.crearNivelHarcodeando();
+		nivelActual.getSnowBro().getJugador().setNombre(nombreJugador);
 		registrarObservers();
 		controlaGrafica.mostrarPantallaNivel();
 		HiloJugador hiloJugador = new HiloJugador(nivelActual);

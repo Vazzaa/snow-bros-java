@@ -114,6 +114,10 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 		return panelGameOver;
 	}
 
+	public ControladorJuego getControladorJuego(){
+		return controlarJuego;
+	}
+
 	@Override
 	public void registrarControladorJuego(ControladorJuego cj) {
 		this.controlarJuego = cj;

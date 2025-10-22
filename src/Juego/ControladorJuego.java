@@ -8,4 +8,5 @@ public interface ControladorJuego {
 	public void lanzarProyectil();
 	public boolean estaColisionando(Entidad e);
 	public void moverAbajo();
+	public void setNombreJugador(String nombre);
 }

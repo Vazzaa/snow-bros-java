@@ -68,6 +68,11 @@ public class PanelPantallaElegirDominio extends PanelVista{
     protected void registrarOyenteBotonDominio1() {
         botonDominio1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if (campoNombre.getText().isEmpty()) {
+                    campoNombre.setText("Jugador");
+                }
+                agregarNombre();
+                System.out.println("Nombre jugador: " + campoNombre.getText());
                 controladorVistas.accionarPantallaElegirModoJuego();
             }
         });
@@ -76,6 +81,11 @@ public class PanelPantallaElegirDominio extends PanelVista{
     protected void registrarOyenteBotonDominio2() {
         botonDominio2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if (campoNombre.getText().isEmpty()) {
+                    campoNombre.setText("Jugador");
+                }
+                agregarNombre();
+                System.out.println("Nombre jugador: " + campoNombre.getText());
                 controladorVistas.accionarPantallaElegirModoJuego();
             }
         });
@@ -105,5 +115,9 @@ public class PanelPantallaElegirDominio extends PanelVista{
 		botonDominio2.setBounds(500 ,ConstantesVistas.PANEL_ALTO - 190, 200 , 50);
 	}
 
+    protected void agregarNombre() {
+        String nombreJugador = campoNombre.getText();
+        controladorVistas.getControladorJuego().setNombreJugador(nombreJugador);
+    }
 }
 

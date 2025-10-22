@@ -1,10 +1,13 @@
 package Grafica;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.util.ResourceBundle.Control;
 
+import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -17,7 +20,13 @@ import Juego.EntidadLogica;
 public class PanelPantallaNivel extends PanelVista{
     private static final long serialVersionUID = 1L;
     private JPanel panelNivel;
+    private JPanel panelInformacion;
     private JLabel imagenFondo;
+    private JLabel imagenFondoPanelInformacion;
+    private JLabel labelVida;
+    private JLabel labelPuntaje;
+    private JLabel labelTextPuntaje;
+    private JLabel labelTextVida;
 
     public PanelPantallaNivel(ControladorVistas c){
         super(c);
@@ -27,6 +36,7 @@ public class PanelPantallaNivel extends PanelVista{
         setSize(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
         setLayout(new BorderLayout());
         setDoubleBuffered(true);
+        agregarPanelInformacion();
         agregarPanelNivelconImagenFondo();
 
     }
@@ -56,7 +66,7 @@ public class PanelPantallaNivel extends PanelVista{
 	}
     
     protected void actualizar_labels_informacion(EntidadJugador jugador) {
-        //TODO: agregar label para la informacion del jugador
+        //TODO: actualizar puntaje y vida
 	}
 
     protected void agregarPanelNivelconImagenFondo() {
@@ -78,6 +88,43 @@ public class PanelPantallaNivel extends PanelVista{
         this.add(panelNivel);
     }
 
-    
+    protected void agregarPanelInformacion() {
+        panelInformacion = new JPanel();
+        panelInformacion.setBackground(Color.BLACK);
+        labelPuntaje = new JLabel("Puntaje: ");
+        labelPuntaje.setForeground(Color.WHITE);
+
+        labelTextPuntaje = new JLabel("0");
+        labelTextPuntaje.setForeground(Color.WHITE);
+
+        labelVida = new JLabel("Vida: ");
+        labelVida.setForeground(Color.WHITE);
+
+        labelTextVida = new JLabel("3");
+        labelTextVida.setForeground(Color.WHITE);
+
+        Font fuenteEstandar = new Font("Monospaced", Font.BOLD, 24);
+
+        labelPuntaje.setFont(fuenteEstandar);
+        labelPuntaje.setForeground(new Color(255, 0, 0)); 
+        //labelPuntaje.setCaretColor(new Color(255, 0, 0)); 
+        labelTextPuntaje.setFont(fuenteEstandar);
+        labelTextPuntaje.setForeground(new Color(255, 0, 0));
+
+        labelVida.setFont(fuenteEstandar);
+        labelVida.setForeground(new Color(255, 0, 0));
+
+        labelTextVida.setFont(fuenteEstandar);
+        labelTextVida.setForeground(new Color(255, 0, 0));
+        
+        panelInformacion.add(labelPuntaje);
+        panelInformacion.add(labelTextPuntaje);
+        panelInformacion.add(Box.createHorizontalStrut(400));
+        panelInformacion.add(labelVida);
+        panelInformacion.add(labelTextVida);
+
+
+        this.add(panelInformacion, BorderLayout.NORTH);
+    }
 }
 

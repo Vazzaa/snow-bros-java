@@ -1,5 +1,7 @@
 package Grafica;
 
+import Juego.ControladorJuego;
+
 public interface ControladorVistas {
     
     public void accionarInicioJuego();
@@ -9,4 +11,5 @@ public interface ControladorVistas {
     public void accionarPantallaElegirModoJuego();
     public void accionarPantallaPrincipal();
     public void accionarPantallaNivel();
+    public ControladorJuego getControladorJuego();
 }
