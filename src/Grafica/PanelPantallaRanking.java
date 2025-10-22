@@ -1,15 +1,91 @@
 package Grafica;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 
 public class PanelPantallaRanking extends PanelVista{
     
     //Atributos
     protected JButton botonParaAtr;
+    protected JPanel panelRankingClasico;
+    protected JPanel panelRankingContrarreloj;
+    protected JPanel panelRankingSupervivencia;
 
     //Constructor
-    public PanelPantallaRanking(ControladorVistas c,JButton botonparaatras){
+    public PanelPantallaRanking(ControladorVistas c){
         super(c);
-        botonParaAtr=botonparaatras;
+        iniciarComponentes();
+    }
+
+    protected void iniciarComponentes(){
+        setSize(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
+        setLayout(null);
+        agregarImagenFondo();
+        crearPanelesRanking();
+        agregarJugadoresyMostrarPanelesRanking();
+        agregarPanelesRanking();
+        agregarBotonParaAtr();
+    }
+
+    protected void agregarImagenFondo(){
+       JLabel imagenFondo = new JLabel();
+       ImageIcon iconoImagen= new ImageIcon(this.getClass().getResource("/imagenes/PantallaRanking.png"));
+       Image imagenEscalada = iconoImagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
+       Icon iconoImagenEscalada = new ImageIcon(imagenEscalada);
+       imagenFondo.setIcon(iconoImagenEscalada);
+       imagenFondo.setBounds(0, 0, ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
+       add(imagenFondo);
+    }
+
+    protected void crearPanelesRanking(){
+        panelRankingClasico = new JPanel();
+        panelRankingClasico.setBounds(0, 0, 267, 540);
+        panelRankingContrarreloj = new JPanel();
+        panelRankingContrarreloj.setBounds(256, 0, 267, 540);
+        panelRankingSupervivencia = new JPanel();
+        panelRankingSupervivencia.setBounds(534, 0, 266, 540);
+    }
+
+    protected void agregarJugadoresyMostrarPanelesRanking(){
+        //To do: Agregar jugadores a los paneles de ranking y mostrarlos
+    }
+
+    protected void agregarPanelesRanking(){
+        add(panelRankingClasico);
+        add(panelRankingContrarreloj);
+        add(panelRankingSupervivencia);
+    }   
+
+    protected void agregarBotonParaAtr(){
+        botonParaAtr = new JButton();
+        decorarBotonParaAtr();
+        registrarOyenteBotonParaAtr();
+        add(botonParaAtr);
+    }
+
+    protected void decorarBotonParaAtr(){
+        transparentarBoton(botonParaAtr);
+        botonParaAtr.setBounds(350, 550, 100, 30);
+    }
+
+    protected void transparentarBoton(JButton boton){
+        boton.setOpaque(false);
+        boton.setContentAreaFilled(false);
+        boton.setBorderPainted(false);
+    }
+
+    protected void registrarOyenteBotonParaAtr(){
+        botonParaAtr.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                controladorVistas.accionarPantallaPrincipal();
+            }
+        });
     }
 }
