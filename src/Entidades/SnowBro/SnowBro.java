@@ -11,8 +11,6 @@ import Fabricas.Skin;
 =======
 import Entidades.Entidad;
 import Entidades.EntidadJugador;
-import Entidades.Hitbox;
->>>>>>> e5cd332f09d85be70e117c946da8959b12f29755
 import Grafica.ConstantesTeclado;
 import Grafica.Observer;
 import Visitors.Colisionable;

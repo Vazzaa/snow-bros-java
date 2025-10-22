@@ -18,9 +18,4 @@ public interface ControladorGrafica {
 	public void sacarEntidad(EntidadLogica e);
 	public void sacarJugador(EntidadJugador e);
 	public boolean verificarColisiones(Entidad e);
-<<<<<<< HEAD
 }
-=======
-	
-}
->>>>>>> e5cd332f09d85be70e117c946da8959b12f29755

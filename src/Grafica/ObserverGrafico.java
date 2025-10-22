@@ -1,7 +1,6 @@
 package Grafica;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import Entidades.*;
 import Juego.Entidad;
 import Juego.EntidadLogica;
 
@@ -22,7 +21,7 @@ public class ObserverGrafico extends JLabel implements Observer {
 	}
 	
 	protected void actualizarImagen() {
-		String rutaImagen = entidadObservada.getSkins().getRutaImagenActual();
+		String rutaImagen = entidadObservada.getSkin().getRutaImagenActual();
 		ImageIcon icono = new ImageIcon(getClass().getClassLoader().getResource(rutaImagen));
 		setIcon(icono);
 	}

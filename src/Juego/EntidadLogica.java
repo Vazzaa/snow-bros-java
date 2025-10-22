@@ -4,7 +4,7 @@ import Fabricas.Skin;
 
 public interface EntidadLogica {
 
-	public Skin getSkins();
+	public Skin getSkin();
 	public int getPosX();
 	public int getPosY();
 	
