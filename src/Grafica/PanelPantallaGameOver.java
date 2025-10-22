@@ -17,7 +17,6 @@ public class PanelPantallaGameOver extends PanelVista{
     //Constructor
     public PanelPantallaGameOver(ControladorVistas c){
         super(c);
-<<<<<<< HEAD
     }
 
     protected void iniciarComponentes(){
@@ -29,7 +28,7 @@ public class PanelPantallaGameOver extends PanelVista{
 
     protected void agregarImagenFondo(){
        imagenFondo = new JLabel();
-       ImageIcon iconoImagen= new ImageIcon(this.getClass().getResource("/imagenes/gameover.png"));
+       ImageIcon iconoImagen= new ImageIcon(this.getClass().getResource("/Imagenes/PantallaGameOver.png"));
        Image imagenEscalada = iconoImagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
        Icon iconoImagenEscalada = new ImageIcon(imagenEscalada);
        imagenFondo.setIcon(iconoImagenEscalada);
@@ -61,7 +60,5 @@ public class PanelPantallaGameOver extends PanelVista{
                 controladorVistas.accionarPantallaPrincipal();
             }
         });
-=======
->>>>>>> 2978b5f8077939d5e7fcd2c3ba23ef6c892d6478
     }
 }

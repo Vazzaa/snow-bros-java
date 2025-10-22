@@ -21,7 +21,6 @@ public class PanelPantallaRanking extends PanelVista{
     //Constructor
     public PanelPantallaRanking(ControladorVistas c){
         super(c);
-<<<<<<< HEAD
         iniciarComponentes();
     }
 
@@ -37,7 +36,7 @@ public class PanelPantallaRanking extends PanelVista{
 
     protected void agregarImagenFondo(){
        JLabel imagenFondo = new JLabel();
-       ImageIcon iconoImagen= new ImageIcon(this.getClass().getResource("/imagenes/PantallaRanking.png"));
+       ImageIcon iconoImagen= new ImageIcon(this.getClass().getResource("/Imagenes/PantallaRanking.png"));
        Image imagenEscalada = iconoImagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
        Icon iconoImagenEscalada = new ImageIcon(imagenEscalada);
        imagenFondo.setIcon(iconoImagenEscalada);
@@ -88,7 +87,5 @@ public class PanelPantallaRanking extends PanelVista{
                 controladorVistas.accionarPantallaPrincipal();
             }
         });
-=======
->>>>>>> 2978b5f8077939d5e7fcd2c3ba23ef6c892d6478
     }
 }
