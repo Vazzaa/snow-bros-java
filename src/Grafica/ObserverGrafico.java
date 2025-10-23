@@ -25,7 +25,11 @@ public class ObserverGrafico extends JLabel implements Observer {
 		String rutaImagen = entidadObservada.getSkin().getRutaImagenActual();
 		System.out.println("Intentando cargar imagen desde: " + rutaImagen);
     	java.net.URL url = getClass().getClassLoader().getResource(rutaImagen);
-    	if (url == null) {
+		if (rutaImagen == null) {
+			System.err.println("Error: La ruta de la imagen es null para la entidad: " + entidadObservada.getClass().getSimpleName());
+			return;
+		}
+		if (url == null) {
         	System.err.println("No se pudo encontrar la imagen en: " + rutaImagen);
         	return;
     	}
@@ -40,8 +44,12 @@ public class ObserverGrafico extends JLabel implements Observer {
 	public void actualizarPosicionTamaño(){
 		int x = AdaptadorPosicionPixel.transformar_x(entidadObservada.getPosX());
 		int y = AdaptadorPosicionPixel.transformar_y(entidadObservada.getPosY());
-		int ancho = this.getIcon().getIconWidth();
-		int alto = this.getIcon().getIconHeight();
-		setBounds(x, y, ancho, alto);
+		if (this.getIcon() != null) {
+			int ancho = this.getIcon().getIconWidth();
+			int alto = this.getIcon().getIconHeight();
+			setBounds(x, y, ancho, alto);
+		}else {
+			setBounds(x, y, 32, 32);
+		}
 	}
 }

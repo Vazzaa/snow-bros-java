@@ -53,18 +53,30 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	protected void registrarOyenteVentana() {
 		ventana.addKeyListener(new KeyAdapter(){
 			public void keyPressed(KeyEvent e){
+				ConstantesTeclado.teclasPresionadas.add(e.getKeyCode());
+				// Debug temporal
+				if (e.getKeyCode() == KeyEvent.VK_W) {
+					System.out.println("TECLA W PRESIONADA - Registrada en ConstantesTeclado");
+				}
 				if (e.getKeyCode() == KeyEvent.VK_A){
 					controlarJuego.cambiarDireccionJugador(ConstantesTeclado.IZQUIERDA);
 				}
 				if (e.getKeyCode() == KeyEvent.VK_D){
 					controlarJuego.cambiarDireccionJugador(ConstantesTeclado.DERECHA);
 				}
-				if (e.getKeyCode() == KeyEvent.VK_SPACE){
+				if (e.getKeyCode() == KeyEvent.VK_W){
+					controlarJuego.lanzarProyectil();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_SPACE){  // ← AGREGAR esta línea
 					controlarJuego.lanzarProyectil();
 				}
 			}
+			public void keyReleased(KeyEvent e){
+				// Remover la tecla de ConstantesTeclado
+				ConstantesTeclado.teclasPresionadas.remove(e.getKeyCode());
+			}
 		});
-	}
+		};
 
 	public void setPanelRanking(PanelPantallaRanking pr){
 		panelRanking=pr;

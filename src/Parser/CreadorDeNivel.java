@@ -47,20 +47,24 @@ public class CreadorDeNivel {
 public Nivel crearNivelHarcodeando(){
     List<Estructura> plataformas = new ArrayList<>();
     List<Enemigo> enemigos = new ArrayList<>();
-    SnowBro jugador = fabEntidades.getSnowBro(10, 8000);
+    SnowBro jugador = fabEntidades.getSnowBro(10, 7650);
 
     //plataformas.add(fabEntidades.getPlatMovil(100, 400));
-    //plataformas.add(fabEntidades.getPlatQuebradiza(200, 350));
+    //plataformas.add(fabEntidades.getPlatQuebradiza(200, 7100));
     //plataformas.add(fabEntidades.getSueloResbaladizo(0, 500));
     //plataformas.add(fabEntidades.getPared(0, 0));
     //plataformas.add(fabEntidades.getPincho(150, 480));
     //plataformas.add(fabEntidades.getEscalera(300, 450));
+    Estructura plataforma = fabEntidades.getPlataforma(300, 7680);
+    plataformas.add(plataforma);
+    System.out.println("PLATAFORMA CREADA - X: " + plataforma.getPosX() + ", Y: " + plataforma.getPosY());
+    System.out.println("PLATAFORMA SKIN: " + plataforma.getSkin().getRutaImagenActual());
 
-    enemigos.add(fabEntidades.getDemonioRojo(100, 8000));
-    //enemigos.add(fabEntidades.getTrollAmarillo(500, 300));
-    //enemigos.add(fabEntidades.getRanaDeFuego(600, 300));
-    //enemigos.add(fabEntidades.getCalabaza(700, 300));
-    //enemigos.add(fabEntidades.getMoghera(800, 300));
+    enemigos.add(fabEntidades.getDemonioRojo(100, 7650));
+    enemigos.add(fabEntidades.getTrollAmarillo(200, 7650));
+    enemigos.add(fabEntidades.getRanaDeFuego(300, 7650));
+    enemigos.add(fabEntidades.getCalabaza(400, 7650));
+    enemigos.add(fabEntidades.getMoghera(500, 7650));
 
     return new Nivel(1, plataformas, enemigos, jugador, fabEntidades);
 }
