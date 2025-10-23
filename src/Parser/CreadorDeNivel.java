@@ -55,12 +55,38 @@ public Nivel crearNivelHarcodeando(){
     //plataformas.add(fabEntidades.getPared(0, 0));
     //plataformas.add(fabEntidades.getPincho(150, 480));
     //plataformas.add(fabEntidades.getEscalera(300, 450));
-    /*Estructuraataforma = fabEntidades.getPlataforma(300, 7680);
-    plataformas.add(plataforma);
-    System.out.println("PLATAFORMA CREADA - X: " + plataforma.getPosX() + ", Y: " + plataforma.getPosY());
-    System.out.println("PLATAFORMA SKIN: " + plataforma.getSkin().getRutaImagenActual());*/
+    plataformas.add(fabEntidades.getPlataforma(0, 7620));
+    plataformas.add(fabEntidades.getPlataforma(16, 7620));
+    plataformas.add(fabEntidades.getPlataforma(32, 7620));
+    plataformas.add(fabEntidades.getPlataforma(48, 7620));
+    plataformas.add(fabEntidades.getPlataforma(64, 7620));
+    plataformas.add(fabEntidades.getPlataforma(80, 7620));
+    plataformas.add(fabEntidades.getPlataforma(96, 7620));
+    plataformas.add(fabEntidades.getPlataforma(112, 7620));
+    plataformas.add(fabEntidades.getPlataforma(128, 7620));
+    plataformas.add(fabEntidades.getPlataforma(144, 7620));
+    plataformas.add(fabEntidades.getPlataforma(160, 7620));
+    plataformas.add(fabEntidades.getPlataforma(176, 7620));
+    plataformas.add(fabEntidades.getPlataforma(192, 7620));
+    plataformas.add(fabEntidades.getPlataforma(208, 7620));
+    plataformas.add(fabEntidades.getPlataforma(224, 7620));
+    plataformas.add(fabEntidades.getPlataforma(240, 7620));
+
+    //plat un poco mas arriba
+    plataformas.add(fabEntidades.getPlataforma(112, 7670));
+    plataformas.add(fabEntidades.getPlataforma(128, 7670));
+    plataformas.add(fabEntidades.getPlataforma(144, 7670));
+    plataformas.add(fabEntidades.getPlataforma(160, 7670));
+    plataformas.add(fabEntidades.getPlataforma(176, 7670));
+    plataformas.add(fabEntidades.getPlataforma(192, 7670));
+    plataformas.add(fabEntidades.getPlataforma(208, 7670));
+    plataformas.add(fabEntidades.getPlataforma(224, 7670));
+    plataformas.add(fabEntidades.getPlataforma(240, 7670));
+
+    
 
     enemigos.add(fabEntidades.getDemonioRojo(100, 7650));
+    enemigos.add(fabEntidades.getDemonioRojo(176, 7700));
     enemigos.add(fabEntidades.getTrollAmarillo(200, 7650));
     enemigos.add(fabEntidades.getRanaDeFuego(300, 7650));
     enemigos.add(fabEntidades.getCalabaza(400, 7650));

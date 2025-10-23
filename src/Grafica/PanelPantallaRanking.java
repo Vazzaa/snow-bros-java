@@ -27,7 +27,7 @@ public class PanelPantallaRanking extends PanelVista{
     protected void iniciarComponentes(){
         setSize(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
         setLayout(null);
-        agregarImagenFondo();
+        //agregarImagenFondo();
         crearPanelesRanking();
         agregarJugadoresyMostrarPanelesRanking();
         agregarPanelesRanking();

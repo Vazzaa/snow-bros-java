@@ -7,8 +7,8 @@ public class EstadoMovimietoSnowBro {
     
     protected SnowBro snowBro;
 
-    private final int VELOCIDAD_MOVIMIENTO = 5;
-    private final int FUERZA_SALTO = 18; 
+    private final int VELOCIDAD_MOVIMIENTO = 3;
+    private final int FUERZA_SALTO = 12; 
     private final int GRAVEDAD = 1;
 
     private int velocidadHorizontal = 0;
@@ -74,7 +74,10 @@ public class EstadoMovimietoSnowBro {
     }
     
     public boolean enElSuelo() {
-    	return enElSuelo;
+    	if (snowBro.getPosY() == 7650 || (snowBro.getPosY() <= 7710 && snowBro.getPosY() >= 7700 && snowBro.getPosX() >= 112 && snowBro.getPosX() <= 240)){
+            return true;
+        }
+        return false;
     }
 
     public void detenerMovimientoHorizontal() {
@@ -99,12 +102,19 @@ public class EstadoMovimietoSnowBro {
             enElSuelo = true; // Marcar como en el suelo
             System.out.println("TOCO EL SUELO - PosY: " + snowBro.getPosY());
         }
-        /*  if (snowBro.getPosY() <= 7300 && snowBro.getPosY() >= 7290 && snowBro.getPosX() >= 300 && snowBro.getPosX() <= 332 && velocidadVertical <= 0) {
-        snowBro.setPosY(7300);
+        if (snowBro.getPosY() == 7700 && velocidadVertical <= 0) {
+            snowBro.setPosY(7700); // Mantener en el suelo
+            velocidadVertical = 0; // Detener la caída
+            enElSuelo = true; // Marcar como en el suelo
+            System.out.println("TOCO EL SUELO - PosY: " + snowBro.getPosY());
+        }
+        if (snowBro.getPosY() <= 7710 && snowBro.getPosY() >= 7700 && snowBro.getPosX() >= 112 && snowBro.getPosX() <= 240 && velocidadVertical >=0) {
+        snowBro.setPosY(7700);
         velocidadVertical = 0;
         enElSuelo = true;
+        System.out.println("-------------------------TOQUE LA PLATAFORMA DE ARRIBA----------------------------" );
         System.out.println("TOCO LA PLATAFORMA - PosY: " + snowBro.getPosY());
-        }*/
+        }
         if (enElSuelo() && !ConstantesTeclado.estaPresionada(ConstantesTeclado.SALTAR)) {
             // Si está en una plataforma pero no en el suelo principal, puede caer
             if (snowBro.getPosY() > 7650) {

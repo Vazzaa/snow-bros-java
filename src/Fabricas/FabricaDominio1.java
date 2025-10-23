@@ -69,7 +69,9 @@ public class FabricaDominio1 extends FabricaSkin {
         return new Skin(get_mapeo_estado_imagen("Resbaladizo", 0), 1);//Falta
     }
     public Skin crearSkinPlataforma(){
-        return new Skin(get_mapeo_estado_imagen("Plataforma1", 1), 1);
+        Map<Integer,String> mapeoparaplataforma= new HashMap<Integer,String>();
+        mapeoparaplataforma.put(1,"Imagenes/SkinsOriginales/plataforma2.png");
+        return new Skin(mapeoparaplataforma, 1);
     }
     public Skin crearSkinPlatQuebradiza(){
         return new Skin(get_mapeo_estado_imagen("PlatQuebradiza", 0), 1);//Falta

@@ -112,9 +112,9 @@ public PlatMovil getPlatMovil(int x, int y) {
     return null;
     //return new PlatMovil(this.fabricaSkin.crearSkinPlatMovil(), x, y);
 }
-/*blic Plataforma getPlataforma(int x, int y) {
+public Plataforma getPlataforma(int x, int y) {
     return new Plataforma(this.fabricaSkin.crearSkinPlataforma(), x, y);
-}*/
+}
 
 public ProyectilBomba getProyectilBomba(int x, int y) {
     return null;
