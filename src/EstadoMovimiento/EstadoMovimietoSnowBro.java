@@ -74,7 +74,7 @@ public class EstadoMovimietoSnowBro {
     }
     
     public boolean enElSuelo() {
-    	if (snowBro.getPosY() == 7650 || (snowBro.getPosY() <= 7710 && snowBro.getPosY() >= 7700 && snowBro.getPosX() >= 112 && snowBro.getPosX() <= 240)){
+    	if (snowBro.getPosY() == 7650 ){
             return true;
         }
         return false;
@@ -125,7 +125,28 @@ public class EstadoMovimietoSnowBro {
         if (velocidadVertical != 0) {
             System.out.println("SALTO - PosY: " + posYAnterior + " -> " + snowBro.getPosY() + " (velocidad: " + velocidadVertical + ", enElSuelo: " + enElSuelo + ")");
         }
+        if(chocarparediz()){
+            snowBro.setPosX(0);
+        }
+        if(chocarparedde()){
+            snowBro.setPosX(800);
+        
+        }
 
+    }
+
+    private boolean chocarparediz() {
+        if(snowBro.getPosX()<=0){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean chocarparedde() {
+        if(snowBro.getPosX()>=800){
+            return true;
+        }
+        return false;
     }
 }
 

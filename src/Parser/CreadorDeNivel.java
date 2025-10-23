@@ -55,22 +55,10 @@ public Nivel crearNivelHarcodeando(){
     //plataformas.add(fabEntidades.getPared(0, 0));
     //plataformas.add(fabEntidades.getPincho(150, 480));
     //plataformas.add(fabEntidades.getEscalera(300, 450));
-    plataformas.add(fabEntidades.getPlataforma(0, 7620));
-    plataformas.add(fabEntidades.getPlataforma(16, 7620));
-    plataformas.add(fabEntidades.getPlataforma(32, 7620));
-    plataformas.add(fabEntidades.getPlataforma(48, 7620));
-    plataformas.add(fabEntidades.getPlataforma(64, 7620));
-    plataformas.add(fabEntidades.getPlataforma(80, 7620));
-    plataformas.add(fabEntidades.getPlataforma(96, 7620));
-    plataformas.add(fabEntidades.getPlataforma(112, 7620));
-    plataformas.add(fabEntidades.getPlataforma(128, 7620));
-    plataformas.add(fabEntidades.getPlataforma(144, 7620));
-    plataformas.add(fabEntidades.getPlataforma(160, 7620));
-    plataformas.add(fabEntidades.getPlataforma(176, 7620));
-    plataformas.add(fabEntidades.getPlataforma(192, 7620));
-    plataformas.add(fabEntidades.getPlataforma(208, 7620));
-    plataformas.add(fabEntidades.getPlataforma(224, 7620));
-    plataformas.add(fabEntidades.getPlataforma(240, 7620));
+    for(int i=0; i<800; i+=16){
+    plataformas.add(fabEntidades.getPlataforma(i, 7620));
+}
+
 
     //plat un poco mas arriba
     plataformas.add(fabEntidades.getPlataforma(112, 7670));
