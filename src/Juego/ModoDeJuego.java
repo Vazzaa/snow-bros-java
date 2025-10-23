@@ -83,7 +83,7 @@ public class ModoDeJuego implements ControladorJuego {
 	public void iniciar() {
 		//nivelActual = miCreadorNivel.leerArchivo("src/nivel_simple.txt");
 		nivelActual = miCreadorNivel.crearNivelHarcodeando();
-		nivelActual.getSnowBro().getJugador().setNombre(nombreJugador);
+		//nivelActual.getSnowBro().getJugador().setNombre(nombreJugador);
 		registrarObservers();
 		controlaGrafica.mostrarPantallaNivel();
 		HiloJugador hiloJugador = new HiloJugador(nivelActual);

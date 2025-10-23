@@ -30,7 +30,7 @@ public FabricaEntidades (FabricaSkin fb, ModoDeJuego juego) {
 
 
 public SnowBro getSnowBro(int x, int y) {
-    SnowBro s = new SnowBro(this.fabricaSkin.crearSkinSnowBro(), x, y, new Jugador("Pepe", 0));
+    SnowBro s = new SnowBro(this.fabricaSkin.crearSkinSnowBro(), x, y, null);
     return s;
 };
 
