@@ -87,7 +87,7 @@ public class ModoDeJuego implements ControladorJuego {
 		registrarObservers();
 		controlaGrafica.mostrarPantallaNivel();
 		HiloJugador hiloJugador = new HiloJugador(nivelActual);
-		//hiloJugador.start();
+		hiloJugador.start();
 	}
 
 	protected void registrarObservers() {
@@ -122,7 +122,7 @@ public class ModoDeJuego implements ControladorJuego {
 
 	@Override
 	public void lanzarProyectil() {
-		// TODO Auto-generated method stub
+		System.out.println("¡Proyectil lanzado!");
 		throw new UnsupportedOperationException("Unimplemented method 'lanzarProyectil'");
 	}
 

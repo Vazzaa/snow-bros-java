@@ -81,7 +81,10 @@ public class SnowBro extends Entidad implements EntidadJugador {
         boolean derecha = ConstantesTeclado.estaPresionada(ConstantesTeclado.DERECHA);
     	boolean izquierda = ConstantesTeclado.estaPresionada(ConstantesTeclado.IZQUIERDA);
     	boolean salto = ConstantesTeclado.estaPresionada(ConstantesTeclado.SALTAR);
-    	
+    	if (derecha || izquierda || salto) {
+            System.out.println("MOVIMIENTO DETECTADO - Derecha: " + derecha + ", Izquierda: " + izquierda + ", Salto: " + salto);
+            System.out.println("Posición actual X: " + getPosX() + ", Y: " + getPosY());
+        }
         estadoMovimiento.mover(derecha, izquierda, salto);
         notificarObserver();
         
@@ -124,7 +127,24 @@ public class SnowBro extends Entidad implements EntidadJugador {
     }
     
     public int getClaveRepreEstado() {
-        return 0;
+        if (!estadoMovimiento.enElSuelo()) {
+            switch (estadoMovimiento.direccion) {
+                case 0:
+                    return 10;
+                case 180:
+                    return 11;
+                default:
+                    return 10;
+        }
+    }
+        switch (estadoMovimiento.direccion) {
+            case 0: // Caminando hacia la derecha
+                return 1; // Estado caminando derecha
+            case 180: // Caminando hacia la izquierda
+                return 2; // Estado caminando izquierda
+            default:
+                return 1; // Estado por defecto
+        }
     }
 
     @Override
