@@ -55,10 +55,10 @@ public Nivel crearNivelHarcodeando(){
     //plataformas.add(fabEntidades.getPared(0, 0));
     //plataformas.add(fabEntidades.getPincho(150, 480));
     //plataformas.add(fabEntidades.getEscalera(300, 450));
-    Estructura plataforma = fabEntidades.getPlataforma(300, 7680);
+    /*Estructuraataforma = fabEntidades.getPlataforma(300, 7680);
     plataformas.add(plataforma);
     System.out.println("PLATAFORMA CREADA - X: " + plataforma.getPosX() + ", Y: " + plataforma.getPosY());
-    System.out.println("PLATAFORMA SKIN: " + plataforma.getSkin().getRutaImagenActual());
+    System.out.println("PLATAFORMA SKIN: " + plataforma.getSkin().getRutaImagenActual());*/
 
     enemigos.add(fabEntidades.getDemonioRojo(100, 7650));
     enemigos.add(fabEntidades.getTrollAmarillo(200, 7650));

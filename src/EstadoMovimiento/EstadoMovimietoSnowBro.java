@@ -15,7 +15,7 @@ public class EstadoMovimietoSnowBro {
     private int velocidadVertical = 0;
     protected int [] deriva_x; 
     public int direccion;
-    protected boolean enElSuelo = false;
+    public boolean enElSuelo = false;
 
     
     public EstadoMovimietoSnowBro(SnowBro snowBro){
