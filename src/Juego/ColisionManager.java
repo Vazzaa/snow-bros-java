@@ -5,6 +5,7 @@ import java.util.List;
 import Entidades.Estructuras.Estructura;
 import Entidades.Estructuras.Plataforma;
 import Entidades.SnowBro.SnowBro;
+import Juego.Hitbox;
 
 public class ColisionManager {
     
@@ -67,7 +68,7 @@ public class ColisionManager {
         return null;
     }
 
-    public Estructura getPlaraformaDebajo(SnowBro s, List<Estructura> estructuras){
+    public Estructura getPlataformaDebajo(SnowBro s, List<Estructura> estructuras){
         Hitbox hitboxSnowBro = s.miHitbox;
         Estructura plataformaMasCercana = null;
         int distanciaMinima = Integer.MAX_VALUE;
