@@ -70,7 +70,7 @@ public class FabricaDominio1 extends FabricaSkin {
     }
     public Skin crearSkinPlataforma(){
         Map<Integer,String> mapeoparaplataforma= new HashMap<Integer,String>();
-        mapeoparaplataforma.put(1,"Imagenes/SkinsOriginales/plataforma2.png");
+        mapeoparaplataforma.put(1,"Imagenes/SkinsOriginales/plataforma1.png");
         return new Skin(mapeoparaplataforma, 1);
     }
     public Skin crearSkinPlatQuebradiza(){

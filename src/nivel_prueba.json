@@ -1,0 +1,19 @@
+{
+    "nivel": 1,
+    "jugador": {
+        "x": 10,
+        "y": 7650
+    },
+    "estructuras": [
+        {"tipo": "plataforma", "x": 0, "y": 7620},
+        {"tipo": "pared", "x": 0, "y": 0}
+    ],
+    "enemigos": [
+        {"tipo": "demonioRojo", "x": 100, "y": 7650},
+        {"tipo": "trollAmarillo", "x": 176, "y": 7700},
+        {"tipo": "ranaDeFuego", "x": 300, "y": 7650},
+        {"tipo": "calabaza", "x": 400, "y": 7650},
+        {"tipo": "moghera", "x": 500, "y": 7650},
+        {"tipo": "fantasma", "x": 600, "y": 7650}
+    ]
+}

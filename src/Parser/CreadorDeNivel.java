@@ -27,8 +27,28 @@ import Entidades.Estructuras.PlatMovil;
 import Entidades.Estructuras.PlatQuebradiza;
 import Entidades.Estructuras.Plataforma;
 import Entidades.Estructuras.SueloResbaladizo;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 public class CreadorDeNivel {
+    // Clases POJO para deserialización JSON con Gson
+    public static class NivelData {
+        public int nivel;
+        public PosicionData jugador;
+        public List<EntidadData> estructuras;
+        public List<EntidadData> enemigos;
+    }
+    
+    public static class PosicionData {
+        public int x;
+        public int y;
+    }
+    
+    public static class EntidadData {
+        public String tipo;
+        public int x;
+        public int y;
+    }
 
     protected ModoDeJuego crearNaModo;
     protected FabricaSkin fabSkins;
@@ -83,76 +103,95 @@ public Nivel crearNivelHarcodeando(){
     return new Nivel(1, plataformas, enemigos, jugador, fabEntidades);
 }
 
-    public Nivel leerArchivo(String rutaArchivo){
+    public Nivel leerArchivo(String rutaArchivo) {
         List<Estructura> plataformas = new ArrayList<>();
         List<Enemigo> enemigos = new ArrayList<>();
         SnowBro jugador = null;
-        int numeroNivel= 0;
+        int numeroNivel = 0;
         
-        try (BufferedReader reader = new BufferedReader(new FileReader(rutaArchivo))){
-            String  linea;
-            int fila = 0;
-            while ((linea = reader.readLine()) != null){
-                for (int col = 0; col < linea.length(); col++){
-                    char caracter = linea.charAt(col);
-                    int posX = col * ANCHO_TILE;
-                    int posY = fila * ALTO_TILE;
-                    switch (caracter) {
-                        case '1':
-                            numeroNivel = 1;
-                            break;
-                        case '2':
-                            numeroNivel = 2;
-                            break;
-                        case 'P':
-                            plataformas.add(fabEntidades.getPlatMovil(posX, posY));
-                            break;
-                        case 'L':
-                            //plataformas.add(fabEntidades.getPlataforma(posX, posY));//Flata
-                            break;
-                        case 'Q':
-                            plataformas.add(fabEntidades.getPlatQuebradiza(posX, posY));
-                            break;
-                        case 'R':
-                            plataformas.add(fabEntidades.getSueloResbaladizo(posX, posY));
-                            break;
-                        case 'A':
-                            plataformas.add(fabEntidades.getPared(posX, posY));
-                            break;
-                        case 'D':
-                            //plataformas.add(fabEntidades.getParedDestructible(posX, posY));//Falta
-                            break;
-                        case 'I':
-                            plataformas.add(fabEntidades.getPincho(posX, posY));
-                            break;
-                        case 'C':
-                            plataformas.add(fabEntidades.getEscalera(posX, posY));
-                            break;
-                        case 'J':
-                            jugador = fabEntidades.getSnowBro(posX, posY);
-                            break;
-                        case 'E':
-                            enemigos.add(fabEntidades.getDemonioRojo(posX, posY));
-                            break;
-                        case 'T':
-                            enemigos.add(fabEntidades.getTrollAmarillo(posX, posY));
-                            break;
-                        case 'G':
-                            enemigos.add(fabEntidades.getRanaDeFuego(posX, posY));
-                            break;
-                        case 'B':
-                            enemigos.add(fabEntidades.getCalabaza(posX, posY));
-                            break;
-                        case 'M':
-                            enemigos.add(fabEntidades.getMoghera(posX, posY));
-                            break;
+        try (FileReader reader = new FileReader(rutaArchivo)) {
+            Gson gson = new Gson();
+            NivelData nivelData = gson.fromJson(reader, NivelData.class);
+            
+            numeroNivel = nivelData.nivel;
+            
+            // Crear el jugador
+            if (nivelData.jugador != null) {
+                jugador = fabEntidades.getSnowBro(nivelData.jugador.x, nivelData.jugador.y);
+            }
+            
+            // Crear estructuras
+            if (nivelData.estructuras != null) {
+                for (EntidadData estructura : nivelData.estructuras) {
+                    Estructura nuevaEstructura = crearEstructura(estructura);
+                    if (nuevaEstructura != null) {
+                        plataformas.add(nuevaEstructura);
                     }
                 }
             }
+            
+            // Crear enemigos
+            if (nivelData.enemigos != null) {
+                for (EntidadData enemigo : nivelData.enemigos) {
+                    Enemigo nuevoEnemigo = crearEnemigo(enemigo);
+                    if (nuevoEnemigo != null) {
+                        enemigos.add(nuevoEnemigo);
+                    }
+                }
+            }
+            
         } catch (IOException e) {
-            //TODO: crear LevelLoadException
-            throw new LevelLoadException("Error al leer el archivo de nivel. ", e);
+            throw new LevelLoadException("Error al leer el archivo JSON de nivel: " + e.getMessage(), e);
+        } catch (JsonSyntaxException e) {
+            throw new LevelLoadException("Error de sintaxis en el archivo JSON: " + e.getMessage(), e);
         }
+        
         return new Nivel(numeroNivel, plataformas, enemigos, jugador, fabEntidades);
+    }
+    
+    private Estructura crearEstructura(EntidadData data) {
+        switch (data.tipo.toLowerCase()) {
+            case "plataforma":
+                return fabEntidades.getPlataforma(data.x, data.y);
+            case "platmovil":
+                return fabEntidades.getPlatMovil(data.x, data.y);
+            case "platquebradiza":
+                return fabEntidades.getPlatQuebradiza(data.x, data.y);
+            case "sueloresbaladizo":
+                return fabEntidades.getSueloResbaladizo(data.x, data.y);
+            case "pared":
+                return fabEntidades.getPared(data.x, data.y);
+            case "pareddestructible":
+                // TODO: Implementar cuando esté disponible en FabricaEntidades
+                System.err.println("ParedDestructible no implementada aún");
+                return null;
+            case "pincho":
+                return fabEntidades.getPincho(data.x, data.y);
+            case "escalera":
+                return fabEntidades.getEscalera(data.x, data.y);
+            default:
+                System.err.println("Tipo de estructura no reconocido: " + data.tipo);
+                return null;
+        }
+    }
+    
+    private Enemigo crearEnemigo(EntidadData data) {
+        switch (data.tipo.toLowerCase()) {
+            case "demoniorojo":
+                return fabEntidades.getDemonioRojo(data.x, data.y);
+            case "trollamarillo":
+                return fabEntidades.getTrollAmarillo(data.x, data.y);
+            case "ranadefuego":
+                return fabEntidades.getRanaDeFuego(data.x, data.y);
+            case "calabaza":
+                return fabEntidades.getCalabaza(data.x, data.y);
+            case "moghera":
+                return fabEntidades.getMoghera(data.x, data.y);
+            case "fantasma":
+                return fabEntidades.getFantasma(data.x, data.y);
+            default:
+                System.err.println("Tipo de enemigo no reconocido: " + data.tipo);
+                return null;
+        }
     }
 }
