@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import Entidades.SnowBro.SnowBro;
+import EstadoMovimiento.Movible;
 import Fabricas.FabricaEntidades;
 import Fabricas.FabricaSkin;
 import Entidades.Enemigos.*;
@@ -97,8 +98,9 @@ public class Nivel {
     	snowBro.moverse();
     }
 
-    public void moverEntidad(Entidad e){
+    public void moverEntidad(Movible e){
         
     }
+
     
 }

@@ -5,16 +5,17 @@ import Fabricas.Skin;
 import Juego.Entidad;
 import Entidades.SnowBro.SnowBro;
 import Visitors.Colisionable;
+import EstadoMovimiento.Movible;
 
-public abstract class Enemigo extends Entidad implements Colisionable{
+public abstract class Enemigo extends Entidad implements Colisionable, Movible {
 
     protected int vida;
     protected int posX;
     protected int posY;
     protected int puntaje;
     protected EstadoEnemigo estadoEnemigo;
-
-
+    
+    
     public Enemigo(Skin skins, int posX, int posY, int v, int p){
         super(skins,posX,posY);
         int vida = v;

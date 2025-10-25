@@ -74,7 +74,7 @@ public class EstadoMovimietoSnowBro {
     }
     
     public boolean enElSuelo() {
-    	if (snowBro.getPosY() == 7650 ){
+    	if (snowBro.getPosY() == 7650 || (snowBro.getPosY() == 7700 && snowBro.getPosX() >= 112 && snowBro.getPosX() <= 240)){
             return true;
         }
         return false;
