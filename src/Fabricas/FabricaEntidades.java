@@ -84,33 +84,27 @@ public VidaExtra getVidaExtra(int x, int y) {
 }
 
 public Pincho getPincho(int x, int y) {
-    return null;
-    //return new Pincho(this.fabricaSkin.crearSkinPincho(), x, y);
+    return new Pincho(this.fabricaSkin.crearSkinPincho(), x, y);
 }
 
 public Escalera getEscalera(int x, int y) {
-    return null;
-    //return new Escalera(this.fabricaSkin.crearSkinEscalera(), x, y);
+    return new Escalera(this.fabricaSkin.crearSkinEscalera(), x, y);
 }
 
 public Pared getPared(int x, int y) {
-    return null;
-    //return new Pared(this.fabricaSkin.crearSkinPared(), x, y);
+    return new Pared(this.fabricaSkin.crearSkinPared(), x, y);
 }
 
 public SueloResbaladizo getSueloResbaladizo(int x, int y) {
-    return null;
-    //return new SueloResbaladizo(this.fabricaSkin.crearSkinSueloResbaladizo(), x, y);
+    return new SueloResbaladizo(this.fabricaSkin.crearSkinSueloResbaladizo(), x, y);
 }
 
 public PlatQuebradiza getPlatQuebradiza(int x, int y) {
-    return null;
-    //return new PlatQuebradiza(this.fabricaSkin.crearSkinPlatQuebradiza(), x, y);
+    return new PlatQuebradiza(this.fabricaSkin.crearSkinPlatQuebradiza(), x, y);
 }
 
 public PlatMovil getPlatMovil(int x, int y) {
-    return null;
-    //return new PlatMovil(this.fabricaSkin.crearSkinPlatMovil(), x, y);
+    return new PlatMovil(this.fabricaSkin.crearSkinPlatMovil(), x, y);
 }
 public Plataforma getPlataforma(int x, int y) {
     return new Plataforma(this.fabricaSkin.crearSkinPlataforma(), x, y);

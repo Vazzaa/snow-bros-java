@@ -46,7 +46,6 @@ public class Nivel {
     }
 
 
-
     public List<Estructura> getMisEstructuras() {
         return misEstructuras;
     }
