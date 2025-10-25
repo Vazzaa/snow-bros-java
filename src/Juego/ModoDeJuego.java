@@ -9,11 +9,11 @@ import Entidades.SnowBro.SnowBro;
 import Fabricas.FabricaDominio1;
 import Fabricas.FabricaEntidades;
 import Fabricas.FabricaSkin;
+import Parser.CreadorDeNivel;
 import Grafica.*;
 import Hilos.HiloJugador;
 import Juego.Nivel;
 import Juego.Ranking;
-import Parser.CreadorDeNivel;
 
 public class ModoDeJuego implements ControladorJuego {
     
@@ -24,13 +24,14 @@ public class ModoDeJuego implements ControladorJuego {
 	protected FabricaEntidades miFabricaEntidades;
 	protected CreadorDeNivel miCreadorNivel;
 	protected String nombreJugador;
+	protected FabricaSkin fabricaSkins;
 	
 	// Comandos
 	public ModoDeJuego(ControladorGrafica controlador_grafica) {
 		this.controlaGrafica = controlador_grafica;
-		FabricaSkin fabricaSkinsActuales= new FabricaDominio1();
-		miFabricaEntidades = new FabricaEntidades(fabricaSkinsActuales, this);
-		miCreadorNivel = new CreadorDeNivel(fabricaSkinsActuales);
+		fabricaSkins = new FabricaDominio1();
+		miFabricaEntidades = new FabricaEntidades(fabricaSkins, this);
+		miCreadorNivel = new CreadorDeNivel(fabricaSkins);
 		miCreadorNivel.setFrabricaEntidades(miFabricaEntidades);
 	}
 	public ControladorGrafica getControladoraGrafica(){
@@ -81,9 +82,11 @@ public class ModoDeJuego implements ControladorJuego {
 
 	@Override
 	public void iniciar() {
-		//nivelActual = miCreadorNivel.leerArchivo("src/nivel_simple.txt");
-		nivelActual = miCreadorNivel.crearNivelHarcodeando();
-		//nivelActual.getSnowBro().getJugador().setNombre(nombreJugador);
+		
+		//nivelActual = miCreadorNivel.crearNivelHarcodeando();
+		CreadorDeNivel creador = new CreadorDeNivel(fabricaSkins);
+		creador.setFrabricaEntidades(miFabricaEntidades);
+		nivelActual = creador.leerArchivo("nivel_simple.json");
 		registrarObservers();
 		controlaGrafica.mostrarPantallaNivel();
 		HiloJugador hiloJugador = new HiloJugador(nivelActual);

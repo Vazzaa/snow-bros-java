@@ -6,7 +6,6 @@ import Entidades.Jugador.Jugador;
 import Entidades.PowerUp.*;
 import Entidades.Proyectiles.*;
 import Entidades.SnowBro.SnowBro;
-import Entidades.*;
 import Fabricas.FabricaSkin;
 import Grafica.Observer;
 import Grafica.ObserverGrafico;

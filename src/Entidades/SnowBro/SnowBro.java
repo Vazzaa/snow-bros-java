@@ -9,10 +9,11 @@ import Fabricas.FabricaEntidades;
 import Fabricas.Skin;
 import Grafica.ConstantesTeclado;
 import Visitors.Colisionable;
+import Visitors.Colisionador;
 import Juego.Entidad;
 import Juego.EntidadJugador;
 
-public class SnowBro extends Entidad implements EntidadJugador {
+public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     //Atributos de instancia
     
     protected Jugador jugador;
@@ -150,6 +151,12 @@ public class SnowBro extends Entidad implements EntidadJugador {
     @Override
     public Skin getSkin() {
         return misAspectos;
+    }
+
+    @Override
+    public void colisionar(Entidad e1, Entidad e2) {
+        // TODO Auto-generated method stub
+        
     }
     
 }
