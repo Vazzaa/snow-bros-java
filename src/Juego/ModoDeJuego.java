@@ -87,6 +87,7 @@ public class ModoDeJuego implements ControladorJuego {
 		CreadorDeNivel creador = new CreadorDeNivel(fabricaSkins);
 		creador.setFrabricaEntidades(miFabricaEntidades);
 		nivelActual = creador.leerArchivo("nivel_simple.json");
+		nivelActual.getSnowBro().setNivel(nivelActual);
 		registrarObservers();
 		controlaGrafica.mostrarPantallaNivel();
 		HiloJugador hiloJugador = new HiloJugador(nivelActual);
