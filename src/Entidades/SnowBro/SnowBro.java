@@ -12,6 +12,7 @@ import Visitors.Colisionable;
 import Visitors.Colisionador;
 import Juego.Entidad;
 import Juego.EntidadJugador;
+import Juego.Nivel;
 
 public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     //Atributos de instancia
@@ -19,14 +20,14 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     protected Jugador jugador;
     protected EstadoMovimietoSnowBro estadoMovimiento;
     protected FabricaEntidades crearNieve;
-
+    protected Nivel nivel;
     
     protected int puntaje;
     protected int vida;
     protected int velocidad;
     
     //Constructor
-    public SnowBro (Skin aspectos, int x, int y, Jugador jug) {
+    public SnowBro (Skin aspectos, int x, int y, Jugador jug, Nivel nivelAlQuePertenece) {
         super(aspectos, x, y);
         velocidad = 5;
         jugador = jug;
@@ -34,10 +35,13 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         puntaje = 0;
         jugador = jug;
         estadoMovimiento = new EstadoMovimietoSnowBro(this);
+        nivel = nivelAlQuePertenece;
     }
 
     //Comandos
-    
+    public Nivel getNivel() {
+        return this.nivel;
+    }
     public int getVida() {
         return vida;
     }
@@ -56,6 +60,10 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     
     public String getNombre() {
         return jugador.getNombre();
+    }
+
+    public void setNivel(Nivel nivelAlQuePertenece) {
+        nivel = nivelAlQuePertenece;
     }
 
     public void setVida(int v) {

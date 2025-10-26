@@ -2,6 +2,7 @@ package EstadoMovimiento;
 
 import Entidades.SnowBro.SnowBro;
 import Grafica.ConstantesTeclado;
+import Juego.ColisionManager;
 
 public class EstadoMovimietoSnowBro {
     
@@ -16,9 +17,11 @@ public class EstadoMovimietoSnowBro {
     protected int [] deriva_x; 
     public int direccion;
     public boolean enElSuelo = false;
+    ColisionManager controladorColisiones;
 
     
     public EstadoMovimietoSnowBro(SnowBro snowBro){
+        controladorColisiones = new ColisionManager();
         this.snowBro = snowBro;
         deriva_x = new int[] {-1, 1};
         direccion=0;
@@ -74,7 +77,7 @@ public class EstadoMovimietoSnowBro {
     }
     
     public boolean enElSuelo() {
-    	if (snowBro.getPosY() == 7650 || (snowBro.getPosY() == 7700 && snowBro.getPosX() >= 112 && snowBro.getPosX() <= 240)){
+    	if (controladorColisiones.estaEnSuelo(snowBro, snowBro.getNivel().getMisEstructuras())) {
             return true;
         }
         return false;
@@ -96,20 +99,13 @@ public class EstadoMovimietoSnowBro {
         if (velocidadHorizontal != 0) {
             System.out.println("ACTUALIZAR - PosX: " + posXAnterior + " -> " + snowBro.getPosX() + " (velocidad: " + velocidadHorizontal + ")");
         }
-        if (snowBro.getPosY() <= 7650 && velocidadVertical <= 0) {
-            snowBro.setPosY(7650); // Mantener en el suelo
+        if (enElSuelo()) {
             velocidadVertical = 0; // Detener la caída
             enElSuelo = true; // Marcar como en el suelo
             System.out.println("TOCO EL SUELO - PosY: " + snowBro.getPosY());
         }
-        if (snowBro.getPosY() == 7700 && velocidadVertical <= 0) {
-            snowBro.setPosY(7700); // Mantener en el suelo
-            velocidadVertical = 0; // Detener la caída
-            enElSuelo = true; // Marcar como en el suelo
-            System.out.println("TOCO EL SUELO - PosY: " + snowBro.getPosY());
-        }
-        if (snowBro.getPosY() <= 7710 && snowBro.getPosY() >= 7700 && snowBro.getPosX() >= 112 && snowBro.getPosX() <= 240 && velocidadVertical >=0) {
-        snowBro.setPosY(7700);
+        if (controladorColisiones.colisionaConPlataformaArriba(snowBro, snowBro.getNivel().getMisEstructuras())!=null) {
+        snowBro.setPosY(controladorColisiones.colisionaConPlataformaArriba(snowBro, snowBro.getNivel().getMisEstructuras()).getPosY());
         velocidadVertical = 0;
         enElSuelo = true;
         System.out.println("-------------------------TOQUE LA PLATAFORMA DE ARRIBA----------------------------" );
@@ -117,7 +113,7 @@ public class EstadoMovimietoSnowBro {
         }
         if (enElSuelo() && !ConstantesTeclado.estaPresionada(ConstantesTeclado.SALTAR)) {
             // Si está en una plataforma pero no en el suelo principal, puede caer
-            if (snowBro.getPosY() > 7650) {
+            if (!enElSuelo()) {
                 enElSuelo = false;
                 System.out.println("CAYENDO DE PLATAFORMA");
             }
