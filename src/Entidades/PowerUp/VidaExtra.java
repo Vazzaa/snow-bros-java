@@ -8,15 +8,10 @@ import Juego.ModoDeJuego;
 
 public class VidaExtra extends PowerUp {
 
-    protected int puntaje;
-    protected float tiempoDeVida;
-    protected int duracionSnowBro;
-
-    public VidaExtra(Skin s,ModoDeJuego juego ,int x, int y, Hitbox h) {
+    public VidaExtra(Skin s,ModoDeJuego juego ,int x, int y) {
         super(s, juego, x, y, 300, 10);
         puntaje = 0;
         tiempoDeVida = 10;
-        duracionSnowBro = 0;
     }
 
     public int getPuntaje() {

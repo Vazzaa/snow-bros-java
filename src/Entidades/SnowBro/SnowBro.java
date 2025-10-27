@@ -32,15 +32,14 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     protected int velocidad;
     
     //Constructor
-    public SnowBro (Skin aspectos, ModoDeJuego juego, int x, int y, Jugador jug, Nivel nivelAlQuePertenece) {
+    public SnowBro (Skin aspectos, ModoDeJuego juego, int x, int y, Jugador jug, Nivel nivelPerteneciente) {
         super(aspectos, juego, x, y);
         velocidad = 3;
         jugador = jug;
         vida = 3;
         puntaje = 0;
-        jugador = jug;
         estadoMovimiento = new EstadoMovimietoSnowBro(this);
-        nivel = nivelAlQuePertenece;
+        nivel = nivelPerteneciente;
     }
 
     //Comandos

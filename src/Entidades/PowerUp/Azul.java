@@ -13,14 +13,10 @@ import javax.swing.Timer;
 
 public class Azul extends PowerUp {
 
-    protected int puntaje;
-    protected float tiempoDeVida;
     protected int duracionSnowBro;
 
-    public Azul(Skin s,ModoDeJuego juego, int x, int y, Hitbox h) {
+    public Azul(Skin s,ModoDeJuego juego, int x, int y) {
         super(s, juego , x, y, 300, 10);
-        puntaje = 300;
-        tiempoDeVida = 10;
         duracionSnowBro = 10000;
     }
 

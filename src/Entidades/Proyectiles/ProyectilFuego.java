@@ -9,14 +9,8 @@ import Juego.ModoDeJuego;
 
 public class ProyectilFuego extends Proyectil{
 
-    protected float Alcance;
-    protected int Daño;
-    protected int Velocidad;
-    protected Skin Aspecto;
-    protected Hitbox hb;
-
-    public ProyectilFuego (Skin s, ModoDeJuego juego, Hitbox h) {
-        super(s, juego, 5, 10, 100, 100, 12);
+    public ProyectilFuego (Skin s, ModoDeJuego juego, int x, int y, int vel, int dañ, int alc) {
+        super(s, juego, x, y, vel, dañ, alc);
     }
 
     public void afectar(SnowBro s) {

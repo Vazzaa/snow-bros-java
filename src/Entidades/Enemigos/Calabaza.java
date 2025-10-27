@@ -2,11 +2,14 @@ package Entidades.Enemigos;
 
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.EstadoEnemigo;
+import Fabricas.FabricaEntidades;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
 import Visitors.Colisionable;
 
 public class Calabaza extends Enemigo implements EstadoEnemigo{
+
+    protected FabricaEntidades mFabricaEntidades;
 
     public Calabaza(Skin skins , ModoDeJuego juego , int posX, int posY){
         super(skins, juego, posX, posY, 0,300);
@@ -30,11 +33,6 @@ public class Calabaza extends Enemigo implements EstadoEnemigo{
         
     }
 
-    @Override
-    public void crearPowerUp() {
-        // TODO Auto-generated method stub
-        
-    }
 
     @Override
     public EstadoEnemigo getEstado() {
@@ -63,6 +61,10 @@ public class Calabaza extends Enemigo implements EstadoEnemigo{
     @Override
     public Skin getSkin() {
         return misAspectos;
+    }
+
+    public void crearFantasma(){
+        
     }
 
 }

@@ -34,12 +34,6 @@ public class Fantasma extends Enemigo implements EstadoEnemigo{
     }
 
     @Override
-    public void crearPowerUp() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
     public EstadoEnemigo getEstado() {
         // TODO Auto-generated method stub
         return null;

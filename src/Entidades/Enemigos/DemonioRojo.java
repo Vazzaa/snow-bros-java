@@ -32,8 +32,6 @@ public class DemonioRojo extends Enemigo implements EstadoEnemigo{
         // TODO Auto-generated method stub
         
     }
-
-    @Override
     public void crearPowerUp() {
         // TODO Auto-generated method stub
         
@@ -47,16 +45,12 @@ public class DemonioRojo extends Enemigo implements EstadoEnemigo{
 
     @Override
     public void moverse() {
-        int numerorandom = (int) (Math.random() * 2);
+        int numerorandom = (int) (Math.random() * 1);
         if(numerorandom == 0){
             moverseDerecha();
         }
-        else{ if(numerorandom == 1){
+        else{
                 moverseIzquierda();
-            }
-            else{
-                saltar();
-            }
         }
     }
 
@@ -85,8 +79,9 @@ public class DemonioRojo extends Enemigo implements EstadoEnemigo{
 
     }
 
-    private void saltar(){
-
+    public PowerUp morir() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }
