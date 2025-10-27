@@ -2,6 +2,7 @@ package Entidades.Enemigos;
 
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.EstadoEnemigo;
+import EstadoMovimiento.Movible;
 import Fabricas.Skin;
 import Visitors.Colisionable;
 
@@ -43,8 +44,17 @@ public class DemonioRojo extends Enemigo implements EstadoEnemigo{
 
     @Override
     public void moverse() {
-        // TODO Auto-generated method stub
-        
+        int numerorandom = (int) (Math.random() * 2);
+        if(numerorandom == 0){
+            moverseDerecha();
+        }
+        else{ if(numerorandom == 1){
+                moverseIzquierda();
+            }
+            else{
+                saltar();
+            }
+        }
     }
 
     @Override
@@ -62,6 +72,18 @@ public class DemonioRojo extends Enemigo implements EstadoEnemigo{
     @Override
     public Skin getSkin() {
         return misAspectos;
+    }
+
+    private void moverseDerecha(){
+        
+    }
+
+    private void moverseIzquierda(){
+
+    }
+
+    private void saltar(){
+
     }
 
 }

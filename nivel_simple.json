@@ -228,5 +228,9 @@
         {"tipo": "demonioRojo", "x": 304, "y": 7950},
         {"tipo": "demonioRojo", "x": 480, "y": 7950}
 
+    ],
+    "powerups": [
+        {"tipo": "comida" , "x":150, "y":7650},
+        {"tipo": "comida" , "x":460, "y":7950}
     ]
 }

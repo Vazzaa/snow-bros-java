@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Entidades.Jugador.Jugador;
+import Entidades.PowerUp.PowerUp;
 import Entidades.SnowBro.SnowBro;
 import Excepciones.LevelLoadException;
 import Fabricas.FabricaEntidades;
@@ -37,6 +38,7 @@ public class CreadorDeNivel {
         public PosicionData jugador;
         public List<EntidadData> estructuras;
         public List<EntidadData> enemigos;
+        public List<EntidadData> powerups;
     }
     
     public static class PosicionData {
@@ -64,48 +66,49 @@ public class CreadorDeNivel {
         this.fabEntidades = fabEntidades;
     }
 
-public Nivel crearNivelHarcodeando(){
-    List<Estructura> plataformas = new ArrayList<>();
-    List<Enemigo> enemigos = new ArrayList<>();
-    SnowBro jugador = fabEntidades.getSnowBro(10, 7650);
+       /*  public Nivel crearNivelHarcodeando(){
+            List<Estructura> plataformas = new ArrayList<>();
+            List<Enemigo> enemigos = new ArrayList<>();
+            SnowBro jugador = fabEntidades.getSnowBro(10, 7650);
 
-    //plataformas.add(fabEntidades.getPlatMovil(100, 400));
-    //plataformas.add(fabEntidades.getPlatQuebradiza(200, 7100));
-    //plataformas.add(fabEntidades.getSueloResbaladizo(0, 500));
-    //plataformas.add(fabEntidades.getPared(0, 0));
-    //plataformas.add(fabEntidades.getPincho(150, 480));
-    //plataformas.add(fabEntidades.getEscalera(300, 450));
-    for(int i=0; i<800; i+=16){
-    plataformas.add(fabEntidades.getPlataforma(i, 7620));
-}
+            //plataformas.add(fabEntidades.getPlatMovil(100, 400));
+            //plataformas.add(fabEntidades.getPlatQuebradiza(200, 7100));
+            //plataformas.add(fabEntidades.getSueloResbaladizo(0, 500));
+            //plataformas.add(fabEntidades.getPared(0, 0));
+            //plataformas.add(fabEntidades.getPincho(150, 480));
+            //plataformas.add(fabEntidades.getEscalera(300, 450));
+            for(int i=0; i<800; i+=16){
+            plataformas.add(fabEntidades.getPlataforma(i, 7620));
+        }
 
 
-    //plat un poco mas arriba
-    plataformas.add(fabEntidades.getPlataforma(112, 7670));
-    plataformas.add(fabEntidades.getPlataforma(128, 7670));
-    plataformas.add(fabEntidades.getPlataforma(144, 7670));
-    plataformas.add(fabEntidades.getPlataforma(160, 7670));
-    plataformas.add(fabEntidades.getPlataforma(176, 7670));
-    plataformas.add(fabEntidades.getPlataforma(192, 7670));
-    plataformas.add(fabEntidades.getPlataforma(208, 7670));
-    plataformas.add(fabEntidades.getPlataforma(224, 7670));
-    plataformas.add(fabEntidades.getPlataforma(240, 7670));
+            //plat un poco mas arriba
+            plataformas.add(fabEntidades.getPlataforma(112, 7670));
+            plataformas.add(fabEntidades.getPlataforma(128, 7670));
+            plataformas.add(fabEntidades.getPlataforma(144, 7670));
+            plataformas.add(fabEntidades.getPlataforma(160, 7670));
+            plataformas.add(fabEntidades.getPlataforma(176, 7670));
+            plataformas.add(fabEntidades.getPlataforma(192, 7670));
+            plataformas.add(fabEntidades.getPlataforma(208, 7670));
+            plataformas.add(fabEntidades.getPlataforma(224, 7670));
+            plataformas.add(fabEntidades.getPlataforma(240, 7670));
 
-    
+            
 
-    enemigos.add(fabEntidades.getDemonioRojo(100, 7650));
-    enemigos.add(fabEntidades.getDemonioRojo(176, 7700));
-    enemigos.add(fabEntidades.getTrollAmarillo(200, 7650));
-    enemigos.add(fabEntidades.getRanaDeFuego(300, 7650));
-    enemigos.add(fabEntidades.getCalabaza(400, 7650));
-    enemigos.add(fabEntidades.getMoghera(500, 7650));
+            enemigos.add(fabEntidades.getDemonioRojo(100, 7650));
+            enemigos.add(fabEntidades.getDemonioRojo(176, 7700));
+            enemigos.add(fabEntidades.getTrollAmarillo(200, 7650));
+            enemigos.add(fabEntidades.getRanaDeFuego(300, 7650));
+            enemigos.add(fabEntidades.getCalabaza(400, 7650));
+            enemigos.add(fabEntidades.getMoghera(500, 7650));
 
-    return new Nivel(1, plataformas, enemigos, jugador, fabEntidades);
-}
+            return new Nivel(1, plataformas, enemigos, jugador, fabEntidades);
+        }*/
 
     public Nivel leerArchivo(String rutaArchivo) {
         List<Estructura> plataformas = new ArrayList<>();
         List<Enemigo> enemigos = new ArrayList<>();
+        List<PowerUp> powerups = new ArrayList<>();
         SnowBro jugador = null;
         int numeroNivel = 0;
         
@@ -139,6 +142,15 @@ public Nivel crearNivelHarcodeando(){
                     }
                 }
             }
+
+            if(nivelData.powerups != null){
+                for(EntidadData powerup : nivelData.powerups){
+                    PowerUp nuevoPowerUp = crearPowerUp(powerup);
+                    if(nuevoPowerUp != null){
+                        powerups.add(nuevoPowerUp);
+                    }
+                }
+            }
             
         } catch (IOException e) {
             throw new LevelLoadException("Error al leer el archivo JSON de nivel: " + e.getMessage(), e);
@@ -146,7 +158,11 @@ public Nivel crearNivelHarcodeando(){
             throw new LevelLoadException("Error de sintaxis en el archivo JSON: " + e.getMessage(), e);
         }
         
-        return new Nivel(numeroNivel, plataformas, enemigos, jugador, fabEntidades);
+        Nivel devolver = new Nivel(numeroNivel, plataformas, enemigos, jugador, fabEntidades);
+        for(PowerUp pu : powerups){
+            devolver.agregarPowerUps(pu);
+        }
+        return devolver;
     }
     
     private Estructura crearEstructura(EntidadData data) {
@@ -191,6 +207,24 @@ public Nivel crearNivelHarcodeando(){
                 return fabEntidades.getFantasma(data.x, data.y);
             default:
                 System.err.println("Tipo de enemigo no reconocido: " + data.tipo);
+                return null;
+        }
+    }
+
+    private PowerUp crearPowerUp(EntidadData data){
+        switch(data.tipo.toLowerCase()){
+            case "pocionroja":
+                return fabEntidades.getPowerUpRojo(data.x, data.y);
+            case "pocionazul":
+                return fabEntidades.getPowerUpAzul(data.x, data.y);
+            case "pocionverde":
+                return fabEntidades.getPowerUpVerde(data.x, data.y);
+            case "comida":
+                return fabEntidades.getFruta(data.x, data.y);
+            case "vidaextra":
+                return fabEntidades.getVidaExtra(data.x, data.y);
+            default:
+                System.err.println("Tipo de powerup no reconocido: " + data.tipo);
                 return null;
         }
     }
