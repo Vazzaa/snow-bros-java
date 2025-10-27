@@ -2,11 +2,12 @@ package Entidades.Estructuras;
 import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
+import Juego.ModoDeJuego;
 
 public class SueloResbaladizo extends Obstaculo {
 
-     public SueloResbaladizo(Skin s, int x, int y) {
-        super(s, x, y);
+     public SueloResbaladizo(Skin s,ModoDeJuego juego ,int x, int y) {
+        super(s, juego, x, y);
     }
 
     public void afectar(SnowBro s) {

@@ -3,16 +3,21 @@ package Entidades.SnowBro;
 import Entidades.Jugador.Jugador;
 import Entidades.Estructuras.Estructura;
 import Entidades.PowerUp.PowerUp;
+
+import java.util.List;
+
 import Entidades.Enemigos.Enemigo;
 import EstadoMovimiento.EstadoMovimietoSnowBro;
 import Fabricas.FabricaEntidades;
 import Fabricas.Skin;
 import Grafica.ConstantesTeclado;
+import Grafica.ObserverGrafico;
 import Visitors.Colisionable;
 import Visitors.Colisionador;
 import Juego.Entidad;
 import Juego.EntidadJugador;
 import Juego.Nivel;
+import Juego.ModoDeJuego;
 
 public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     //Atributos de instancia
@@ -27,8 +32,8 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     protected int velocidad;
     
     //Constructor
-    public SnowBro (Skin aspectos, int x, int y, Jugador jug, Nivel nivelAlQuePertenece) {
-        super(aspectos, x, y);
+    public SnowBro (Skin aspectos, ModoDeJuego juego, int x, int y, Jugador jug, Nivel nivelAlQuePertenece) {
+        super(aspectos, juego, x, y);
         velocidad = 3;
         jugador = jug;
         vida = 3;
@@ -107,11 +112,14 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
 	}
     
     public void morir() {
-        
+        // TODO
     }
     
     public void disminuirVida() {
-        
+        if(vida > 1)
+            vida--;
+        else 
+            morir();
     }
     
     public void procesarColision(Colisionable c) {
@@ -129,9 +137,6 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     public void afectar(PowerUp p) {
         p.afectar(this);
         nivel.eliminarPowerUp(p);
-        if(p.getObserverGrafico() != null) {
-            p.quitarObserver(p.getObserverGrafico());
-        }
         notificarObserver();
     }
     
@@ -186,6 +191,10 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
             if (e.esColisionable()) {
             procesarColision((Colisionable)e);
         }
+    }
+
+    public void resetVelocidad() {
+        this.velocidad = 3;
     }
     
 }

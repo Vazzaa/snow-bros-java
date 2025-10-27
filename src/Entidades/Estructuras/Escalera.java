@@ -3,11 +3,12 @@ package Entidades.Estructuras;
 import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
+import Juego.ModoDeJuego;
 
 public class Escalera extends Obstaculo{
 
-    public Escalera(Skin s, int x, int y) {
-        super(s, x, y);
+    public Escalera(Skin s, ModoDeJuego juego,int x, int y) {
+        super(s, juego, x, y);
     }
 
     public void afectar(SnowBro s) {

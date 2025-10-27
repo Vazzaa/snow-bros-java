@@ -4,6 +4,7 @@ import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
 import Juego.Entidad;
+import Juego.ModoDeJuego;
 import Entidades.Estructuras.Estructura;
 
 public abstract class Proyectil extends Entidad{
@@ -12,8 +13,8 @@ public abstract class Proyectil extends Entidad{
     protected int daño;
     protected float alcance;
 
-    public Proyectil(Skin skins, int x, int y, int v, int d, int a){
-        super(skins, x, y);
+    public Proyectil(Skin skins, ModoDeJuego juego,int x, int y, int v, int d, int a){
+        super(skins, juego, x, y);
         velocidad = v;
         daño = d;
         alcance = a;

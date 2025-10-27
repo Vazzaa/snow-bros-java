@@ -4,14 +4,15 @@ import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.EstadoEnemigo;
 import Fabricas.FabricaEntidades;
 import Fabricas.Skin;
+import Juego.ModoDeJuego;
 import Visitors.Colisionable;
 
 public class RanaDeFuego extends Enemigo implements EstadoEnemigo {
     
     protected FabricaEntidades fabParaFuego;
 
-    public RanaDeFuego(Skin skins, int posX, int posY){
-        super(skins, posX, posY, 3,300);
+    public RanaDeFuego(Skin skins,ModoDeJuego juego ,int posX, int posY){
+        super(skins, juego ,posX, posY, 3,300);
     }
 
     @Override

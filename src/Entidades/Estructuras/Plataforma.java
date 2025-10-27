@@ -3,11 +3,12 @@ import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
 import Visitors.Colisionador;
+import Juego.ModoDeJuego;
 
 public class Plataforma extends Estructura{
 
-    public Plataforma(Skin s, int x, int y) {
-        super(s, x, y);
+    public Plataforma(Skin s, ModoDeJuego juego, int x, int y) {
+        super(s, juego, x, y);
     }
 
     public void afectar(SnowBro s) {

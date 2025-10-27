@@ -4,6 +4,7 @@ import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
 import Juego.Hitbox;
+import Juego.ModoDeJuego;
 
 public class ProyectilBomba extends Proyectil{
     
@@ -13,8 +14,8 @@ public class ProyectilBomba extends Proyectil{
     protected Skin Aspecto;
     protected Hitbox hb;
 
-    public ProyectilBomba(Skin s, Hitbox h) {
-        super(s, 5, 10, 100, 100, 12);
+    public ProyectilBomba(Skin s,ModoDeJuego juego, Hitbox h) {
+        super(s, juego, 5, 10, 100, 100, 12);
     }
 
     public void Explotar() {

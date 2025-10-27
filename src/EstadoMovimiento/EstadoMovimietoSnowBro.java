@@ -9,7 +9,6 @@ public class EstadoMovimietoSnowBro {
     
     protected SnowBro snowBro;
 
-    private int velocidad = 3;
     private int fuerzaSalto = 12; 
     private int gravedad = 1;
 

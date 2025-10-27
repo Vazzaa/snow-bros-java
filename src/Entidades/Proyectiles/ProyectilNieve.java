@@ -5,6 +5,7 @@ import Entidades.Estructuras.Estructura;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
 import Juego.Hitbox;
+import Juego.ModoDeJuego;
 
 public class ProyectilNieve extends Proyectil{
     
@@ -14,8 +15,8 @@ public class ProyectilNieve extends Proyectil{
     protected Skin Aspecto;
     protected Hitbox hb;
 
-    public ProyectilNieve (Skin s, Hitbox h) {
-       super(s, 5, 10, 100, 100, 12);
+    public ProyectilNieve (Skin s, ModoDeJuego juego, Hitbox h) {
+       super(s, juego, 5, 10, 100, 100, 12);
     }
 
     public void afectar(SnowBro s) {

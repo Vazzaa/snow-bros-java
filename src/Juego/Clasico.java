@@ -3,7 +3,7 @@ package Juego;
 public class Clasico extends ModoDeJuego {
 
 public Clasico () {
-super();
+    super();
 }
 
 public void PasarNivel() {

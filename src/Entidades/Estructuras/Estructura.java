@@ -6,11 +6,12 @@ import Fabricas.Skin;
 import Juego.Entidad;
 import Visitors.Colisionable;
 import Visitors.Colisionador;
+import Juego.ModoDeJuego;
 
 public abstract class Estructura extends Entidad implements Colisionable{
 
-    public Estructura(Skin skins, int x, int y){
-        super(skins, x, y);
+    public Estructura(Skin skins, ModoDeJuego juego, int x, int y){
+        super(skins, juego, x, y);
     }
 
     public void afectar(SnowBro s){};

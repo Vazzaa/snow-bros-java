@@ -4,6 +4,7 @@ import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
 import Juego.Hitbox;
+import Juego.ModoDeJuego;
 
 public class VidaExtra extends PowerUp {
 
@@ -11,8 +12,8 @@ public class VidaExtra extends PowerUp {
     protected float tiempoDeVida;
     protected int duracionSnowBro;
 
-    public VidaExtra(Skin s, float x, float y, Hitbox h) {
- super(s,(int) x,(int)y, 300, 10);
+    public VidaExtra(Skin s,ModoDeJuego juego ,int x, int y, Hitbox h) {
+        super(s, juego, x, y, 300, 10);
         puntaje = 0;
         tiempoDeVida = 10;
         duracionSnowBro = 0;

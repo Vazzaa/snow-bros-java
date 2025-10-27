@@ -2,12 +2,13 @@ package Entidades.Estructuras;
 import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
+import Juego.ModoDeJuego;
 import Entidades.Proyectiles.ProyectilNieve;
 
 public class Pincho extends Obstaculo{
 
-    public Pincho(Skin s, int x, int y) {
-        super(s, x, y);
+    public Pincho(Skin s,ModoDeJuego juego ,int x, int y) {
+        super(s, juego, x, y);
     }
     
     public void afectar(SnowBro s) {
