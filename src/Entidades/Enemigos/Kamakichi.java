@@ -4,14 +4,15 @@ import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.EstadoEnemigo;
 import Fabricas.FabricaEntidades;
 import Fabricas.Skin;
+import Juego.ModoDeJuego;
 import Visitors.Colisionable;
 
 public class Kamakichi extends Enemigo {
     
     protected FabricaEntidades fabParaBomba;
 
-    public Kamakichi(Skin skins, int posX, int posY){
-        super(skins, posX, posY, 5,300);
+    public Kamakichi(Skin skins, ModoDeJuego juego, int posX, int posY){
+        super(skins, juego, posX, posY, 5,300);
     }
 
     @Override

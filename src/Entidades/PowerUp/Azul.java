@@ -7,6 +7,8 @@ import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
 import Grafica.ObserverGrafico;
 import Juego.Hitbox;
+import Juego.ModoDeJuego;
+
 import javax.swing.Timer;
 
 public class Azul extends PowerUp {
@@ -15,8 +17,8 @@ public class Azul extends PowerUp {
     protected float tiempoDeVida;
     protected int duracionSnowBro;
 
-    public Azul(Skin s, float x, float y, Hitbox h) {
-        super(s,(int) x,(int)y, 300, 10);
+    public Azul(Skin s,ModoDeJuego juego, int x, int y, Hitbox h) {
+        super(s, juego , x, y, 300, 10);
         puntaje = 300;
         tiempoDeVida = 10;
         duracionSnowBro = 10000;

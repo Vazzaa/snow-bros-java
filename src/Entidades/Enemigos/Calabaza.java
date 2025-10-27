@@ -3,12 +3,13 @@ package Entidades.Enemigos;
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.EstadoEnemigo;
 import Fabricas.Skin;
+import Juego.ModoDeJuego;
 import Visitors.Colisionable;
 
 public class Calabaza extends Enemigo implements EstadoEnemigo{
 
-    public Calabaza(Skin skins, int posX, int posY){
-        super(skins, posX, posY, 0,300);
+    public Calabaza(Skin skins , ModoDeJuego juego , int posX, int posY){
+        super(skins, juego, posX, posY, 0,300);
     }
 
     @Override

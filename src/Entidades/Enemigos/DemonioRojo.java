@@ -5,13 +5,14 @@ import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.EstadoEnemigo;
 import EstadoMovimiento.Movible;
 import Fabricas.Skin;
+import Juego.ModoDeJuego;
 import Visitors.Colisionable;
 import Visitors.Colisionador;
 
 public class DemonioRojo extends Enemigo implements EstadoEnemigo{
 
-    public DemonioRojo(Skin skins, int posX, int posY){
-        super(skins, posX, posY, 3,300);
+    public DemonioRojo(Skin skins, ModoDeJuego juego ,int posX, int posY){
+        super(skins, juego, posX, posY, 3,300);
     }
 
     @Override

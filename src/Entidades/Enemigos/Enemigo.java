@@ -3,6 +3,7 @@ package Entidades.Enemigos;
 import EstadoMovimiento.EstadoEnemigo;
 import Fabricas.Skin;
 import Juego.Entidad;
+import Juego.ModoDeJuego;
 import Entidades.SnowBro.SnowBro;
 import Visitors.Colisionable;
 import Visitors.Colisionador;
@@ -17,8 +18,8 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible {
     protected EstadoEnemigo estadoEnemigo;
     
     
-    public Enemigo(Skin skins, int posX, int posY, int v, int p){
-        super(skins,posX,posY);
+    public Enemigo(Skin skins, ModoDeJuego juego , int posX, int posY, int v, int p){
+        super(skins,juego,posX,posY);
         int vida = v;
         int puntaje = p;
 

@@ -3,12 +3,13 @@ package Entidades.Enemigos;
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.EstadoEnemigo;
 import Fabricas.Skin;
+import Juego.ModoDeJuego;
 import Visitors.Colisionable;
 
 public class Moghera extends Enemigo{
 
-    public Moghera(Skin skins, int posX, int posY){
-        super(skins, posX, posY, 5,300);
+    public Moghera(Skin skins,ModoDeJuego juego ,int posX, int posY){
+        super(skins, juego, posX, posY, 5,300);
     }
 
     @Override
