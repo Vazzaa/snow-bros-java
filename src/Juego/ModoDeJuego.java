@@ -144,5 +144,10 @@ public class ModoDeJuego implements ControladorJuego {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'moverAbajo'");
 	}
+	@Override
+	public Nivel getNivelActual() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getNivelActual'");
+	}
 
 }

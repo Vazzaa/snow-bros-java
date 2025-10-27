@@ -11,13 +11,13 @@ public abstract class Proyectil extends Entidad{
 
     protected int velocidad;
     protected int daño;
-    protected float alcance;
+    protected int alcance;
 
-    public Proyectil(Skin skins, ModoDeJuego juego,int x, int y, int v, int d, int a){
+    public Proyectil(Skin skins, ModoDeJuego juego,int x, int y, int vel, int dañ, int alc){
         super(skins, juego, x, y);
-        velocidad = v;
-        daño = d;
-        alcance = a;
+        velocidad = vel;
+        daño = dañ;
+        alcance = alc;
     }
 
     public void afectar(SnowBro snowNBro){};

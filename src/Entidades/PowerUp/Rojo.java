@@ -8,19 +8,19 @@ import Juego.ModoDeJuego;
 
 public class Rojo extends PowerUp {
     
-    protected int puntaje;
-    protected float tiempoDeVida;
     protected int duracionSnowBro;
 
-    public Rojo(Skin s, ModoDeJuego juego,int x, int y, Hitbox h) {
+    public Rojo(Skin s, ModoDeJuego juego,int x, int y) {
         super(s, juego, x, y, 300, 10);
-        puntaje = 300;
-        tiempoDeVida = 10;
         duracionSnowBro = 10;
     }
 
     public int getPuntaje() {
         return puntaje;
+    }
+
+    public void setPuntaje(int puntaje) {
+        this.puntaje = puntaje;
     }
     
     public void afectar(PowerUp p) {

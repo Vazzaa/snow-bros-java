@@ -31,5 +31,9 @@ public class PlatQuebradiza extends Plataforma{
         return puntaje;
     }
 
+    public void destruir() {
+
+    }
+
 
 }

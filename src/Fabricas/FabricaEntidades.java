@@ -63,23 +63,23 @@ public Kamakichi getKamakichi(int x, int y) {
 }
 
 public Azul getPowerUpAzul(int x, int y) {
-    return new Azul(this.fabricaSkin.crearSkinPowerUpAzul(), miJuego, x, y,new Hitbox(y, y, x, y));
+    return new Azul(this.fabricaSkin.crearSkinPowerUpAzul(), miJuego, x, y);
 }
 
 public Rojo getPowerUpRojo(int x, int y) {
-    return new Rojo(this.fabricaSkin.crearSkinPowerUpRojo(), miJuego, x, y,new Hitbox(y, y, x, y));
+    return new Rojo(this.fabricaSkin.crearSkinPowerUpRojo(), miJuego, x, y);
 }
 
 public Verde getPowerUpVerde(int x, int y) {
-    return new Verde(this.fabricaSkin.crearSkinPowerUpVerde(), miJuego, x, y,new Hitbox(y, y, x, y));
+    return new Verde(this.fabricaSkin.crearSkinPowerUpVerde(), miJuego, x, y);
 }
 
 public Fruta getFruta(int x, int y) {
-    return new Fruta(this.fabricaSkin.crearSkinFruta(), miJuego, x, y,new Hitbox(y, y, x, y));
+    return new Fruta(this.fabricaSkin.crearSkinFruta(), miJuego, x, y);
 }
 
 public VidaExtra getVidaExtra(int x, int y) {
-    return new VidaExtra(this.fabricaSkin.crearSkinVidaExtra(), miJuego, x, y,new Hitbox(y, y, x, y));
+    return new VidaExtra(this.fabricaSkin.crearSkinVidaExtra(), miJuego, x, y);
 }
 
 public Pincho getPincho(int x, int y) {
