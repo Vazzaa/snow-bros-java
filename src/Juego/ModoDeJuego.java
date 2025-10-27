@@ -1,10 +1,8 @@
 package Juego;
 
-import java.awt.List;
-import java.util.LinkedList;
-
 import Entidades.Enemigos.Enemigo;
 import Entidades.Estructuras.Estructura;
+import Entidades.PowerUp.PowerUp;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.FabricaDominio1;
 import Fabricas.FabricaEntidades;
@@ -12,8 +10,6 @@ import Fabricas.FabricaSkin;
 import Parser.CreadorDeNivel;
 import Grafica.*;
 import Hilos.HiloJugador;
-import Juego.Nivel;
-import Juego.Ranking;
 
 public class ModoDeJuego implements ControladorJuego {
     
@@ -98,6 +94,7 @@ public class ModoDeJuego implements ControladorJuego {
 		registrarObserverJugador(nivelActual.getSnowBro());
 		registrarObserverEnemigos(nivelActual.getMisEnemigos());
 		registrarObserversEstructuras(nivelActual.getMisEstructuras());
+		registrarObserversPowerUps(nivelActual.getMisPowerUps());
 	}
 	protected void registrarObserverJugador(SnowBro jugador) {
 		Observer observerJugador = controlaGrafica.registrarJugador(jugador);
@@ -115,6 +112,12 @@ public class ModoDeJuego implements ControladorJuego {
 		for (Estructura es : estructuras) {
 			Observer observerEstructura = controlaGrafica.registrarEntidad(es);
 			es.registrarObserver(observerEstructura);
+		}
+	}
+	protected void registrarObserversPowerUps(java.util.List<PowerUp> powerups) {
+		for (PowerUp pu : powerups) {
+			Observer observerPowerUp = controlaGrafica.registrarEntidad(pu);
+			pu.registrarObserver(observerPowerUp);
 		}
 	}
 

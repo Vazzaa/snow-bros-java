@@ -22,6 +22,10 @@ public abstract class Entidad implements EntidadLogica {
 	public ObserverGrafico getObserverGrafico(){
 		return observer;
 	}
+	
+	public ModoDeJuego getJuego() {
+		return miJuego;
+	}
 
 	public Skin getSkin(){
 		return misAspectos;

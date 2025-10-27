@@ -45,4 +45,8 @@ public abstract class PowerUp extends Entidad implements Colisionable {
         c.colisionar(this);
     }
 
+    public boolean esColisionable() {
+        return true;
+    }
+
 }

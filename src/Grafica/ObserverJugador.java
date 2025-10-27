@@ -17,8 +17,8 @@ public class ObserverJugador extends ObserverGrafico{
 	
 	public void actualizar() {
 		super.actualizar();
-		/*if (panelPantallaNivel != null){
-			panelPantallaNivel.actualizar_scroll_hacia_jugador(jugador_observado);
-		}*/
+		if (panelPantallaNivel != null){
+		panelPantallaNivel.actualizar_info_jugador(jugador_observado);
+		}
 	}
 }

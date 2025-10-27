@@ -70,7 +70,7 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         vida = v;
     }
     
-    public void setPuntaje(int p) {
+    public void sumarPuntaje(int p) {
         puntaje += p;
     }
 
@@ -120,14 +120,19 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     
     public void afectar(Enemigo e) {
         vida -= 1;
+        notificarObserver();
         if (vida <= 0) {
             morir();
         }
     }
     
     public void afectar(PowerUp p) {
-        setPuntaje(p.getPuntaje());
         p.afectar(this);
+        nivel.eliminarPowerUp(p);
+        if(p.getObserverGrafico() != null) {
+            p.quitarObserver(p.getObserverGrafico());
+        }
+        notificarObserver();
     }
     
     public void afectar(Estructura e) {
@@ -170,7 +175,15 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         boolean colisiona = this.colisionaAABB(this.miHitbox, e.getHitbox());
         if (!colisiona) return;
         
-        if (e.esColisionable()) {
+        if (e.getClass().getSuperclass().equals(PowerUp.class)) {
+            afectar((PowerUp)e);
+            return;
+        }
+        if (e.getClass().getSuperclass().equals(Enemigo.class)) {
+            afectar((Enemigo)e);
+            return;
+        }
+            if (e.esColisionable()) {
             procesarColision((Colisionable)e);
         }
     }
