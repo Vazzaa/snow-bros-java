@@ -29,7 +29,7 @@ public FabricaEntidades (FabricaSkin fb, ModoDeJuego juego) {
 
 
 public SnowBro getSnowBro(int x, int y) {
-    SnowBro s = new SnowBro(this.fabricaSkin.crearSkinSnowBro(), x, y, null, null);
+    SnowBro s = new SnowBro(this.fabricaSkin.crearSkinSnowBro(), miJuego, x, y, null, null);
     return s;
 };
 
@@ -75,9 +75,7 @@ public Verde getPowerUpVerde(int x, int y) {
 }
 
 public Fruta getFruta(int x, int y) {
-    Fruta frutillita = new Fruta(this.fabricaSkin.crearSkinFruta(), x, y,new Hitbox(y, y, x, y));
-    frutillita.setJuego(miJuego);
-    return frutillita;
+    return new Fruta(this.fabricaSkin.crearSkinFruta(), miJuego, x, y,new Hitbox(y, y, x, y));
 }
 
 public VidaExtra getVidaExtra(int x, int y) {
@@ -105,10 +103,10 @@ public PlatQuebradiza getPlatQuebradiza(int x, int y) {
 }
 
 public PlatMovil getPlatMovil(int x, int y) {
-    return new PlatMovil(this.fabricaSkin.crearSkinPlatMovil(), x, y);
+    return new PlatMovil(this.fabricaSkin.crearSkinPlatMovil(), miJuego, x, y);
 }
 public Plataforma getPlataforma(int x, int y) {
-    return new Plataforma(this.fabricaSkin.crearSkinPlataforma(), x, y);
+    return new Plataforma(this.fabricaSkin.crearSkinPlataforma(), miJuego, x, y);
 }
 
 public ProyectilBomba getProyectilBomba(int x, int y) {

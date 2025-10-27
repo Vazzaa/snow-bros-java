@@ -17,6 +17,7 @@ import Visitors.Colisionador;
 import Juego.Entidad;
 import Juego.EntidadJugador;
 import Juego.Nivel;
+import Juego.ModoDeJuego;
 
 public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     //Atributos de instancia
@@ -31,8 +32,8 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     protected int velocidad;
     
     //Constructor
-    public SnowBro (Skin aspectos, int x, int y, Jugador jug, Nivel nivelAlQuePertenece) {
-        super(aspectos, x, y);
+    public SnowBro (Skin aspectos, ModoDeJuego juego, int x, int y, Jugador jug, Nivel nivelAlQuePertenece) {
+        super(aspectos, juego, x, y);
         velocidad = 3;
         jugador = jug;
         vida = 3;

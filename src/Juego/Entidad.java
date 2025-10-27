@@ -13,9 +13,10 @@ public abstract class Entidad implements EntidadLogica {
 	protected ObserverGrafico observer;
 	protected Hitbox miHitbox;
 
-	protected Entidad(Skin skins, int x, int y){
+	protected Entidad(Skin skins, ModoDeJuego juego, int x, int y){
 		miHitbox = new Hitbox(32, 32, x, y);
 		misAspectos = skins;
+		miJuego = juego;
 	}
 
 	public ObserverGrafico getObserverGrafico(){

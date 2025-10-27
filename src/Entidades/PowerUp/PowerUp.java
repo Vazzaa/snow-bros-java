@@ -6,14 +6,15 @@ import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
 import Juego.Entidad;
 import Entidades.Enemigos.Enemigo;
+import Juego.ModoDeJuego;
 
 public abstract class PowerUp extends Entidad implements Colisionable {
 
     protected int puntaje;
     protected int tiempoDeVida; 
 
-    public PowerUp(Skin skins, int posX, int posY,int puntaje, int tiempoDeVida) {
-        super(skins, posX, posY);
+    public PowerUp(Skin skins, ModoDeJuego juego, int posX, int posY,int puntaje, int tiempoDeVida) {
+        super(skins, juego, posX, posY);
         this.puntaje = puntaje;
         this.tiempoDeVida = tiempoDeVida;
     }
