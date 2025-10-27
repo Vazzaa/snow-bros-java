@@ -29,7 +29,7 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     //Constructor
     public SnowBro (Skin aspectos, int x, int y, Jugador jug, Nivel nivelAlQuePertenece) {
         super(aspectos, x, y);
-        velocidad = 5;
+        velocidad = 3;
         jugador = jug;
         vida = 3;
         puntaje = 0;

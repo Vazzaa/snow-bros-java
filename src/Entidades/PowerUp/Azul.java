@@ -1,8 +1,11 @@
 package Entidades.PowerUp;
 
+import java.util.List;
+
 import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
+import Grafica.ObserverGrafico;
 import Juego.Hitbox;
 
 public class Azul extends PowerUp {
@@ -28,8 +31,10 @@ public class Azul extends PowerUp {
     
     @Override
     public void afectar(SnowBro snowBro) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'afectar'");
+        snowBro.setVelocidad(snowBro.getVelocidad() * 2);
+        snowBro.sumarPuntaje(puntaje);
+        notificarObserver();
+        //eliminar();
     }
     
     @Override
@@ -45,5 +50,11 @@ public class Azul extends PowerUp {
     @Override
     public Skin getSkin() {
         return misAspectos;
+    }
+
+    @Override
+    public List<ObserverGrafico> getObserversGrafico() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

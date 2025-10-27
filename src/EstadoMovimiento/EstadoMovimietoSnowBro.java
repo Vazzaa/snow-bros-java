@@ -9,9 +9,9 @@ public class EstadoMovimietoSnowBro {
     
     protected SnowBro snowBro;
 
-    private final int VELOCIDAD_MOVIMIENTO = 3;
-    private final int FUERZA_SALTO = 12; 
-    private final int GRAVEDAD = 1;
+    private int velocidad = 3;
+    private int fuerzaSalto = 12; 
+    private int gravedad = 1;
 
     private int velocidadHorizontal = 0;
     private int velocidadVertical = 0;
@@ -62,16 +62,16 @@ public class EstadoMovimietoSnowBro {
     }
 
     protected void moverDerecha() {
-        this.velocidadHorizontal = VELOCIDAD_MOVIMIENTO;
+        this.velocidadHorizontal = snowBro.getVelocidad();
     }
 
     protected void moverIzquierda() {
-        this.velocidadHorizontal = -VELOCIDAD_MOVIMIENTO;
+        this.velocidadHorizontal = -snowBro.getVelocidad();
     }
     
     protected void saltar() {
     	if (enElSuelo()) {
-    		this.velocidadVertical = FUERZA_SALTO;
+    		this.velocidadVertical = fuerzaSalto;
             enElSuelo = false;
             System.out.println("SALTANDO - Velocidad vertical: " + velocidadVertical);
     	}
@@ -94,7 +94,7 @@ public class EstadoMovimietoSnowBro {
     
     public void actualizar() {
         if (!enElSuelo()) {
-            velocidadVertical -= GRAVEDAD;
+            velocidadVertical -= gravedad;
         }
         int posXAnterior = snowBro.getPosX();
         int posYAnterior = snowBro.getPosY();
