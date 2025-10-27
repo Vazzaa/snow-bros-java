@@ -1,6 +1,7 @@
 package Entidades.PowerUp;
 
 import Visitors.Colisionable;
+import Visitors.Colisionador;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
 import Juego.Entidad;
@@ -38,5 +39,10 @@ public abstract class PowerUp extends Entidad implements Colisionable {
     public abstract void afectar(Enemigo enemigo);
 
     public abstract void afectar(PowerUp powerUp);
+    
+    @Override
+    public void aceptarColision(Colisionador c) {
+        c.colisionar(this);
+    }
 
 }

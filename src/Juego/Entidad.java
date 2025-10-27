@@ -56,7 +56,18 @@ public abstract class Entidad implements EntidadLogica {
 			o.actualizar();
 		}
 	}
+	
+	public Hitbox getHitbox(){
+		return miHitbox;
+	}
 
-
+	public boolean colisionaAABB(Hitbox h1, Hitbox h2) {
+		ColisionManager cm = new ColisionManager();
+		return cm.colisionaAABB(h1, h2);
+	}
+	
+	public boolean esColisionable() {
+		return false;
+	}
 
 }

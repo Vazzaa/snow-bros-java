@@ -1,6 +1,7 @@
 package EstadoMovimiento;
 
 import Entidades.SnowBro.SnowBro;
+import Entidades.Estructuras.Estructura;
 import Grafica.ConstantesTeclado;
 import Juego.ColisionManager;
 
@@ -77,6 +78,9 @@ public class EstadoMovimietoSnowBro {
     }
     
     public boolean enElSuelo() {
+        if (snowBro.getNivel() == null || snowBro.getNivel().getMisEstructuras() == null) {
+            return false;
+        }
     	if (controladorColisiones.estaEnSuelo(snowBro, snowBro.getNivel().getMisEstructuras())) {
             return true;
         }
@@ -105,13 +109,16 @@ public class EstadoMovimietoSnowBro {
             System.out.println("TOCO EL SUELO - PosY: " + snowBro.getPosY());
         }
 
-        if (controladorColisiones.colisionaConPlataformaArriba(snowBro, snowBro.getNivel().getMisEstructuras()) != null && velocidadVertical > 0) {
-            // Si elimino el "&& velocidadVertical > 0" del if, el SnowBro salta siempre. Si lo agrego (como esta ahora), tiene supersalto y traspasa las plataformas.
-            snowBro.setPosY(controladorColisiones.colisionaConPlataformaArriba(snowBro, snowBro.getNivel().getMisEstructuras()).getPosY());
-            velocidadVertical = 0;
-            enElSuelo = true;
-            System.out.println("-------------------------TOQUE LA PLATAFORMA DE ARRIBA----------------------------" );
-            System.out.println("TOCO LA PLATAFORMA - PosY: " + snowBro.getPosY());
+        if (velocidadVertical > 0 && snowBro.getNivel() != null && snowBro.getNivel().getMisEstructuras() != null) {
+            Estructura plataformaArriba = controladorColisiones.colisionaConPlataformaArriba(snowBro, snowBro.getNivel().getMisEstructuras());
+            if (plataformaArriba != null) {
+                // Si elimino el "&& velocidadVertical > 0" del if, el SnowBro salta siempre. Si lo agrego (como esta ahora), tiene supersalto y traspasa las plataformas.
+                snowBro.setPosY(plataformaArriba.getPosY());
+                velocidadVertical = 0;
+                enElSuelo = true;
+                System.out.println("-------------------------TOQUE LA PLATAFORMA DE ARRIBA----------------------------" );
+                System.out.println("TOCO LA PLATAFORMA - PosY: " + snowBro.getPosY());
+            }
         }
         if (enElSuelo() && !ConstantesTeclado.estaPresionada(ConstantesTeclado.SALTAR)) {
             // Si está en una plataforma pero no en el suelo principal, puede caer

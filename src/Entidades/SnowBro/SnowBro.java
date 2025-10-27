@@ -114,20 +114,24 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         
     }
     
-    public void chocar(Colisionable c) {
-        
+    public void procesarColision(Colisionable c) {
+        c.aceptarColision(this);
     }
     
     public void afectar(Enemigo e) {
-        
+        vida -= 1;
+        if (vida <= 0) {
+            morir();
+        }
     }
     
     public void afectar(PowerUp p) {
-        
+        setPuntaje(p.getPuntaje());
+        p.afectar(this);
     }
     
     public void afectar(Estructura e) {
-        
+        e.afectar(this);
     }
     
     
@@ -162,9 +166,13 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     }
 
     @Override
-    public void colisionar(Entidad e1, Entidad e2) {
-        // TODO Auto-generated method stub
+    public void colisionar(Entidad e) {
+        boolean colisiona = this.colisionaAABB(this.miHitbox, e.getHitbox());
+        if (!colisiona) return;
         
+        if (e.esColisionable()) {
+            procesarColision((Colisionable)e);
+        }
     }
     
 }

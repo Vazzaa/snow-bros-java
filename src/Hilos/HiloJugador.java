@@ -13,6 +13,7 @@ public class HiloJugador extends Thread {
     public void run(){
         while(true){
             juego.moverSnowBro();
+            juego.verificarColisiones();
             try {
                 sleep(16);
             } catch (InterruptedException e) {
