@@ -46,6 +46,10 @@ public class PanelPantallaNivel extends PanelVista{
 		return observer_grafico;
 	}
 
+    public void removerEntidad(ObserverGrafico og){
+        imagenFondo.remove(og);
+    }
+
     public Observer incorporarEntidadJugador(EntidadJugador entidad_jugador) {
 		ObserverJugador observer_jugador = new ObserverJugador(this, entidad_jugador);
 		imagenFondo.add(observer_jugador);
@@ -66,7 +70,8 @@ public class PanelPantallaNivel extends PanelVista{
 	}
     
     protected void actualizar_labels_informacion(EntidadJugador jugador) {
-        //TODO: actualizar puntaje y vida
+        labelTextPuntaje.setText(String.valueOf(jugador.getPuntaje()));
+        labelTextVida.setText(String.valueOf(jugador.getVida()));
 	}
 
     protected void agregarPanelNivelconImagenFondo() {

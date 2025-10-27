@@ -84,6 +84,11 @@ public class Nivel {
     public void agregarPowerUps(PowerUp p){
         misPowerUps.addLast(p);
     }
+    
+    public void eliminarPowerUp(PowerUp p){
+        misPowerUps.remove(p);
+        p.getJuego().getControladoraGrafica().sacarEntidad(p);
+    }
 
     public void agregarEstructura(Estructura e){
         misEstructuras.addLast(e);
@@ -126,6 +131,4 @@ public class Nivel {
             e.printStackTrace();
         }
     }
-
-    
 }
