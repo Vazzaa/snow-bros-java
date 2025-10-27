@@ -192,12 +192,6 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         }
     }
 
-    @Override
-    public List<ObserverGrafico> getObserversGrafico() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getObserversGrafico'");
-    }
-
     public void resetVelocidad() {
         this.velocidad = 3;
     }

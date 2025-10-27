@@ -58,9 +58,4 @@ public class Azul extends PowerUp {
         return misAspectos;
     }
 
-    @Override
-    public List<ObserverGrafico> getObserversGrafico() {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }
