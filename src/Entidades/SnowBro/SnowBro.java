@@ -32,15 +32,14 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     protected int velocidad;
     
     //Constructor
-    public SnowBro (Skin aspectos, ModoDeJuego juego, int x, int y, Jugador jug, Nivel nivelAlQuePertenece) {
+    public SnowBro (Skin aspectos, ModoDeJuego juego, int x, int y, Jugador jug, Nivel nivelPerteneciente) {
         super(aspectos, juego, x, y);
         velocidad = 3;
         jugador = jug;
         vida = 3;
         puntaje = 0;
-        jugador = jug;
         estadoMovimiento = new EstadoMovimietoSnowBro(this);
-        nivel = nivelAlQuePertenece;
+        nivel = nivelPerteneciente;
     }
 
     //Comandos
@@ -112,11 +111,14 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
 	}
     
     public void morir() {
-        // TODO
+       System.out.println("SnowBro ha muerto");
+       if (miJuego != null && miJuego.getControladoraGrafica() != null) {
+        miJuego.getControladoraGrafica().mostrarPantallaGameOver();
+       }
     }
     
     public void disminuirVida() {
-        if(vida > 1)
+        if(vida > 0)
             vida--;
         else 
             morir();
@@ -128,6 +130,9 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     
     public void afectar(Enemigo e) {
         vida -= 1;
+        miHitbox.setPosX(10);
+        miHitbox.setPosY(7650);
+        resetVelocidad();
         notificarObserver();
         if (vida <= 0) {
             morir();
@@ -162,9 +167,9 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     }
         switch (estadoMovimiento.direccion) {
             case 0: // Caminando hacia la derecha
-                return 1; // Estado caminando derecha
+                return 3 + estadoMovimiento.getFrameAnimacion(); // Estado caminando derecha
             case 180: // Caminando hacia la izquierda
-                return 2; // Estado caminando izquierda
+                return 6 + estadoMovimiento.getFrameAnimacion(); // Estado caminando izquierda
             default:
                 return 1; // Estado por defecto
         }
@@ -175,11 +180,10 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         return misAspectos;
     }
 
-    @Override
     public void colisionar(Entidad e) {
         boolean colisiona = this.colisionaAABB(this.miHitbox, e.getHitbox());
         if (!colisiona) return;
-        
+    
         if (e.getClass().getSuperclass().equals(PowerUp.class)) {
             afectar((PowerUp)e);
             return;
@@ -188,13 +192,24 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
             afectar((Enemigo)e);
             return;
         }
-            if (e.esColisionable()) {
-            procesarColision((Colisionable)e);
+    
+        if (e.getClass().getSuperclass().equals(Estructura.class)) {
+            afectar((Estructura)e);
+            return;
+        }
+    
+        if (e.getClass().getSuperclass().getName().equals("Entidades.Estructuras.Obstaculo")) {
+            afectar((Estructura)e);
+            return;
         }
     }
-
+    
     public void resetVelocidad() {
         this.velocidad = 3;
+    }
+
+    public void detenerMovimiento() {
+        estadoMovimiento.detenerMovimientoHorizontal();
     }
     
 }

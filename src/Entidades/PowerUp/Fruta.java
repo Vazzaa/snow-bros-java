@@ -8,10 +8,7 @@ import Juego.ModoDeJuego;
 
 public class Fruta extends PowerUp{
 
-    protected int puntaje;
-    protected float tiempoDeVida;
-
-    public Fruta(Skin s, ModoDeJuego juego, int x, int y, Hitbox h) {
+    public Fruta(Skin s, ModoDeJuego juego, int x, int y) {
         super(s, juego, x, y, 300, 10);
         puntaje = 500;
         tiempoDeVida = 10;

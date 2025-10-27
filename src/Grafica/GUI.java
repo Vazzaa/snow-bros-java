@@ -150,8 +150,8 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 
 	@Override
 	public void mostrarPantallaGameOver() {
-		// TODO Auto-generated method stub
-		
+		ventana.setContentPane(panelGameOver);
+		refrescar();
 	}
 
 	@Override

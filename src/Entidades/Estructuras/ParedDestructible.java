@@ -15,7 +15,7 @@ public class ParedDestructible extends Pared {
         puntaje = 150;
     }
 
-    public void Destruir() {
+    public void destruir() {
 
     }
 

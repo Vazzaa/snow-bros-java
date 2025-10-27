@@ -1,5 +1,6 @@
 package Entidades.Enemigos;
 
+import Entidades.Proyectiles.ProyectilBomba;
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.EstadoEnemigo;
 import Fabricas.FabricaEntidades;
@@ -34,12 +35,6 @@ public class Kamakichi extends Enemigo {
     }
 
     @Override
-    public void crearPowerUp() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
     public EstadoEnemigo getEstado() {
         // TODO Auto-generated method stub
         return null;
@@ -66,5 +61,9 @@ public class Kamakichi extends Enemigo {
     @Override
     public Skin getSkin() {
         return misAspectos;
+    }
+
+    public ProyectilBomba crearBomba(){
+        return null;
     }
 }

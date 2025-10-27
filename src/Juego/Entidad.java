@@ -38,10 +38,6 @@ public abstract class Entidad implements EntidadLogica {
 	public int getPosY(){
 		return miHitbox.getPosY();
 	}
-	
-	public void setJuego(ModoDeJuego juego) {
-		miJuego = juego;
-	}
 
 	public void setPosX(int x){
 		miHitbox.setPosX(x);
@@ -53,6 +49,10 @@ public abstract class Entidad implements EntidadLogica {
 
 	public void registrarObserver(Observer obs){
 		observer = (ObserverGrafico) obs; // ObserverGrafico implementa Observer
+	}
+
+	public void eliminarObserver(Observer obs){
+		observer = null;
 	}
 
 	public void notificarObserver(){

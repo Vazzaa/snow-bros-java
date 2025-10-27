@@ -1,12 +1,16 @@
 package Entidades.Enemigos;
 
+import Entidades.Proyectiles.ProyectilFuego;
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.EstadoEnemigo;
+import Fabricas.FabricaEntidades;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
 import Visitors.Colisionable;
 
 public class Moghera extends Enemigo{
+
+    protected FabricaEntidades creacionFuego;
 
     public Moghera(Skin skins,ModoDeJuego juego ,int posX, int posY){
         super(skins, juego, posX, posY, 5,300);
@@ -30,10 +34,8 @@ public class Moghera extends Enemigo{
         
     }
 
-    @Override
-    public void crearPowerUp() {
-        // TODO Auto-generated method stub
-        
+    public ProyectilFuego dispararFuego() {
+        return null;
     }
 
     @Override
@@ -63,5 +65,9 @@ public class Moghera extends Enemigo{
     @Override
     public Skin getSkin() {
         return misAspectos;
+    }
+
+    public void morir(){
+        
     }
 }

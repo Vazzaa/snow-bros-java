@@ -12,8 +12,6 @@ import EstadoMovimiento.Movible;
 public abstract class Enemigo extends Entidad implements Colisionable, Movible {
 
     protected int vida;
-    protected int posX;
-    protected int posY;
     protected int puntaje;
     protected EstadoEnemigo estadoEnemigo;
     
@@ -51,8 +49,6 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible {
     public abstract void chocar(Colisionable c);
     
     public abstract void recibirDisparo();
-
-    public abstract void crearPowerUp();
 
     public abstract void setEstado(EstadoEnemigo estado);
 

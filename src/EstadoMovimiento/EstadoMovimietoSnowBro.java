@@ -4,6 +4,8 @@ import Entidades.SnowBro.SnowBro;
 import Entidades.Estructuras.Estructura;
 import Grafica.ConstantesTeclado;
 import Juego.ColisionManager;
+import Juego.Hitbox;
+import Entidades.Estructuras.Estructura;
 
 public class EstadoMovimietoSnowBro {
     
@@ -19,6 +21,8 @@ public class EstadoMovimietoSnowBro {
     public boolean enElSuelo = false;
     ColisionManager controladorColisiones;
 
+    private int frameAnimacion = 1;
+    private static final int FRAMES_POR_ESTADO = 8;
     
     public EstadoMovimietoSnowBro(SnowBro snowBro){
         controladorColisiones = new ColisionManager();
@@ -47,10 +51,13 @@ public class EstadoMovimietoSnowBro {
         }
         if (derecha) {
     		moverDerecha();
+            frameAnimacion++;
     	} else if (izquierda) {
     		moverIzquierda();
+            frameAnimacion++;
     	} else {
     		detenerMovimientoHorizontal();
+            frameAnimacion = 0;
     	}
     	
     	if (salto) {
@@ -60,6 +67,9 @@ public class EstadoMovimietoSnowBro {
     	actualizar();
     }
 
+    public int getFrameAnimacion() {
+        return (frameAnimacion / FRAMES_POR_ESTADO) % 3;
+    }
     protected void moverDerecha() {
         this.velocidadHorizontal = snowBro.getVelocidad();
     }
@@ -97,7 +107,31 @@ public class EstadoMovimietoSnowBro {
         }
         int posXAnterior = snowBro.getPosX();
         int posYAnterior = snowBro.getPosY();
-        snowBro.setPosX(snowBro.getPosX() + velocidadHorizontal);
+        
+        // NUEVO: Verificar si va a chocar con una pared antes de mover
+        if (snowBro.getNivel() != null && snowBro.getNivel().getMisEstructuras() != null && velocidadHorizontal != 0) {
+            int nuevaX = snowBro.getPosX() + velocidadHorizontal;
+            boolean colisionaria = false;
+            for (Estructura estructura : snowBro.getNivel().getMisEstructuras()) {
+                // Verificar si es una pared (Obstaculo) que va a bloquear
+                if (estructura.getClass().getSuperclass().getName().equals("Entidades.Estructuras.Obstaculo")) {
+                    Hitbox hitboxFutura = new Hitbox(snowBro.getHitbox().getAncho(), snowBro.getHitbox().getAlto(), nuevaX, snowBro.getPosY());
+                    if (controladorColisiones.colisionaAABB(hitboxFutura, estructura.getHitbox())) {
+                        colisionaria = true;
+                        break;
+                    }
+                }
+            }
+            if (colisionaria) {
+                // Si va a chocar, no aplicar velocidad
+                velocidadHorizontal = 0;
+            } else {
+                snowBro.setPosX(snowBro.getPosX() + velocidadHorizontal);
+            }
+        } else {
+            snowBro.setPosX(snowBro.getPosX() + velocidadHorizontal);
+        }
+        
         snowBro.setPosY(snowBro.getPosY() + velocidadVertical);
         if (velocidadHorizontal != 0) {
             System.out.println("ACTUALIZAR - PosX: " + posXAnterior + " -> " + snowBro.getPosX() + " (velocidad: " + velocidadHorizontal + ")");
@@ -107,11 +141,10 @@ public class EstadoMovimietoSnowBro {
             enElSuelo = true; // Marcar como en el suelo
             System.out.println("TOCO EL SUELO - PosY: " + snowBro.getPosY());
         }
-
+    
         if (velocidadVertical > 0 && snowBro.getNivel() != null && snowBro.getNivel().getMisEstructuras() != null) {
             Estructura plataformaArriba = controladorColisiones.colisionaConPlataformaArriba(snowBro, snowBro.getNivel().getMisEstructuras());
             if (plataformaArriba != null) {
-                // Si elimino el "&& velocidadVertical > 0" del if, el SnowBro salta siempre. Si lo agrego (como esta ahora), tiene supersalto y traspasa las plataformas.
                 snowBro.setPosY(plataformaArriba.getPosY());
                 velocidadVertical = 0;
                 enElSuelo = true;
@@ -120,7 +153,6 @@ public class EstadoMovimietoSnowBro {
             }
         }
         if (enElSuelo() && !ConstantesTeclado.estaPresionada(ConstantesTeclado.SALTAR)) {
-            // Si está en una plataforma pero no en el suelo principal, puede caer
             if (!enElSuelo()) {
                 enElSuelo = false;
                 System.out.println("CAYENDO DE PLATAFORMA");
@@ -129,28 +161,6 @@ public class EstadoMovimietoSnowBro {
         if (velocidadVertical != 0) {
             System.out.println("SALTO - PosY: " + posYAnterior + " -> " + snowBro.getPosY() + " (velocidad: " + velocidadVertical + ", enElSuelo: " + enElSuelo + ")");
         }
-        if(chocarparediz()){
-            snowBro.setPosX(0);
-        }
-        if(chocarparedde()){
-            snowBro.setPosX(800);
-        
-        }
-
-    }
-
-    private boolean chocarparediz() {
-        if(snowBro.getPosX()<=0){
-            return true;
-        }
-        return false;
-    }
-
-    private boolean chocarparedde() {
-        if(snowBro.getPosX()>=800){
-            return true;
-        }
-        return false;
     }
 }
 

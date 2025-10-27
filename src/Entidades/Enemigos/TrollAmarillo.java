@@ -1,5 +1,6 @@
 package Entidades.Enemigos;
 
+import Entidades.PowerUp.PowerUp;
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.EstadoEnemigo;
 import Fabricas.Skin;
@@ -30,10 +31,9 @@ public class TrollAmarillo extends Enemigo implements EstadoEnemigo{
         
     }
 
-    @Override
-    public void crearPowerUp() {
+    public PowerUp morir() {
         // TODO Auto-generated method stub
-        
+        return null;
     }
 
     @Override
