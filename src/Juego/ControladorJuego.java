@@ -9,4 +9,5 @@ public interface ControladorJuego {
 	public boolean estaColisionando(Entidad e);
 	public void moverAbajo();
 	public void setNombreJugador(String nombre);
+	public Nivel getNivelActual();
 }

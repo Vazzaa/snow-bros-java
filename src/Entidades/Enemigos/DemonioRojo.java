@@ -1,10 +1,12 @@
 package Entidades.Enemigos;
 
+import Entidades.PowerUp.PowerUp;
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.EstadoEnemigo;
 import EstadoMovimiento.Movible;
 import Fabricas.Skin;
 import Visitors.Colisionable;
+import Visitors.Colisionador;
 
 public class DemonioRojo extends Enemigo implements EstadoEnemigo{
 

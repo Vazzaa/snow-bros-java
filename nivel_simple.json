@@ -231,6 +231,7 @@
     ],
     "powerups": [
         {"tipo": "comida" , "x":150, "y":7650},
-        {"tipo": "comida" , "x":460, "y":7950}
+        {"tipo": "comida" , "x":460, "y":7950},
+        {"tipo": "pocionazul" , "x":700, "y":7650}
     ]
 }
