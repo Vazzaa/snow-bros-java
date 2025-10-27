@@ -2,6 +2,7 @@ package Entidades.Estructuras;
 import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
+import Visitors.Colisionador;
 
 public class Plataforma extends Estructura{
 
@@ -24,5 +25,9 @@ public class Plataforma extends Estructura{
     @Override
     public Skin getSkin() {
         return misAspectos;
+    }
+
+    public void aceptarColision(Colisionador c){
+        c.colisionar(this);
     }
 }

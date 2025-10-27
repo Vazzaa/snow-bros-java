@@ -100,6 +100,32 @@ public class Nivel {
     public void moverEntidad(Movible e){
         
     }
+    
+    public void verificarColisiones() {
+        try {
+            // Verificar colisiones de SnowBro con enemigos
+            if (misEnemigos != null) {
+                for (Enemigo enemigo : misEnemigos) {
+                    snowBro.colisionar(enemigo);
+                }
+            }
+            // Verificar colisiones de SnowBro con PowerUps
+            if (misPowerUps != null) {
+                for (PowerUp powerUp : misPowerUps) {
+                    snowBro.colisionar(powerUp);
+                }
+            }
+            // Verificar colisiones de SnowBro con estructuras
+            if (misEstructuras != null) {
+                for (Estructura estructura : misEstructuras) {
+                    snowBro.colisionar(estructura);
+                }
+            }
+        } catch (Exception e) {
+            // Silenciar errores de colisión para no detener el juego
+            e.printStackTrace();
+        }
+    }
 
     
 }

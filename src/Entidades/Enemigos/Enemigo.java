@@ -5,6 +5,7 @@ import Fabricas.Skin;
 import Juego.Entidad;
 import Entidades.SnowBro.SnowBro;
 import Visitors.Colisionable;
+import Visitors.Colisionador;
 import EstadoMovimiento.Movible;
 
 public abstract class Enemigo extends Entidad implements Colisionable, Movible {
@@ -55,5 +56,10 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible {
     public abstract void setEstado(EstadoEnemigo estado);
 
     public abstract EstadoEnemigo getEstado();
+    
+    @Override
+    public void aceptarColision(Colisionador c) {
+        c.colisionar(this);
+    }
 
 } 

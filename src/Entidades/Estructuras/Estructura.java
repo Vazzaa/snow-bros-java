@@ -5,6 +5,7 @@ import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
 import Juego.Entidad;
 import Visitors.Colisionable;
+import Visitors.Colisionador;
 
 public abstract class Estructura extends Entidad implements Colisionable{
 
@@ -15,4 +16,9 @@ public abstract class Estructura extends Entidad implements Colisionable{
     public void afectar(SnowBro s){};
 
     public void afectar (Enemigo e){};
+
+    @Override
+    public void aceptarColision(Colisionador c){
+        c.colisionar(this);
+    }
 }

@@ -12,6 +12,7 @@ import Visitors.Colisionable;
 import Visitors.Colisionador;
 import Juego.Entidad;
 import Juego.EntidadJugador;
+import Juego.Nivel;
 
 public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     //Atributos de instancia
@@ -19,14 +20,14 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     protected Jugador jugador;
     protected EstadoMovimietoSnowBro estadoMovimiento;
     protected FabricaEntidades crearNieve;
-
+    protected Nivel nivel;
     
     protected int puntaje;
     protected int vida;
     protected int velocidad;
     
     //Constructor
-    public SnowBro (Skin aspectos, int x, int y, Jugador jug) {
+    public SnowBro (Skin aspectos, int x, int y, Jugador jug, Nivel nivelAlQuePertenece) {
         super(aspectos, x, y);
         velocidad = 5;
         jugador = jug;
@@ -34,10 +35,13 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         puntaje = 0;
         jugador = jug;
         estadoMovimiento = new EstadoMovimietoSnowBro(this);
+        nivel = nivelAlQuePertenece;
     }
 
     //Comandos
-    
+    public Nivel getNivel() {
+        return this.nivel;
+    }
     public int getVida() {
         return vida;
     }
@@ -56,6 +60,10 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     
     public String getNombre() {
         return jugador.getNombre();
+    }
+
+    public void setNivel(Nivel nivelAlQuePertenece) {
+        nivel = nivelAlQuePertenece;
     }
 
     public void setVida(int v) {
@@ -106,20 +114,24 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         
     }
     
-    public void chocar(Colisionable c) {
-        
+    public void procesarColision(Colisionable c) {
+        c.aceptarColision(this);
     }
     
     public void afectar(Enemigo e) {
-        
+        vida -= 1;
+        if (vida <= 0) {
+            morir();
+        }
     }
     
     public void afectar(PowerUp p) {
-        
+        setPuntaje(p.getPuntaje());
+        p.afectar(this);
     }
     
     public void afectar(Estructura e) {
-        
+        e.afectar(this);
     }
     
     
@@ -154,9 +166,13 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     }
 
     @Override
-    public void colisionar(Entidad e1, Entidad e2) {
-        // TODO Auto-generated method stub
+    public void colisionar(Entidad e) {
+        boolean colisiona = this.colisionaAABB(this.miHitbox, e.getHitbox());
+        if (!colisiona) return;
         
+        if (e.esColisionable()) {
+            procesarColision((Colisionable)e);
+        }
     }
     
 }
