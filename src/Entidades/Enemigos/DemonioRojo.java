@@ -1,9 +1,11 @@
 package Entidades.Enemigos;
 
+import Entidades.PowerUp.PowerUp;
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.EstadoEnemigo;
 import Fabricas.Skin;
 import Visitors.Colisionable;
+import Visitors.Colisionador;
 
 public class DemonioRojo extends Enemigo implements EstadoEnemigo{
 
@@ -62,6 +64,30 @@ public class DemonioRojo extends Enemigo implements EstadoEnemigo{
     @Override
     public Skin getSkin() {
         return misAspectos;
+    }
+
+    @Override
+    public void aceptarColision(Colisionador c) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void afectar(SnowBro snowBro) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void afectar(Enemigo enemigo) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void afectar(PowerUp powerUp) {
+        // TODO Auto-generated method stub
+        
     }
 
 }
