@@ -57,16 +57,22 @@ public class FabricaDominio1 extends FabricaSkin {
         return new Skin(get_mapeo_estado_imagen("SnowBro", 26), 1);
     }
     public Skin crearSkinPincho(){
-        return new Skin(get_mapeo_estado_imagen("Pincho", 0), 1);//Falta
+        Map<Integer,String> mapeo = new HashMap<>();
+        mapeo.put(1, rutaCarpetaImagenes + "Pincho.png");
+        return new Skin(mapeo, 1);
     }
     public Skin crearSkinEscalera(){
-        return new Skin(get_mapeo_estado_imagen("Escalera", 0), 1);//Falta
+        Map<Integer,String> mapeo = new HashMap<>();
+        mapeo.put(1, rutaCarpetaImagenes + "escalera.png");
+        return new Skin(mapeo, 1);
     }
     public Skin crearSkinPared(){
-        return new Skin(get_mapeo_estado_imagen("Pared", 0), 1);//Falta
+        Map<Integer,String> mapeo = new HashMap<>();
+        mapeo.put(1, rutaCarpetaImagenes + "Pared1.png");
+        return new Skin(mapeo, 1);
     }
     public Skin crearSkinSueloResbaladizo(){
-        return new Skin(get_mapeo_estado_imagen("Resbaladizo", 0), 1);//Falta
+        return new Skin(get_mapeo_estado_imagen("Resbaladizo", 1), 1);//Falta
     }
     public Skin crearSkinPlataforma(){
         Map<Integer,String> mapeoparaplataforma= new HashMap<Integer,String>();
@@ -74,7 +80,7 @@ public class FabricaDominio1 extends FabricaSkin {
         return new Skin(mapeoparaplataforma, 1);
     }
     public Skin crearSkinPlatQuebradiza(){
-        return new Skin(get_mapeo_estado_imagen("PlatQuebradiza", 0), 1);//Falta
+        return new Skin(get_mapeo_estado_imagen("PlatQuebradiza", 1), 1);//Falta
     }
     public Skin crearSkinPlatMovil(){
         return new Skin(get_mapeo_estado_imagen("Plataforma", 1), 1);

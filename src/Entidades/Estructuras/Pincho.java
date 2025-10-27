@@ -12,8 +12,16 @@ public class Pincho extends Obstaculo{
     }
     
     public void afectar(SnowBro s) {
-
-    }
+        s.disminuirVida();
+        s.setPosX(10);
+        s.setPosY(7650);
+        s.resetVelocidad();
+        s.notificarObserver();
+        System.out.println("Pincho: SnowBro afectado");
+        if (s.getVida() <= 0) {
+            s.morir();
+        }
+        }
 
     public void afectar (Enemigo e) {
 
@@ -32,4 +40,7 @@ public class Pincho extends Obstaculo{
         return misAspectos;
     }
 
+    public boolean esColisionable() {
+        return true;
+    }
 }

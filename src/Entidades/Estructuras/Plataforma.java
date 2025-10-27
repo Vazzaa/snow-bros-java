@@ -9,6 +9,8 @@ public class Plataforma extends Estructura{
 
     public Plataforma(Skin s, ModoDeJuego juego, int x, int y) {
         super(s, juego, x, y);
+        miHitbox.setAncho(12);
+        miHitbox.setAlto(32);
     }
 
     public void afectar(SnowBro s) {

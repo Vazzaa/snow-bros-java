@@ -9,10 +9,26 @@ public class Pared extends Obstaculo{
 
      public Pared(Skin s, ModoDeJuego juego,int x, int y) {
         super(s, juego, x, y);
+        miHitbox.setAncho(16);
+        miHitbox.setAlto(64);
     }
 
     public void afectar(SnowBro s) {
+        int snowBrox = s.getPosX();
+        int paredx = getPosX();
+        int paredAncho = miHitbox.getAncho();
+        int centroDelSnowBroX = snowBrox + s.getHitbox().getAncho() / 2;
+        int centroParedX = paredx + paredAncho / 2;
 
+        if (centroDelSnowBroX < centroParedX) {
+            int nuevaX = paredx - s.getHitbox().getAncho();
+            s.setPosX(nuevaX);
+        } else {
+            int nuevaX = paredx + paredAncho;
+            s.setPosX(nuevaX);
+        }
+        s.detenerMovimiento();
+        s.notificarObserver();
     }
 
     public void afectar (Enemigo e) {
@@ -26,6 +42,10 @@ public class Pared extends Obstaculo{
     @Override
     public Skin getSkin() {
         return misAspectos;
+    }
+
+    public boolean esColisionable() {
+        return true;
     }
 }
 

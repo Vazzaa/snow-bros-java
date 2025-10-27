@@ -39,6 +39,7 @@ public class CreadorDeNivel {
         public List<EntidadData> estructuras;
         public List<EntidadData> enemigos;
         public List<EntidadData> powerups;
+        public List<EntidadData> obstaculos;
     }
     
     public static class PosicionData {
