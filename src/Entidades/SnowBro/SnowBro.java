@@ -3,11 +3,15 @@ package Entidades.SnowBro;
 import Entidades.Jugador.Jugador;
 import Entidades.Estructuras.Estructura;
 import Entidades.PowerUp.PowerUp;
+
+import java.util.List;
+
 import Entidades.Enemigos.Enemigo;
 import EstadoMovimiento.EstadoMovimietoSnowBro;
 import Fabricas.FabricaEntidades;
 import Fabricas.Skin;
 import Grafica.ConstantesTeclado;
+import Grafica.ObserverGrafico;
 import Visitors.Colisionable;
 import Visitors.Colisionador;
 import Juego.Entidad;
@@ -186,6 +190,16 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
             if (e.esColisionable()) {
             procesarColision((Colisionable)e);
         }
+    }
+
+    @Override
+    public List<ObserverGrafico> getObserversGrafico() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getObserversGrafico'");
+    }
+
+    public void resetVelocidad() {
+        this.velocidad = 3;
     }
     
 }

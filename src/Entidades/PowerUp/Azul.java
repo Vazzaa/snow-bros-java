@@ -7,6 +7,7 @@ import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
 import Grafica.ObserverGrafico;
 import Juego.Hitbox;
+import javax.swing.Timer;
 
 public class Azul extends PowerUp {
 
@@ -18,7 +19,7 @@ public class Azul extends PowerUp {
         super(s,(int) x,(int)y, 300, 10);
         puntaje = 300;
         tiempoDeVida = 10;
-        duracionSnowBro = 10;
+        duracionSnowBro = 10000;
     }
 
     public int getPuntaje() {
@@ -31,8 +32,13 @@ public class Azul extends PowerUp {
     
     @Override
     public void afectar(SnowBro snowBro) {
-        snowBro.setVelocidad(snowBro.getVelocidad() * 2);
+        snowBro.setVelocidad(snowBro.getVelocidad() * 4);
         snowBro.sumarPuntaje(puntaje);
+        Timer timer = new Timer(duracionSnowBro, e -> {
+        snowBro.resetVelocidad(); 
+        });
+        timer.setRepeats(false);
+        timer.start();
         notificarObserver();
         //eliminar();
     }
