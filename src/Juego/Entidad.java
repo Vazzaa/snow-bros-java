@@ -9,7 +9,6 @@ import Grafica.*;
 public abstract class Entidad implements EntidadLogica {
 	
 	protected Skin misAspectos;
-	protected List<Observer> listaObservadores;
 	protected ModoDeJuego miJuego;
 	protected ObserverGrafico observer;
 	protected Hitbox miHitbox;
@@ -17,8 +16,8 @@ public abstract class Entidad implements EntidadLogica {
 	protected Entidad(Skin skins, int x, int y){
 		miHitbox = new Hitbox(32, 32, x, y);
 		misAspectos = skins;
-		listaObservadores = new LinkedList<Observer>();
 	}
+
 	public ObserverGrafico getObserverGrafico(){
 		return observer;
 	}
@@ -38,6 +37,10 @@ public abstract class Entidad implements EntidadLogica {
 	public int getPosY(){
 		return miHitbox.getPosY();
 	}
+	
+	public void setJuego(ModoDeJuego juego) {
+		miJuego = juego;
+	}
 
 	public void setPosX(int x){
 		miHitbox.setPosX(x);
@@ -48,17 +51,11 @@ public abstract class Entidad implements EntidadLogica {
 	}
 
 	public void registrarObserver(Observer obs){
-		listaObservadores.add(obs);
-	}
-
-	public void quitarObserver(Observer obs){
-		listaObservadores.remove(obs);
+		observer = (ObserverGrafico) obs; // ObserverGrafico implementa Observer
 	}
 
 	public void notificarObserver(){
-		for(Observer o: listaObservadores){
-			o.actualizar();
-		}
+		observer.actualizar();
 	}
 	
 	public Hitbox getHitbox(){

@@ -75,7 +75,9 @@ public Verde getPowerUpVerde(int x, int y) {
 }
 
 public Fruta getFruta(int x, int y) {
-    return new Fruta(this.fabricaSkin.crearSkinFruta(), x, y,new Hitbox(y, y, x, y));
+    Fruta frutillita = new Fruta(this.fabricaSkin.crearSkinFruta(), x, y,new Hitbox(y, y, x, y));
+    frutillita.setJuego(miJuego);
+    return frutillita;
 }
 
 public VidaExtra getVidaExtra(int x, int y) {

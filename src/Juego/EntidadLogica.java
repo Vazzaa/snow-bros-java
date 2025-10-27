@@ -9,6 +9,6 @@ public interface EntidadLogica {
 	public Skin getSkin();
 	public int getPosX();
 	public int getPosY();
-	public List<ObserverGrafico> getObserversGrafico();
+	public ObserverGrafico getObserverGrafico();
 	
 }

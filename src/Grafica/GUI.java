@@ -176,9 +176,7 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 
 	@Override
 	public void sacarEntidad(EntidadLogica e) {
-		for (ObserverGrafico og : e.getObserversGrafico()) {
-			panelNivel.removerEntidad(og);
-		}
+		panelNivel.removerEntidad(e.getObserverGrafico());
 		System.out.println("se elimina observer");
 		refrescar();
 	}

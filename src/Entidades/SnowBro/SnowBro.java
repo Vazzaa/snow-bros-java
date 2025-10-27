@@ -107,11 +107,14 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
 	}
     
     public void morir() {
-        
+        // TODO
     }
     
     public void disminuirVida() {
-        
+        if(vida > 1)
+            vida--;
+        else
+            morir();
     }
     
     public void procesarColision(Colisionable c) {
@@ -129,9 +132,6 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     public void afectar(PowerUp p) {
         p.afectar(this);
         nivel.eliminarPowerUp(p);
-        if(p.getObserverGrafico() != null) {
-            p.quitarObserver(p.getObserverGrafico());
-        }
         notificarObserver();
     }
     
