@@ -63,48 +63,10 @@ public class CreadorDeNivel {
         this.fabSkins = fabricaSkins;
 
     }
+    
     public void setFrabricaEntidades(FabricaEntidades fabEntidades){
         this.fabEntidades = fabEntidades;
     }
-
-       /*  public Nivel crearNivelHarcodeando(){
-            List<Estructura> plataformas = new ArrayList<>();
-            List<Enemigo> enemigos = new ArrayList<>();
-            SnowBro jugador = fabEntidades.getSnowBro(10, 7650);
-
-            //plataformas.add(fabEntidades.getPlatMovil(100, 400));
-            //plataformas.add(fabEntidades.getPlatQuebradiza(200, 7100));
-            //plataformas.add(fabEntidades.getSueloResbaladizo(0, 500));
-            //plataformas.add(fabEntidades.getPared(0, 0));
-            //plataformas.add(fabEntidades.getPincho(150, 480));
-            //plataformas.add(fabEntidades.getEscalera(300, 450));
-            for(int i=0; i<800; i+=16){
-            plataformas.add(fabEntidades.getPlataforma(i, 7620));
-        }
-
-
-            //plat un poco mas arriba
-            plataformas.add(fabEntidades.getPlataforma(112, 7670));
-            plataformas.add(fabEntidades.getPlataforma(128, 7670));
-            plataformas.add(fabEntidades.getPlataforma(144, 7670));
-            plataformas.add(fabEntidades.getPlataforma(160, 7670));
-            plataformas.add(fabEntidades.getPlataforma(176, 7670));
-            plataformas.add(fabEntidades.getPlataforma(192, 7670));
-            plataformas.add(fabEntidades.getPlataforma(208, 7670));
-            plataformas.add(fabEntidades.getPlataforma(224, 7670));
-            plataformas.add(fabEntidades.getPlataforma(240, 7670));
-
-            
-
-            enemigos.add(fabEntidades.getDemonioRojo(100, 7650));
-            enemigos.add(fabEntidades.getDemonioRojo(176, 7700));
-            enemigos.add(fabEntidades.getTrollAmarillo(200, 7650));
-            enemigos.add(fabEntidades.getRanaDeFuego(300, 7650));
-            enemigos.add(fabEntidades.getCalabaza(400, 7650));
-            enemigos.add(fabEntidades.getMoghera(500, 7650));
-
-            return new Nivel(1, plataformas, enemigos, jugador, fabEntidades);
-        }*/
 
     public Nivel leerArchivo(String rutaArchivo) {
         List<Estructura> plataformas = new ArrayList<>();

@@ -32,6 +32,7 @@ public class PanelPantallaNivel extends PanelVista{
         super(c);
         iniciarComponentes();
     }
+
     public void iniciarComponentes(){
         setSize(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
         setLayout(new BorderLayout());
@@ -40,7 +41,8 @@ public class PanelPantallaNivel extends PanelVista{
         agregarPanelNivelconImagenFondo();
 
     }
-     public Observer incorporarEntidad(EntidadLogica e){
+
+    public Observer incorporarEntidad(EntidadLogica e){
         ObserverGrafico observer_grafico = new ObserverGrafico(e);
 		imagenFondo.add(observer_grafico);	
 		return observer_grafico;
@@ -65,7 +67,7 @@ public class PanelPantallaNivel extends PanelVista{
         return observer_silueta;
     }
 
-    	protected void actualizar_info_jugador(EntidadJugador jugador) {
+    protected void actualizar_info_jugador(EntidadJugador jugador) {
 		actualizar_labels_informacion(jugador);
 	}
     

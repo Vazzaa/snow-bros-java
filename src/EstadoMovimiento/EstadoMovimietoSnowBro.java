@@ -108,12 +108,10 @@ public class EstadoMovimietoSnowBro {
         int posXAnterior = snowBro.getPosX();
         int posYAnterior = snowBro.getPosY();
         
-        // NUEVO: Verificar si va a chocar con una pared antes de mover
         if (snowBro.getNivel() != null && snowBro.getNivel().getMisEstructuras() != null && velocidadHorizontal != 0) {
             int nuevaX = snowBro.getPosX() + velocidadHorizontal;
             boolean colisionaria = false;
             for (Estructura estructura : snowBro.getNivel().getMisEstructuras()) {
-                // Verificar si es una pared (Obstaculo) que va a bloquear
                 if (estructura.getClass().getSuperclass().getName().equals("Entidades.Estructuras.Obstaculo")) {
                     Hitbox hitboxFutura = new Hitbox(snowBro.getHitbox().getAncho(), snowBro.getHitbox().getAlto(), nuevaX, snowBro.getPosY());
                     if (controladorColisiones.colisionaAABB(hitboxFutura, estructura.getHitbox())) {
@@ -123,7 +121,6 @@ public class EstadoMovimietoSnowBro {
                 }
             }
             if (colisionaria) {
-                // Si va a chocar, no aplicar velocidad
                 velocidadHorizontal = 0;
             } else {
                 snowBro.setPosX(snowBro.getPosX() + velocidadHorizontal);
@@ -133,12 +130,14 @@ public class EstadoMovimietoSnowBro {
         }
         
         snowBro.setPosY(snowBro.getPosY() + velocidadVertical);
+
         if (velocidadHorizontal != 0) {
             System.out.println("ACTUALIZAR - PosX: " + posXAnterior + " -> " + snowBro.getPosX() + " (velocidad: " + velocidadHorizontal + ")");
         }
+
         if (enElSuelo()) {
-            velocidadVertical = 0; // Detener la caída
-            enElSuelo = true; // Marcar como en el suelo
+            velocidadVertical = 0;
+            enElSuelo = true;
             System.out.println("TOCO EL SUELO - PosY: " + snowBro.getPosY());
         }
     
@@ -152,16 +151,16 @@ public class EstadoMovimietoSnowBro {
                 System.out.println("TOCO LA PLATAFORMA - PosY: " + snowBro.getPosY());
             }
         }
+
         if (enElSuelo() && !ConstantesTeclado.estaPresionada(ConstantesTeclado.SALTAR)) {
             if (!enElSuelo()) {
                 enElSuelo = false;
                 System.out.println("CAYENDO DE PLATAFORMA");
             }
         }
+
         if (velocidadVertical != 0) {
             System.out.println("SALTO - PosY: " + posYAnterior + " -> " + snowBro.getPosY() + " (velocidad: " + velocidadVertical + ", enElSuelo: " + enElSuelo + ")");
         }
     }
 }
-
-

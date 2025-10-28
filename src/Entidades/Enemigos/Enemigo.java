@@ -20,7 +20,6 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible {
         super(skins,juego,posX,posY);
         int vida = v;
         int puntaje = p;
-
     }
 
     public void setVida(int v){

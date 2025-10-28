@@ -76,7 +76,7 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 				ConstantesTeclado.teclasPresionadas.remove(e.getKeyCode());
 			}
 		});
-		};
+	};
 
 	public void setPanelRanking(PanelPantallaRanking pr){
 		panelRanking=pr;
@@ -133,7 +133,6 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	@Override
 	public void registrarControladorJuego(ControladorJuego cj) {
 		this.controlarJuego = cj;
-		
 	}
 
 	@Override
@@ -208,7 +207,6 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	@Override
 	public void accionarInicioJuego() {
 		controlarJuego.iniciar();
-		
 	}
 
 	@Override

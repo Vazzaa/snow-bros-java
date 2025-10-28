@@ -40,16 +40,10 @@ public class ModoDeJuego implements ControladorJuego {
 	
 	public void cambiarModoDeJuego(int modo) {
 		// TODO
-		// ¿Y ese entero que haría? No hay ningún atributo de tipo int. En la interfaz ControladorJuego, este método no recibe ningún parámetro.
 	}
 	
 	public void cambiarDireccionJugador(int direccion) {
 		nivelActual.getSnowBro().setDireccion(direccion);
-		// TODO
-		// En la interfaz ControladorJuego, cambiarDireccionJugador() recibe un entero n.
-		
-		// No hay ningún método en ControladorGrafica que controle la dirección de un jugador:
-	 	// registrarJugador() recibe un jugador y lo registra, y verificarColisiones() verifica las colisiones, no los movimientos.
 	}
 
 	public Nivel getNivel(){
@@ -78,8 +72,6 @@ public class ModoDeJuego implements ControladorJuego {
 
 	@Override
 	public void iniciar() {
-		
-		//nivelActual = miCreadorNivel.crearNivelHarcodeando();
 		CreadorDeNivel creador = new CreadorDeNivel(fabricaSkins);
 		creador.setFrabricaEntidades(miFabricaEntidades);
 		nivelActual = creador.leerArchivo("nivel_simple.json");
@@ -96,6 +88,7 @@ public class ModoDeJuego implements ControladorJuego {
 		registrarObserversEstructuras(nivelActual.getMisEstructuras());
 		registrarObserversPowerUps(nivelActual.getMisPowerUps());
 	}
+
 	protected void registrarObserverJugador(SnowBro jugador) {
 		Observer observerJugador = controlaGrafica.registrarJugador(jugador);
 		jugador.registrarObserver(observerJugador);
@@ -108,12 +101,14 @@ public class ModoDeJuego implements ControladorJuego {
 			e.registrarObserver(observerEnemigo);
 		}
 	}
+
 	protected void registrarObserversEstructuras(java.util.List<Estructura> estructuras) {
 		for (Estructura es : estructuras) {
 			Observer observerEstructura = controlaGrafica.registrarEntidad(es);
 			es.registrarObserver(observerEstructura);
 		}
 	}
+
 	protected void registrarObserversPowerUps(java.util.List<PowerUp> powerups) {
 		for (PowerUp pu : powerups) {
 			Observer observerPowerUp = controlaGrafica.registrarEntidad(pu);

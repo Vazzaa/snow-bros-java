@@ -7,7 +7,7 @@ import Juego.ModoDeJuego;
 
 public class Pared extends Obstaculo{
 
-     public Pared(Skin s, ModoDeJuego juego,int x, int y) {
+    public Pared(Skin s, ModoDeJuego juego,int x, int y) {
         super(s, juego, x, y);
         miHitbox.setAncho(16);
         miHitbox.setAlto(64);

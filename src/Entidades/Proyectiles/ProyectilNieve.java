@@ -10,7 +10,7 @@ import Juego.ModoDeJuego;
 public class ProyectilNieve extends Proyectil{
     
     public ProyectilNieve (Skin s, ModoDeJuego juego,int x, int y, int vel, int dañ, int alc) {
-       super(s, juego, x, y, vel, dañ, alc);
+        super(s, juego, x, y, vel, dañ, alc);
     }
 
     public void afectar(SnowBro s) {
