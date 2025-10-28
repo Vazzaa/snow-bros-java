@@ -9,7 +9,7 @@ public class PlatQuebradiza extends Plataforma{
     protected int puntaje;
     protected int Vida;
 
-     public PlatQuebradiza(Skin s,ModoDeJuego juego ,int x, int y) {
+    public PlatQuebradiza(Skin s,ModoDeJuego juego ,int x, int y) {
         super(s, juego, x, y);
         puntaje = 300;
         Vida = 1;
@@ -34,6 +34,4 @@ public class PlatQuebradiza extends Plataforma{
     public void destruir() {
 
     }
-
-
 }

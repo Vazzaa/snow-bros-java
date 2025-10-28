@@ -9,7 +9,7 @@ public class ParedDestructible extends Pared {
     protected int Vida;
     protected int puntaje;
 
-     public ParedDestructible(Skin s, ModoDeJuego juego,int x, int y) {
+    public ParedDestructible(Skin s, ModoDeJuego juego,int x, int y) {
         super(s, juego, x, y);
         Vida = 1;
         puntaje = 150;

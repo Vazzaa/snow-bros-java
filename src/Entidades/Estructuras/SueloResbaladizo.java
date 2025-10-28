@@ -6,7 +6,7 @@ import Juego.ModoDeJuego;
 
 public class SueloResbaladizo extends Obstaculo {
 
-     public SueloResbaladizo(Skin s,ModoDeJuego juego ,int x, int y) {
+    public SueloResbaladizo(Skin s,ModoDeJuego juego ,int x, int y) {
         super(s, juego, x, y);
     }
 

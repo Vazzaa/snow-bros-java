@@ -48,9 +48,8 @@ public class DemonioRojo extends Enemigo implements EstadoEnemigo{
         int numerorandom = (int) (Math.random() * 1);
         if(numerorandom == 0){
             moverseDerecha();
-        }
-        else{
-                moverseIzquierda();
+        } else {
+            moverseIzquierda();
         }
     }
 

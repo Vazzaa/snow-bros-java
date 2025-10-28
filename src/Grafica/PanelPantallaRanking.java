@@ -12,13 +12,13 @@ import java.awt.event.ActionEvent;
 
 public class PanelPantallaRanking extends PanelVista{
     
-    //Atributos
+    // Atributos
     protected JButton botonParaAtr;
     protected JPanel panelRankingClasico;
     protected JPanel panelRankingContrarreloj;
     protected JPanel panelRankingSupervivencia;
 
-    //Constructor
+    // Constructor
     public PanelPantallaRanking(ControladorVistas c){
         super(c);
         iniciarComponentes();
@@ -27,7 +27,7 @@ public class PanelPantallaRanking extends PanelVista{
     protected void iniciarComponentes(){
         setSize(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
         setLayout(null);
-        //agregarImagenFondo();
+        agregarImagenFondo();
         crearPanelesRanking();
         agregarJugadoresyMostrarPanelesRanking();
         agregarPanelesRanking();
@@ -35,13 +35,13 @@ public class PanelPantallaRanking extends PanelVista{
     }
 
     protected void agregarImagenFondo(){
-       JLabel imagenFondo = new JLabel();
-       ImageIcon iconoImagen= new ImageIcon(this.getClass().getResource("/Imagenes/PantallaRanking.png"));
-       Image imagenEscalada = iconoImagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
-       Icon iconoImagenEscalada = new ImageIcon(imagenEscalada);
-       imagenFondo.setIcon(iconoImagenEscalada);
-       imagenFondo.setBounds(0, 0, ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
-       add(imagenFondo);
+        JLabel imagenFondo = new JLabel();
+        ImageIcon iconoImagen = new ImageIcon(this.getClass().getResource("/Imagenes/PantallaRanking.png"));
+        Image imagenEscalada = iconoImagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
+        Icon iconoImagenEscalada = new ImageIcon(imagenEscalada);
+        imagenFondo.setIcon(iconoImagenEscalada);
+        imagenFondo.setBounds(0, 0, ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
+        add(imagenFondo);
     }
 
     protected void crearPanelesRanking(){
@@ -54,7 +54,7 @@ public class PanelPantallaRanking extends PanelVista{
     }
 
     protected void agregarJugadoresyMostrarPanelesRanking(){
-        //To do: Agregar jugadores a los paneles de ranking y mostrarlos
+        // TODO: Agregar jugadores a los paneles de ranking y mostrarlos
     }
 
     protected void agregarPanelesRanking(){

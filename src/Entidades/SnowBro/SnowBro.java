@@ -20,13 +20,13 @@ import Juego.Nivel;
 import Juego.ModoDeJuego;
 
 public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
+
     //Atributos de instancia
-    
     protected Jugador jugador;
     protected EstadoMovimietoSnowBro estadoMovimiento;
     protected FabricaEntidades crearNieve;
     protected Nivel nivel;
-    
+
     protected int puntaje;
     protected int vida;
     protected int velocidad;
@@ -46,6 +46,7 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     public Nivel getNivel() {
         return this.nivel;
     }
+
     public int getVida() {
         return vida;
     }
@@ -100,8 +101,6 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         }
         estadoMovimiento.mover(derecha, izquierda, salto);
         notificarObserver();
-        
-        
     }
     
     public void setDireccion(int direccion){
