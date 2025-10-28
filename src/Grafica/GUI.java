@@ -167,10 +167,10 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 		return observerJugador;
 	}
 
-	public Observer registrar_silueta(EntidadLogica silueta) {
-		Observer observer_silueta = panelNivel.incorporarSilueta(silueta);
+	public Observer registrarSilueta(EntidadLogica silueta) {
+		Observer observerSilueta = panelNivel.incorporarSilueta(silueta);
 		refrescar();
-		return observer_silueta;
+		return observerSilueta;
 	}
 
 	@Override

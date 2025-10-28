@@ -53,25 +53,25 @@ public class PanelPantallaNivel extends PanelVista{
     }
 
     public Observer incorporarEntidadJugador(EntidadJugador entidad_jugador) {
-		ObserverJugador observer_jugador = new ObserverJugador(this, entidad_jugador);
-		imagenFondo.add(observer_jugador);
-		actualizar_info_jugador(entidad_jugador);
-		return observer_jugador;
+		ObserverJugador observerJugador = new ObserverJugador(this, entidad_jugador);
+		imagenFondo.add(observerJugador);
+		actualizarInfoJugador(entidad_jugador);
+		return observerJugador;
 	}
 
     public Observer incorporarSilueta(EntidadLogica entidad_logica) {
-        ObserverGrafico observer_silueta = new ObserverGrafico(entidad_logica);
+        ObserverGrafico observerSilueta = new ObserverGrafico(entidad_logica);
         imagenFondo.setIcon(new ImageIcon(getClass().getClassLoader().getResource(entidad_logica.getSkin().getRutaImagenActual())));
         imagenFondo.setBounds(0,0, imagenFondo.getIcon().getIconWidth(), imagenFondo.getIcon().getIconHeight());
         panelNivel.setPreferredSize(new Dimension(imagenFondo.getIcon().getIconWidth(), imagenFondo.getIcon().getIconHeight()));
-        return observer_silueta;
+        return observerSilueta;
     }
 
-    protected void actualizar_info_jugador(EntidadJugador jugador) {
-		actualizar_labels_informacion(jugador);
+    protected void actualizarInfoJugador(EntidadJugador jugador) {
+		actualizarLabelsInformacion(jugador);
 	}
     
-    protected void actualizar_labels_informacion(EntidadJugador jugador) {
+    protected void actualizarLabelsInformacion(EntidadJugador jugador) {
         labelTextPuntaje.setText(String.valueOf(jugador.getPuntaje()));
         labelTextVida.setText(String.valueOf(jugador.getVida()));
 	}
