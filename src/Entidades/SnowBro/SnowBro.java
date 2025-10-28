@@ -183,7 +183,7 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     public void colisionar(Entidad e) {
         boolean colisiona = this.colisionaAABB(this.miHitbox, e.getHitbox());
         if (!colisiona) return;
-    
+        
         if (e.getClass().getSuperclass().equals(PowerUp.class)) {
             afectar((PowerUp)e);
             return;
@@ -203,7 +203,7 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
             return;
         }
     }
-    
+
     public void resetVelocidad() {
         this.velocidad = 3;
     }

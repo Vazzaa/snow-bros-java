@@ -5,11 +5,6 @@
         "y": 7650
     },
     "estructuras": [
-<<<<<<< HEAD
-
-        {"tipo": "plataforma", "x": 0, "y": 7620},
-=======
->>>>>>> d63b739f00833b43b1d06313da78c4231e049d91
         {"tipo": "plataforma", "x": 16, "y": 7620},
         {"tipo": "plataforma", "x": 32, "y": 7620},
         {"tipo": "plataforma", "x": 48, "y": 7620},

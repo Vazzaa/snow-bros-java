@@ -46,7 +46,7 @@ public class PanelPantallaGameOver extends PanelVista{
 
     protected void decorarBotonVolverMenu(){
         transparentarBoton(botonVolverMenu);
-        botonVolverMenu.setBounds(400, 520, 260, 50);
+        botonVolverMenu.setBounds(200,490,390,50);
     }
 
     protected void transparentarBoton(JButton boton){
