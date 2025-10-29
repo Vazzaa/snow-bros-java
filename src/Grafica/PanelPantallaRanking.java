@@ -1,10 +1,15 @@
 package Grafica;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import Entidades.Jugador.Jugador;
 import Juego.Ranking;
@@ -28,22 +33,21 @@ public class PanelPantallaRanking extends PanelVista{
     // Constructor
     public PanelPantallaRanking(ControladorVistas c){
         super(c);
-        iniciarComponentes();
         rankingClasico = new Ranking();
         rankingContrarreloj = new Ranking();
         rankingSupervivencia = new Ranking();
+        iniciarComponentes();
     }
 
     protected void iniciarComponentes(){
         setSize(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
         setLayout(null);
-        agregarImagenFondo();
         crearPanelesRanking();
-        MostrarPanelesRanking();
-        agregarPanelesRanking();
         agregarBotonParaAtr();
+        refrescarRankingsEnPantalla();
+        agregarImagenFondo();
     }
-
+    
     protected void agregarImagenFondo(){
         JLabel imagenFondo = new JLabel();
         ImageIcon iconoImagen = new ImageIcon(this.getClass().getResource("/Imagenes/PantallaRanking.png"));
@@ -56,16 +60,23 @@ public class PanelPantallaRanking extends PanelVista{
 
     protected void crearPanelesRanking(){
         panelRankingClasico = new JPanel();
-        panelRankingClasico.setBounds(0, 0, 267, 540);
-        panelRankingContrarreloj = new JPanel();
-        panelRankingContrarreloj.setBounds(256, 0, 267, 540);
+        panelRankingClasico.setLayout(new BoxLayout(panelRankingClasico, BoxLayout.Y_AXIS));
+        panelRankingClasico.setBounds(267, 50, 267, 540);
+        panelRankingClasico.setOpaque(false); 
+        panelRankingClasico.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        panelRankingContrarreloj = new JPanel();  
+        panelRankingContrarreloj.setLayout(new BoxLayout(panelRankingContrarreloj, BoxLayout.Y_AXIS));
+        panelRankingContrarreloj.setBounds(534, 50, 267, 540);
+        panelRankingContrarreloj.setOpaque(false); 
+        panelRankingContrarreloj.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panelRankingSupervivencia = new JPanel();
-        panelRankingSupervivencia.setBounds(534, 0, 266, 540);
+        panelRankingSupervivencia.setLayout(new BoxLayout(panelRankingSupervivencia, BoxLayout.Y_AXIS));
+        panelRankingSupervivencia.setBounds(0, 50, 266, 540);
+        panelRankingSupervivencia.setOpaque(false); 
+        panelRankingSupervivencia.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        agregarPanelesRanking();
     }
 
-    protected void MostrarPanelesRanking(){
-        // TODO: Agregar los paneles de ranking y mostrarlos
-    }
 
     public void agregarJugadoresRanking(int ModoDeJuego, Jugador j){
         switch (ModoDeJuego) {
@@ -79,6 +90,7 @@ public class PanelPantallaRanking extends PanelVista{
                 rankingSupervivencia.agregarJugador(j);
                 break;
         }
+        refrescarRankingsEnPantalla();
     }
 
     protected void agregarPanelesRanking(){
@@ -112,4 +124,36 @@ public class PanelPantallaRanking extends PanelVista{
             }
         });
     }
+
+    public void refrescarRankingsEnPantalla() {
+        panelRankingClasico.removeAll();
+        panelRankingContrarreloj.removeAll();
+        panelRankingSupervivencia.removeAll();
+        
+        mostrarRanking(panelRankingClasico, rankingClasico.getPuntajes());
+        mostrarRanking(panelRankingContrarreloj, rankingContrarreloj.getPuntajes());
+        mostrarRanking(panelRankingSupervivencia, rankingSupervivencia.getPuntajes());
+        revalidate();
+        repaint();
+    }
+
+    private void mostrarRanking(JPanel panel, Jugador[] puntajes) {
+        if(puntajes != null){
+            Font fuenteEstandar = new Font("Monospaced", Font.BOLD, 24);
+            for (int i = 0; i < puntajes.length; i++) {
+                Jugador j = puntajes[i];
+                if (j != null) {
+                String texto = (i + 1) + ". " + j.getNombre() + " - " + j.getPuntaje();
+                JLabel jugadorLabel = new JLabel(texto);
+                jugadorLabel.setForeground(Color.WHITE);
+                jugadorLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+                jugadorLabel.setFont(fuenteEstandar);
+                panel.add(jugadorLabel);
+                }
+            }
+        }
+    }
+
 }
+
+

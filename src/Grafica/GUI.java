@@ -154,6 +154,24 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	}
 
 	@Override
+	public void mostrarPantallaRanking() {
+		ventana.setContentPane(panelRanking);
+		refrescar();
+	}
+
+	@Override
+	public void mostrarPantallaElegirDominio() {
+		ventana.setContentPane(panelElegirDominio);
+		refrescar();
+	}
+
+	@Override
+	public void mostrarPantallaElegirModoJuego() {
+		ventana.setContentPane(panelElegirModoJuego);
+		refrescar();
+	}
+	
+	@Override
 	public Observer registrarEntidad(EntidadLogica e) {
 		Observer observerEntidad=panelNivel.incorporarEntidad(e);
 		refrescar();
@@ -191,23 +209,6 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 		return false;
 	}
 
-	@Override
-	public void mostrarPantallaRanking() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'mostrarPantallaRanking'");
-	}
-
-	@Override
-	public void mostrarPantallaElegirDominio() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'mostrarPantallaElegirDominio'");
-	}
-
-	@Override
-	public void mostrarPantallaElegirModoJuego() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'mostrarPantallaElegirModoJuego'");
-	}
 
 	@Override
 	public void accionarInicioJuego() {
@@ -246,6 +247,7 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 
 	@Override
 	public void accionarPantallaRanking() {
+		panelRanking.refrescarRankingsEnPantalla();
 		ventana.setContentPane(panelRanking);
 		refrescar();
 		
