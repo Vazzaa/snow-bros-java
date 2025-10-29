@@ -67,4 +67,10 @@ public class Calabaza extends Enemigo implements EstadoEnemigo{
         
     }
 
+    @Override
+    public void cambiarEstado() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'cambiarEstado'");
+    }
+
 }

@@ -9,6 +9,7 @@ import Fabricas.FabricaEntidades;
 import Fabricas.FabricaSkin;
 import Parser.CreadorDeNivel;
 import Grafica.*;
+import Hilos.HiloEntidades;
 import Hilos.HiloJugador;
 
 public class ModoDeJuego implements ControladorJuego {
@@ -80,6 +81,9 @@ public class ModoDeJuego implements ControladorJuego {
 		controlaGrafica.mostrarPantallaNivel();
 		HiloJugador hiloJugador = new HiloJugador(nivelActual);
 		hiloJugador.start();
+		HiloEntidades hiloEntidades = new HiloEntidades(nivelActual);
+		hiloEntidades.start();
+
 	}
 
 	protected void registrarObservers() {

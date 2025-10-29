@@ -66,4 +66,10 @@ public class Kamakichi extends Enemigo {
     public ProyectilBomba crearBomba(){
         return null;
     }
+
+    @Override
+    public void cambiarEstado() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'cambiarEstado'");
+    }
 }

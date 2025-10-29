@@ -91,10 +91,6 @@ public class Nivel {
     public void moverSnowBro(){
     	snowBro.moverse();
     }
-
-    public void moverEntidad(Movible e){
-        
-    }
     
     public void verificarColisiones() {
         try {
@@ -125,4 +121,17 @@ public class Nivel {
         misPowerUps.clear();
         misProyectiles.clear();
     }
+    public void moverEntidad(Movible e){
+        if (e != null) {
+            e.moverse();
+        }
+    }
+
+    public void moverEnemigos(){
+        if (misEnemigos == null) return;
+        for (Enemigo enemigo : misEnemigos) {
+            if (enemigo != null) enemigo.moverse();
+        }
+    }
+// ...existing code...
 }
