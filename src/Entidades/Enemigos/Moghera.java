@@ -70,4 +70,10 @@ public class Moghera extends Enemigo{
     public void morir(){
         
     }
+
+    @Override
+    public void cambiarEstado() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'cambiarEstado'");
+    }
 }

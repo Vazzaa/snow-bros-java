@@ -68,4 +68,10 @@ public class RanaDeFuego extends Enemigo implements EstadoEnemigo {
         return misAspectos;
     }
 
+    @Override
+    public void cambiarEstado() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'cambiarEstado'");
+    }
+
 }

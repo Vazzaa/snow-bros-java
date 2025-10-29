@@ -2,6 +2,9 @@ package Entidades.Enemigos;
 
 import Entidades.PowerUp.PowerUp;
 import Entidades.SnowBro.SnowBro;
+import EstadoMovimiento.EstadoMovimientoEnemigo;
+import EstadoMovimiento.EnemigoCaminandoDerecha;
+import EstadoMovimiento.EnemigoCaminandoIzquierda;
 import EstadoMovimiento.EstadoEnemigo;
 import EstadoMovimiento.Movible;
 import Fabricas.Skin;
@@ -10,9 +13,11 @@ import Visitors.Colisionable;
 import Visitors.Colisionador;
 
 public class DemonioRojo extends Enemigo implements EstadoEnemigo{
-
+    protected int movimientoActual;
+    private static final int VELOCIDAD = 5;
     public DemonioRojo(Skin skins, ModoDeJuego juego ,int posX, int posY){
         super(skins, juego, posX, posY, 3,300);
+        movimientoActual = 1;
     }
 
     @Override
@@ -26,7 +31,6 @@ public class DemonioRojo extends Enemigo implements EstadoEnemigo{
         // TODO Auto-generated method stub
         
     }
-
     @Override
     public void chocar(Colisionable c) {
         // TODO Auto-generated method stub
@@ -45,12 +49,8 @@ public class DemonioRojo extends Enemigo implements EstadoEnemigo{
 
     @Override
     public void moverse() {
-        int numerorandom = (int) (Math.random() * 1);
-        if(numerorandom == 0){
-            moverseDerecha();
-        } else {
-            moverseIzquierda();
-        }
+        cambiarEstado();
+        estadoMovimiento.moverse(this, VELOCIDAD);
     }
 
     @Override
@@ -70,17 +70,24 @@ public class DemonioRojo extends Enemigo implements EstadoEnemigo{
         return misAspectos;
     }
 
-    private void moverseDerecha(){
-        
-    }
-
-    private void moverseIzquierda(){
-
-    }
-
     public PowerUp morir() {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public void cambiarEstado() {
+        long tiempoActual = System.currentTimeMillis();
+        if (tiempoActual - tiempoUltimoCambio >= INTERVALO_CAMBIO) {
+            if (movimientoActual == 1) {
+                estadoMovimiento = new EnemigoCaminandoIzquierda();
+                movimientoActual = 2;
+            } else {
+                estadoMovimiento = new EnemigoCaminandoDerecha();
+                movimientoActual = 1;
+            }
+            tiempoUltimoCambio = tiempoActual;
+        }
     }
 
 }
