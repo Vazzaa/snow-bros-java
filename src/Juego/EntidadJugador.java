@@ -1,6 +1,7 @@
 package Juego;
 
 import Entidades.Jugador.Jugador;
+import Grafica.ObserverJugador;
 
 public interface EntidadJugador extends EntidadLogica {
 	

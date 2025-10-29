@@ -117,4 +117,12 @@ public class Nivel {
             e.printStackTrace();
         }
     }
+
+    public void reiniciarnivel(){
+        snowBro=null;
+        misEstructuras.clear();
+        misEnemigos.clear();
+        misPowerUps.clear();
+        misProyectiles.clear();
+    }
 }

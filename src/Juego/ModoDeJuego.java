@@ -145,4 +145,18 @@ public class ModoDeJuego implements ControladorJuego {
 		throw new UnsupportedOperationException("Unimplemented method 'getNivelActual'");
 	}
 
+	public void reiniciarNivel() {
+		controlaGrafica.sacarJugador(nivelActual.getSnowBro());
+		for(Estructura es : nivelActual.getMisEstructuras()){
+			controlaGrafica.sacarEntidad(es);
+		}
+		for(Enemigo en : nivelActual.getMisEnemigos()){
+			controlaGrafica.sacarEntidad(en);
+		}
+		for(PowerUp pu : nivelActual.getMisPowerUps()){
+			controlaGrafica.sacarEntidad(pu);
+		}
+		nivelActual.reiniciarnivel();
+	}
+
 }

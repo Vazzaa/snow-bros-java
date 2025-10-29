@@ -179,7 +179,12 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 		System.out.println("se elimina observer");
 		refrescar();
 	}
-
+	public void sacarJugador(EntidadJugador e) {
+		panelNivel.removerEntidad(e.getObserverGrafico());
+		System.out.println("se elimina observer jugador");
+		refrescar();
+	}
+	
 	@Override
 	public boolean verificarColisiones(Entidad e) {
 		// TODO Auto-generated method stub
@@ -246,11 +251,6 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 		
 	}
 
-	@Override
-	public void sacarJugador(EntidadJugador e) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'sacarJugador'");
-	}
 
 	protected void refrescar(){
 		ventana.revalidate();

@@ -12,6 +12,7 @@ import Fabricas.FabricaEntidades;
 import Fabricas.Skin;
 import Grafica.ConstantesTeclado;
 import Grafica.ObserverGrafico;
+import Grafica.ObserverJugador;
 import Visitors.Colisionable;
 import Visitors.Colisionador;
 import Juego.Entidad;
@@ -112,7 +113,9 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     public void morir() {
        System.out.println("SnowBro ha muerto");
        if (miJuego != null && miJuego.getControladoraGrafica() != null) {
-        miJuego.getControladoraGrafica().mostrarPantallaGameOver();
+           //miJuego.getControladoraGrafica().getPanelRanking().agregarPuntajeFinal(jugador.getNombre(), puntaje);
+           miJuego.getControladoraGrafica().mostrarPantallaGameOver();
+           miJuego.reiniciarNivel();
        }
     }
     
@@ -210,5 +213,6 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     public void detenerMovimiento() {
         estadoMovimiento.detenerMovimientoHorizontal();
     }
+
     
 }
