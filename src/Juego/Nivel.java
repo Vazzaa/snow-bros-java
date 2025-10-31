@@ -114,7 +114,7 @@ public class Nivel {
         }
     }
 
-    public void reiniciarnivel(){
+    public void reiniciarNivel(){
         snowBro=null;
         misEstructuras.clear();
         misEnemigos.clear();

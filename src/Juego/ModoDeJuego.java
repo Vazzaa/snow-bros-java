@@ -2,6 +2,7 @@ package Juego;
 
 import Entidades.Enemigos.Enemigo;
 import Entidades.Estructuras.Estructura;
+import Entidades.Jugador.Jugador;
 import Entidades.PowerUp.PowerUp;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.FabricaDominio1;
@@ -77,6 +78,7 @@ public class ModoDeJuego implements ControladorJuego {
 		creador.setFrabricaEntidades(miFabricaEntidades);
 		nivelActual = creador.leerArchivo("nivel_simple.json");
 		nivelActual.getSnowBro().setNivel(nivelActual);
+		nivelActual.getSnowBro().setJugador(new Jugador(nombreJugador, 0));
 		registrarObservers();
 		controlaGrafica.mostrarPantallaNivel();
 		HiloJugador hiloJugador = new HiloJugador(nivelActual);
@@ -160,7 +162,7 @@ public class ModoDeJuego implements ControladorJuego {
 		for(PowerUp pu : nivelActual.getMisPowerUps()){
 			controlaGrafica.sacarEntidad(pu);
 		}
-		nivelActual.reiniciarnivel();
+		nivelActual.reiniciarNivel();
 	}
 
 }

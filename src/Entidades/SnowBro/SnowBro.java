@@ -111,12 +111,12 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
 	}
     
     public void morir() {
-       System.out.println("SnowBro ha muerto");
-       if (miJuego != null && miJuego.getControladoraGrafica() != null) {
-           //miJuego.getControladoraGrafica().getPanelRanking().agregarPuntajeFinal(jugador.getNombre(), puntaje);
-           miJuego.getControladoraGrafica().mostrarPantallaGameOver();
-           miJuego.reiniciarNivel();
-       }
+        jugador.sumarPuntaje(puntaje);
+        System.out.println("SnowBro ha muerto");
+        if (miJuego != null && miJuego.getControladoraGrafica() != null) {
+            miJuego.getControladoraGrafica().mostrarPantallaGameOver();
+            miJuego.reiniciarNivel();
+        }
     }
     
     public void disminuirVida() {

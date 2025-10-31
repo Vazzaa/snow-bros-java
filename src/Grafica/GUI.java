@@ -200,6 +200,7 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	public void sacarJugador(EntidadJugador e) {
 		panelNivel.removerEntidad(e.getObserverGrafico());
 		System.out.println("se elimina observer jugador");
+		panelRanking.agregarJugadoresRanking(1, e.getJugador());
 		refrescar();
 	}
 	
