@@ -50,7 +50,7 @@ public class PanelPantallaRanking extends PanelVista{
     
     protected void agregarImagenFondo(){
         JLabel imagenFondo = new JLabel();
-        ImageIcon iconoImagen = new ImageIcon(this.getClass().getResource("/Imagenes/PantallaRanking.png"));
+        ImageIcon iconoImagen = new ImageIcon(this.getClass().getResource("/Imagenes/PantallaRankins.png"));
         Image imagenEscalada = iconoImagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
         Icon iconoImagenEscalada = new ImageIcon(imagenEscalada);
         imagenFondo.setIcon(iconoImagenEscalada);

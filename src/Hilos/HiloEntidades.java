@@ -24,7 +24,7 @@ public class HiloEntidades  extends Thread {
         juego.moverEntidad(estrucmovible);
     } */
         try {
-            Thread.sleep(1000);
+            Thread.sleep(10);
             juego.moverEnemigos();
 
         } catch (InterruptedException e) {
@@ -32,5 +32,6 @@ public class HiloEntidades  extends Thread {
             }
         }
     }
+    
 
 }

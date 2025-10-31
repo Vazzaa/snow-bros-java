@@ -133,5 +133,4 @@ public class Nivel {
             if (enemigo != null) enemigo.moverse();
         }
     }
-// ...existing code...
 }

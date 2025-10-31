@@ -13,11 +13,10 @@ import Visitors.Colisionable;
 import Visitors.Colisionador;
 
 public class DemonioRojo extends Enemigo implements EstadoEnemigo{
-    protected int movimientoActual;
-    private static final int VELOCIDAD = 5;
+    protected double movimientoActual;
+    private static final int VELOCIDAD = 1;
     public DemonioRojo(Skin skins, ModoDeJuego juego ,int posX, int posY){
         super(skins, juego, posX, posY, 3,300);
-        movimientoActual = 1;
     }
 
     @Override
@@ -77,14 +76,13 @@ public class DemonioRojo extends Enemigo implements EstadoEnemigo{
 
     @Override
     public void cambiarEstado() {
+        movimientoActual = Math.random()*2;
         long tiempoActual = System.currentTimeMillis();
         if (tiempoActual - tiempoUltimoCambio >= INTERVALO_CAMBIO) {
-            if (movimientoActual == 1) {
+            if (movimientoActual <= 1) {
                 estadoMovimiento = new EnemigoCaminandoIzquierda();
-                movimientoActual = 2;
             } else {
                 estadoMovimiento = new EnemigoCaminandoDerecha();
-                movimientoActual = 1;
             }
             tiempoUltimoCambio = tiempoActual;
         }
