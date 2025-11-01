@@ -88,4 +88,10 @@ public class DemonioRojo extends Enemigo implements EstadoEnemigo{
         }
     }
 
+    public void cambiarEstadoInmediato() {
+        if (estadoMovimiento != null) {
+            estadoMovimiento = estadoMovimiento.getEstadoOpuesto();
+            tiempoUltimoCambio = System.currentTimeMillis();
+        }
+    }
 }

@@ -67,4 +67,11 @@ public class Fantasma extends Enemigo implements EstadoEnemigo{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'cambiarEstado'");
     }
+
+    public void cambiarEstadoInmediato() {
+        if (estadoMovimiento != null) {
+            estadoMovimiento = estadoMovimiento.getEstadoOpuesto();
+            tiempoUltimoCambio = System.currentTimeMillis();
+        }
+    }
 }

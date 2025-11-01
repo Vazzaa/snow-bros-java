@@ -6,8 +6,13 @@ import EstadoMovimiento.EstadoEnemigo;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
 import Visitors.Colisionable;
+import EstadoMovimiento.EnemigoCaminandoIzquierda;
+import EstadoMovimiento.EnemigoCaminandoDerecha;
 
 public class TrollAmarillo extends Enemigo implements EstadoEnemigo{
+    
+    private static final int VELOCIDAD = 3;
+    private double movimientoActual;
 
     public TrollAmarillo(Skin skins, ModoDeJuego juego,int posX, int posY){
         super(skins, juego,posX, posY, 3,300);
@@ -44,8 +49,8 @@ public class TrollAmarillo extends Enemigo implements EstadoEnemigo{
 
     @Override
     public void moverse() {
-        // TODO Auto-generated method stub
-        
+        cambiarEstado();
+        estadoMovimiento.moverse(this, VELOCIDAD);
     }
 
     @Override
@@ -67,8 +72,22 @@ public class TrollAmarillo extends Enemigo implements EstadoEnemigo{
 
     @Override
     public void cambiarEstado() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cambiarEstado'");
+        movimientoActual = Math.random()*2;
+        long tiempoActual = System.currentTimeMillis();
+        if (tiempoActual - tiempoUltimoCambio >= INTERVALO_CAMBIO) {
+            if (movimientoActual <= 1) {
+                estadoMovimiento = new EnemigoCaminandoIzquierda();
+            } else {
+                estadoMovimiento = new EnemigoCaminandoDerecha();
+            }
+            tiempoUltimoCambio = tiempoActual;
+        }
     }
-    
+    public void cambiarEstadoInmediato() {
+        if (estadoMovimiento != null) {
+            estadoMovimiento = estadoMovimiento.getEstadoOpuesto();
+            tiempoUltimoCambio = System.currentTimeMillis();
+        }
+    }
+
 }

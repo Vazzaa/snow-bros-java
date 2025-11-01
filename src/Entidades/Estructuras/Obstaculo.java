@@ -19,4 +19,7 @@ abstract class Obstaculo extends Estructura implements Colisionable{
     public void aceptarColision(Colisionador c){
         c.colisionar(this);
     }
+    public boolean bloquearMovimientoHorizontal() {
+        return true;
+    }
 }

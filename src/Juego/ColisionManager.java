@@ -48,23 +48,6 @@ public class ColisionManager {
         return false;
 }
 
-    public Estructura colisionaConPlataformaArriba(SnowBro s, List<Estructura> estructuras){
-        Hitbox hitboxSnowBro = s.miHitbox;
-        
-        for (Estructura estructura : estructuras) {
-            if (colisionaAABB(hitboxSnowBro, estructura.miHitbox)) {
-                int cabezaSnowBro = hitboxSnowBro.getPosY() + hitboxSnowBro.getAlto();
-                int sueloEstructura = estructura.miHitbox.getPosY();
-                if (cabezaSnowBro >= sueloEstructura && 
-                    cabezaSnowBro <= sueloEstructura + TOLERANCIA_SUELO) {
-                    return estructura;
-                }
-            }
-        }
-
-        return null;
-    }
-
     public Estructura getPlataformaDebajo(SnowBro s, List<Estructura> estructuras){
         Hitbox hitboxSnowBro = s.miHitbox;
         Estructura plataformaMasCercana = null;
@@ -94,4 +77,5 @@ public class ColisionManager {
 
         return plataformaMasCercana;
     }
+
 }

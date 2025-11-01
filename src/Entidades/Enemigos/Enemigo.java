@@ -17,13 +17,13 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible {
     protected EstadoEnemigo estadoEnemigo;
     protected EstadoMovimientoEnemigo estadoMovimiento;
     protected long tiempoUltimoCambio;
-    protected static final long INTERVALO_CAMBIO = 3000;
+    protected static final long INTERVALO_CAMBIO = 2800;
     
     
     public Enemigo(Skin skins, ModoDeJuego juego , int posX, int posY, int v, int p){
         super(skins,juego,posX,posY);
-        int vida = v;
-        int puntaje = p;
+        vida = v;
+        puntaje = p;
     }
 
     public void setVida(int v){
@@ -63,5 +63,7 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible {
     public void aceptarColision(Colisionador c) {
         c.colisionar(this);
     }
+
+    public abstract void cambiarEstadoInmediato();
 
 } 

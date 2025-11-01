@@ -15,23 +15,17 @@ public class HiloEntidades  extends Thread {
 
     @Override
     public void run() {
-     while (true) {
+    while (true) {
         for(Enemigo enemigo : juego.getMisEnemigos()) {
             juego.moverEntidad(enemigo);
         }
-    /*
-    for(Movible estrucmovible: juego.getMisEstructuras()) {
-        juego.moverEntidad(estrucmovible);
-    } */
         try {
             Thread.sleep(10);
             juego.moverEnemigos();
-
         } catch (InterruptedException e) {
             e.printStackTrace();
-            }
+            break;
         }
     }
-    
-
+    }
 }

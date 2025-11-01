@@ -112,8 +112,7 @@ public class FabricaEntidades {
     }
 
     public ProyectilFuego getProyectilFuego(int x, int y) {
-        return null;
-        //return new ProyectilFuego(this.fabricaSkin.crearSkinProyectilFuego(), x, y);
+        return new ProyectilFuego(this.fabricaSkin.crearSkinProyectilFuego(), x, y, 5, 1, 500);
     }
 
     public ProyectilNieve getProyectilNieve(int x, int y) {

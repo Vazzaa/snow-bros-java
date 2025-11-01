@@ -33,4 +33,8 @@ public class Plataforma extends Estructura{
     public void aceptarColision(Colisionador c){
         c.colisionar(this);
     }
+
+    public boolean bloquearMovimientoHorizontal() {
+        return false;
+    }
 }

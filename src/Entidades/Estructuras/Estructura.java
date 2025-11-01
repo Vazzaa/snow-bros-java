@@ -22,4 +22,6 @@ public abstract class Estructura extends Entidad implements Colisionable{
     public void aceptarColision(Colisionador c){
         c.colisionar(this);
     }
+
+    public abstract boolean bloquearMovimientoHorizontal();
 }

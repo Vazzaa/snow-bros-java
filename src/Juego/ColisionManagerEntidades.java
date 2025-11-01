@@ -48,22 +48,6 @@ public class ColisionManagerEntidades {
         return false;
 }
 
-    public Estructura colisionaConPlataformaArriba(Entidad entidad, List<Estructura> estructuras){
-        Hitbox hitboxEntidad = entidad.miHitbox;
-        
-        for (Estructura estructura : estructuras) {
-            if (colisionaAABB(hitboxEntidad, estructura.miHitbox)) {
-                int cabezaEntidad = hitboxEntidad.getPosY() + hitboxEntidad.getAlto();
-                int sueloEstructura = estructura.miHitbox.getPosY();
-                if (cabezaEntidad >= sueloEstructura && 
-                    cabezaEntidad <= sueloEstructura + TOLERANCIA_SUELO) {
-                    return estructura;
-                }
-            }
-        }
-
-        return null;
-    }
 
     public Estructura getPlataformaDebajo(Entidad s, List<Estructura> estructuras){
         Hitbox hitboxEntidad = s.miHitbox;

@@ -73,4 +73,11 @@ public class Calabaza extends Enemigo implements EstadoEnemigo{
         throw new UnsupportedOperationException("Unimplemented method 'cambiarEstado'");
     }
 
+    public void cambiarEstadoInmediato() {
+        if (estadoMovimiento != null) {
+            estadoMovimiento = estadoMovimiento.getEstadoOpuesto();
+            tiempoUltimoCambio = System.currentTimeMillis();
+        }
+    }
+
 }

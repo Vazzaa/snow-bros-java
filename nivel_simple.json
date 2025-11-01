@@ -359,14 +359,15 @@
 
     ],
     "enemigos": [
-        {"tipo": "demonioRojo", "x": 480, "y": 7950},
+        {"tipo": "demonioRojo", "x": 464, "y": 7950},
 
         {"tipo": "demonioRojo", "x": 192, "y": 7890},
         {"tipo": "demonioRojo", "x": 608, "y": 7890},
 
-        {"tipo": "demonioRojo", "x": 304, "y": 7950},
-        {"tipo": "demonioRojo", "x": 480, "y": 7950}
-
+        {"tipo": "RanaDeFuego", "x": 304, "y": 7950},
+        {"tipo": "Calabaza", "x": 480, "y": 7950},
+        {"tipo": "TrollAmarillo", "x": 448, "y": 7950}
+        
     ],
     "powerups": [
         {"tipo": "comida" , "x":150, "y":7650},

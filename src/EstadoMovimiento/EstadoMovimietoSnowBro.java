@@ -112,7 +112,7 @@ public class EstadoMovimietoSnowBro {
             int nuevaX = snowBro.getPosX() + velocidadHorizontal;
             boolean colisionaria = false;
             for (Estructura estructura : snowBro.getNivel().getMisEstructuras()) {
-                if (estructura.getClass().getSuperclass().getName().equals("Entidades.Estructuras.Obstaculo")) {
+                if (estructura.bloquearMovimientoHorizontal()){
                     Hitbox hitboxFutura = new Hitbox(snowBro.getHitbox().getAncho(), snowBro.getHitbox().getAlto(), nuevaX, snowBro.getPosY());
                     if (controladorColisiones.colisionaAABB(hitboxFutura, estructura.getHitbox())) {
                         colisionaria = true;
@@ -129,8 +129,7 @@ public class EstadoMovimietoSnowBro {
             snowBro.setPosX(snowBro.getPosX() + velocidadHorizontal);
         }
         
-        snowBro.setPosY(snowBro.getPosY() + velocidadVertical);
-
+       snowBro.setPosY(snowBro.getPosY() + velocidadVertical);
         if (velocidadHorizontal != 0) {
             System.out.println("ACTUALIZAR - PosX: " + posXAnterior + " -> " + snowBro.getPosX() + " (velocidad: " + velocidadHorizontal + ")");
         }
@@ -141,17 +140,6 @@ public class EstadoMovimietoSnowBro {
             System.out.println("TOCO EL SUELO - PosY: " + snowBro.getPosY());
         }
     
-        if (velocidadVertical > 0 && snowBro.getNivel() != null && snowBro.getNivel().getMisEstructuras() != null) {
-            Estructura plataformaArriba = controladorColisiones.colisionaConPlataformaArriba(snowBro, snowBro.getNivel().getMisEstructuras());
-            if (plataformaArriba != null) {
-                snowBro.setPosY(plataformaArriba.getPosY());
-                velocidadVertical = 0;
-                enElSuelo = true;
-                System.out.println("-------------------------TOQUE LA PLATAFORMA DE ARRIBA----------------------------" );
-                System.out.println("TOCO LA PLATAFORMA - PosY: " + snowBro.getPosY());
-            }
-        }
-
         if (enElSuelo() && !ConstantesTeclado.estaPresionada(ConstantesTeclado.SALTAR)) {
             if (!enElSuelo()) {
                 enElSuelo = false;

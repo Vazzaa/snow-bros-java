@@ -72,4 +72,11 @@ public class Kamakichi extends Enemigo {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'cambiarEstado'");
     }
+
+    public void cambiarEstadoInmediato() {
+        if (estadoMovimiento != null) {
+            estadoMovimiento = estadoMovimiento.getEstadoOpuesto();
+            tiempoUltimoCambio = System.currentTimeMillis();
+        }
+    }
 }
