@@ -43,7 +43,7 @@ public abstract class PowerUp extends Entidad implements Colisionable {
     
     @Override
     public void aceptarColision(Colisionador c) {
-        c.colisionar(this);
+        c.colisionarPowerUp(this);
     }
 
     public boolean esColisionable() {
