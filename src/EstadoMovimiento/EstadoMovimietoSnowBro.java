@@ -45,10 +45,10 @@ public class EstadoMovimietoSnowBro {
     }
     
     public void mover(boolean derecha, boolean izquierda, boolean salto) {
-        if (derecha || izquierda || salto) {
-            System.out.println("EstadoMovimiento.mover() - Derecha: " + derecha + ", Izquierda: " + izquierda + ", Salto: " + salto);
-            System.out.println("Velocidad horizontal antes: " + velocidadHorizontal);
-        }
+        // if (derecha || izquierda || salto) {
+        //     System.out.println("EstadoMovimiento.mover() - Derecha: " + derecha + ", Izquierda: " + izquierda + ", Salto: " + salto);
+        //     System.out.println("Velocidad horizontal antes: " + velocidadHorizontal);
+        // }
         if (derecha) {
     		moverDerecha();
             frameAnimacion++;
@@ -82,7 +82,7 @@ public class EstadoMovimietoSnowBro {
     	if (enElSuelo()) {
     		this.velocidadVertical = fuerzaSalto;
             enElSuelo = false;
-            System.out.println("SALTANDO - Velocidad vertical: " + velocidadVertical);
+            // System.out.println("SALTANDO - Velocidad vertical: " + velocidadVertical);
     	}
     }
     
@@ -131,14 +131,14 @@ public class EstadoMovimietoSnowBro {
         
         snowBro.setPosY(snowBro.getPosY() + velocidadVertical);
 
-        if (velocidadHorizontal != 0) {
-            System.out.println("ACTUALIZAR - PosX: " + posXAnterior + " -> " + snowBro.getPosX() + " (velocidad: " + velocidadHorizontal + ")");
-        }
+        // if (velocidadHorizontal != 0) {
+        //     System.out.println("ACTUALIZAR - PosX: " + posXAnterior + " -> " + snowBro.getPosX() + " (velocidad: " + velocidadHorizontal + ")");
+        // }
 
         if (enElSuelo()) {
             velocidadVertical = 0;
             enElSuelo = true;
-            System.out.println("TOCO EL SUELO - PosY: " + snowBro.getPosY());
+            // System.out.println("TOCO EL SUELO - PosY: " + snowBro.getPosY());
         }
     
         if (velocidadVertical > 0 && snowBro.getNivel() != null && snowBro.getNivel().getMisEstructuras() != null) {
@@ -147,20 +147,20 @@ public class EstadoMovimietoSnowBro {
                 snowBro.setPosY(plataformaArriba.getPosY());
                 velocidadVertical = 0;
                 enElSuelo = true;
-                System.out.println("-------------------------TOQUE LA PLATAFORMA DE ARRIBA----------------------------" );
-                System.out.println("TOCO LA PLATAFORMA - PosY: " + snowBro.getPosY());
+                // System.out.println("-------------------------TOQUE LA PLATAFORMA DE ARRIBA----------------------------" );
+                // System.out.println("TOCO LA PLATAFORMA - PosY: " + snowBro.getPosY());
             }
         }
 
         if (enElSuelo() && !ConstantesTeclado.estaPresionada(ConstantesTeclado.SALTAR)) {
             if (!enElSuelo()) {
                 enElSuelo = false;
-                System.out.println("CAYENDO DE PLATAFORMA");
+                // System.out.println("CAYENDO DE PLATAFORMA");
             }
         }
 
-        if (velocidadVertical != 0) {
-            System.out.println("SALTO - PosY: " + posYAnterior + " -> " + snowBro.getPosY() + " (velocidad: " + velocidadVertical + ", enElSuelo: " + enElSuelo + ")");
-        }
+        // if (velocidadVertical != 0) {
+        //     System.out.println("SALTO - PosY: " + posYAnterior + " -> " + snowBro.getPosY() + " (velocidad: " + velocidadVertical + ", enElSuelo: " + enElSuelo + ")");
+        // }
     }
 }

@@ -101,10 +101,10 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         boolean derecha = ConstantesTeclado.estaPresionada(ConstantesTeclado.DERECHA);
     	boolean izquierda = ConstantesTeclado.estaPresionada(ConstantesTeclado.IZQUIERDA);
     	boolean salto = ConstantesTeclado.estaPresionada(ConstantesTeclado.SALTAR);
-    	if (derecha || izquierda || salto) {
-            System.out.println("MOVIMIENTO DETECTADO - Derecha: " + derecha + ", Izquierda: " + izquierda + ", Salto: " + salto);
-            System.out.println("Posición actual X: " + getPosX() + ", Y: " + getPosY());
-        }
+    	// if (derecha || izquierda || salto) {
+        //     System.out.println("MOVIMIENTO DETECTADO - Derecha: " + derecha + ", Izquierda: " + izquierda + ", Salto: " + salto);
+        //     System.out.println("Posición actual X: " + getPosX() + ", Y: " + getPosY());
+        // }
         estadoMovimiento.mover(derecha, izquierda, salto);
         notificarObserver();
     }

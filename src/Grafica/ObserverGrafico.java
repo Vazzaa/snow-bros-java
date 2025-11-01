@@ -23,7 +23,7 @@ public class ObserverGrafico extends JLabel implements Observer {
 	
 	protected void actualizarImagen() {
 		String rutaImagen = entidadObservada.getSkin().getRutaImagenActual();
-		System.out.println("Intentando cargar imagen desde: " + rutaImagen);
+		// System.out.println("Intentando cargar imagen desde: " + rutaImagen);
     	java.net.URL url = getClass().getClassLoader().getResource(rutaImagen);
 		if (rutaImagen == null) {
 			System.err.println("Error: La ruta de la imagen es null para la entidad: " + entidadObservada.getClass().getSimpleName());
