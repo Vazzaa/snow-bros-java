@@ -129,18 +129,11 @@ public class EstadoMovimietoSnowBro {
             snowBro.setPosX(snowBro.getPosX() + velocidadHorizontal);
         }
         
-<<<<<<< HEAD
-       snowBro.setPosY(snowBro.getPosY() + velocidadVertical);
-        if (velocidadHorizontal != 0) {
-            System.out.println("ACTUALIZAR - PosX: " + posXAnterior + " -> " + snowBro.getPosX() + " (velocidad: " + velocidadHorizontal + ")");
-        }
-=======
         snowBro.setPosY(snowBro.getPosY() + velocidadVertical);
 
         // if (velocidadHorizontal != 0) {
         //     System.out.println("ACTUALIZAR - PosX: " + posXAnterior + " -> " + snowBro.getPosX() + " (velocidad: " + velocidadHorizontal + ")");
         // }
->>>>>>> 3ca937aa58d02592a79f6358572d1fb808522317
 
         if (enElSuelo()) {
             velocidadVertical = 0;
@@ -148,20 +141,6 @@ public class EstadoMovimietoSnowBro {
             // System.out.println("TOCO EL SUELO - PosY: " + snowBro.getPosY());
         }
     
-<<<<<<< HEAD
-=======
-        if (velocidadVertical > 0 && snowBro.getNivel() != null && snowBro.getNivel().getMisEstructuras() != null) {
-            Estructura plataformaArriba = controladorColisiones.colisionaConPlataformaArriba(snowBro, snowBro.getNivel().getMisEstructuras());
-            if (plataformaArriba != null) {
-                snowBro.setPosY(plataformaArriba.getPosY());
-                velocidadVertical = 0;
-                enElSuelo = true;
-                // System.out.println("-------------------------TOQUE LA PLATAFORMA DE ARRIBA----------------------------" );
-                // System.out.println("TOCO LA PLATAFORMA - PosY: " + snowBro.getPosY());
-            }
-        }
-
->>>>>>> 3ca937aa58d02592a79f6358572d1fb808522317
         if (enElSuelo() && !ConstantesTeclado.estaPresionada(ConstantesTeclado.SALTAR)) {
             if (!enElSuelo()) {
                 enElSuelo = false;

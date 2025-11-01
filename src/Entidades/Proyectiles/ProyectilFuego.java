@@ -9,8 +9,8 @@ import Juego.ModoDeJuego;
 
 public class ProyectilFuego extends Proyectil{
 
-    public ProyectilFuego (Skin s, ModoDeJuego juego, int x, int y, int vel, int dañ, int alc) {
-        super(s, juego, x, y, vel, dañ, alc);
+    public ProyectilFuego (Skin s, ModoDeJuego juego, int x, int y, int vel, int dañ, int alc, int dir) {
+        super(s, juego, x, y, vel, dañ, alc, dir);
     }
 
     public void afectar(SnowBro s) {
@@ -32,6 +32,11 @@ public class ProyectilFuego extends Proyectil{
     @Override
     public Skin getSkin() {
         return misAspectos;
+    }
+
+    @Override
+    public int getAlcance() {
+        return alcance;
     }
 
 }

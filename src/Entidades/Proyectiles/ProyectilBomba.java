@@ -1,6 +1,7 @@
 package Entidades.Proyectiles;
 
 import Entidades.Enemigos.Enemigo;
+import Entidades.Estructuras.Estructura;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
 import Juego.Hitbox;
@@ -8,14 +9,14 @@ import Juego.ModoDeJuego;
 
 public class ProyectilBomba extends Proyectil{
     
-    protected float Alcance;
-    protected int Daño;
-    protected int Velocidad;
-    protected Skin Aspecto;
+    protected int alcance;
+    protected int daño;
+    protected int velocidad;
+    protected Skin aspecto;
     protected Hitbox hb;
 
-    public ProyectilBomba(Skin s,ModoDeJuego juego, int x, int y, int vel, int dañ, int alc) {
-        super(s, juego, x, y, vel, dañ, alc);
+    public ProyectilBomba(Skin s, ModoDeJuego juego, int x, int y, int vel, int dañ, int alc, int dir) {
+        super(s, juego, x, y, vel, dañ, alc, dir);
     }
 
     public void Explotar() {
@@ -30,6 +31,10 @@ public class ProyectilBomba extends Proyectil{
 
     }
 
+    public void afectar(Estructura es) {
+
+    }
+
     public void setSkin(Skin s) {
         
     }
@@ -37,5 +42,10 @@ public class ProyectilBomba extends Proyectil{
     @Override
     public Skin getSkin() {
         return misAspectos;
+    }
+
+    @Override
+    public int getAlcance() {
+        return alcance;
     }
 }

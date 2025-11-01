@@ -111,11 +111,11 @@ public class FabricaEntidades {
         //return new ProyetilBomba(this.fabricaSkin.crearSkinProyectilBomba(), x, y);
     }
 
-    public ProyectilFuego getProyectilFuego(int x, int y) {
-        return new ProyectilFuego(this.fabricaSkin.crearSkinProyectilFuego(), x, y, 5, 1, 500);
+    public ProyectilFuego getProyectilFuego(int x, int y, int direccion) {
+        return new ProyectilFuego(this.fabricaSkin.crearSkinProyectilFuego(), miJuego, x, y, 5, 1, 500, direccion);
     }
 
-    public ProyectilNieve getProyectilNieve(int x, int y,int direccion) {
+    public ProyectilNieve getProyectilNieve(int x, int y, int direccion) {
         return new ProyectilNieve(this.fabricaSkin.crearSkinProyectilNieve(), miJuego, x, y, direccion);
     }
 

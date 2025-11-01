@@ -29,4 +29,9 @@ public class BolaDeNieve extends Proyectil{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'afectar'");
     }
+
+    @Override
+    public int getAlcance() {
+        return alcance;
+    }
 }
