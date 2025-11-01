@@ -96,17 +96,17 @@ public class Nivel {
         try {
             if (misEnemigos != null) {
                 for (Enemigo enemigo : misEnemigos) {
-                    snowBro.colisionar(enemigo);
+                    snowBro.colisionarEnemigo(enemigo);
                 }
             }
             if (misPowerUps != null) {
                 for (PowerUp powerUp : misPowerUps) {
-                    snowBro.colisionar(powerUp);
+                    snowBro.colisionarPowerUp(powerUp);
                 }
             }
             if (misEstructuras != null) {
                 for (Estructura estructura : misEstructuras) {
-                    snowBro.colisionar(estructura);
+                    snowBro.colisionarEstructura(estructura);
                 }
             }
         } catch (Exception e) {
