@@ -133,4 +133,11 @@ public class Nivel {
             if (enemigo != null) enemigo.moverse();
         }
     }
+
+    public void moverProyectiles() {
+        if (misProyectiles == null) return;
+        for (Proyectil proyectil : misProyectiles) {
+            if (proyectil != null) proyectil.mover();
+        }
+    }
 }

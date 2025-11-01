@@ -8,8 +8,8 @@ import Juego.ModoDeJuego;
 
 public class BolaDeNieve extends Proyectil{
 
-    public BolaDeNieve(Skin miSkins, ModoDeJuego juego, int x, int y, int vel, int dañ, int alc){
-        super(miSkins, juego, x, y, vel, dañ, alc);
+    public BolaDeNieve(Skin miSkins, ModoDeJuego juego, int x, int y, int vel, int dañ, int alc, int dir){
+        super(miSkins, juego, x, y, vel, dañ, alc, dir);
     }
 
     @Override

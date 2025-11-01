@@ -121,7 +121,7 @@ public class FabricaEntidades {
         //return new ProyectilNieve(this.fabricaSkin.crearSkinProyectilNieve(), x, y);
     }
 
-    public BolaDeNieve getBolaDeNieve(int x, int y) {
-        return new BolaDeNieve(this.fabricaSkin.crearSkinBolaDeNieve(), miJuego, x, y, 3, 1, 1000);
+    public BolaDeNieve getBolaDeNieve(int x, int y, int direccion) {
+        return new BolaDeNieve(this.fabricaSkin.crearSkinBolaDeNieve(), miJuego, x, y, 5, 1, 1000, direccion);
     }
 }
