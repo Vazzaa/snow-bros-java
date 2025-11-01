@@ -42,5 +42,5 @@ public abstract class Proyectil extends Entidad{
 
     public abstract void afectar(Estructura estructura);
 
-
+    public abstract int getAlcance();
 }

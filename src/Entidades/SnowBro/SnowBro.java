@@ -5,8 +5,11 @@ import Entidades.Estructuras.Estructura;
 import Entidades.Estructuras.Obstaculo;
 import Entidades.PowerUp.PowerUp;
 import Entidades.Proyectiles.BolaDeNieve;
+import Entidades.Proyectiles.ProyectilNieve;
 
 import java.util.List;
+
+import javax.swing.Timer;
 
 import Entidades.Enemigos.Enemigo;
 import EstadoMovimiento.EstadoMovimietoSnowBro;
@@ -92,9 +95,14 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     }
     
     public void disparar() {
-        BolaDeNieve disparo = crearNieve.getBolaDeNieve(miHitbox.getPosX(), miHitbox.getPosY(), estadoMovimiento.direccion);
+        ProyectilNieve disparo = crearNieve.getProyectilNieve(miHitbox.getPosX(), miHitbox.getPosY(), estadoMovimiento.direccion);
         nivel.agregarProyectiles(disparo);
         miJuego.registrarObserver(disparo);
+         Timer timer = new Timer(disparo.getAlcance(), e -> {
+        miJuego.getControladoraGrafica().sacarEntidad(disparo); 
+        });
+        timer.setRepeats(false);
+        timer.start();
     }
     
     public void moverse() {
