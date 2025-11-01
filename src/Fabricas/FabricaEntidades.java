@@ -26,7 +26,7 @@ public class FabricaEntidades {
     }
 
     public SnowBro getSnowBro(int x, int y) {
-        SnowBro s = new SnowBro(this.fabricaSkin.crearSkinSnowBro(), miJuego, x, y, null, null);
+        SnowBro s = new SnowBro(this.fabricaSkin.crearSkinSnowBro(), miJuego, x, y, null, null, this);
         return s;
     };
 
@@ -115,13 +115,11 @@ public class FabricaEntidades {
         return new ProyectilFuego(this.fabricaSkin.crearSkinProyectilFuego(), x, y, 5, 1, 500);
     }
 
-    public ProyectilNieve getProyectilNieve(int x, int y) {
-        return null;
-        //return new ProyectilNieve(this.fabricaSkin.crearSkinProyectilNieve(), x, y);
+    public ProyectilNieve getProyectilNieve(int x, int y,int direccion) {
+        return new ProyectilNieve(this.fabricaSkin.crearSkinProyectilNieve(), miJuego, x, y, direccion);
     }
 
-    public BolaDeNieve getBolaDeNieve(int x, int y) {
-        return null;
-        //return new BolaDeNieve(this.fabricaSkin.crearSkinBolaDeNieve(), x, y);
+    public BolaDeNieve getBolaDeNieve(int x, int y, int direccion) {
+        return new BolaDeNieve(this.fabricaSkin.crearSkinBolaDeNieve(), miJuego, x, y, 5, 1, 1000, direccion);
     }
 }

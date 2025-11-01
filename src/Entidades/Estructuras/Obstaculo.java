@@ -7,7 +7,7 @@ import Juego.ModoDeJuego;
 import Visitors.Colisionable;
 import Visitors.Colisionador;
 
-abstract class Obstaculo extends Estructura implements Colisionable{
+public abstract class Obstaculo extends Estructura implements Colisionable{
 
     public Obstaculo(Skin s, ModoDeJuego juego,int x, int y) {
         super(s, juego, x, y);
@@ -17,7 +17,7 @@ abstract class Obstaculo extends Estructura implements Colisionable{
     public void afectar (Enemigo e){};
 
     public void aceptarColision(Colisionador c){
-        c.colisionar(this);
+        c.colisionarObstaculo(this);
     }
     public boolean bloquearMovimientoHorizontal() {
         return true;

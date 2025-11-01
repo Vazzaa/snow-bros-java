@@ -1,9 +1,15 @@
 package Visitors;
 
-import Juego.Entidad;
+import Entidades.PowerUp.PowerUp;
+import Entidades.Enemigos.Enemigo;
+import Entidades.Estructuras.Estructura;
+import Entidades.Estructuras.Obstaculo;
 
 public interface Colisionador {
 
-    public void colisionar(Entidad e);
+    public void colisionarPowerUp(PowerUp p);
+    public void colisionarEnemigo(Enemigo e);
+    public void colisionarEstructura(Estructura e);
+    public void colisionarObstaculo(Obstaculo o);
 
 }

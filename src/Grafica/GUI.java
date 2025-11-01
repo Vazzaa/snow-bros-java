@@ -55,9 +55,6 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 			public void keyPressed(KeyEvent e){
 				ConstantesTeclado.teclasPresionadas.add(e.getKeyCode());
 				// Debug temporal
-				if (e.getKeyCode() == KeyEvent.VK_W) {
-					System.out.println("TECLA W PRESIONADA - Registrada en ConstantesTeclado");
-				}
 				if (e.getKeyCode() == KeyEvent.VK_A){
 					controlarJuego.cambiarDireccionJugador(ConstantesTeclado.IZQUIERDA);
 				}
@@ -65,9 +62,10 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 					controlarJuego.cambiarDireccionJugador(ConstantesTeclado.DERECHA);
 				}
 				if (e.getKeyCode() == KeyEvent.VK_W){
-					controlarJuego.lanzarProyectil();
+					controlarJuego.cambiarDireccionJugador(ConstantesTeclado.SALTAR);
 				}
-				if (e.getKeyCode() == KeyEvent.VK_SPACE){  // ← AGREGAR esta línea
+				if (e.getKeyCode() == KeyEvent.VK_SPACE){
+					System.out.println("Se lanzo un proyectil. ");
 					controlarJuego.lanzarProyectil();
 				}
 			}

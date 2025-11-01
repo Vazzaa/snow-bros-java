@@ -96,17 +96,17 @@ public class Nivel {
         try {
             if (misEnemigos != null) {
                 for (Enemigo enemigo : misEnemigos) {
-                    snowBro.colisionar(enemigo);
+                    snowBro.colisionarEnemigo(enemigo);
                 }
             }
             if (misPowerUps != null) {
                 for (PowerUp powerUp : misPowerUps) {
-                    snowBro.colisionar(powerUp);
+                    snowBro.colisionarPowerUp(powerUp);
                 }
             }
             if (misEstructuras != null) {
                 for (Estructura estructura : misEstructuras) {
-                    snowBro.colisionar(estructura);
+                    snowBro.colisionarEstructura(estructura);
                 }
             }
         } catch (Exception e) {
@@ -131,6 +131,13 @@ public class Nivel {
         if (misEnemigos == null) return;
         for (Enemigo enemigo : misEnemigos) {
             if (enemigo != null) enemigo.moverse();
+        }
+    }
+
+    public void moverProyectiles() {
+        if (misProyectiles == null) return;
+        for (Proyectil proyectil : misProyectiles) {
+            if (proyectil != null) proyectil.mover();
         }
     }
 }
