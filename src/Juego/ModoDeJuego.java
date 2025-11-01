@@ -122,6 +122,11 @@ public class ModoDeJuego implements ControladorJuego {
 		}
 	}
 
+	public void registrarObserver(Entidad nuevaEntidad){
+		Observer nuevoObserver = controlaGrafica.registrarEntidad(nuevaEntidad);
+		nuevaEntidad.registrarObserver(nuevoObserver);
+	}
+
 	@Override
 	public void cambiarModoDeJuego() {
 		// TODO Auto-generated method stub
@@ -130,8 +135,7 @@ public class ModoDeJuego implements ControladorJuego {
 
 	@Override
 	public void lanzarProyectil() {
-		System.out.println("¡Proyectil lanzado!");
-		throw new UnsupportedOperationException("Unimplemented method 'lanzarProyectil'");
+		nivelActual.getSnowBro().disparar();
 	}
 
 	@Override

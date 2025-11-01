@@ -68,6 +68,7 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 					controlarJuego.lanzarProyectil();
 				}
 				if (e.getKeyCode() == KeyEvent.VK_SPACE){  // ← AGREGAR esta línea
+					System.out.println("Se lanzo un proyectil. ");
 					controlarJuego.lanzarProyectil();
 				}
 			}

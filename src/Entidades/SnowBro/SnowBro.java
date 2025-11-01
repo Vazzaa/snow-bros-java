@@ -3,6 +3,7 @@ package Entidades.SnowBro;
 import Entidades.Jugador.Jugador;
 import Entidades.Estructuras.Estructura;
 import Entidades.PowerUp.PowerUp;
+import Entidades.Proyectiles.BolaDeNieve;
 
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     protected int velocidad;
     
     //Constructor
-    public SnowBro (Skin aspectos, ModoDeJuego juego, int x, int y, Jugador jug, Nivel nivelPerteneciente) {
+    public SnowBro (Skin aspectos, ModoDeJuego juego, int x, int y, Jugador jug, Nivel nivelPerteneciente, FabricaEntidades crearNieve) {
         super(aspectos, juego, x, y);
         velocidad = 3;
         jugador = jug;
@@ -41,6 +42,7 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         puntaje = 0;
         estadoMovimiento = new EstadoMovimietoSnowBro(this);
         nivel = nivelPerteneciente;
+        this.crearNieve = crearNieve;
     }
 
     //Comandos
@@ -89,7 +91,9 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     }
     
     public void disparar() {
-        
+        BolaDeNieve disparo = crearNieve.getBolaDeNieve(miHitbox.getPosX(), miHitbox.getPosY());
+        nivel.agregarProyectiles(disparo);
+        miJuego.registrarObserver(disparo);
     }
     
     public void moverse() {

@@ -20,11 +20,11 @@ public abstract class Proyectil extends Entidad{
         alcance = alc;
     }
 
-    public void afectar(SnowBro snowNBro){};
+    public abstract void afectar(SnowBro snowNBro);
 
-    public void afectar(Enemigo enemigo){};
+    public abstract void afectar(Enemigo enemigo);
 
-    public void afectar(Estructura estructura){}
+    public abstract void afectar(Estructura estructura);
 
 
 }
