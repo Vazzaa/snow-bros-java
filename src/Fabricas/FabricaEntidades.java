@@ -39,7 +39,7 @@ public class FabricaEntidades {
     }
 
     public RanaDeFuego getRanaDeFuego(int x, int y) {
-        return new RanaDeFuego(this.fabricaSkin.crearSkinRanaDeFuego(), miJuego, x, y);
+        return new RanaDeFuego(this.fabricaSkin.crearSkinRanaDeFuego(), miJuego, x, y, this);
     }
 
     public Calabaza getCalabaza(int x, int y) {

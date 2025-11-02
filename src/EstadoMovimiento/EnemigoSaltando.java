@@ -11,6 +11,16 @@ public class EnemigoSaltando implements EstadoMovimientoEnemigo {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'moverse'");
     }
+    @Override
+    public boolean permiteMovimiento() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'permiteMovimiento'");
+    }
+    @Override
+    public EstadoMovimientoEnemigo getEstadoAnterior() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getEstadoAnterior'");
+    }
 
 
 

@@ -7,4 +7,6 @@ public interface EstadoMovimientoEnemigo {
     ColisionManagerEntidades colisionManager = new ColisionManagerEntidades();
     public void moverse(Enemigo enemigo, int velocidad);
     public EstadoMovimientoEnemigo getEstadoOpuesto();
+    public boolean permiteMovimiento();
+    public EstadoMovimientoEnemigo getEstadoAnterior();
 }

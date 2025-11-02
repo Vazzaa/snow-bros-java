@@ -38,7 +38,7 @@ public class EnemigoCaminandoDerecha implements EstadoMovimientoEnemigo {
                 Hitbox hitboxFutura = new Hitbox(enemigo.getHitbox().getAncho(), enemigo.getHitbox().getAlto(), nuevaX, enemigo.getPosY());
                 if (colisionManager.colisionaAABB(hitboxFutura, estructura.getHitbox())) {
                     colisionaria = true;
-                    enemigo.cambiarEstadoInmediato();
+                    enemigo.cambiarEstado();
                     break;
                 }
             }
@@ -55,5 +55,16 @@ public class EnemigoCaminandoDerecha implements EstadoMovimientoEnemigo {
             }
         }
         enemigo.notificarObserver();
+    }
+
+    @Override
+    public boolean permiteMovimiento() {
+        return true;
+    }
+
+    @Override
+    public EstadoMovimientoEnemigo getEstadoAnterior() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getEstadoAnterior'");
     }
 }

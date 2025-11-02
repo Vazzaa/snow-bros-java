@@ -1,5 +1,7 @@
 package Entidades.Enemigos;
 
+import javax.swing.Timer;
+
 import Entidades.PowerUp.PowerUp;
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.EstadoEnemigo;
@@ -8,6 +10,7 @@ import Fabricas.Skin;
 import Juego.ModoDeJuego;
 import Visitors.Colisionable;
 import EstadoMovimiento.EnemigoCaminandoDerecha;
+import EstadoMovimiento.EnemigoCaminandoIzquierda;
 import Entidades.Proyectiles.ProyectilFuego;
 import Grafica.Observer;
 import Juego.Nivel;
@@ -25,10 +28,13 @@ public class RanaDeFuego extends Enemigo implements EstadoEnemigo {
     private long tiempoInicioQuieto = 0;
     private EstadoMovimientoEnemigo estadoAntesDeQuieto = null;
     private boolean estabaQuieto = false;
+    public int direccion;
+    public double movimientoActual;
 
-    public RanaDeFuego(Skin skins,ModoDeJuego juego ,int posX, int posY){
+    public RanaDeFuego(Skin skins,ModoDeJuego juego ,int posX, int posY, FabricaEntidades fabricaFuego){
         super(skins, juego ,posX, posY, 3,300);
         estadoMovimiento = new EnemigoCaminandoDerecha();
+        fabParaFuego = fabricaFuego;
     }
 
     @Override
@@ -62,93 +68,100 @@ public class RanaDeFuego extends Enemigo implements EstadoEnemigo {
 
     @Override
     public void moverse() {
-       /*if (estadoMovimiento == null) {
-        estadoMovimiento = new EnemigoCaminandoDerecha();
-       }
-
-       long tiempoActual = System.currentTimeMillis();
-
-
-       if (!estadoMovimiento.permiteMovimiento()) {
-
-        if(!estadoMovimiento.permiteMovimiento()) {
-            if(tiempoInicioQuieto == 0) {
-                tiempoInicioQuieto = tiempoActual;
-            }
-        }
-
-        if(tiempoActual - tiempoInicioQuieto >= TIEMPO_QUIETA) {
-
-            if(tiempoActual - tiempoUltimoDisparo >= INTERVALO_DISPARO) {
-                dispararFuego();
-                tiempoUltimoDisparo = tiempoActual;
-            }
-
-            if(tiempoActual - tiempoInicioQuieto >= TIEMPO_QUIETA + TIEMPO_DISPARO) {
-                EstadoMovimientoEnemigo estadoAnterior = estadoMovimiento.getEstadoAnterior();
-                if(estadoAnterior != null) {
-                    estadoMovimiento = estadoAnterior.getEstadoOpuesto();
-                } else {
-                    estadoMovimiento = new EnemigoCaminandoDerecha();
-                }
-                estadoAntesDeQuieto = null;
-                estabaQuieto = false;
-                tiempoInicioQuieto = 0;
-            } 
-        }
-        estadoMovimiento.moverse(this, VELOCIDAD);
-       } else {
-        int posXAntes = getPosX();
         cambiarEstado();
         estadoMovimiento.moverse(this, VELOCIDAD);
-        int posXDespues = getPosX();
+    //    if (estadoMovimiento == null) {
+    //     estadoMovimiento = new EnemigoCaminandoDerecha();
+    //     direccion=0;
+    //    }
 
-        if(posXAntes == posXDespues) {
-            estadoAntesDeQuieto = estadoMovimiento;
-            estadoMovimiento = new EnemigoQuieto(estadoAntesDeQuieto);
-            tiempoInicioQuieto = tiempoActual;
-            estabaQuieto = true;
+    //    long tiempoActual = System.currentTimeMillis();
+
+
+    //    if (!estadoMovimiento.permiteMovimiento()) {
+
+    //     if(!estadoMovimiento.permiteMovimiento()) {
+    //         if(tiempoInicioQuieto == 0) {
+    //             tiempoInicioQuieto = tiempoActual;
+    //         }
+    //     }
+
+    //     if(tiempoActual - tiempoInicioQuieto >= TIEMPO_QUIETA) {
+
+    //         if(tiempoActual - tiempoUltimoDisparo >= INTERVALO_DISPARO) {
+    //             dispararFuego();
+    //             tiempoUltimoDisparo = tiempoActual;
+    //         }
+
+    //         if(tiempoActual - tiempoInicioQuieto >= TIEMPO_QUIETA + TIEMPO_DISPARO) {
+    //             EstadoMovimientoEnemigo estadoAnterior = estadoMovimiento.getEstadoAnterior();
+    //             if(estadoAnterior != null) {
+    //                 estadoMovimiento = estadoAnterior.getEstadoOpuesto();
+    //                 actualizarDireccion();
+    //             } else {
+    //                 estadoMovimiento = new EnemigoCaminandoDerecha();
+    //                 direccion=0;
+    //             }
+    //             estadoAntesDeQuieto = null;
+    //             estabaQuieto = false;
+    //             tiempoInicioQuieto = 0;
+    //         } 
+    //     }
+    //     estadoMovimiento.moverse(this, VELOCIDAD);
+    //    } else {
+    //     int posXAntes = getPosX();
+    //     cambiarEstado();
+    //     estadoMovimiento.moverse(this, VELOCIDAD);
+    //     int posXDespues = getPosX();
+
+    //     if(posXAntes == posXDespues) {
+    //         estadoAntesDeQuieto = estadoMovimiento;
+    //         estadoMovimiento = new EnemigoQuieto(estadoAntesDeQuieto);
+    //         tiempoInicioQuieto = tiempoActual;
+    //         estabaQuieto = true;
+    //         }
+    //     }
+    }
+
+    private void actualizarDireccion(){
+        if(direccion==0){
+            direccion=180;
+        }else{
+            direccion=0;
         }
     }
-    */}
 
-public void cambiarEstadoInmediato() {
-    if(!estadoMovimiento.permiteMovimiento()) {
-        EstadoMovimientoEnemigo estadoAnterior = estadoMovimiento.getEstadoAnterior();
-        if(estadoAnterior != null) {
-            estadoMovimiento = estadoAnterior.getEstadoOpuesto();
-        } else {
-            estadoMovimiento = new EnemigoCaminandoDerecha();
-        }
-        estadoAntesDeQuieto = null;
-        estabaQuieto = false;
-        tiempoInicioQuieto = 0;
-    } else if (estadoMovimiento != null) {
-        estadoMovimiento = estadoMovimiento.getEstadoOpuesto();
-        tiempoUltimoCambio = System.currentTimeMillis();
-    }
 
-}
-
-public void dispararFuego() {        
-   /* if (miJuego != null && miJuego.getNivel() != null) {
-        Nivel nivel = miJuego.getNivel();
-        FabricaEntidades fabrica = nivel.getMiFabrica();
-        if (fabrica != null) {
-            ProyectilFuego proyectil = fabrica.getProyectilFuego(getPosX(), getPosY());
-            if (proyectil != null) {
-                nivel.agregarProyectiles(proyectil);
-                if (miJuego.getControladoraGrafica() != null) {
-                    Observer obs = miJuego.getControladoraGrafica().registrarEntidad(proyectil);
-                    if (obs != null) {
-                        proyectil.registrarObserver(obs);
-                    }
-                }
-
+    public void cambiarEstadoInmediato() {
+        if(!estadoMovimiento.permiteMovimiento()) {
+            EstadoMovimientoEnemigo estadoAnterior = estadoMovimiento.getEstadoAnterior();
+            if(estadoAnterior != null) {
+                estadoMovimiento = estadoAnterior.getEstadoOpuesto();
+            } else {
+                estadoMovimiento = new EnemigoCaminandoDerecha();
             }
+            estadoAntesDeQuieto = null;
+            estabaQuieto = false;
+            tiempoInicioQuieto = 0;
+        } else if (estadoMovimiento != null) {
+            estadoMovimiento = estadoMovimiento.getEstadoOpuesto();
+            tiempoUltimoCambio = System.currentTimeMillis();
+        }
+
+    }
+
+    public void dispararFuego() {        
+        if (miJuego != null && miJuego.getNivel() != null) {
+            ProyectilFuego disparo= fabParaFuego.getProyectilFuego(miHitbox.getPosX(), miHitbox.getPosY(), direccion);
+            miJuego.registrarObserver(disparo);
+            miJuego.getNivel().agregarProyectiles(disparo);
+            Timer timer = new Timer(disparo.getAlcance(), e -> {
+            miJuego.getControladoraGrafica().sacarEntidad(disparo); 
+            });
+            timer.setRepeats(false);
+            timer.start();
         }
     }
-*/}
     public void recibirDisparo() {
         // TODO Auto-generated method stub        
     }
@@ -163,8 +176,27 @@ public void dispararFuego() {
     }
 
     public void cambiarEstado() {
-
-    
+        movimientoActual = (int) (Math.random()*3+1);
+        long tiempoActual = System.currentTimeMillis();
+        if (tiempoActual - tiempoUltimoCambio >= INTERVALO_CAMBIO) {
+            if (movimientoActual == 1) {
+                System.out.println("Cambia a izquierda");
+                estadoMovimiento = new EnemigoCaminandoIzquierda();
+                direccion=180;
+            } else if (movimientoActual == 2) {
+                estadoMovimiento = new EnemigoCaminandoDerecha();
+                direccion=0;
+            } else {
+                estadoAntesDeQuieto = estadoMovimiento;
+                estadoMovimiento = new EnemigoQuieto(estadoAntesDeQuieto);
+                tiempoInicioQuieto = tiempoActual;
+                if (tiempoActual - tiempoUltimoDisparo >= INTERVALO_DISPARO) {
+                    dispararFuego();
+                    tiempoUltimoDisparo = tiempoActual;
+                }
+            }
+            tiempoUltimoCambio = tiempoActual;
+        }
     }
 
 }

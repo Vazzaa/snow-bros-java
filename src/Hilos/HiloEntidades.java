@@ -20,7 +20,7 @@ public class HiloEntidades  extends Thread {
             juego.moverEntidad(enemigo);
         }
         try {
-            Thread.sleep(10);
+            Thread.sleep(16);
             juego.moverEnemigos();
             juego.moverProyectiles();
             juego.verificarColisiones();

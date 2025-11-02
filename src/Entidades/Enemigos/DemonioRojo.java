@@ -1,6 +1,11 @@
 package Entidades.Enemigos;
 
+import java.util.Timer;
+
+import Entidades.Estructuras.Estructura;
+import Entidades.Estructuras.Obstaculo;
 import Entidades.PowerUp.PowerUp;
+import Entidades.Proyectiles.ProyectilNieve;
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.EstadoMovimientoEnemigo;
 import EstadoMovimiento.EnemigoCaminandoDerecha;
@@ -13,6 +18,14 @@ import Visitors.Colisionable;
 import Visitors.Colisionador;
 
 public class DemonioRojo extends Enemigo implements EstadoEnemigo{
+    
+    protected static final int ESTADO_NORMAL = 1;
+    protected static final int ESTADO_POCO_NIEVE = 2;
+    protected static final int ESTADO_MEDIO_NIEVE = 3;
+    protected static final int ESTADO_NIEVE_COMPLETO = 4;
+    
+    protected int estadoNieve;
+    protected Timer timerDerretimiento;
     protected double movimientoActual;
     private static final int VELOCIDAD = 1;
     public DemonioRojo(Skin skins, ModoDeJuego juego ,int posX, int posY){
@@ -76,10 +89,10 @@ public class DemonioRojo extends Enemigo implements EstadoEnemigo{
 
     @Override
     public void cambiarEstado() {
-        movimientoActual = Math.random()*2;
+        movimientoActual = (int) (Math.random()*2);
         long tiempoActual = System.currentTimeMillis();
         if (tiempoActual - tiempoUltimoCambio >= INTERVALO_CAMBIO) {
-            if (movimientoActual <= 1) {
+            if (movimientoActual == 1) {
                 estadoMovimiento = new EnemigoCaminandoIzquierda();
             } else {
                 estadoMovimiento = new EnemigoCaminandoDerecha();
@@ -93,5 +106,20 @@ public class DemonioRojo extends Enemigo implements EstadoEnemigo{
             estadoMovimiento = estadoMovimiento.getEstadoOpuesto();
             tiempoUltimoCambio = System.currentTimeMillis();
         }
+    }
+
+
+    public void colisionarEstructura(Estructura e) {
+        boolean colisiona = this.colisionaAABB(this.miHitbox, e.getHitbox());
+        if (!colisiona) return;
+        afectar(e);
+        return;
+    }
+
+     public void afectar(Estructura e) {
+        e.afectar(this);
+    }
+
+    public void afectar(ProyectilNieve n) {
     }
 }

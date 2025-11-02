@@ -72,10 +72,10 @@ public class TrollAmarillo extends Enemigo implements EstadoEnemigo{
 
     @Override
     public void cambiarEstado() {
-        movimientoActual = Math.random()*2;
+        movimientoActual = (int) (Math.random()*2);
         long tiempoActual = System.currentTimeMillis();
         if (tiempoActual - tiempoUltimoCambio >= INTERVALO_CAMBIO) {
-            if (movimientoActual <= 1) {
+            if (movimientoActual == 1) {
                 estadoMovimiento = new EnemigoCaminandoIzquierda();
             } else {
                 estadoMovimiento = new EnemigoCaminandoDerecha();

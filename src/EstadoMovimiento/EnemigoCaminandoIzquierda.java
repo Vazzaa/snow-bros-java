@@ -37,7 +37,7 @@ public class EnemigoCaminandoIzquierda implements EstadoMovimientoEnemigo {
                 Hitbox hitboxFutura = new Hitbox(enemigo.getHitbox().getAncho(), enemigo.getHitbox().getAlto(), nuevaX, enemigo.getPosY());
                 if (colisionManager.colisionaAABB(hitboxFutura, estructura.getHitbox())) {
                     colisionaria = true;
-                    enemigo.cambiarEstadoInmediato();
+                    enemigo.cambiarEstado();
                     break;
                 }
             }
@@ -46,7 +46,6 @@ public class EnemigoCaminandoIzquierda implements EstadoMovimientoEnemigo {
             enemigo.setPosX(nuevaX);
         }
         Estructura plataformaDebajo = colisionManager.getPlataformaDebajo(enemigo, enemigo.getJuego().getNivel().getMisEstructuras());
-        
         if (plataformaDebajo != null && colisionManager.estaEnSuelo(enemigo, enemigo.getJuego().getNivel().getMisEstructuras())) {
             int pieEnemigo = enemigo.getHitbox().getPosY();
             int techoPlataforma = plataformaDebajo.getHitbox().getPosY() + plataformaDebajo.getHitbox().getAlto();
@@ -55,5 +54,16 @@ public class EnemigoCaminandoIzquierda implements EstadoMovimientoEnemigo {
             }
         }
         enemigo.notificarObserver();
+    }
+
+    @Override
+    public boolean permiteMovimiento() {
+        return true;
+    }
+
+    @Override
+    public EstadoMovimientoEnemigo getEstadoAnterior() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getEstadoAnterior'");
     }
 }

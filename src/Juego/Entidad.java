@@ -14,7 +14,7 @@ public abstract class Entidad implements EntidadLogica {
 	protected Hitbox miHitbox;
 
 	protected Entidad(Skin skins, ModoDeJuego juego, int x, int y){
-		miHitbox = new Hitbox(32, 32, x, y);
+		miHitbox = new Hitbox(16, 16, x, y);
 		misAspectos = skins;
 		miJuego = juego;
 	}
