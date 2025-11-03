@@ -114,6 +114,7 @@ public class DemonioRojo extends Enemigo {
         this.getJuego().getControladoraGrafica().sacarEntidad(this);
         PowerUp powerUp = this.getJuego().getNivelActual().getMiFabrica().getPowerUpAzul(miHitbox.getPosX(), miHitbox.getPosY());
         this.getJuego().registrarObserver(powerUp);
+        this.getJuego().getNivelActual().agregarPowerUps(powerUp);
         BolaDeNieve bola = this.getJuego().getNivelActual().getMiFabrica().getBolaDeNieve(miHitbox.getPosX(), miHitbox.getPosY(), 1);
         this.getJuego().registrarObserver(bola);
         this.getJuego().getNivelActual().agregarProyectiles(bola);
