@@ -5,6 +5,8 @@ import java.util.Timer;
 import Entidades.Estructuras.Estructura;
 import Entidades.Estructuras.Obstaculo;
 import Entidades.PowerUp.PowerUp;
+import Entidades.Proyectiles.BolaDeNieve;
+import Entidades.Proyectiles.Proyectil;
 import Entidades.Proyectiles.ProyectilNieve;
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.EstadoMovimientoEnemigo;
@@ -15,12 +17,17 @@ import Juego.ModoDeJuego;
 import Visitors.Colisionable;
 import Visitors.Colisionador;
 
-public class DemonioRojo extends Enemigo implements EstadoEnemigo{
+public class DemonioRojo extends Enemigo {
     
     protected static final int ESTADO_NORMAL = 1;
     protected static final int ESTADO_POCO_NIEVE = 2;
     protected static final int ESTADO_MEDIO_NIEVE = 3;
     protected static final int ESTADO_NIEVE_COMPLETO = 4;
+
+    protected EstadoEnemigo estadoNormal;
+    protected EstadoEnemigo estadoPocoCongelado;
+    protected EstadoEnemigo estadoMedioCongelado;
+    protected EstadoEnemigo estadoCompletamenteCongelado;
     
     protected int estadoNieve;
     protected Timer timerDerretimiento;
@@ -28,6 +35,11 @@ public class DemonioRojo extends Enemigo implements EstadoEnemigo{
     private static final int VELOCIDAD = 1;
     public DemonioRojo(Skin skins, ModoDeJuego juego ,int posX, int posY){
         super(skins, juego, posX, posY, 3,300);
+        estadoNieve = 0;
+        estadoNormal = new EstadoNormal();
+        estadoPocoCongelado = new EstadoPocoCongelado();
+        estadoMedioCongelado = new EstadoMedioCongelado();
+        estadoCompletamenteCongelado = new EstadoCompletamenteCongelado();
     }
 
     @Override
@@ -65,8 +77,25 @@ public class DemonioRojo extends Enemigo implements EstadoEnemigo{
 
     @Override
     public void recibirDisparo() {
-        // TODO Auto-generated method stub
-        
+        estadoMovimiento = new EnemigoQuieto();
+        estadoNieve++;
+        switch (estadoNieve) {
+            case ESTADO_NORMAL:
+                this.estadoNormal.recibirDisparo(this);
+                break;
+            case ESTADO_POCO_NIEVE:
+                this.estadoPocoCongelado.recibirDisparo(this);
+                break;
+            case ESTADO_MEDIO_NIEVE:
+                this.estadoMedioCongelado.recibirDisparo(this);
+                break;
+            case ESTADO_NIEVE_COMPLETO:
+                this.estadoCompletamenteCongelado.recibirDisparo(this);
+                break;
+            default:
+                break;
+        }
+
     }
 
     @Override
@@ -81,8 +110,14 @@ public class DemonioRojo extends Enemigo implements EstadoEnemigo{
     }
 
     public PowerUp morir() {
-        // TODO Auto-generated method stub
-        return null;
+        this.getJuego().getNivelActual().getMisEnemigos().remove(this);
+        this.getJuego().getControladoraGrafica().sacarEntidad(this);
+        PowerUp powerUp = this.getJuego().getNivelActual().getMiFabrica().getPowerUpAzul(miHitbox.getPosX(), miHitbox.getPosY());
+        this.getJuego().registrarObserver(powerUp);
+        BolaDeNieve bola = this.getJuego().getNivelActual().getMiFabrica().getBolaDeNieve(miHitbox.getPosX(), miHitbox.getPosY(), 1);
+        this.getJuego().registrarObserver(bola);
+        this.getJuego().getNivelActual().agregarProyectiles(bola);
+        return powerUp;
     }
 
     @Override
@@ -125,5 +160,32 @@ public class DemonioRojo extends Enemigo implements EstadoEnemigo{
     }
 
     public void afectar(ProyectilNieve n) {
+    }
+
+    @Override
+    public void colisionarPowerUp(PowerUp p) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'colisionarPowerUp'");
+    }
+
+    @Override
+    public void colisionarEnemigo(Enemigo e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'colisionarEnemigo'");
+    }
+
+    @Override
+    public void colisionarObstaculo(Obstaculo o) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'colisionarObstaculo'");
+    }
+
+    @Override
+    public void colisionarProyectil(Proyectil p) {
+        if (this.colisionaAABB(miHitbox, p.getHitbox())){
+            recibirDisparo();
+            p.getJuego().getControladoraGrafica().sacarEntidad(p);
+            p.getJuego().getNivel().getMisProyectiles().remove(p);
+        }
     }
 }

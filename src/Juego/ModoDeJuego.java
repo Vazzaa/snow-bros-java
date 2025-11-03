@@ -151,8 +151,7 @@ public class ModoDeJuego implements ControladorJuego {
 	}
 	@Override
 	public Nivel getNivelActual() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getNivelActual'");
+		return nivelActual;
 	}
 
 	public void reiniciarNivel() {

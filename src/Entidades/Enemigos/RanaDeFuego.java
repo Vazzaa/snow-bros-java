@@ -2,6 +2,8 @@ package Entidades.Enemigos;
 
 import javax.swing.Timer;
 
+import Entidades.Estructuras.Estructura;
+import Entidades.Estructuras.Obstaculo;
 import Entidades.PowerUp.PowerUp;
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.EstadoEnemigo;
@@ -11,6 +13,7 @@ import Juego.ModoDeJuego;
 import Visitors.Colisionable;
 import EstadoMovimiento.EnemigoCaminandoDerecha;
 import EstadoMovimiento.EnemigoCaminandoIzquierda;
+import Entidades.Proyectiles.Proyectil;
 import Entidades.Proyectiles.ProyectilFuego;
 import Grafica.Observer;
 import Juego.Nivel;
@@ -201,5 +204,41 @@ public class RanaDeFuego extends Enemigo implements EstadoEnemigo {
             tiempoUltimoCambio = tiempoActual;
         }
     }
+
+    @Override
+    public void colisionarPowerUp(PowerUp p) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'colisionarPowerUp'");
+    }
+
+    @Override
+    public void colisionarEnemigo(Enemigo e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'colisionarEnemigo'");
+    }
+
+    @Override
+    public void colisionarEstructura(Estructura e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'colisionarEstructura'");
+    }
+
+    @Override
+    public void colisionarObstaculo(Obstaculo o) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'colisionarObstaculo'");
+    }
+
+    @Override
+    public void colisionarProyectil(Proyectil p) {
+        
+    }
+
+    @Override
+    public void recibirDisparo(DemonioRojo dr) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'recibirDisparo'");
+    }
+
 
 }

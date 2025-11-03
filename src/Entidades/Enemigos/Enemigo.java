@@ -1,6 +1,6 @@
 package Entidades.Enemigos;
 
-import EstadoMovimiento.EstadoEnemigo;
+import EstadoMovimiento.*;
 import EstadoMovimiento.EstadoMovimientoEnemigo;
 import Fabricas.Skin;
 import Juego.Entidad;
@@ -10,7 +10,7 @@ import Visitors.Colisionable;
 import Visitors.Colisionador;
 import EstadoMovimiento.Movible;
 
-public abstract class Enemigo extends Entidad implements Colisionable, Movible {
+public abstract class Enemigo extends Entidad implements Colisionable, Movible, Colisionador{
 
     
     protected int vida;
@@ -21,10 +21,11 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible {
     protected static final long INTERVALO_CAMBIO = 2800;
     
     
-    public Enemigo(Skin skins, ModoDeJuego juego , int posX, int posY, int v, int p){
+    public Enemigo(Skin skins, ModoDeJuego juego , int posX, int posY, int v, int p) {
         super(skins,juego,posX,posY);
         vida = v;
         puntaje = p;
+        estadoEnemigo = new EstadoActivo();
     }
 
     public void setVida(int v){

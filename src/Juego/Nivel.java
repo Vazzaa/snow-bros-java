@@ -114,6 +114,20 @@ public class Nivel {
         }
     }
 
+    public void verificarColisionesProyectiles() {
+        try {
+            if (misEnemigos != null) {
+                for (Enemigo enemigo : misEnemigos) {
+                    for (Proyectil proyectil : misProyectiles) {
+                         enemigo.colisionarProyectil(proyectil);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void reiniciarNivel(){
         snowBro=null;
         misEstructuras.clear();

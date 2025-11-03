@@ -1,5 +1,9 @@
 package Entidades.Enemigos;
 
+import Entidades.Estructuras.Estructura;
+import Entidades.Estructuras.Obstaculo;
+import Entidades.PowerUp.PowerUp;
+import Entidades.Proyectiles.Proyectil;
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.EstadoEnemigo;
 import Fabricas.FabricaEntidades;
@@ -73,5 +77,40 @@ public class Fantasma extends Enemigo implements EstadoEnemigo{
             estadoMovimiento = estadoMovimiento.getEstadoOpuesto();
             tiempoUltimoCambio = System.currentTimeMillis();
         }
+    }
+
+    @Override
+    public void colisionarPowerUp(PowerUp p) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'colisionarPowerUp'");
+    }
+
+    @Override
+    public void colisionarEnemigo(Enemigo e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'colisionarEnemigo'");
+    }
+
+    @Override
+    public void colisionarEstructura(Estructura e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'colisionarEstructura'");
+    }
+
+    @Override
+    public void colisionarObstaculo(Obstaculo o) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'colisionarObstaculo'");
+    }
+
+    @Override
+    public void colisionarProyectil(Proyectil p) {
+        
+    }
+
+    @Override
+    public void recibirDisparo(DemonioRojo dr) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'recibirDisparo'");
     }
 }
