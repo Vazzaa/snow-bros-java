@@ -29,7 +29,7 @@ public class RanaDeFuego extends Enemigo implements EstadoEnemigo {
     private EstadoMovimientoEnemigo estadoAntesDeQuieto = null;
     private boolean estabaQuieto = false;
     public int direccion;
-    public double movimientoActual;
+    public int movimientoActual;
 
     public RanaDeFuego(Skin skins,ModoDeJuego juego ,int posX, int posY, FabricaEntidades fabricaFuego){
         super(skins, juego ,posX, posY, 3,300);
@@ -179,22 +179,25 @@ public class RanaDeFuego extends Enemigo implements EstadoEnemigo {
         movimientoActual = (int) (Math.random()*3+1);
         long tiempoActual = System.currentTimeMillis();
         if (tiempoActual - tiempoUltimoCambio >= INTERVALO_CAMBIO) {
-            if (movimientoActual == 1) {
-                System.out.println("Cambia a izquierda");
-                estadoMovimiento = new EnemigoCaminandoIzquierda();
-                direccion=180;
-            } else if (movimientoActual == 2) {
-                estadoMovimiento = new EnemigoCaminandoDerecha();
-                direccion=0;
-            } else {
-                estadoAntesDeQuieto = estadoMovimiento;
-                estadoMovimiento = new EnemigoQuieto(estadoAntesDeQuieto);
-                tiempoInicioQuieto = tiempoActual;
-                if (tiempoActual - tiempoUltimoDisparo >= INTERVALO_DISPARO) {
-                    dispararFuego();
-                    tiempoUltimoDisparo = tiempoActual;
+            switch(movimientoActual){
+                case 1:
+                     estadoMovimiento = new EnemigoCaminandoIzquierda();
+                     direccion=180;
+                    break;
+                case 2:
+                    estadoMovimiento = new EnemigoCaminandoDerecha();
+                    direccion=0;
+                    break;
+                case 3:
+                    estadoAntesDeQuieto = estadoMovimiento;
+                    estadoMovimiento = new EnemigoQuieto();
+                    tiempoInicioQuieto = tiempoActual;
+                    if (tiempoActual - tiempoUltimoDisparo >= INTERVALO_DISPARO) {
+                        tiempoUltimoDisparo = tiempoActual;
+                        dispararFuego();
+                    }
+                    break;
                 }
-            }
             tiempoUltimoCambio = tiempoActual;
         }
     }

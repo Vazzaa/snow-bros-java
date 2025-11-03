@@ -5,9 +5,11 @@ import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
 import Juego.Entidad;
 import Juego.ModoDeJuego;
+import Visitors.Colisionable;
+import Visitors.Colisionador;
 import Entidades.Estructuras.Estructura;
 
-public abstract class Proyectil extends Entidad{
+public abstract class Proyectil extends Entidad implements Colisionable{
 
     protected int velocidad;
     protected int daño;
@@ -43,4 +45,8 @@ public abstract class Proyectil extends Entidad{
     public abstract void afectar(Estructura estructura);
 
     public abstract int getAlcance();
+
+    public void aceptarColision(Colisionador c) {
+        c.colisionarProyectil(this);
+    }
 }

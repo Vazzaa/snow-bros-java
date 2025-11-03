@@ -6,13 +6,12 @@ import EstadoMovimiento.EstadoEnemigo;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
 import Visitors.Colisionable;
-import EstadoMovimiento.EnemigoCaminandoIzquierda;
-import EstadoMovimiento.EnemigoCaminandoDerecha;
+import EstadoMovimiento.*;
 
 public class TrollAmarillo extends Enemigo implements EstadoEnemigo{
     
     private static final int VELOCIDAD = 3;
-    private double movimientoActual;
+    private int movimientoActual;
 
     public TrollAmarillo(Skin skins, ModoDeJuego juego,int posX, int posY){
         super(skins, juego,posX, posY, 3,300);
@@ -72,14 +71,20 @@ public class TrollAmarillo extends Enemigo implements EstadoEnemigo{
 
     @Override
     public void cambiarEstado() {
-        movimientoActual = (int) (Math.random()*2);
+        movimientoActual = (int) (Math.random()*3+1);
         long tiempoActual = System.currentTimeMillis();
         if (tiempoActual - tiempoUltimoCambio >= INTERVALO_CAMBIO) {
-            if (movimientoActual == 1) {
-                estadoMovimiento = new EnemigoCaminandoIzquierda();
-            } else {
-                estadoMovimiento = new EnemigoCaminandoDerecha();
-            }
+            switch(movimientoActual){
+                case 1:
+                     estadoMovimiento = new EnemigoCaminandoIzquierda();
+                    break;
+                case 2:
+                    estadoMovimiento = new EnemigoCaminandoDerecha();
+                    break;
+                case 3:
+                    estadoMovimiento = new EnemigoQuieto();
+                    break;
+                }
             tiempoUltimoCambio = tiempoActual;
         }
     }

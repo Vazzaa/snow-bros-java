@@ -82,7 +82,6 @@ public class EstadoMovimietoSnowBro {
     	if (enElSuelo()) {
     		this.velocidadVertical = fuerzaSalto;
             enElSuelo = false;
-            // System.out.println("SALTANDO - Velocidad vertical: " + velocidadVertical);
     	}
     }
     

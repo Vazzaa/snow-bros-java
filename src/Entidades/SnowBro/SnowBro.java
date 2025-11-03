@@ -5,6 +5,8 @@ import Entidades.Estructuras.Estructura;
 import Entidades.Estructuras.Obstaculo;
 import Entidades.PowerUp.PowerUp;
 import Entidades.Proyectiles.BolaDeNieve;
+import Entidades.Proyectiles.Proyectil;
+import Entidades.Proyectiles.ProyectilFuego;
 import Entidades.Proyectiles.ProyectilNieve;
 
 import java.util.List;
@@ -164,6 +166,16 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         e.afectar(this);
     }
     
+    public void afectar(Proyectil p) {
+        vida -= 1;
+        miHitbox.setPosX(10);
+        miHitbox.setPosY(7650);
+        resetVelocidad();
+        notificarObserver();
+        if (vida <= 0) {
+            morir();
+        }
+    }
     
     public void reiniciar() {
         
@@ -223,6 +235,15 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         return;
     }
 
+    @Override
+    public void colisionarProyectil(Proyectil p) {
+        boolean colisiona = this.colisionaAABB(this.miHitbox, p.getHitbox());
+        if (!colisiona) return;
+        System.out.println("SnowBro: colisionarProyectil(ProyectilFuego) hit -> afectar");
+        afectar(p);
+        return;
+    }
+
     public void resetVelocidad() {
         this.velocidad = 3;
     }
@@ -230,4 +251,6 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     public void detenerMovimiento() {
         estadoMovimiento.detenerMovimientoHorizontal();
     }
+
+    
 }

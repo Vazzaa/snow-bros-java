@@ -1,7 +1,7 @@
 package Entidades.Enemigos;
 
 import Entidades.SnowBro.SnowBro;
-import EstadoMovimiento.EstadoEnemigo;
+import EstadoMovimiento.*;
 import Fabricas.FabricaEntidades;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
@@ -10,6 +10,8 @@ import Visitors.Colisionable;
 public class Calabaza extends Enemigo implements EstadoEnemigo{
 
     protected FabricaEntidades mFabricaEntidades;
+    protected int movimientoActual;
+    private static final int VELOCIDAD = 1;
 
     public Calabaza(Skin skins , ModoDeJuego juego , int posX, int posY){
         super(skins, juego, posX, posY, 0,300);
@@ -42,8 +44,8 @@ public class Calabaza extends Enemigo implements EstadoEnemigo{
 
     @Override
     public void moverse() {
-        // TODO Auto-generated method stub
-        
+        cambiarEstado();
+        estadoMovimiento.moverse(this, VELOCIDAD);
     }
 
     @Override
@@ -69,8 +71,25 @@ public class Calabaza extends Enemigo implements EstadoEnemigo{
 
     @Override
     public void cambiarEstado() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cambiarEstado'");
+        movimientoActual = (int) (Math.random()*4+1);
+        long tiempoActual = System.currentTimeMillis();
+        if (tiempoActual - tiempoUltimoCambio >= INTERVALO_CAMBIO) {
+            switch(movimientoActual){
+                case 1:
+                     estadoMovimiento = new EnemigoCaminandoIzquierda();
+                    break;
+                case 2:
+                    estadoMovimiento = new EnemigoCaminandoDerecha();
+                    break;
+                case 3:
+                    estadoMovimiento = new EnemigoQuieto();
+                    break;
+                case 4:
+                    estadoMovimiento = new EnemigoDiagonal();
+                    break;
+                }
+            tiempoUltimoCambio = tiempoActual;
+        }
     }
 
     public void cambiarEstadoInmediato() {

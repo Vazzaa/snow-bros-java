@@ -8,9 +8,7 @@ import Entidades.PowerUp.PowerUp;
 import Entidades.Proyectiles.ProyectilNieve;
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.EstadoMovimientoEnemigo;
-import EstadoMovimiento.EnemigoCaminandoDerecha;
-import EstadoMovimiento.EnemigoCaminandoIzquierda;
-import EstadoMovimiento.EstadoEnemigo;
+import EstadoMovimiento.*;
 import EstadoMovimiento.Movible;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
@@ -26,7 +24,7 @@ public class DemonioRojo extends Enemigo implements EstadoEnemigo{
     
     protected int estadoNieve;
     protected Timer timerDerretimiento;
-    protected double movimientoActual;
+    protected int movimientoActual;
     private static final int VELOCIDAD = 1;
     public DemonioRojo(Skin skins, ModoDeJuego juego ,int posX, int posY){
         super(skins, juego, posX, posY, 3,300);
@@ -89,14 +87,20 @@ public class DemonioRojo extends Enemigo implements EstadoEnemigo{
 
     @Override
     public void cambiarEstado() {
-        movimientoActual = (int) (Math.random()*2);
+        movimientoActual = (int) (Math.random()*3+1);
         long tiempoActual = System.currentTimeMillis();
         if (tiempoActual - tiempoUltimoCambio >= INTERVALO_CAMBIO) {
-            if (movimientoActual == 1) {
-                estadoMovimiento = new EnemigoCaminandoIzquierda();
-            } else {
-                estadoMovimiento = new EnemigoCaminandoDerecha();
-            }
+            switch(movimientoActual){
+                case 1:
+                     estadoMovimiento = new EnemigoCaminandoIzquierda();
+                    break;
+                case 2:
+                    estadoMovimiento = new EnemigoCaminandoDerecha();
+                    break;
+                case 3:
+                    estadoMovimiento = new EnemigoQuieto();
+                    break;
+                }
             tiempoUltimoCambio = tiempoActual;
         }
     }
