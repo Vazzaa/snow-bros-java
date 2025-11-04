@@ -21,7 +21,7 @@ public class Fruta extends PowerUp{
     public void afectar(SnowBro s) {
         s.sumarPuntaje(puntaje);
         notificarObserver();
-        //eliminar();
+        eliminar();
     }
 
     

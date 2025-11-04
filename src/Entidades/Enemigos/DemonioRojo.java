@@ -15,8 +15,8 @@ import Visitors.Colisionador;
 
 public class DemonioRojo extends Enemigo {
     
-    protected static final int ESTADO_INICIAL = 0; // Estado normal, moviéndose
-    protected static final int ESTADO_POCO_NIEVE = 1; // Primer disparo, "BolaDeNieve1"
+    protected static final int ESTADO_INICIAL = 0;
+    protected static final int ESTADO_POCO_NIEVE = 1; 
     protected static final int ESTADO_MEDIO_NIEVE = 2;
     protected static final int ESTADO_NIEVE_COMPLETO = 3;
 
@@ -92,17 +92,14 @@ public class DemonioRojo extends Enemigo {
         return misAspectos;
     }
 
-    public void setSkin(Skin nuevaSkin) {
-        this.misAspectos = nuevaSkin;
-    }
-
     public PowerUp morir() {
-        this.estaVivo = false;
+        estaVivo = false;
         this.getJuego().getControladoraGrafica().sacarEntidad(this);
         PowerUp powerUp = this.getJuego().getNivelActual().getMiFabrica().getFruta(miHitbox.getPosX(), miHitbox.getPosY());
         this.getJuego().registrarObserver(powerUp);
         this.getJuego().getNivelActual().agregarPowerUps(powerUp);
-        BolaDeNieve bola = this.getJuego().getNivelActual().getMiFabrica().getBolaDeNieve(miHitbox.getPosX(), miHitbox.getPosY(), 1);
+        int dir = (Math.random() < 0.5) ? 0 : 180;
+        BolaDeNieve bola = this.getJuego().getNivelActual().getMiFabrica().getBolaDeNieve(miHitbox.getPosX(), miHitbox.getPosY(), dir);
         this.getJuego().registrarObserver(bola);
         this.getJuego().getNivelActual().agregarProyectiles(bola);
         return powerUp;
@@ -198,19 +195,18 @@ public class DemonioRojo extends Enemigo {
     private void actualizarEstadoNieve() {
         switch (estadoNieve) {
             case ESTADO_INICIAL:
-                this.estadoNormal.recibirDisparo(this);
+                estadoNormal.recibirDisparo(this);
                 break;
             case ESTADO_POCO_NIEVE:
-                this.estadoPocoCongelado.recibirDisparo(this);
+                estadoPocoCongelado.recibirDisparo(this);
                 break;
             case ESTADO_MEDIO_NIEVE:
-                this.estadoMedioCongelado.recibirDisparo(this);
+                estadoMedioCongelado.recibirDisparo(this);
                 break;
             case ESTADO_NIEVE_COMPLETO:
-                this.estadoCompletamenteCongelado.recibirDisparo(this);
+                estadoCompletamenteCongelado.recibirDisparo(this);
                 break;
         }
-        // Si está en cualquier estado de nieve, activamos el timer.
         if (estadoNieve > ESTADO_INICIAL) {
             tiempoFinCongelado = System.currentTimeMillis() + DURACION_CONGELADO_MS;
         }

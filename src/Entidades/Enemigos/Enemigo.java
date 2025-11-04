@@ -1,14 +1,12 @@
 package Entidades.Enemigos;
 
 import EstadoMovimiento.*;
-import EstadoMovimiento.EstadoMovimientoEnemigo;
 import Fabricas.Skin;
 import Juego.Entidad;
 import Juego.ModoDeJuego;
 import Entidades.SnowBro.SnowBro;
 import Visitors.Colisionable;
 import Visitors.Colisionador;
-import EstadoMovimiento.Movible;
 
 public abstract class Enemigo extends Entidad implements Colisionable, Movible, Colisionador{
 
@@ -20,12 +18,14 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
     protected long tiempoUltimoCambio;
     protected static final long INTERVALO_CAMBIO = 2800;
     protected boolean estaVivo = true;
+    protected Skin skinOriginal;
     
     
     public Enemigo(Skin skins, ModoDeJuego juego , int posX, int posY, int v, int p) {
         super(skins,juego,posX,posY);
         vida = v;
         puntaje = p;
+        skinOriginal = skins; // Guardamos la skin con la que fue creado
         estadoEnemigo = new EstadoActivo();
     }
 
@@ -73,6 +73,14 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
 
     public boolean estaVivo() {
         return estaVivo;
+    }
+
+      public void setSkin(Skin nuevaSkin) {
+        this.misAspectos = nuevaSkin;
+    }
+
+    public Skin getSkinOriginal() {
+        return skinOriginal;
     }
 
 } 

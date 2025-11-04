@@ -11,12 +11,15 @@ import Juego.ModoDeJuego;
 public abstract class PowerUp extends Entidad implements Colisionable {
 
     protected int puntaje;
-    protected int tiempoDeVida; 
+    protected int tiempoDeVida;
+    private boolean vidaActiva = true;
+    private long tiempoCreacion;
 
     public PowerUp(Skin skins, ModoDeJuego juego, int posX, int posY,int puntaje, int tiempoDeVida) {
         super(skins, juego, posX, posY);
         this.puntaje = puntaje;
         this.tiempoDeVida = tiempoDeVida;
+        this.tiempoCreacion = System.currentTimeMillis();
     }
 
     public int getPuntaje() {
@@ -48,6 +51,21 @@ public abstract class PowerUp extends Entidad implements Colisionable {
 
     public boolean esColisionable() {
         return true;
+    }
+
+    public void eliminar() {
+        vidaActiva = false;
+        miJuego.getControladoraGrafica().sacarEntidad(this);
+    }
+
+    public boolean estaActivo() {
+        return vidaActiva;
+    }
+
+    public void verificarTiempoDeVida() {
+        if (vidaActiva && (System.currentTimeMillis() - tiempoCreacion > tiempoDeVida * 1000)) {
+            eliminar();
+        }
     }
 
 }

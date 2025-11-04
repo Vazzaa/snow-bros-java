@@ -155,7 +155,6 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     
     public void afectar(PowerUp p) {
         p.afectar(this);
-        nivel.eliminarPowerUp(p);
         notificarObserver();
     }
     

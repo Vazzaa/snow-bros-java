@@ -78,8 +78,8 @@ public class Nivel {
     }
     
     public void eliminarPowerUp(PowerUp p){
+        p.eliminar();
         misPowerUps.remove(p);
-        p.getJuego().getControladoraGrafica().sacarEntidad(p);
     }
 
     public void agregarEstructura(Estructura e){
@@ -165,5 +165,13 @@ public class Nivel {
             p.mover();
         }
         misProyectiles.removeIf(p -> !p.estaActivo());
+    }
+
+    public void actualizarPowerUps() {
+        if (misPowerUps == null) return;
+        for (PowerUp p : misPowerUps) {
+            p.verificarTiempoDeVida();
+        }
+        misPowerUps.removeIf(p -> !p.estaActivo());
     }
 }

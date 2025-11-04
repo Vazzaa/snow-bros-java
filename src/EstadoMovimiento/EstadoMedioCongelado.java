@@ -1,11 +1,11 @@
 package EstadoMovimiento;
 
-import Entidades.Enemigos.DemonioRojo;
+import Entidades.Enemigos.*;
 
 public class EstadoMedioCongelado implements EstadoEnemigo {
 
     @Override
-    public void recibirDisparo(DemonioRojo dr) {
+    public void recibirDisparo(Enemigo dr) {
         dr.getSkin().setEstadoActual(3);
     }
 }

@@ -5,21 +5,36 @@ import Entidades.Estructuras.Obstaculo;
 import Entidades.PowerUp.PowerUp;
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.EstadoEnemigo;
+import EstadoMovimiento.EstadoMedioCongelado;
 import Fabricas.FabricaEntidades;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
 import Visitors.Colisionable;
 import EstadoMovimiento.EnemigoCaminandoDerecha;
 import EstadoMovimiento.EnemigoCaminandoIzquierda;
+import Entidades.Proyectiles.BolaDeNieve;
 import Entidades.Proyectiles.Proyectil;
 import Entidades.Proyectiles.ProyectilFuego;
 import Grafica.Observer;
 import Juego.Nivel;
 import EstadoMovimiento.EstadoMovimientoEnemigo;
+import EstadoMovimiento.EstadoNormal;
+import EstadoMovimiento.EstadoPocoCongelado;
 import EstadoMovimiento.EnemigoQuieto;
+import EstadoMovimiento.EstadoCompletamenteCongelado;
 
-public class RanaDeFuego extends Enemigo implements EstadoEnemigo {
+public class RanaDeFuego extends Enemigo {
         
+    protected static final int ESTADO_INICIAL = 0;
+    protected static final int ESTADO_POCO_NIEVE = 1; 
+    protected static final int ESTADO_MEDIO_NIEVE = 2;
+    protected static final int ESTADO_NIEVE_COMPLETO = 3;
+
+    protected EstadoEnemigo estadoNormal;
+    protected EstadoEnemigo estadoPocoCongelado;
+    protected EstadoEnemigo estadoMedioCongelado;
+    protected EstadoEnemigo estadoCompletamenteCongelado;
+
     protected FabricaEntidades fabParaFuego;
     private static final int VELOCIDAD = 1;
     private long tiempoUltimoDisparo = 0;
@@ -29,13 +44,22 @@ public class RanaDeFuego extends Enemigo implements EstadoEnemigo {
     private long tiempoInicioQuieto = 0;
     private EstadoMovimientoEnemigo estadoAntesDeQuieto = null;
     private boolean estabaQuieto = false;
-    public int direccion;
-    public int movimientoActual;
+    protected int direccion;
+    protected int movimientoActual;
+    protected int estadoNieve;
+
+    private long tiempoFinCongelado = 0;
+    private static final int DURACION_CONGELADO_MS = 3000;
 
     public RanaDeFuego(Skin skins,ModoDeJuego juego ,int posX, int posY, FabricaEntidades fabricaFuego){
         super(skins, juego ,posX, posY, 3,300);
         estadoMovimiento = new EnemigoCaminandoDerecha();
         fabParaFuego = fabricaFuego;
+                estadoNieve = ESTADO_INICIAL;
+        estadoNormal = new EstadoNormal();
+        estadoPocoCongelado = new EstadoPocoCongelado();
+        estadoMedioCongelado = new EstadoMedioCongelado();
+        estadoCompletamenteCongelado = new EstadoCompletamenteCongelado();
     }
 
     @Override
@@ -57,8 +81,16 @@ public class RanaDeFuego extends Enemigo implements EstadoEnemigo {
     }
 
     public PowerUp morir() {
-        // TODO Auto-generated method stub
-        return null;
+        estaVivo=false;
+        this.getJuego().getControladoraGrafica().sacarEntidad(this);
+        PowerUp powerUp = this.getJuego().getNivelActual().getMiFabrica().getFruta(miHitbox.getPosX(), miHitbox.getPosY());
+        this.getJuego().registrarObserver(powerUp);
+        this.getJuego().getNivelActual().agregarPowerUps(powerUp);
+        int dir = (Math.random() < 0.5) ? 0 : 180;
+        BolaDeNieve bola = this.getJuego().getNivelActual().getMiFabrica().getBolaDeNieve(miHitbox.getPosX(), miHitbox.getPosY(), dir);
+        this.getJuego().registrarObserver(bola);
+        this.getJuego().getNivelActual().agregarProyectiles(bola);
+        return powerUp;
     }
 
     @Override
@@ -69,7 +101,13 @@ public class RanaDeFuego extends Enemigo implements EstadoEnemigo {
 
     @Override
     public void moverse() {
-        cambiarEstado();
+        if (estadoNieve > ESTADO_INICIAL) {
+            estadoMovimiento = new EnemigoQuieto();
+        } else {
+            cambiarEstado();
+        }
+
+        verificarDerretimiento();
         estadoMovimiento.moverse(this, VELOCIDAD);
     //    if (estadoMovimiento == null) {
     //     estadoMovimiento = new EnemigoCaminandoDerecha();
@@ -124,15 +162,6 @@ public class RanaDeFuego extends Enemigo implements EstadoEnemigo {
     //     }
     }
 
-    private void actualizarDireccion(){
-        if(direccion==0){
-            direccion=180;
-        }else{
-            direccion=0;
-        }
-    }
-
-
     public void cambiarEstadoInmediato() {
         if(!estadoMovimiento.permiteMovimiento()) {
             EstadoMovimientoEnemigo estadoAnterior = estadoMovimiento.getEstadoAnterior();
@@ -154,12 +183,17 @@ public class RanaDeFuego extends Enemigo implements EstadoEnemigo {
     public void dispararFuego() {        
         if (miJuego != null && miJuego.getNivel() != null) {
             ProyectilFuego disparo= fabParaFuego.getProyectilFuego(miHitbox.getPosX(), miHitbox.getPosY(), direccion);
-            miJuego.registrarObserver(disparo);
             miJuego.getNivel().agregarProyectiles(disparo);
+            miJuego.registrarObserver(disparo);
         }
     }
     public void recibirDisparo() {
-        // TODO Auto-generated method stub        
+         if (estadoNieve == ESTADO_NIEVE_COMPLETO) {
+            morir();
+        } else {
+            estadoNieve++;
+            actualizarEstadoNieve();
+        }      
     }
 
     public void setEstado(EstadoEnemigo estado) {
@@ -224,16 +258,44 @@ public class RanaDeFuego extends Enemigo implements EstadoEnemigo {
 
     @Override
     public void colisionarProyectil(Proyectil p) {
-        
+        if (this.colisionaAABB(miHitbox, p.getHitbox())) {
+            p.afectar(this);
+        }
     }
 
-    @Override
-    public void recibirDisparo(DemonioRojo dr) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'recibirDisparo'");
+    private void verificarDerretimiento() {
+        if (estadoNieve <= ESTADO_INICIAL || tiempoFinCongelado == 0 || System.currentTimeMillis() < tiempoFinCongelado) {
+            return;
+        }
+        estadoNieve--;
+        actualizarEstadoNieve();
+    }
+
+    private void actualizarEstadoNieve() {
+        switch (estadoNieve) {
+            case ESTADO_INICIAL:
+                estadoNormal.recibirDisparo(this);
+                break;
+            case ESTADO_POCO_NIEVE:
+                estadoPocoCongelado.recibirDisparo(this);
+                break;
+            case ESTADO_MEDIO_NIEVE:
+                estadoMedioCongelado.recibirDisparo(this);
+                break;
+            case ESTADO_NIEVE_COMPLETO:
+                estadoCompletamenteCongelado.recibirDisparo(this);
+                break;
+        }
+        if (estadoNieve > ESTADO_INICIAL) {
+            tiempoFinCongelado = System.currentTimeMillis() + DURACION_CONGELADO_MS;
+        }
+        else {
+            tiempoFinCongelado = 0; 
+        }
     }
 
     public boolean esVolador() {
         return false;
     }
+
 }

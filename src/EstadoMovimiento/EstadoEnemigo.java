@@ -1,7 +1,7 @@
 package EstadoMovimiento;
 
-import Entidades.Enemigos.DemonioRojo;
+import Entidades.Enemigos.*;
 
 public interface EstadoEnemigo {
-    public void recibirDisparo(DemonioRojo dr);
+    public void recibirDisparo(Enemigo enemigo);
 }

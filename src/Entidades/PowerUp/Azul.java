@@ -33,7 +33,7 @@ public class Azul extends PowerUp {
         snowBro.sumarPuntaje(puntaje);
         snowBro.activarBoostAzul(duracionSnowBro);
         notificarObserver();
-        //eliminar();
+        eliminar();
     }
     
     @Override

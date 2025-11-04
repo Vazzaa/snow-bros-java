@@ -24,6 +24,7 @@ public class HiloEntidades  extends Thread {
             juego.moverEnemigos();
             juego.moverProyectiles();
             juego.verificarColisiones();
+            juego.actualizarPowerUps();
             juego.verificarColisionesProyectiles();
 
         } catch (InterruptedException e) {

@@ -5,19 +5,36 @@ import Entidades.Estructuras.Obstaculo;
 import Entidades.PowerUp.PowerUp;
 import Entidades.Proyectiles.Proyectil;
 import Entidades.SnowBro.SnowBro;
-import EstadoMovimiento.EstadoEnemigo;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
 import Visitors.Colisionable;
 import EstadoMovimiento.*;
 
-public class TrollAmarillo extends Enemigo implements EstadoEnemigo{
+public class TrollAmarillo extends Enemigo{
     
+    protected static final int ESTADO_INICIAL = 0; 
+    protected static final int ESTADO_POCO_NIEVE = 1;
+    protected static final int ESTADO_MEDIO_NIEVE = 2;
+    protected static final int ESTADO_NIEVE_COMPLETO = 3;
+
+    protected EstadoEnemigo estadoNormal;
+    protected EstadoEnemigo estadoPocoCongelado;
+    protected EstadoEnemigo estadoMedioCongelado;
+    protected EstadoEnemigo estadoCompletamenteCongelado;
+
+    private int estadoNieve;
     private static final int VELOCIDAD = 3;
     private int movimientoActual;
+    private long tiempoFinCongelado = 0;
+    private static final int DURACION_CONGELADO_MS = 3000;
 
     public TrollAmarillo(Skin skins, ModoDeJuego juego,int posX, int posY){
         super(skins, juego,posX, posY, 3,300);
+        estadoNieve = ESTADO_INICIAL;
+        estadoNormal = new EstadoNormal();
+        estadoPocoCongelado = new EstadoPocoCongelado();
+        estadoMedioCongelado = new EstadoMedioCongelado();
+        estadoCompletamenteCongelado = new EstadoCompletamenteCongelado();
     }
 
     @Override
@@ -39,8 +56,12 @@ public class TrollAmarillo extends Enemigo implements EstadoEnemigo{
     }
 
     public PowerUp morir() {
-        // TODO Auto-generated method stub
-        return null;
+        this.estaVivo = false;
+        this.getJuego().getControladoraGrafica().sacarEntidad(this);
+        PowerUp powerUp = this.getJuego().getNivelActual().getMiFabrica().getFruta(miHitbox.getPosX(), miHitbox.getPosY());
+        this.getJuego().registrarObserver(powerUp);
+        this.getJuego().getNivelActual().agregarPowerUps(powerUp);
+        return powerUp;
     }
 
     @Override
@@ -51,13 +72,25 @@ public class TrollAmarillo extends Enemigo implements EstadoEnemigo{
 
     @Override
     public void moverse() {
-        cambiarEstado();
+        if (estadoNieve > ESTADO_INICIAL) {
+            estadoMovimiento = new EnemigoQuieto();
+        } else {
+            cambiarEstado();
+        }
+
+        verificarDerretimiento();
         estadoMovimiento.moverse(this, VELOCIDAD);
     }
+    
 
     @Override
     public void recibirDisparo() {
-        // TODO Auto-generated method stub
+        if (estadoNieve == ESTADO_NIEVE_COMPLETO) {
+            morir();
+        } else {
+            estadoNieve++;
+            actualizarEstadoNieve();
+        }
         
     }
 
@@ -124,16 +157,44 @@ public class TrollAmarillo extends Enemigo implements EstadoEnemigo{
 
     @Override
     public void colisionarProyectil(Proyectil p) {
-        
-    }
-
-    @Override
-    public void recibirDisparo(DemonioRojo dr) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'recibirDisparo'");
+        if (this.colisionaAABB(miHitbox, p.getHitbox())) {
+            p.afectar(this);
+        }
     }
 
     public boolean esVolador() {
         return false;
     }
+
+    private void verificarDerretimiento() {
+        if (estadoNieve <= ESTADO_INICIAL || tiempoFinCongelado == 0 || System.currentTimeMillis() < tiempoFinCongelado) {
+            return;
+        }
+        estadoNieve--;
+        actualizarEstadoNieve();
+    }
+
+    private void actualizarEstadoNieve() {
+        switch (estadoNieve) {
+            case ESTADO_INICIAL:
+                estadoNormal.recibirDisparo(this);
+                break;
+            case ESTADO_POCO_NIEVE:
+                estadoPocoCongelado.recibirDisparo(this);
+                break;
+            case ESTADO_MEDIO_NIEVE:
+                estadoMedioCongelado.recibirDisparo(this);
+                break;
+            case ESTADO_NIEVE_COMPLETO:
+                estadoCompletamenteCongelado.recibirDisparo(this);
+                break;
+        }
+        if (estadoNieve > ESTADO_INICIAL) {
+            tiempoFinCongelado = System.currentTimeMillis() + DURACION_CONGELADO_MS;
+        }
+        else {
+            tiempoFinCongelado = 0; 
+        }
+    }
+
 }
