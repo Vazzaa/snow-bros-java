@@ -30,13 +30,8 @@ public class Azul extends PowerUp {
     
     @Override
     public void afectar(SnowBro snowBro) {
-        snowBro.setVelocidad(snowBro.getVelocidad() * 4);
         snowBro.sumarPuntaje(puntaje);
-        Timer timer = new Timer(duracionSnowBro, e -> {
-        snowBro.resetVelocidad(); 
-        });
-        timer.setRepeats(false);
-        timer.start();
+        snowBro.activarBoostAzul(duracionSnowBro);
         notificarObserver();
         //eliminar();
     }

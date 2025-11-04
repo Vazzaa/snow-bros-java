@@ -11,8 +11,6 @@ import Entidades.Proyectiles.ProyectilNieve;
 
 import java.util.List;
 
-import javax.swing.Timer;
-
 import Entidades.Enemigos.Enemigo;
 import EstadoMovimiento.EstadoMovimietoSnowBro;
 import Fabricas.FabricaEntidades;
@@ -38,6 +36,8 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     protected int puntaje;
     protected int vida;
     protected int velocidad;
+
+    private long tiempoFinalBoostAzul=0;
     
     //Constructor
     public SnowBro (Skin aspectos, ModoDeJuego juego, int x, int y, Jugador jug, Nivel nivelPerteneciente, FabricaEntidades crearNieve) {
@@ -100,11 +100,7 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         ProyectilNieve disparo = crearNieve.getProyectilNieve(miHitbox.getPosX(), miHitbox.getPosY(), estadoMovimiento.direccion);
         nivel.agregarProyectiles(disparo);
         miJuego.registrarObserver(disparo);
-         Timer timer = new Timer(disparo.getAlcance(), e -> {
-        miJuego.getControladoraGrafica().sacarEntidad(disparo); 
-        });
-        timer.setRepeats(false);
-        timer.start();
+        
     }
     
     public void moverse() {
@@ -115,6 +111,7 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         //     System.out.println("MOVIMIENTO DETECTADO - Derecha: " + derecha + ", Izquierda: " + izquierda + ", Salto: " + salto);
         //     System.out.println("Posición actual X: " + getPosX() + ", Y: " + getPosY());
         // }
+        verificarFinBoostAzul();
         estadoMovimiento.mover(derecha, izquierda, salto);
         notificarObserver();
     }
@@ -239,7 +236,6 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     public void colisionarProyectil(Proyectil p) {
         boolean colisiona = this.colisionaAABB(this.miHitbox, p.getHitbox());
         if (!colisiona) return;
-        System.out.println("SnowBro: colisionarProyectil(ProyectilFuego) hit -> afectar");
         afectar(p);
         return;
     }
@@ -250,6 +246,18 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
 
     public void detenerMovimiento() {
         estadoMovimiento.detenerMovimientoHorizontal();
+    }
+
+    public void activarBoostAzul(int duracion) {
+        velocidad = 6;
+        tiempoFinalBoostAzul = System.currentTimeMillis() + duracion;
+    }
+
+    private void verificarFinBoostAzul() {
+        if (velocidad==6 && System.currentTimeMillis() >= tiempoFinalBoostAzul) {
+            resetVelocidad();
+            tiempoFinalBoostAzul = 0;
+        }
     }
 
     

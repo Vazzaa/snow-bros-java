@@ -6,12 +6,6 @@ public class EstadoCompletamenteCongelado implements EstadoEnemigo {
 
     @Override
     public void recibirDisparo(DemonioRojo dr) {
-        dr.morir();
+        dr.getSkin().setEstadoActual(4);
     }
-
-    @Override
-    public void derretirse(DemonioRojo dr) {
-        dr.getSkin().setEstadoActual(6);
-    }
-    
 }

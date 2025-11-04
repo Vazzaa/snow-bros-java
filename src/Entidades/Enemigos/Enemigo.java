@@ -19,6 +19,7 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
     protected EstadoMovimientoEnemigo estadoMovimiento;
     protected long tiempoUltimoCambio;
     protected static final long INTERVALO_CAMBIO = 2800;
+    protected boolean estaVivo = true;
     
     
     public Enemigo(Skin skins, ModoDeJuego juego , int posX, int posY, int v, int p) {
@@ -69,5 +70,9 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
     public abstract void cambiarEstadoInmediato();
 
     public abstract boolean esVolador();
+
+    public boolean estaVivo() {
+        return estaVivo;
+    }
 
 } 

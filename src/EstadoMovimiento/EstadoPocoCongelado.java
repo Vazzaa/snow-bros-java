@@ -1,17 +1,13 @@
 package EstadoMovimiento;
 
 import Entidades.Enemigos.DemonioRojo;
+import Fabricas.FabricaSkin;
 
 public class EstadoPocoCongelado implements EstadoEnemigo {
 
     @Override
     public void recibirDisparo(DemonioRojo dr) {
-        dr.getSkin().setEstadoActual(6);
+        // En lugar de cambiar el índice, le asignamos la skin de BolaDeNieve.
+        dr.setSkin(dr.getJuego().getNivel().getMiFabrica().getFabricaSkin().crearSkinBolaDeNieve());
     }
-
-    @Override
-    public void derretirse(DemonioRojo dr) {
-        dr.getSkin().setEstadoActual(4);
-    }
-    
 }

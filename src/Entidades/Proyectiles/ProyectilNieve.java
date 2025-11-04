@@ -11,6 +11,7 @@ public class ProyectilNieve extends Proyectil{
     
     public ProyectilNieve (Skin s, ModoDeJuego juego,int x, int y,int dir) {
         super(s, juego, x, y, 5, 1, 1000, dir);
+        activarTemporizadorVida();
     }
 
     public void afectar(SnowBro s) {
@@ -18,7 +19,8 @@ public class ProyectilNieve extends Proyectil{
     }
 
     public void afectar(Enemigo e) {
-
+        e.recibirDisparo(); 
+        this.eliminar();    
     }
 
     public void afectar(Estructura es) {

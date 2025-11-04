@@ -1,6 +1,5 @@
 package Entidades.Enemigos;
 
-import javax.swing.Timer;
 import Entidades.Estructuras.Estructura;
 import Entidades.Estructuras.Obstaculo;
 import Entidades.PowerUp.PowerUp;
@@ -16,10 +15,10 @@ import Visitors.Colisionador;
 
 public class DemonioRojo extends Enemigo {
     
-    protected static final int ESTADO_NORMAL = 1;
-    protected static final int ESTADO_POCO_NIEVE = 2;
-    protected static final int ESTADO_MEDIO_NIEVE = 3;
-    protected static final int ESTADO_NIEVE_COMPLETO = 4;
+    protected static final int ESTADO_INICIAL = 0; // Estado normal, moviéndose
+    protected static final int ESTADO_POCO_NIEVE = 1; // Primer disparo, "BolaDeNieve1"
+    protected static final int ESTADO_MEDIO_NIEVE = 2;
+    protected static final int ESTADO_NIEVE_COMPLETO = 3;
 
     protected EstadoEnemigo estadoNormal;
     protected EstadoEnemigo estadoPocoCongelado;
@@ -27,12 +26,16 @@ public class DemonioRojo extends Enemigo {
     protected EstadoEnemigo estadoCompletamenteCongelado;
     
     protected int estadoNieve;
-    protected Timer timerDerretimiento;
     protected int movimientoActual;
     private static final int VELOCIDAD = 1;
+    
+    // Atributos para el temporizador de derretimiento
+    private long tiempoFinCongelado = 0;
+    private static final int DURACION_CONGELADO_MS = 3000;
+
     public DemonioRojo(Skin skins, ModoDeJuego juego ,int posX, int posY){
         super(skins, juego, posX, posY, 3,300);
-        estadoNieve = 0;
+        estadoNieve = ESTADO_INICIAL;
         estadoNormal = new EstadoNormal();
         estadoPocoCongelado = new EstadoPocoCongelado();
         estadoMedioCongelado = new EstadoMedioCongelado();
@@ -68,7 +71,13 @@ public class DemonioRojo extends Enemigo {
 
     @Override
     public void moverse() {
-        cambiarEstado();
+        if (estadoNieve > ESTADO_INICIAL) {
+            estadoMovimiento = new EnemigoQuieto();
+        } else {
+            cambiarEstado();
+        }
+
+        verificarDerretimiento();
         estadoMovimiento.moverse(this, VELOCIDAD);
     }
 
@@ -83,10 +92,14 @@ public class DemonioRojo extends Enemigo {
         return misAspectos;
     }
 
+    public void setSkin(Skin nuevaSkin) {
+        this.misAspectos = nuevaSkin;
+    }
+
     public PowerUp morir() {
-        this.getJuego().getNivelActual().getMisEnemigos().remove(this);
+        this.estaVivo = false;
         this.getJuego().getControladoraGrafica().sacarEntidad(this);
-        PowerUp powerUp = this.getJuego().getNivelActual().getMiFabrica().getPowerUpAzul(miHitbox.getPosX(), miHitbox.getPosY());
+        PowerUp powerUp = this.getJuego().getNivelActual().getMiFabrica().getFruta(miHitbox.getPosX(), miHitbox.getPosY());
         this.getJuego().registrarObserver(powerUp);
         this.getJuego().getNivelActual().agregarPowerUps(powerUp);
         BolaDeNieve bola = this.getJuego().getNivelActual().getMiFabrica().getBolaDeNieve(miHitbox.getPosX(), miHitbox.getPosY(), 1);
@@ -135,18 +148,17 @@ public class DemonioRojo extends Enemigo {
     }
 
     public void afectar(ProyectilNieve n) {
+        //creo q no hace nada
     }
 
     @Override
     public void colisionarPowerUp(PowerUp p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'colisionarPowerUp'");
+        //no hace nada
     }
 
     @Override
     public void colisionarEnemigo(Enemigo e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'colisionarEnemigo'");
+        //no hace nada
     }
 
     @Override
@@ -157,10 +169,8 @@ public class DemonioRojo extends Enemigo {
 
     @Override
     public void colisionarProyectil(Proyectil p) {
-        if (this.colisionaAABB(miHitbox, p.getHitbox())){
-            recibirDisparo();
-            p.getJuego().getControladoraGrafica().sacarEntidad(p);
-            p.getJuego().getNivel().getMisProyectiles().remove(p);
+        if (this.colisionaAABB(miHitbox, p.getHitbox())) {
+            p.afectar(this);
         }
     }
 
@@ -169,52 +179,43 @@ public class DemonioRojo extends Enemigo {
     }
     @Override
     public void recibirDisparo() {
-        estadoMovimiento = new EnemigoQuieto();
-        estadoNieve++;
+        if (estadoNieve == ESTADO_NIEVE_COMPLETO) {
+            morir();
+        } else {
+            estadoNieve++;
+            actualizarEstadoNieve();
+        }
+    }
+
+    private void verificarDerretimiento() {
+        if (estadoNieve <= ESTADO_INICIAL || tiempoFinCongelado == 0 || System.currentTimeMillis() < tiempoFinCongelado) {
+            return;
+        }
+        estadoNieve--;
+        actualizarEstadoNieve();
+    }
+
+    private void actualizarEstadoNieve() {
         switch (estadoNieve) {
-            case ESTADO_NORMAL:
+            case ESTADO_INICIAL:
                 this.estadoNormal.recibirDisparo(this);
-                estadoMovimiento = new EnemigoQuieto();
                 break;
-                case ESTADO_POCO_NIEVE:
+            case ESTADO_POCO_NIEVE:
                 this.estadoPocoCongelado.recibirDisparo(this);
-                estadoMovimiento = new EnemigoQuieto();
                 break;
             case ESTADO_MEDIO_NIEVE:
                 this.estadoMedioCongelado.recibirDisparo(this);
-                estadoMovimiento = new EnemigoQuieto();
                 break;
             case ESTADO_NIEVE_COMPLETO:
                 this.estadoCompletamenteCongelado.recibirDisparo(this);
                 break;
-                default:
-                break;
-            }
-        if (estadoNieve > ESTADO_NORMAL) {
-        timerDerretimiento = new Timer(3000, e -> derretirsePaso());
-        timerDerretimiento.setRepeats(false);
-        timerDerretimiento.start();
+        }
+        // Si está en cualquier estado de nieve, activamos el timer.
+        if (estadoNieve > ESTADO_INICIAL) {
+            tiempoFinCongelado = System.currentTimeMillis() + DURACION_CONGELADO_MS;
+        }
+        else {
+            tiempoFinCongelado = 0; 
         }
     }
-    private void derretirsePaso(){
-        switch (estadoNieve) {
-            case ESTADO_POCO_NIEVE:
-                estadoMovimiento = new EnemigoQuieto();
-                this.estadoPocoCongelado.derretirse(this);
-                break;
-            case ESTADO_MEDIO_NIEVE:
-                this.estadoMedioCongelado.derretirse(this);
-                estadoMovimiento = new EnemigoQuieto();
-                break;
-            case ESTADO_NIEVE_COMPLETO:
-                this.estadoCompletamenteCongelado.derretirse(this);
-                estadoMovimiento = new EnemigoQuieto();
-                break;
-        }
-        estadoNieve--;
-        if(estadoNieve == ESTADO_NORMAL){
-            timerDerretimiento.stop();
-        }
-    }
-
 }

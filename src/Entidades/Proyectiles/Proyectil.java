@@ -16,6 +16,9 @@ public abstract class Proyectil extends Entidad implements Colisionable{
     protected int alcance;
     protected int direccion; // 0 para derecha, 180 para izquierda
 
+    private long tiempoFinVida = 0;
+    private boolean vidaActiva = true;
+
     public Proyectil(Skin skins, ModoDeJuego juego,int x, int y, int vel, int dañ, int alc, int dir){
         super(skins, juego, x, y);
         velocidad = vel;
@@ -32,10 +35,24 @@ public abstract class Proyectil extends Entidad implements Colisionable{
         }
 
         // Futura lógica de colisiones y alcance puede ir aquí.
+        verificarTemporizadorVida();
+        notificarObserver();
+    }
 
-        if (observer != null) {
-            notificarObserver();
+    public void activarTemporizadorVida() {
+        tiempoFinVida = System.currentTimeMillis() + alcance;
+        vidaActiva = true;
+    }
+
+    public void verificarTemporizadorVida() {
+        if(vidaActiva && System.currentTimeMillis() >= tiempoFinVida) {
+            eliminar();
         }
+    }
+
+    public void eliminar() {
+        vidaActiva = false;
+        miJuego.getControladoraGrafica().sacarEntidad(this);
     }
 
     public abstract void afectar(SnowBro snowNBro);
@@ -51,4 +68,8 @@ public abstract class Proyectil extends Entidad implements Colisionable{
     }
 
     public abstract boolean afectaAEnemigos();
+
+    public boolean estaActivo() {
+        return vidaActiva;
+    }
 }

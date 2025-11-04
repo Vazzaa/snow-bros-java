@@ -1,17 +1,13 @@
 package EstadoMovimiento;
 
 import Entidades.Enemigos.DemonioRojo;
+import Fabricas.FabricaSkin;
 
 public class EstadoNormal implements EstadoEnemigo {
 
     @Override
     public void recibirDisparo(DemonioRojo dr) {
-        dr.getSkin().setEstadoActual(5);
+        // Le devolvemos su skin original de DemonioRojo.
+        dr.setSkin(dr.getJuego().getNivel().getMiFabrica().getFabricaSkin().crearSkinDemonioRojo());
     }
-
-    @Override
-    public void derretirse(DemonioRojo dr) {
-        // No hace nada porque ya está en estado normal
-    }
-    
 }

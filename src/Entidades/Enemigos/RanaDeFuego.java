@@ -1,7 +1,5 @@
 package Entidades.Enemigos;
 
-import javax.swing.Timer;
-
 import Entidades.Estructuras.Estructura;
 import Entidades.Estructuras.Obstaculo;
 import Entidades.PowerUp.PowerUp;
@@ -158,11 +156,6 @@ public class RanaDeFuego extends Enemigo implements EstadoEnemigo {
             ProyectilFuego disparo= fabParaFuego.getProyectilFuego(miHitbox.getPosX(), miHitbox.getPosY(), direccion);
             miJuego.registrarObserver(disparo);
             miJuego.getNivel().agregarProyectiles(disparo);
-            Timer timer = new Timer(disparo.getAlcance(), e -> {
-            miJuego.getControladoraGrafica().sacarEntidad(disparo); 
-            });
-            timer.setRepeats(false);
-            timer.start();
         }
     }
     public void recibirDisparo() {

@@ -156,12 +156,14 @@ public class Nivel {
         for (Enemigo enemigo : misEnemigos) {
             if (enemigo != null) enemigo.moverse();
         }
+        misEnemigos.removeIf(e -> !e.estaVivo());
     }
 
     public void moverProyectiles() {
         if (misProyectiles == null) return;
-        for (Proyectil proyectil : misProyectiles) {
-            if (proyectil != null) proyectil.mover();
+        for (Proyectil p : misProyectiles) {
+            p.mover();
         }
+        misProyectiles.removeIf(p -> !p.estaActivo());
     }
 }

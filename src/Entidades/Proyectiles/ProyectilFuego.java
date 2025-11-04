@@ -11,14 +11,15 @@ public class ProyectilFuego extends Proyectil{
 
     public ProyectilFuego (Skin s, ModoDeJuego juego, int x, int y, int vel, int dañ, int alc, int dir) {
         super(s, juego, x, y, 5, 1, 500, dir);
+        activarTemporizadorVida();
     }
 
     public void afectar(SnowBro s) {
 
     }
 
-    public void afectar(Enemigo e) {
-
+    public void afectar(Enemigo e) {        
+        // No hace nada.
     }
 
     public void afectar(Estructura es) {

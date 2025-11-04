@@ -25,6 +25,10 @@ public class FabricaEntidades {
         miJuego = juego;
     }
 
+    public FabricaSkin getFabricaSkin() {
+        return fabricaSkin;
+    }
+
     public SnowBro getSnowBro(int x, int y) {
         SnowBro s = new SnowBro(this.fabricaSkin.crearSkinSnowBro(), miJuego, x, y, null, null, this);
         return s;
