@@ -48,4 +48,10 @@ public class ProyectilBomba extends Proyectil{
     public int getAlcance() {
         return alcance;
     }
+
+    @Override
+    public boolean afectaAEnemigos() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'afectaAEnemigos'");
+    }
 }

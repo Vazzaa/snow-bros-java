@@ -26,5 +26,11 @@ public class SueloResbaladizo extends Obstaculo {
     public Skin getSkin() {
         return misAspectos;
     }
+
+    @Override
+    public boolean esSuelo() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'esSuelo'");
+    }
 }
 
