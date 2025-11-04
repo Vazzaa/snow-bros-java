@@ -8,5 +8,10 @@ public class EstadoPocoCongelado implements EstadoEnemigo {
     public void recibirDisparo(DemonioRojo dr) {
         dr.getSkin().setEstadoActual(6);
     }
+
+    @Override
+    public void derretirse(DemonioRojo dr) {
+        dr.getSkin().setEstadoActual(4);
+    }
     
 }

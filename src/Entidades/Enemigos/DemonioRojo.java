@@ -1,7 +1,6 @@
 package Entidades.Enemigos;
 
-import java.util.Timer;
-
+import javax.swing.Timer;
 import Entidades.Estructuras.Estructura;
 import Entidades.Estructuras.Obstaculo;
 import Entidades.PowerUp.PowerUp;
@@ -9,9 +8,7 @@ import Entidades.Proyectiles.BolaDeNieve;
 import Entidades.Proyectiles.Proyectil;
 import Entidades.Proyectiles.ProyectilNieve;
 import Entidades.SnowBro.SnowBro;
-import EstadoMovimiento.EstadoMovimientoEnemigo;
 import EstadoMovimiento.*;
-import EstadoMovimiento.Movible;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
 import Visitors.Colisionable;
@@ -73,29 +70,6 @@ public class DemonioRojo extends Enemigo {
     public void moverse() {
         cambiarEstado();
         estadoMovimiento.moverse(this, VELOCIDAD);
-    }
-
-    @Override
-    public void recibirDisparo() {
-        estadoMovimiento = new EnemigoQuieto();
-        estadoNieve++;
-        switch (estadoNieve) {
-            case ESTADO_NORMAL:
-                this.estadoNormal.recibirDisparo(this);
-                break;
-            case ESTADO_POCO_NIEVE:
-                this.estadoPocoCongelado.recibirDisparo(this);
-                break;
-            case ESTADO_MEDIO_NIEVE:
-                this.estadoMedioCongelado.recibirDisparo(this);
-                break;
-            case ESTADO_NIEVE_COMPLETO:
-                this.estadoCompletamenteCongelado.recibirDisparo(this);
-                break;
-            default:
-                break;
-        }
-
     }
 
     @Override
@@ -189,4 +163,54 @@ public class DemonioRojo extends Enemigo {
             p.getJuego().getNivel().getMisProyectiles().remove(p);
         }
     }
+    @Override
+    public void recibirDisparo() {
+        estadoMovimiento = new EnemigoQuieto();
+        estadoNieve++;
+        switch (estadoNieve) {
+            case ESTADO_NORMAL:
+                this.estadoNormal.recibirDisparo(this);
+                estadoMovimiento = new EnemigoQuieto();
+                break;
+                case ESTADO_POCO_NIEVE:
+                this.estadoPocoCongelado.recibirDisparo(this);
+                estadoMovimiento = new EnemigoQuieto();
+                break;
+            case ESTADO_MEDIO_NIEVE:
+                this.estadoMedioCongelado.recibirDisparo(this);
+                estadoMovimiento = new EnemigoQuieto();
+                break;
+            case ESTADO_NIEVE_COMPLETO:
+                this.estadoCompletamenteCongelado.recibirDisparo(this);
+                break;
+                default:
+                break;
+            }
+        if (estadoNieve > ESTADO_NORMAL) {
+        timerDerretimiento = new Timer(3000, e -> derretirsePaso());
+        timerDerretimiento.setRepeats(false);
+        timerDerretimiento.start();
+        }
+    }
+    private void derretirsePaso(){
+        switch (estadoNieve) {
+            case ESTADO_POCO_NIEVE:
+                estadoMovimiento = new EnemigoQuieto();
+                this.estadoPocoCongelado.derretirse(this);
+                break;
+            case ESTADO_MEDIO_NIEVE:
+                this.estadoMedioCongelado.derretirse(this);
+                estadoMovimiento = new EnemigoQuieto();
+                break;
+            case ESTADO_NIEVE_COMPLETO:
+                this.estadoCompletamenteCongelado.derretirse(this);
+                estadoMovimiento = new EnemigoQuieto();
+                break;
+        }
+        estadoNieve--;
+        if(estadoNieve == ESTADO_NORMAL){
+            timerDerretimiento.stop();
+        }
+    }
+
 }
