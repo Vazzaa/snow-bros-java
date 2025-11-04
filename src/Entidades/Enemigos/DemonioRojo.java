@@ -189,4 +189,8 @@ public class DemonioRojo extends Enemigo {
             p.getJuego().getNivel().getMisProyectiles().remove(p);
         }
     }
+
+    public boolean esVolador() {
+        return false;
+    }
 }

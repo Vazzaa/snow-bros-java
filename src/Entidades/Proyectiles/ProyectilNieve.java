@@ -37,5 +37,8 @@ public class ProyectilNieve extends Proyectil{
     public int getAlcance() {
         return alcance;
     }
-
+    
+    public boolean afectaAEnemigos() {
+        return true;
+    }
 }

@@ -10,13 +10,21 @@ import Fabricas.FabricaEntidades;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
 import Visitors.Colisionable;
+import EstadoMovimiento.EnemigoVoladorCaminandoIzquierda;
+import EstadoMovimiento.EnemigoVoladorCaminandoDerecha;
+import EstadoMovimiento.EnemigoVoladorQuieto;
+import EstadoMovimiento.EnemigoVoladorDiagonal;
 
 public class Fantasma extends Enemigo implements EstadoEnemigo{
     
-    protected FabricaEntidades fabParaCalabaza;
+    protected FabricaEntidades mFabricaEntidades;
+    protected int movimientoActual;
+    private static final int VELOCIDAD = 1;
 
     public Fantasma(Skin skins,ModoDeJuego juego ,int posX, int posY){
         super(skins, juego, posX, posY, 0,300);
+        estadoMovimiento = new EnemigoVoladorCaminandoIzquierda();
+        tiempoUltimoCambio = System.currentTimeMillis();
     }
 
     @Override
@@ -45,8 +53,8 @@ public class Fantasma extends Enemigo implements EstadoEnemigo{
 
     @Override
     public void moverse() {
-        // TODO Auto-generated method stub
-        
+        cambiarEstado();
+        estadoMovimiento.moverse(this, VELOCIDAD);
     }
 
     @Override
@@ -68,8 +76,25 @@ public class Fantasma extends Enemigo implements EstadoEnemigo{
 
     @Override
     public void cambiarEstado() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cambiarEstado'");
+        movimientoActual = (int) (Math.random()*4+1);
+        long tiempoActual = System.currentTimeMillis();
+        if (tiempoActual - tiempoUltimoCambio >= INTERVALO_CAMBIO) {
+            switch(movimientoActual){
+                case 1:
+                     estadoMovimiento = new EnemigoVoladorCaminandoIzquierda();
+                    break;
+                case 2:
+                    estadoMovimiento = new EnemigoVoladorCaminandoDerecha();
+                    break;
+                case 3:
+                    estadoMovimiento = new EnemigoVoladorQuieto();
+                    break;
+                case 4:
+                    estadoMovimiento = new EnemigoVoladorDiagonal();
+                    break;
+                }
+            tiempoUltimoCambio = tiempoActual;
+        }
     }
 
     public void cambiarEstadoInmediato() {
@@ -112,5 +137,9 @@ public class Fantasma extends Enemigo implements EstadoEnemigo{
     public void recibirDisparo(DemonioRojo dr) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'recibirDisparo'");
+    }
+
+    public boolean esVolador() {
+        return true;
     }
 }

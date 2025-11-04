@@ -106,6 +106,11 @@ public class FabricaEntidades {
         return new Plataforma(this.fabricaSkin.crearSkinPlataforma(), miJuego, x, y);
     }
 
+    public Plataforma getPlataformaSuelo(int x, int y) {
+        Plataforma platSuelo = new Plataforma(this.fabricaSkin.crearSkinPlataforma(), miJuego, x, y, true);
+        return platSuelo;
+    }
+
     public ProyectilBomba getProyectilBomba(int x, int y) {
         return null;
         //return new ProyetilBomba(this.fabricaSkin.crearSkinProyectilBomba(), x, y);

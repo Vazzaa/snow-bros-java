@@ -117,4 +117,8 @@ public class Moghera extends Enemigo{
     public void colisionarProyectil(Proyectil p) {
         
     }
+
+    public boolean esVolador() {
+        return false;
+    }
 }
