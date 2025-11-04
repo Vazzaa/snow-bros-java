@@ -76,7 +76,7 @@ public class ModoDeJuego implements ControladorJuego {
 	public void iniciar() {
 		CreadorDeNivel creador = new CreadorDeNivel(fabricaSkins);
 		creador.setFrabricaEntidades(miFabricaEntidades);
-		nivelActual = creador.leerArchivo("nivel_simple.json");
+		nivelActual = creador.leerArchivo("nivel1.txt");
 		nivelActual.getSnowBro().setNivel(nivelActual);
 		nivelActual.getSnowBro().setJugador(new Jugador(nombreJugador, 0));
 		registrarObservers();

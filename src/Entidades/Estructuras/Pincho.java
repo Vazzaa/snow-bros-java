@@ -43,4 +43,10 @@ public class Pincho extends Obstaculo{
     public boolean esColisionable() {
         return true;
     }
+
+    @Override
+    public boolean esSuelo() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'esSuelo'");
+    }
 }
