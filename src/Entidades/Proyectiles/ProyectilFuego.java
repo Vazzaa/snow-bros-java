@@ -34,9 +34,12 @@ public class ProyectilFuego extends Proyectil{
         return misAspectos;
     }
 
-    @Override
     public int getAlcance() {
         return alcance;
     }
 
+    @Override
+    public boolean afectaAEnemigos() {
+        return false;
+    }
 }

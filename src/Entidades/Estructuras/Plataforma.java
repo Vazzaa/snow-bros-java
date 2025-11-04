@@ -7,10 +7,20 @@ import Juego.ModoDeJuego;
 
 public class Plataforma extends Estructura{
 
+    protected boolean esPlataformaSuelo;
+
     public Plataforma(Skin s, ModoDeJuego juego, int x, int y) {
         super(s, juego, x, y);
         miHitbox.setAncho(12);
         miHitbox.setAlto(32);
+        esPlataformaSuelo = false;
+    }
+
+    public Plataforma(Skin s, ModoDeJuego juego, int x, int y, boolean esSuelo) {
+        super(s, juego, x, y);
+        miHitbox.setAncho(12);
+        miHitbox.setAlto(32);
+        esPlataformaSuelo = esSuelo;
     }
 
     public void afectar(SnowBro s) {
@@ -36,5 +46,9 @@ public class Plataforma extends Estructura{
 
     public boolean bloquearMovimientoHorizontal() {
         return false;
+    }
+
+    public boolean esSuelo() {
+        return esPlataformaSuelo;
     }
 }

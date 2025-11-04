@@ -132,6 +132,8 @@ public class CreadorDeNivel {
         switch (data.tipo.toLowerCase()) {
             case "plataforma":
                 return fabEntidades.getPlataforma(data.x, data.y);
+            case "suelo":
+                return fabEntidades.getPlataformaSuelo(data.x, data.y);
             case "platmovil":
                 return fabEntidades.getPlatMovil(data.x, data.y);
             case "platquebradiza":

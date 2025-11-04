@@ -49,4 +49,6 @@ public abstract class Proyectil extends Entidad implements Colisionable{
     public void aceptarColision(Colisionador c) {
         c.colisionarProyectil(this);
     }
+
+    public abstract boolean afectaAEnemigos();
 }

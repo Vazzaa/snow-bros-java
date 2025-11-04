@@ -240,5 +240,7 @@ public class RanaDeFuego extends Enemigo implements EstadoEnemigo {
         throw new UnsupportedOperationException("Unimplemented method 'recibirDisparo'");
     }
 
-
+    public boolean esVolador() {
+        return false;
+    }
 }

@@ -30,8 +30,11 @@ public class BolaDeNieve extends Proyectil{
         throw new UnsupportedOperationException("Unimplemented method 'afectar'");
     }
 
-    @Override
     public int getAlcance() {
         return alcance;
+    }
+
+    public boolean afectaAEnemigos() {
+        return true;
     }
 }

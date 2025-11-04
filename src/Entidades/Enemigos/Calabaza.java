@@ -19,6 +19,23 @@ public class Calabaza extends Enemigo implements EstadoEnemigo{
 
     public Calabaza(Skin skins , ModoDeJuego juego , int posX, int posY){
         super(skins, juego, posX, posY, 0,300);
+        // Inicializar con un estado aleatorio para movimiento libre
+        int estadoInicial = (int) (Math.random()*4+1);
+        switch(estadoInicial){
+            case 1:
+                estadoMovimiento = new EnemigoVoladorCaminandoIzquierda();
+                break;
+            case 2:
+                estadoMovimiento = new EnemigoVoladorCaminandoDerecha();
+                break;
+            case 3:
+                estadoMovimiento = new EnemigoVoladorQuieto();
+                break;
+            case 4:
+                estadoMovimiento = new EnemigoVoladorDiagonal();
+                break;
+        }
+        tiempoUltimoCambio = System.currentTimeMillis();
     }
 
     @Override
@@ -80,16 +97,16 @@ public class Calabaza extends Enemigo implements EstadoEnemigo{
         if (tiempoActual - tiempoUltimoCambio >= INTERVALO_CAMBIO) {
             switch(movimientoActual){
                 case 1:
-                     estadoMovimiento = new EnemigoCaminandoIzquierda();
+                     estadoMovimiento = new EnemigoVoladorCaminandoIzquierda();
                     break;
                 case 2:
-                    estadoMovimiento = new EnemigoCaminandoDerecha();
+                    estadoMovimiento = new EnemigoVoladorCaminandoDerecha();
                     break;
                 case 3:
-                    estadoMovimiento = new EnemigoQuieto();
+                    estadoMovimiento = new EnemigoVoladorQuieto();
                     break;
                 case 4:
-                    estadoMovimiento = new EnemigoDiagonal();
+                    estadoMovimiento = new EnemigoVoladorDiagonal();
                     break;
                 }
             tiempoUltimoCambio = tiempoActual;
@@ -97,10 +114,22 @@ public class Calabaza extends Enemigo implements EstadoEnemigo{
     }
 
     public void cambiarEstadoInmediato() {
-        if (estadoMovimiento != null) {
-            estadoMovimiento = estadoMovimiento.getEstadoOpuesto();
-            tiempoUltimoCambio = System.currentTimeMillis();
+        int nuevoEstado = (int) (Math.random()*4+1);
+        switch(nuevoEstado){
+            case 1:
+                estadoMovimiento = new EnemigoVoladorCaminandoIzquierda();
+                break;
+            case 2:
+                estadoMovimiento = new EnemigoVoladorCaminandoDerecha();
+                break;
+            case 3:
+                estadoMovimiento = new EnemigoVoladorQuieto();
+                break;
+            case 4:
+                estadoMovimiento = new EnemigoVoladorDiagonal();
+                break;
         }
+        tiempoUltimoCambio = System.currentTimeMillis();
     }
 
 
@@ -112,8 +141,7 @@ public class Calabaza extends Enemigo implements EstadoEnemigo{
 
     @Override
     public void colisionarEnemigo(Enemigo e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'colisionarEnemigo'");
+        
     }
 
     @Override
@@ -136,6 +164,10 @@ public class Calabaza extends Enemigo implements EstadoEnemigo{
     public void recibirDisparo(DemonioRojo dr) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'recibirDisparo'");
+    }
+
+    public boolean esVolador() {
+        return true;
     }
 
 }

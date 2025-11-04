@@ -11,6 +11,8 @@ import Entidades.Enemigos.*;
 import Entidades.PowerUp.*;
 import Entidades.Proyectiles.Proyectil;
 import Entidades.Estructuras.*;
+import Entidades.Proyectiles.Proyectil;
+import Entidades.Proyectiles.ProyectilFuego;
 
 public class Nivel {
 
@@ -116,10 +118,18 @@ public class Nivel {
 
     public void verificarColisionesProyectiles() {
         try {
-            if (misEnemigos != null) {
-                for (Enemigo enemigo : misEnemigos) {
-                    for (Proyectil proyectil : misProyectiles) {
-                         enemigo.colisionarProyectil(proyectil);
+            if (misProyectiles != null) {
+                for (Proyectil proyectil : misProyectiles) {
+                    if (proyectil.afectaAEnemigos()) {
+                        if (misEnemigos != null) {
+                            for (Enemigo enemigo : misEnemigos) {
+                                enemigo.colisionarProyectil(proyectil);
+                            }
+                        }
+                    } else {
+                        if (snowBro != null) {
+                            snowBro.colisionarProyectil(proyectil);
+                        }
                     }
                 }
             }

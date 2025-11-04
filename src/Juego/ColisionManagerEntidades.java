@@ -3,9 +3,6 @@ package Juego;
 import java.util.List;
 
 import Entidades.Estructuras.Estructura;
-import Entidades.Estructuras.Plataforma;
-import Entidades.*;
-import Juego.Hitbox;
 
 public class ColisionManagerEntidades {
     
@@ -78,4 +75,8 @@ public class ColisionManagerEntidades {
 
         return plataformaMasCercana;
     }
+
+
 }
+
+        

@@ -133,5 +133,7 @@ public class TrollAmarillo extends Enemigo implements EstadoEnemigo{
         throw new UnsupportedOperationException("Unimplemented method 'recibirDisparo'");
     }
 
-
+    public boolean esVolador() {
+        return false;
+    }
 }
