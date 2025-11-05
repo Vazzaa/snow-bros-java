@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import Entidades.Jugador.Jugador;
 import Entidades.PowerUp.PowerUp;
@@ -47,9 +48,9 @@ public class CreadorDeNivel {
     }
 
     public Nivel leerArchivo(String rutaArchivo) {
-        List<Estructura> estructuras = new ArrayList<>();
-        List<Enemigo> enemigos = new ArrayList<>();
-        List<PowerUp> powerups = new ArrayList<>();
+        List<Estructura> estructuras = new CopyOnWriteArrayList<>();
+        List<Enemigo> enemigos = new CopyOnWriteArrayList<>();
+        List<PowerUp> powerups = new CopyOnWriteArrayList<>();
         SnowBro jugador = null;
         int numeroNivel = 1;
         

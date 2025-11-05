@@ -2,6 +2,7 @@ package Juego;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.Movible;
@@ -31,8 +32,8 @@ public class Nivel {
         this.snowBro = snowBro;
         this.misEstructuras = misEstructuras;
         this.misEnemigos = misEnemigos;
-        misPowerUps = new LinkedList<PowerUp>();
-        misProyectiles = new LinkedList<Proyectil>();
+        misPowerUps = new CopyOnWriteArrayList<PowerUp>();
+        misProyectiles = new CopyOnWriteArrayList<Proyectil>();
         this.miFabrica = miFabrica;
         miJuego = null;
     }
@@ -80,11 +81,11 @@ public class Nivel {
     }
 
     public void agregarEnemigos(Enemigo e){
-        misEnemigos.addLast(e);
+        misEnemigos.add(e);
     }
 
     public void agregarPowerUps(PowerUp p){
-        misPowerUps.addLast(p);
+        misPowerUps.add(p);
     }
     
     public void eliminarPowerUp(PowerUp p){
@@ -93,11 +94,11 @@ public class Nivel {
     }
 
     public void agregarEstructura(Estructura e){
-        misEstructuras.addLast(e);
+        misEstructuras.add(e);
     }
 
     public void agregarProyectiles(Proyectil p){
-        misProyectiles.addLast(p);
+        misProyectiles.add(p);
     }
 
     public void moverSnowBro(){
