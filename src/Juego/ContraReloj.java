@@ -1,50 +1,120 @@
 package Juego;
 
+import Entidades.Jugador.Jugador;
+import Grafica.ControladorGrafica;
+
 public class ContraReloj extends ModoDeJuego{
 
-    protected float Timer;
+    private static final int CANTIDAD_NIVELES = 2;
+    private static final long TIEMPO_LIMITE_MS = 180000;
 
-    public ContraReloj () {
+    protected long tiempoInicio;
+    protected long tiempoRestante;
+    protected boolean tiempoAgotado;
 
+    //protected float Timer;
+
+    public ContraReloj(ControladorGrafica controladorGrafica) {
+        super(controladorGrafica);
+        tiempoAgotado = false;
     }
-
-    public void PasarNivel() {
-        
-    }
-
-    @Override
-    public void cambiarDireccionJugador(int n) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void cambiarModoDeJuego() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public boolean estaColisionando(Entidad e) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
     @Override
     public void iniciar() {
-        // TODO Auto-generated method stub
+        jugador = new Jugador(nombreJugador, 0);
         
+        tiempoInicio = System.currentTimeMillis();
+        tiempoRestante = TIEMPO_LIMITE_MS;
+        tiempoAgotado = false;
+
+        cargarNivel(1, 0);
+        
+        controlaGrafica.mostrarPantallaNivel();
+        iniciarHilos();
+        
+        System.out.println("Modo Contrareloj iniciado");
+        System.out.println("Tiempo límite: " + (TIEMPO_LIMITE_MS / 1000) + " segundos");
     }
 
-    @Override
-    public void lanzarProyectil() {
-        // TODO Auto-generated method stub
+    public void verificarNivelCompletado() {
+        if (nivelActual == null) return;
         
+        actualizarTiempo();
+        
+        if (tiempoAgotado) {
+            System.out.println("¡Tiempo agotado!");
+            juegoCompletado();
+            return;
+        }
+        
+        if (nivelActual.estaCompletado()) {
+            System.out.println("Nivel " + numeroNivelActual + " completado.");
+            System.out.println("Tiempo restante: " + (tiempoRestante / 1000) + " segundos");
+            
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            
+            avanzarSiguienteNivel();
+        }
     }
 
-    @Override
-    public void moverAbajo() {
-        // TODO Auto-generated method stub
+    private void actualizarTiempo() {
+        long tiempoTranscurrido = System.currentTimeMillis() - tiempoInicio;
+        tiempoRestante = TIEMPO_LIMITE_MS - tiempoTranscurrido;
         
+        if (tiempoRestante <= 0) {
+            tiempoRestante = 0;
+            tiempoAgotado = true;
+        }
+        
+        if (tiempoRestante <= 30000 && tiempoRestante > 29000) {
+            System.out.println("ADVERTENCIA: 30 segundos restantes.");
+        } else if (tiempoRestante <= 10000 && tiempoRestante > 9000) {
+            System.out.println("ADVERTENCIA: 10 segundos restantes.");
+        }
+    }
+
+    public int getTiempoRestanteSegundos() {
+        return (int) (tiempoRestante / 1000);
+    }
+
+    public String getTiempoRestanteFormateado() {
+        int segundosTotales = getTiempoRestanteSegundos();
+        int minutos = segundosTotales / 60;
+        int segundos = segundosTotales % 60;
+        return String.format("%02d:%02d", minutos, segundos);
+    }
+
+    public void juegoCompletado() {
+        detenerHilos();
+        controlaGrafica.mostrarPantallaGameOver();
+    }
+
+    protected void avanzarSiguienteNivel() {
+        int puntajeActual = nivelActual.getSnowBro().getPuntaje();
+        
+        detenerHilos();
+        limpiarNivelActual();
+        
+        int siguienteNivel = numeroNivelActual + 1;
+        
+        if (siguienteNivel <= CANTIDAD_NIVELES) {
+            String archivoSiguienteNivel = "nivel" + siguienteNivel + ".txt";
+            java.io.File archivo = new java.io.File(archivoSiguienteNivel);
+            
+            if (archivo.exists()) {
+                System.out.println("Cargando nivel " + siguienteNivel + "...");
+                cargarNivel(siguienteNivel, puntajeActual);
+                iniciarHilos();
+            } else {
+                System.err.println("ERROR: No se encontró el archivo " + archivoSiguienteNivel);
+                juegoCompletado();
+            }
+        } else {
+            System.out.println("Todos los niveles completados a tiempo.");
+            juegoCompletado();
+        }
     }
 }

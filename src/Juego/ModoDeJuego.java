@@ -83,14 +83,6 @@ public abstract class ModoDeJuego implements ControladorJuego {
 	public abstract void verificarNivelCompletado();
 	public abstract void juegoCompletado();
 
-	// public void iniciar() {
-	// 	jugador = new Jugador(nombreJugador, 0);
-	// 	cargarNivel(1, 0);
-
-	// 	controlaGrafica.mostrarPantallaNivel();
-	// 	iniciarHilos();
-	// }
-
 	protected void cargarNivel(int numeroNivel, int puntaje) {
 		String archivoNivel = "nivel" + numeroNivel + ".txt";
 
@@ -107,37 +99,6 @@ public abstract class ModoDeJuego implements ControladorJuego {
 		numeroNivelActual = numeroNivel;
 		registrarObservers();
 	}
-
-	public void avanzarSiguienteNivel() {
-		int puntajeActual = nivelActual.getSnowBro().getPuntaje();
-		detenerHilos();
-		limpiarNivelActual();
-		int siguienteNivel = numeroNivelActual + 1;
-
-		String archivoSiguienteNivel = "nivel" + siguienteNivel + ".txt";
-		java.io.File archivo = new java.io.File(archivoSiguienteNivel);
-
-		if(archivo.exists()) {
-			cargarNivel(siguienteNivel, puntajeActual);
-			iniciarHilos();
-			System.out.println("Nivel " + siguienteNivel + " cargado.");
-		} else {
-			System.out.println("No hay mas niveles. Fin.");
-			juegoCompletado();
-		}
-	}
-	
-	// public void verificarNivelCompletado() {
-	// 	if (nivelActual != null && nivelActual.estaCompletado()) {
-	// 		try {
-	// 			Thread.sleep(1000);
-	// 		} catch (InterruptedException e) {
-	// 			e.printStackTrace();
-	// 		}
-
-	// 		avanzarSiguienteNivel();
-	// 	}
-	// }
 
 	protected void limpiarNivelActual() {
 		if(nivelActual == null)
@@ -182,12 +143,6 @@ public abstract class ModoDeJuego implements ControladorJuego {
 			}
 		}
 	}
-
-	// private void juegoCompletado() {
-	// 	detenerHilos();
-	// 	controlaGrafica.mostrarPantallaGameOver();
-	// 	System.out.println("Juego completado. Puntuación final: " + jugador.getPuntaje());
-	// }
 
 	protected void registrarObservers() {
 		registrarObserverJugador(nivelActual.getSnowBro());

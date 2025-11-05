@@ -22,18 +22,6 @@ public class Supervivencia extends ModoDeJuego {
         random = new Random();
     }
 
-    public void CrearOleada() {
-
-    }
-
-    public void PasarNivel() {
-
-    }
-
-    public void terminarJuego() {
-
-    }
-
     @Override
     public void iniciar() {
         jugador = new Jugador(nombreJugador, 0);
@@ -45,5 +33,76 @@ public class Supervivencia extends ModoDeJuego {
         
         System.out.println("Modo Supervivencia iniciado");
         System.out.println("Objetivo: Alcanzar " + PUNTUACION_OBJETIVO + " puntos");
+    }
+
+    @Override
+    public void verificarNivelCompletado() {
+        if (nivelActual == null)
+            return;
+        
+        int puntajeActual = nivelActual.getSnowBro().getPuntaje();
+
+        if (puntajeActual >= PUNTUACION_OBJETIVO) {
+            System.out.println("Objetivo alcanzado.");
+            juegoCompletado();
+            return;
+        }
+        
+        if (nivelActual.getMisEnemigos().size() <= MIN_ENEMIGOS) {
+            crearOleadaEnemigos();
+        }
+    }
+
+    private void crearOleadaEnemigos() {
+        numeroOleada++;
+        System.out.println("Oleada " + numeroOleada + ". Apareciendo " + ENEMIGOS_POR_OLEADA + " enemigos...");
+        
+        for (int i = 0; i < ENEMIGOS_POR_OLEADA; i++) {
+            crearEnemigoAleatorio();
+        }
+    }
+
+    private void crearEnemigoAleatorio() {
+        if (nivelActual == null || miFabricaEntidades == null) return;
+        
+        // Posiciones aleatorias dentro del nivel
+        // Ajusta estos valores según el tamaño de tu nivel
+        int x = 100 + random.nextInt(600); // Entre 100 y 700
+        int y = 7600 + random.nextInt(200); // Entre 7600 y 7800
+        
+        String[] tiposEnemigos = {"demonioRojo", "calabaza", "trollAmarillo", "ranaDeFuego", "moghera"};
+        String tipoEnemigo = tiposEnemigos[random.nextInt(tiposEnemigos.length)];
+        
+        Enemigo nuevoEnemigo = null;
+        
+        switch (tipoEnemigo) {
+            case "demonioRojo":
+                nuevoEnemigo = miFabricaEntidades.getDemonioRojo(x, y);
+                break;
+            case "calabaza":
+                nuevoEnemigo = miFabricaEntidades.getCalabaza(x, y);
+                break;
+            case "trollAmarillo":
+                nuevoEnemigo = miFabricaEntidades.getTrollAmarillo(x, y);
+                break;
+            case "ranaDeFuego":
+                nuevoEnemigo = miFabricaEntidades.getRanaDeFuego(x, y);
+                break;
+            case "moghera":
+                nuevoEnemigo = miFabricaEntidades.getMoghera(x, y);
+                break;
+        }
+        
+        if (nuevoEnemigo != null) {
+            nivelActual.agregarEnemigos(nuevoEnemigo);
+            registrarObserver(nuevoEnemigo);
+            System.out.println("Enemigo creado: " + tipoEnemigo + " en (" + x + ", " + y + ")");
+        }
+    }
+
+    @Override
+    public void juegoCompletado() {
+        detenerHilos();
+        controlaGrafica.mostrarPantallaGameOver();
     }
 }
