@@ -23,6 +23,7 @@ public class ModoDeJuego implements ControladorJuego {
 	protected CreadorDeNivel miCreadorNivel;
 	protected String nombreJugador;
 	protected FabricaSkin fabricaSkins;
+	protected int numeroNivelActual;
 	
 	// Comandos
 	public ModoDeJuego(ControladorGrafica controlador_grafica) {
@@ -31,6 +32,7 @@ public class ModoDeJuego implements ControladorJuego {
 		miFabricaEntidades = new FabricaEntidades(fabricaSkins, this);
 		miCreadorNivel = new CreadorDeNivel(fabricaSkins);
 		miCreadorNivel.setFrabricaEntidades(miFabricaEntidades);
+		numeroNivelActual = 1;
 	}
 	public ControladorGrafica getControladoraGrafica(){
 		return controlaGrafica;
@@ -74,19 +76,80 @@ public class ModoDeJuego implements ControladorJuego {
 
 	@Override
 	public void iniciar() {
+		cargarNivel(1);
+
+		controlaGrafica.mostrarPantallaNivel();
+		iniciarHilos();
+	}
+
+	private void cargarNivel(int numeroNivel) {
+		String archivoNivel = "nivel" + numeroNivel + ".txt";
+
 		CreadorDeNivel creador = new CreadorDeNivel(fabricaSkins);
 		creador.setFrabricaEntidades(miFabricaEntidades);
-		nivelActual = creador.leerArchivo("nivel1.txt");
+		nivelActual = creador.leerArchivo(archivoNivel);
+
 		nivelActual.getSnowBro().setNivel(nivelActual);
 		nivelActual.getSnowBro().setJugador(new Jugador(nombreJugador, 0));
+
 		registrarObservers();
-		controlaGrafica.mostrarPantallaNivel();
+	}
+
+	public void avanzarSiguienteNivel() {
+		limpiarNivelActual();
+		numeroNivelActual += 1;
+
+		try {
+			cargarNivel(numeroNivelActual);
+			iniciarHilos();
+		} catch (Exception e) {
+			System.out.println("No hay mas niveles. Fin.");
+			//juegoCompletado();
+		}
+	}
+	
+	public void verificarNivelCompletado() {
+		if (nivelActual != null && nivelActual.estaCompletado()) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			avanzarSiguienteNivel();
+		}
+	}
+
+	private void limpiarNivelActual() {
+		if(nivelActual == null)
+			return;
+		
+		controlaGrafica.sacarJugador(nivelActual.getSnowBro());
+
+		for(Estructura es : nivelActual.getMisEstructuras()){
+			controlaGrafica.sacarEntidad(es);
+		}
+		for(Enemigo en : nivelActual.getMisEnemigos()){
+			controlaGrafica.sacarEntidad(en);
+		}
+		for(PowerUp pu : nivelActual.getMisPowerUps()){
+			controlaGrafica.sacarEntidad(pu);
+		}
+	}
+
+	private void iniciarHilos() {
 		HiloJugador hiloJugador = new HiloJugador(nivelActual);
 		hiloJugador.start();
 		HiloEntidades hiloEntidades = new HiloEntidades(nivelActual);
 		hiloEntidades.start();
-
 	}
+
+	/*
+	private void juegoCompletado() {
+		detenerHilos();
+		controlaGrafica.mostrarPantallaVictoria();
+	}
+	*/
 
 	protected void registrarObservers() {
 		registrarObserverJugador(nivelActual.getSnowBro());
@@ -155,16 +218,7 @@ public class ModoDeJuego implements ControladorJuego {
 	}
 
 	public void reiniciarNivel() {
-		controlaGrafica.sacarJugador(nivelActual.getSnowBro());
-		for(Estructura es : nivelActual.getMisEstructuras()){
-			controlaGrafica.sacarEntidad(es);
-		}
-		for(Enemigo en : nivelActual.getMisEnemigos()){
-			controlaGrafica.sacarEntidad(en);
-		}
-		for(PowerUp pu : nivelActual.getMisPowerUps()){
-			controlaGrafica.sacarEntidad(pu);
-		}
+		limpiarNivelActual();
 		nivelActual.reiniciarNivel();
 	}
 

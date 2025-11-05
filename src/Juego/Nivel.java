@@ -174,4 +174,8 @@ public class Nivel {
         }
         misPowerUps.removeIf(p -> !p.estaActivo());
     }
+
+    public boolean estaCompletado() {
+        return misEnemigos.isEmpty();
+    }
 }
