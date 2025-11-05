@@ -3,6 +3,7 @@ package Entidades.Enemigos;
 import Entidades.Estructuras.Estructura;
 import Entidades.Estructuras.Obstaculo;
 import Entidades.PowerUp.PowerUp;
+import Entidades.Proyectiles.BolaDeNieve;
 import Entidades.Proyectiles.Proyectil;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
@@ -56,12 +57,23 @@ public class TrollAmarillo extends Enemigo{
     }
 
     public PowerUp morir() {
-        this.estaVivo = false;
+        estaVivo=false;
+        getJuego().getNivel().getSnowBro().sumarPuntaje(puntaje);
         this.getJuego().getControladoraGrafica().sacarEntidad(this);
         PowerUp powerUp = this.getJuego().getNivelActual().getMiFabrica().getFruta(miHitbox.getPosX(), miHitbox.getPosY());
+        skinAleatoriaFruta(powerUp);
         this.getJuego().registrarObserver(powerUp);
         this.getJuego().getNivelActual().agregarPowerUps(powerUp);
+        int dir = (Math.random() < 0.5) ? 0 : 180;
+        BolaDeNieve bola = this.getJuego().getNivelActual().getMiFabrica().getBolaDeNieve(miHitbox.getPosX(), miHitbox.getPosY(), dir);
+        this.getJuego().registrarObserver(bola);
+        this.getJuego().getNivelActual().agregarProyectiles(bola);
         return powerUp;
+    }
+
+    private void skinAleatoriaFruta(PowerUp p) {
+        int skin = (int) (Math.random()*12+1);
+        p.getSkin().setEstadoActual(skin);
     }
 
     @Override

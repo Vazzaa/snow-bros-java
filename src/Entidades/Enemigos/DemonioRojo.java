@@ -93,9 +93,11 @@ public class DemonioRojo extends Enemigo {
     }
 
     public PowerUp morir() {
-        estaVivo = false;
+        estaVivo=false;
+        getJuego().getNivel().getSnowBro().sumarPuntaje(this.puntaje);
         this.getJuego().getControladoraGrafica().sacarEntidad(this);
         PowerUp powerUp = this.getJuego().getNivelActual().getMiFabrica().getFruta(miHitbox.getPosX(), miHitbox.getPosY());
+        skinAleatoriaFruta(powerUp);
         this.getJuego().registrarObserver(powerUp);
         this.getJuego().getNivelActual().agregarPowerUps(powerUp);
         int dir = (Math.random() < 0.5) ? 0 : 180;
@@ -103,6 +105,11 @@ public class DemonioRojo extends Enemigo {
         this.getJuego().registrarObserver(bola);
         this.getJuego().getNivelActual().agregarProyectiles(bola);
         return powerUp;
+    }
+
+    private void skinAleatoriaFruta(PowerUp p) {
+        int skin = (int) (Math.random()*12+1);
+        p.getSkin().setEstadoActual(skin);
     }
 
     @Override

@@ -9,8 +9,7 @@ import Juego.ModoDeJuego;
 public class Fruta extends PowerUp{
 
     public Fruta(Skin s, ModoDeJuego juego, int x, int y) {
-        super(s, juego, x, y, 300, 10);
-        puntaje = 500;
+        super(s, juego, x, y, 500 , 0);
         tiempoDeVida = 10;
     }
 
