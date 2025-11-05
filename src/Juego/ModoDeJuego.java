@@ -80,13 +80,13 @@ public class ModoDeJuego implements ControladorJuego {
 	@Override
 	public void iniciar() {
 		jugador = new Jugador(nombreJugador, 0);
-		cargarNivel(1);
+		cargarNivel(1, 0);
 
 		controlaGrafica.mostrarPantallaNivel();
 		iniciarHilos();
 	}
 
-	private void cargarNivel(int numeroNivel) {
+	private void cargarNivel(int numeroNivel, int puntaje) {
 		String archivoNivel = "nivel" + numeroNivel + ".txt";
 
 		CreadorDeNivel creador = new CreadorDeNivel(fabricaSkins);
@@ -97,11 +97,13 @@ public class ModoDeJuego implements ControladorJuego {
 
 		nivelActual.getSnowBro().setNivel(nivelActual);
 		nivelActual.getSnowBro().setJugador(jugador);
+		nivelActual.getSnowBro().sumarPuntaje(puntaje);
 
 		registrarObservers();
 	}
 
 	public void avanzarSiguienteNivel() {
+		int puntajeActual = nivelActual.getSnowBro().getPuntaje();
 		detenerHilos();
 		limpiarNivelActual();
 		int siguienteNivel = numeroNivelActual + 1;
@@ -110,22 +112,13 @@ public class ModoDeJuego implements ControladorJuego {
 		java.io.File archivo = new java.io.File(archivoSiguienteNivel);
 
 		if(archivo.exists()) {
-			cargarNivel(siguienteNivel);
+			cargarNivel(siguienteNivel, puntajeActual);
 			iniciarHilos();
 			System.out.println("Nivel " + siguienteNivel + " cargado.");
 		} else {
 			System.out.println("No hay mas niveles. Fin.");
 			juegoCompletado();
 		}
-
-		// try {
-		// 	cargarNivel(numeroNivelActual);
-		// 	iniciarHilos();
-		// 	System.out.println("Nivel " + numeroNivelActual + " cargado.");
-		// } catch (Exception e) {
-		// 	System.out.println("No hay mas niveles. Fin.");
-		// 	juegoCompletado();
-		// }
 	}
 	
 	public void verificarNivelCompletado() {

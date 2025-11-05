@@ -193,7 +193,10 @@ public class Nivel {
     }
 
     public boolean estaCompletado() {
-        return misEnemigos.isEmpty();
+        if(snowBro != null && snowBro.getVida() > 0)
+            return misEnemigos.isEmpty();
+        else
+            return false;
     }
 
     public void detenerEnemigos(int duracion) {
