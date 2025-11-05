@@ -143,8 +143,8 @@ public class ModoDeJuego implements ControladorJuego {
 	private void limpiarNivelActual() {
 		if(nivelActual == null)
 			return;
-		
-		controlaGrafica.sacarJugador(nivelActual.getSnowBro());
+		if (nivelActual.getSnowBro() != null)
+			controlaGrafica.sacarJugador(nivelActual.getSnowBro());
 
 		for(Estructura es : nivelActual.getMisEstructuras()){
 			controlaGrafica.sacarEntidad(es);
