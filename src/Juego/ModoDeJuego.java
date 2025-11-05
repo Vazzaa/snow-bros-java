@@ -23,6 +23,7 @@ public class ModoDeJuego implements ControladorJuego {
 	protected CreadorDeNivel miCreadorNivel;
 	protected String nombreJugador;
 	protected FabricaSkin fabricaSkins;
+	protected Jugador jugador;
 	protected int numeroNivelActual;
 	protected HiloEntidades hiloEntidades;
 	protected HiloJugador hiloJugador;
@@ -78,6 +79,7 @@ public class ModoDeJuego implements ControladorJuego {
 
 	@Override
 	public void iniciar() {
+		jugador = new Jugador(nombreJugador, 0);
 		cargarNivel(1);
 
 		controlaGrafica.mostrarPantallaNivel();
@@ -94,22 +96,36 @@ public class ModoDeJuego implements ControladorJuego {
 		nivelActual.setJuego(this);
 
 		nivelActual.getSnowBro().setNivel(nivelActual);
-		nivelActual.getSnowBro().setJugador(new Jugador(nombreJugador, 0));
+		nivelActual.getSnowBro().setJugador(jugador);
 
 		registrarObservers();
 	}
 
 	public void avanzarSiguienteNivel() {
+		detenerHilos();
 		limpiarNivelActual();
-		numeroNivelActual += 1;
+		int siguienteNivel = numeroNivelActual + 1;
 
-		try {
-			cargarNivel(numeroNivelActual);
+		String archivoSiguienteNivel = "nivel" + siguienteNivel + ".txt";
+		java.io.File archivo = new java.io.File(archivoSiguienteNivel);
+
+		if(archivo.exists()) {
+			cargarNivel(siguienteNivel);
 			iniciarHilos();
-		} catch (Exception e) {
+			System.out.println("Nivel " + siguienteNivel + " cargado.");
+		} else {
 			System.out.println("No hay mas niveles. Fin.");
 			juegoCompletado();
 		}
+
+		// try {
+		// 	cargarNivel(numeroNivelActual);
+		// 	iniciarHilos();
+		// 	System.out.println("Nivel " + numeroNivelActual + " cargado.");
+		// } catch (Exception e) {
+		// 	System.out.println("No hay mas niveles. Fin.");
+		// 	juegoCompletado();
+		// }
 	}
 	
 	public void verificarNivelCompletado() {
@@ -171,6 +187,7 @@ public class ModoDeJuego implements ControladorJuego {
 	private void juegoCompletado() {
 		detenerHilos();
 		controlaGrafica.mostrarPantallaGameOver();
+		System.out.println("Juego completado. Puntuación final: " + jugador.getPuntaje());
 	}
 
 	protected void registrarObservers() {
