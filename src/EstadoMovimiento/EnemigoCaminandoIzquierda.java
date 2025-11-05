@@ -45,14 +45,6 @@ public class EnemigoCaminandoIzquierda implements EstadoMovimientoEnemigo {
         if (!colisionaria) {
             enemigo.setPosX(nuevaX);
         }
-        Estructura plataformaDebajo = colisionManager.getPlataformaDebajo(enemigo, enemigo.getJuego().getNivel().getMisEstructuras());
-        if (plataformaDebajo != null && colisionManager.estaEnSuelo(enemigo, enemigo.getJuego().getNivel().getMisEstructuras())) {
-            int pieEnemigo = enemigo.getHitbox().getPosY();
-            int techoPlataforma = plataformaDebajo.getHitbox().getPosY() + plataformaDebajo.getHitbox().getAlto();
-            if (pieEnemigo > techoPlataforma) {
-                enemigo.setPosY(techoPlataforma);
-            }
-        }
         enemigo.notificarObserver();
     }
 

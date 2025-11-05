@@ -63,6 +63,10 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
 
     public abstract void cambiarEstado();
     
+    public void cambiarEstadoMovimiento(EstadoMovimientoEnemigo nuevoEstado) {
+        this.estadoMovimiento = nuevoEstado;
+    }
+
     @Override
     public void aceptarColision(Colisionador c) {
         c.colisionarEnemigo(this);

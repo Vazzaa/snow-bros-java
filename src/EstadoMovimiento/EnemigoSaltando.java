@@ -1,49 +1,55 @@
 package EstadoMovimiento;
 
 import Entidades.Enemigos.Enemigo;
-import Juego.ColisionManager;
 import Juego.ColisionManagerEntidades;
 
 public class EnemigoSaltando implements EstadoMovimientoEnemigo {
-    ColisionManagerEntidades controladorColisiones; 
-    boolean enElSuelo;
+    private ColisionManagerEntidades colisionManager;
+    private int velocidadVertical;
+    private boolean haSaltado;
+    private static final int FUERZA_SALTO = 12;
+    private static final int GRAVEDAD = 1;
 
-    public EnemigoSaltando(){
-        controladorColisiones = new ColisionManagerEntidades();
-        enElSuelo = true;
+    public EnemigoSaltando() {
+        this.colisionManager = new ColisionManagerEntidades();
+        this.velocidadVertical = FUERZA_SALTO;
+        this.haSaltado = false;
+    }
+
+    @Override
+    public void moverse(Enemigo enemigo, int velocidad) {
+        if (!haSaltado) {
+            haSaltado = true;
+        } else {
+            velocidadVertical -= GRAVEDAD;
+        }
+
+        enemigo.setPosY(enemigo.getPosY() + velocidadVertical);
+
+        if (velocidadVertical <= 0 && colisionManager.estaEnSuelo(enemigo, enemigo.getJuego().getNivel().getMisEstructuras())) {
+            if (Math.random() > 0.5) {
+                enemigo.cambiarEstadoMovimiento(new EnemigoCaminandoDerecha());
+            } else {
+                enemigo.cambiarEstadoMovimiento(new EnemigoCaminandoIzquierda());
+            }
+        }
+        
+        enemigo.notificarObserver();
     }
 
     @Override
     public EstadoMovimientoEnemigo getEstadoOpuesto() {
-        return new EnemigoCaminandoDerecha();
+        // No tiene un opuesto directo, al terminar de saltar se decide el nuevo estado.
+        return this;
     }
-    public void moverse(Enemigo enemigo, int velocidad) {
-        if (enElSuelo(enemigo)) {
-    		velocidad = 12;
-            enElSuelo = false;
-            // System.out.println("SALTANDO - Velocidad vertical: " + velocidadVertical);
-    	};
-    }
+
     @Override
     public boolean permiteMovimiento() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'permiteMovimiento'");
+        return false; // No permite cambiar de dirección mientras salta.
     }
+
     @Override
     public EstadoMovimientoEnemigo getEstadoAnterior() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getEstadoAnterior'");
+        return null;
     }
-    
-     private boolean enElSuelo(Enemigo e) {
-        if (e.getJuego().getNivel() == null || e.getJuego().getNivel().getMisEstructuras() == null) {
-            return false;
-        }
-    	if (controladorColisiones.estaEnSuelo(e, e.getJuego().getNivel().getMisEstructuras())) {
-            return true;
-        }
-        return false;
-    }
-
-
 }

@@ -42,7 +42,7 @@ public class FabricaDominio1 extends FabricaSkin {
     }
 
     public Skin crearSkinMoghera(){
-        return new Skin(getMapeoEstadoImagen("Moghera", 5), 1);
+        return new Skin(getMapeoEstadoImagen("Moghera", 5), 4);
     }
 
     public Skin crearSkinKamakichi(){

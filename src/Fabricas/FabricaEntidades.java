@@ -55,7 +55,7 @@ public class FabricaEntidades {
     }
 
     public Moghera getMoghera(int x, int y) {
-        return new Moghera(this.fabricaSkin.crearSkinMoghera(), miJuego, x, y);
+        return new Moghera(this.fabricaSkin.crearSkinMoghera(), miJuego, x, y,this);
     }
 
     public Kamakichi getKamakichi(int x, int y) {

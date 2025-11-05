@@ -30,23 +30,13 @@ public class EnemigoQuieto implements EstadoMovimientoEnemigo {
     @Override
     public void moverse(Enemigo enemigo, int velocidad) {
         if (enemigo.getJuego() != null && enemigo.getJuego().getNivel() != null && 
-            enemigo.getJuego().getNivel().getMisEstructuras() != null) {
-            
+            enemigo.getJuego().getNivel().getMisEstructuras() != null && !enemigo.esVolador()) { 
+
             if (!colisionManager.estaEnSuelo(enemigo, enemigo.getJuego().getNivel().getMisEstructuras())) {
                 enemigo.setPosY(enemigo.getPosY() - GRAVEDAD);
-            }
-            
-            Estructura plataformaDebajo = colisionManager.getPlataformaDebajo(
-                enemigo, 
-                enemigo.getJuego().getNivel().getMisEstructuras()
-            );
-            
-            if (plataformaDebajo != null && colisionManager.estaEnSuelo(enemigo, enemigo.getJuego().getNivel().getMisEstructuras())) {
-                int pieEnemigo = enemigo.getHitbox().getPosY();
-                int techoPlataforma = plataformaDebajo.getHitbox().getPosY() + plataformaDebajo.getHitbox().getAlto();
-                if (pieEnemigo > techoPlataforma) {
-                    enemigo.setPosY(techoPlataforma);
-                }
+            } else { 
+                Estructura plataformaDebajo = colisionManager.getPlataformaDebajo(enemigo, enemigo.getJuego().getNivel().getMisEstructuras());
+                if (plataformaDebajo != null) { enemigo.setPosY(plataformaDebajo.getHitbox().getPosY() + plataformaDebajo.getHitbox().getAlto()); }
             }
         }
         
