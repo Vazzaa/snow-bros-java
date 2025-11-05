@@ -12,7 +12,7 @@ public class Rojo extends PowerUp {
 
     public Rojo(Skin s, ModoDeJuego juego,int x, int y) {
         super(s, juego, x, y, 300, 10);
-        duracionSnowBro = 10;
+        duracionSnowBro = 10000; // 10 segundos
     }
 
     public int getPuntaje() {
@@ -34,8 +34,10 @@ public class Rojo extends PowerUp {
 
     @Override
     public void afectar(SnowBro snowBro) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'afectar'");
+        snowBro.sumarPuntaje(puntaje);
+        snowBro.activarBoostRojo(duracionSnowBro);
+        notificarObserver();
+        eliminar();
     }
 
     @Override

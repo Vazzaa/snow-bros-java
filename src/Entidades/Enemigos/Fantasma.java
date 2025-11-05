@@ -15,7 +15,7 @@ import EstadoMovimiento.EnemigoVoladorCaminandoDerecha;
 import EstadoMovimiento.EnemigoVoladorQuieto;
 import EstadoMovimiento.EnemigoVoladorDiagonal;
 
-public class Fantasma extends Enemigo implements EstadoEnemigo{
+public class Fantasma extends Enemigo{
     
     protected FabricaEntidades mFabricaEntidades;
     protected int movimientoActual;
@@ -133,11 +133,6 @@ public class Fantasma extends Enemigo implements EstadoEnemigo{
         
     }
 
-    @Override
-    public void recibirDisparo(DemonioRojo dr) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'recibirDisparo'");
-    }
 
     public boolean esVolador() {
         return true;

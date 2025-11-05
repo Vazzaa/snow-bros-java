@@ -80,21 +80,42 @@ public class RanaDeFuego extends Enemigo {
         
     }
 
-    public PowerUp morir() {
+    public void morir() {
         estaVivo=false;
-        getJuego().getNivel().getSnowBro().sumarPuntaje(this.puntaje);
+        getJuego().getNivel().getSnowBro().sumarPuntaje(puntaje);
+        crearPowerUp();
+        int dir = (Math.random() < 0.5) ? 0 : 180;
+        BolaDeNieve bola = this.getJuego().getNivelActual().getMiFabrica().getBolaDeNieve(miHitbox.getPosX(), miHitbox.getPosY(), dir);
+        this.getJuego().registrarObserver(bola);
+        this.getJuego().getNivelActual().agregarProyectiles(bola);
+        return;
+    }
+    
+    protected void crearPowerUp() {
         this.getJuego().getControladoraGrafica().sacarEntidad(this);
         PowerUp powerUp = this.getJuego().getNivelActual().getMiFabrica().getFruta(miHitbox.getPosX(), miHitbox.getPosY());
         skinAleatoriaFruta(powerUp);
         this.getJuego().registrarObserver(powerUp);
         this.getJuego().getNivelActual().agregarPowerUps(powerUp);
-        int dir = (Math.random() < 0.5) ? 0 : 180;
-        BolaDeNieve bola = this.getJuego().getNivelActual().getMiFabrica().getBolaDeNieve(miHitbox.getPosX(), miHitbox.getPosY(), dir);
-        this.getJuego().registrarObserver(bola);
-        this.getJuego().getNivelActual().agregarProyectiles(bola);
-        return powerUp;
+        int crearPocionONo = (int) Math.random()*3;
+        if(crearPocionONo == 2){
+            PowerUp pocion = null;
+            int color = (int) Math.random()*2;
+            switch (color) {
+                case 0:
+                    pocion = this.getJuego().getNivelActual().getMiFabrica().getPowerUpAzul(miHitbox.getPosX()+5, miHitbox.getPosY());
+                break;
+                case 1:
+                    pocion = this.getJuego().getNivelActual().getMiFabrica().getPowerUpRojo(miHitbox.getPosX()+5, miHitbox.getPosY());
+                break;
+                case 2:
+                    pocion = this.getJuego().getNivelActual().getMiFabrica().getPowerUpVerde(miHitbox.getPosX()+5, miHitbox.getPosY());
+                break;
+            }
+            this.getJuego().registrarObserver(pocion);
+            this.getJuego().getNivelActual().agregarPowerUps(pocion);
+        }
     }
-
     private void skinAleatoriaFruta(PowerUp p) {
         int skin = (int) (Math.random()*12+1);
         p.getSkin().setEstadoActual(skin);
@@ -108,6 +129,7 @@ public class RanaDeFuego extends Enemigo {
 
     @Override
     public void moverse() {
+        if (detenidoGlobalmente) return;
         if (estadoNieve > ESTADO_INICIAL) {
             estadoMovimiento = new EnemigoQuieto();
         } else {
@@ -195,10 +217,10 @@ public class RanaDeFuego extends Enemigo {
         }
     }
     public void recibirDisparo() {
-         if (estadoNieve == ESTADO_NIEVE_COMPLETO) {
+         if (estadoNieve >= ESTADO_NIEVE_COMPLETO) {
             morir();
         } else {
-            estadoNieve++;
+            estadoNieve += getJuego().getNivel().getSnowBro().getDañoProyectil();
             actualizarEstadoNieve();
         }      
     }
@@ -274,11 +296,15 @@ public class RanaDeFuego extends Enemigo {
         if (estadoNieve <= ESTADO_INICIAL || tiempoFinCongelado == 0 || System.currentTimeMillis() < tiempoFinCongelado) {
             return;
         }
-        estadoNieve--;
+        estadoNieve -= getJuego().getNivel().getSnowBro().getDañoProyectil();
         actualizarEstadoNieve();
     }
 
     private void actualizarEstadoNieve() {
+        if (estadoNieve > ESTADO_NIEVE_COMPLETO) {
+            estadoNieve = ESTADO_NIEVE_COMPLETO;
+        }
+
         switch (estadoNieve) {
             case ESTADO_INICIAL:
                 estadoNormal.recibirDisparo(this);

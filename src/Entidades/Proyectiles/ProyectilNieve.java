@@ -43,4 +43,8 @@ public class ProyectilNieve extends Proyectil{
     public boolean afectaAEnemigos() {
         return true;
     }
+
+    public void setDaño(int daño) {
+        this.daño = daño;
+    }
 }

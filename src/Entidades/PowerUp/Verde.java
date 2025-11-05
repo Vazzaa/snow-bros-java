@@ -8,19 +8,22 @@ import Juego.ModoDeJuego;
 
 public class Verde extends PowerUp {
 
-    protected int duracionSnowBro;
+    protected int duracion;
 
     public Verde(Skin s, ModoDeJuego juego,int x, int y) {
         super(s, juego, x, y, 300, 10);
-        duracionSnowBro = 10;
+        duracion = 10000;
     }
 
     public int getPuntaje() {
         return puntaje;
     }
 
-    public void afectar(SnowBro s) {
-        
+    public void afectar(SnowBro snowBro) {
+        snowBro.sumarPuntaje(puntaje);
+        snowBro.activarBoostVerde(duracion);
+        notificarObserver();
+        eliminar();
     }
 
     

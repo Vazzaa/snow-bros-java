@@ -368,4 +368,4 @@ ENEMIGO:TrollAmarillo,448,7950
 # Power-ups
 POWERUP:comida,150,7650
 POWERUP:comida,460,7950
-POWERUP:pocionazul,700,7650
+POWERUP:pocionverde,700,7650

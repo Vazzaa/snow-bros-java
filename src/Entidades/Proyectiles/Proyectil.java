@@ -72,4 +72,8 @@ public abstract class Proyectil extends Entidad implements Colisionable{
     public boolean estaActivo() {
         return vidaActiva;
     }
+
+    public int getDaño() {
+        return daño;
+    }
 }

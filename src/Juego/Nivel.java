@@ -25,6 +25,7 @@ public class Nivel {
     protected List<Proyectil> misProyectiles;
     protected FabricaEntidades miFabrica;
     protected ModoDeJuego miJuego;
+    private long tiempoFinDetencionEnemigos = 0;
 
 
     public Nivel(int num, List<Estructura> misEstructuras, List<Enemigo> misEnemigos, SnowBro snowBro, FabricaEntidades miFabrica) {
@@ -168,6 +169,7 @@ public class Nivel {
 
     public void moverEnemigos(){
         if (misEnemigos == null) return;
+        verificarFinDetencionEnemigos();
         for (Enemigo enemigo : misEnemigos) {
             if (enemigo != null) enemigo.moverse();
         }
@@ -192,5 +194,26 @@ public class Nivel {
 
     public boolean estaCompletado() {
         return misEnemigos.isEmpty();
+    }
+
+    public void detenerEnemigos(int duracion) {
+        this.tiempoFinDetencionEnemigos = System.currentTimeMillis() + duracion;
+        for (Enemigo enemigo : misEnemigos) {
+            enemigo.detenerMovimientoGlobal();
+        }
+    }
+
+    public void reanudarEnemigos() {
+        for (Enemigo enemigo : misEnemigos) {
+            enemigo.reanudarMovimientoGlobal();
+        }
+    }
+
+    private void verificarFinDetencionEnemigos() {
+        if (tiempoFinDetencionEnemigos == 0) return;
+        if (System.currentTimeMillis() >= tiempoFinDetencionEnemigos) {
+            reanudarEnemigos();
+            tiempoFinDetencionEnemigos = 0;
+        }
     }
 }

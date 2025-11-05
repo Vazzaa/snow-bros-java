@@ -37,7 +37,9 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     protected int vida;
     protected int velocidad;
 
+    protected int dañoProyectil;
     private long tiempoFinalBoostAzul=0;
+    private long tiempoFinalBoostRojo=0;
     
     //Constructor
     public SnowBro (Skin aspectos, ModoDeJuego juego, int x, int y, Jugador jug, Nivel nivelPerteneciente, FabricaEntidades crearNieve) {
@@ -46,6 +48,7 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         jugador = jug;
         vida = 3;
         puntaje = 0;
+        dañoProyectil = 1;
         estadoMovimiento = new EstadoMovimietoSnowBro(this);
         nivel = nivelPerteneciente;
         this.crearNieve = crearNieve;
@@ -98,6 +101,7 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     
     public void disparar() {
         ProyectilNieve disparo = crearNieve.getProyectilNieve(miHitbox.getPosX(), miHitbox.getPosY(), estadoMovimiento.direccion);
+        disparo.setDaño(dañoProyectil);
         nivel.agregarProyectiles(disparo);
         miJuego.registrarObserver(disparo);
         
@@ -112,6 +116,7 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         //     System.out.println("Posición actual X: " + getPosX() + ", Y: " + getPosY());
         // }
         verificarFinBoostAzul();
+        verificarFinBoostRojo();
         estadoMovimiento.mover(derecha, izquierda, salto);
         notificarObserver();
     }
@@ -147,6 +152,7 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         miHitbox.setPosX(10);
         miHitbox.setPosY(7650);
         resetVelocidad();
+        resetDañoProyectil();
         notificarObserver();
         if (vida <= 0) {
             morir();
@@ -167,6 +173,7 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         miHitbox.setPosX(10);
         miHitbox.setPosY(7650);
         resetVelocidad();
+        resetDañoProyectil();
         notificarObserver();
         if (vida <= 0) {
             morir();
@@ -243,6 +250,10 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         this.velocidad = 3;
     }
 
+    public void resetDañoProyectil() {
+        this.dañoProyectil = 1;
+    }
+
     public void detenerMovimiento() {
         estadoMovimiento.detenerMovimientoHorizontal();
     }
@@ -252,6 +263,15 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         tiempoFinalBoostAzul = System.currentTimeMillis() + duracion;
     }
 
+    public void activarBoostRojo(int duracion) {
+        dañoProyectil = 2;
+        tiempoFinalBoostRojo = System.currentTimeMillis() + duracion;
+    }
+
+    public void activarBoostVerde(int duracion){
+        getNivel().detenerEnemigos(duracion);
+    }
+
     private void verificarFinBoostAzul() {
         if (velocidad==6 && System.currentTimeMillis() >= tiempoFinalBoostAzul) {
             resetVelocidad();
@@ -259,5 +279,16 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         }
     }
 
+    private void verificarFinBoostRojo() {
+        if (dañoProyectil == 2 && System.currentTimeMillis() >= tiempoFinalBoostRojo) {
+            resetDañoProyectil();
+            tiempoFinalBoostRojo = 0;
+        }
+    }
+
+
+    public int getDañoProyectil() {
+        return dañoProyectil;
+    }
     
 }

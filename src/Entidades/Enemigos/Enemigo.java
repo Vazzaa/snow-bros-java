@@ -18,6 +18,7 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
     protected long tiempoUltimoCambio;
     protected static final long INTERVALO_CAMBIO = 2800;
     protected boolean estaVivo = true;
+    protected boolean detenidoGlobalmente = false;
     protected Skin skinOriginal;
     
     
@@ -81,6 +82,14 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
 
     public Skin getSkinOriginal() {
         return skinOriginal;
+    }
+
+    public void detenerMovimientoGlobal() {
+        this.detenidoGlobalmente = true;
+    }
+
+    public void reanudarMovimientoGlobal() {
+        this.detenidoGlobalmente = false;
     }
 
 } 
