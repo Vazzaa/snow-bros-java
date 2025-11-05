@@ -102,24 +102,28 @@ public class Nivel {
     }
 
     public void moverSnowBro(){
-    	snowBro.moverse();
+        if (snowBro != null) 
+    	    snowBro.moverse();
     }
     
     public void verificarColisiones() {
         try {
             if (misEnemigos != null) {
                 for (Enemigo enemigo : misEnemigos) {
-                    snowBro.colisionarEnemigo(enemigo);
+                    if (snowBro != null)
+                        snowBro.colisionarEnemigo(enemigo);
                 }
             }
             if (misPowerUps != null) {
                 for (PowerUp powerUp : misPowerUps) {
-                    snowBro.colisionarPowerUp(powerUp);
+                    if (snowBro != null)
+                        snowBro.colisionarPowerUp(powerUp);
                 }
             }
             if (misEstructuras != null) {
                 for (Estructura estructura : misEstructuras) {
-                    snowBro.colisionarEstructura(estructura);
+                    if (snowBro != null)
+                        snowBro.colisionarEstructura(estructura);
                 }
             }
         } catch (Exception e) {

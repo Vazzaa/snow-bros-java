@@ -56,7 +56,9 @@ public abstract class Entidad implements EntidadLogica {
 	}
 
 	public void notificarObserver(){
-		observer.actualizar();
+		if (observer != null){
+			observer.actualizar();
+		}
 	}
 	
 	public Hitbox getHitbox(){
