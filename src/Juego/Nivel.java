@@ -31,7 +31,7 @@ public class Nivel {
         this.snowBro = snowBro;
         this.misEstructuras = misEstructuras;
         this.misEnemigos = misEnemigos;
-        misPowerUps = new LinkedList<PowerUp>();
+        misPowerUps = new CopyOnWriteArrayList<PowerUp>();
         misProyectiles = new CopyOnWriteArrayList<Proyectil>();
         this.miFabrica = miFabrica;
     }
