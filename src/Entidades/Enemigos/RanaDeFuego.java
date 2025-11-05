@@ -97,18 +97,19 @@ public class RanaDeFuego extends Enemigo {
         skinAleatoriaFruta(powerUp);
         this.getJuego().registrarObserver(powerUp);
         this.getJuego().getNivelActual().agregarPowerUps(powerUp);
-        int crearPocionONo = (int) Math.random()*3;
+        int crearPocionONo = (int) (Math.random()*3+1);
+        System.out.println("numero tocado"+crearPocionONo);
         if(crearPocionONo == 2){
             PowerUp pocion = null;
-            int color = (int) Math.random()*2;
+            int color = (int) (Math.random()*3+1);
             switch (color) {
-                case 0:
+                case 1:
                     pocion = this.getJuego().getNivelActual().getMiFabrica().getPowerUpAzul(miHitbox.getPosX()+5, miHitbox.getPosY());
                 break;
-                case 1:
+                case 2:
                     pocion = this.getJuego().getNivelActual().getMiFabrica().getPowerUpRojo(miHitbox.getPosX()+5, miHitbox.getPosY());
                 break;
-                case 2:
+                case 3:
                     pocion = this.getJuego().getNivelActual().getMiFabrica().getPowerUpVerde(miHitbox.getPosX()+5, miHitbox.getPosY());
                 break;
             }
