@@ -1,12 +1,25 @@
 package Juego;
 
+import Grafica.ControladorGrafica;
+import Entidades.Enemigos.Enemigo;
+import Entidades.Jugador.Jugador;
+
+import java.util.Random;
+
 public class Supervivencia extends ModoDeJuego {
 
-    protected int NumOleada;
-    protected int PuntajeFinal;
+    private static final int PUNTUACION_OBJETIVO = 50000;
+    private static final int ENEMIGOS_POR_OLEADA = 3;
+    private static final int MIN_ENEMIGOS = 2;
 
-    public Supervivencia() {
+    protected int numeroOleada;
+    protected Random random;
+    // protected int PuntajeFinal;
 
+    public Supervivencia(ControladorGrafica controladorGrafica) {
+        super(controladorGrafica);
+        numeroOleada = 1;
+        random = new Random();
     }
 
     public void CrearOleada() {
@@ -22,39 +35,15 @@ public class Supervivencia extends ModoDeJuego {
     }
 
     @Override
-    public void cambiarDireccionJugador(int n) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void cambiarModoDeJuego() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public boolean estaColisionando(Entidad e) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
     public void iniciar() {
-        // TODO Auto-generated method stub
+        jugador = new Jugador(nombreJugador, 0);
         
-    }
-
-    @Override
-    public void lanzarProyectil() {
-        // TODO Auto-generated method stub
+        cargarNivel(1, 0);
         
-    }
-
-    @Override
-    public void moverAbajo() {
-        // TODO Auto-generated method stub
+        controlaGrafica.mostrarPantallaNivel();
+        iniciarHilos();
         
+        System.out.println("Modo Supervivencia iniciado");
+        System.out.println("Objetivo: Alcanzar " + PUNTUACION_OBJETIVO + " puntos");
     }
-
 }

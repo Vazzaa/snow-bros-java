@@ -1,48 +1,67 @@
 package Juego;
 
+import Entidades.Jugador.Jugador;
+import Grafica.ControladorGrafica;
+
 public class Clasico extends ModoDeJuego {
 
-    public Clasico () {
-        super();
-    }
+    private static final int CANTIDAD_NIVELES = 2;
 
-    public void PasarNivel() {
-        
-    }
-
-    @Override
-    public void cambiarDireccionJugador(int n) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void cambiarModoDeJuego() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public boolean estaColisionando(Entidad e) {
-        // TODO Auto-generated method stub
-        return false;
+    public Clasico (ControladorGrafica controladorGrafica) {
+        super(controladorGrafica);
     }
 
     @Override
     public void iniciar() {
-        // TODO Auto-generated method stub
-        
+        jugador = new Jugador(nombreJugador, 0);
+        cargarNivel(1, 0);
+        controlaGrafica.mostrarPantallaNivel();
+        iniciarHilos();
+        System.out.println("Modo Clásico iniciado - Nivel 1");
     }
 
     @Override
-    public void lanzarProyectil() {
-        // TODO Auto-generated method stub
-        
+    public void verificarNivelCompletado() {
+        if (nivelActual != null && nivelActual.estaCompletado()) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            avanzarSiguienteNivel();
+        }
+    }
+
+    public void avanzarSiguienteNivel() {
+        int puntajeActual = nivelActual.getSnowBro().getPuntaje();
+
+		detenerHilos();
+		limpiarNivelActual();
+
+		int siguienteNivel = numeroNivelActual + 1;
+
+		if(siguienteNivel <= CANTIDAD_NIVELES) {
+            String archivoSiguienteNivel = "nivel" + siguienteNivel + ".txt";
+            java.io.File archivo = new java.io.File(archivoSiguienteNivel);
+
+		    if(archivo.exists()) {
+                cargarNivel(siguienteNivel, puntajeActual);
+                iniciarHilos();
+                System.out.println("Nivel " + siguienteNivel + " cargado.");
+		    } else {
+                System.out.println("ERROR: No se encontró el archivo " + archivoSiguienteNivel);
+                juegoCompletado();
+		    }
+        } else {
+            System.out.println("No hay mas niveles. Fin.");
+            juegoCompletado();
+        }
+
     }
 
     @Override
-    public void moverAbajo() {
-        // TODO Auto-generated method stub
-        
+    public void juegoCompletado() {
+        detenerHilos();
+        controlaGrafica.mostrarPantallaGameOver();
     }
 }

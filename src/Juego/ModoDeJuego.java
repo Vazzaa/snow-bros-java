@@ -13,7 +13,7 @@ import Grafica.*;
 import Hilos.HiloEntidades;
 import Hilos.HiloJugador;
 
-public class ModoDeJuego implements ControladorJuego {
+public abstract class ModoDeJuego implements ControladorJuego {
     
 	// Atributos
 	protected Ranking rank;
@@ -37,6 +37,7 @@ public class ModoDeJuego implements ControladorJuego {
 		miCreadorNivel.setFrabricaEntidades(miFabricaEntidades);
 		numeroNivelActual = 1;
 	}
+
 	public ControladorGrafica getControladoraGrafica(){
 		return controlaGrafica;
 	}
@@ -78,15 +79,19 @@ public class ModoDeJuego implements ControladorJuego {
 	}
 
 	@Override
-	public void iniciar() {
-		jugador = new Jugador(nombreJugador, 0);
-		cargarNivel(1, 0);
+	public abstract void iniciar();
+	public abstract void verificarNivelCompletado();
+	public abstract void juegoCompletado();
 
-		controlaGrafica.mostrarPantallaNivel();
-		iniciarHilos();
-	}
+	// public void iniciar() {
+	// 	jugador = new Jugador(nombreJugador, 0);
+	// 	cargarNivel(1, 0);
 
-	private void cargarNivel(int numeroNivel, int puntaje) {
+	// 	controlaGrafica.mostrarPantallaNivel();
+	// 	iniciarHilos();
+	// }
+
+	protected void cargarNivel(int numeroNivel, int puntaje) {
 		String archivoNivel = "nivel" + numeroNivel + ".txt";
 
 		CreadorDeNivel creador = new CreadorDeNivel(fabricaSkins);
@@ -99,6 +104,7 @@ public class ModoDeJuego implements ControladorJuego {
 		nivelActual.getSnowBro().setJugador(jugador);
 		nivelActual.getSnowBro().sumarPuntaje(puntaje);
 
+		numeroNivelActual = numeroNivel;
 		registrarObservers();
 	}
 
@@ -121,19 +127,19 @@ public class ModoDeJuego implements ControladorJuego {
 		}
 	}
 	
-	public void verificarNivelCompletado() {
-		if (nivelActual != null && nivelActual.estaCompletado()) {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+	// public void verificarNivelCompletado() {
+	// 	if (nivelActual != null && nivelActual.estaCompletado()) {
+	// 		try {
+	// 			Thread.sleep(1000);
+	// 		} catch (InterruptedException e) {
+	// 			e.printStackTrace();
+	// 		}
 
-			avanzarSiguienteNivel();
-		}
-	}
+	// 		avanzarSiguienteNivel();
+	// 	}
+	// }
 
-	private void limpiarNivelActual() {
+	protected void limpiarNivelActual() {
 		if(nivelActual == null)
 			return;
 		if (nivelActual.getSnowBro() != null)
@@ -150,14 +156,14 @@ public class ModoDeJuego implements ControladorJuego {
 		}
 	}
 
-	private void iniciarHilos() {
+	protected void iniciarHilos() {
 		hiloJugador = new HiloJugador(nivelActual);
 		hiloJugador.start();
 		hiloEntidades = new HiloEntidades(nivelActual);
 		hiloEntidades.start();
 	}
 
-	private void detenerHilos() {
+	protected void detenerHilos() {
 		if(hiloJugador != null && hiloJugador.isAlive()) {
 			hiloJugador.detener();
 			try {
@@ -177,11 +183,11 @@ public class ModoDeJuego implements ControladorJuego {
 		}
 	}
 
-	private void juegoCompletado() {
-		detenerHilos();
-		controlaGrafica.mostrarPantallaGameOver();
-		System.out.println("Juego completado. Puntuación final: " + jugador.getPuntaje());
-	}
+	// private void juegoCompletado() {
+	// 	detenerHilos();
+	// 	controlaGrafica.mostrarPantallaGameOver();
+	// 	System.out.println("Juego completado. Puntuación final: " + jugador.getPuntaje());
+	// }
 
 	protected void registrarObservers() {
 		registrarObserverJugador(nivelActual.getSnowBro());
