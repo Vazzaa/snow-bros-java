@@ -8,6 +8,7 @@ import Juego.Nivel;
 public class HiloEntidades  extends Thread {
     
     protected Nivel juego;
+    private volatile boolean ejecutando = true;
 
     public HiloEntidades(Nivel juego) {
         this.juego = juego;
@@ -15,7 +16,7 @@ public class HiloEntidades  extends Thread {
 
     @Override
     public void run() {
-    while (true) {
+    while (ejecutando) {
         for(Enemigo enemigo : juego.getMisEnemigos()) {
             juego.moverEntidad(enemigo);
         }
@@ -27,10 +28,19 @@ public class HiloEntidades  extends Thread {
             juego.actualizarPowerUps();
             juego.verificarColisionesProyectiles();
 
+            if(juego.getJuego() != null) {
+                juego.getJuego().verificarNivelCompletado();
+            }
+
         } catch (InterruptedException e) {
             e.printStackTrace();
+            ejecutando = false;
             break;
         }
     }
+    }
+
+    public void detener() {
+        ejecutando = false;
     }
 }

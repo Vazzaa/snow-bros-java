@@ -24,6 +24,8 @@ public class ModoDeJuego implements ControladorJuego {
 	protected String nombreJugador;
 	protected FabricaSkin fabricaSkins;
 	protected int numeroNivelActual;
+	protected HiloEntidades hiloEntidades;
+	protected HiloJugador hiloJugador;
 	
 	// Comandos
 	public ModoDeJuego(ControladorGrafica controlador_grafica) {
@@ -89,6 +91,8 @@ public class ModoDeJuego implements ControladorJuego {
 		creador.setFrabricaEntidades(miFabricaEntidades);
 		nivelActual = creador.leerArchivo(archivoNivel);
 
+		nivelActual.setJuego(this);
+
 		nivelActual.getSnowBro().setNivel(nivelActual);
 		nivelActual.getSnowBro().setJugador(new Jugador(nombreJugador, 0));
 
@@ -104,7 +108,7 @@ public class ModoDeJuego implements ControladorJuego {
 			iniciarHilos();
 		} catch (Exception e) {
 			System.out.println("No hay mas niveles. Fin.");
-			//juegoCompletado();
+			juegoCompletado();
 		}
 	}
 	
@@ -138,18 +142,36 @@ public class ModoDeJuego implements ControladorJuego {
 	}
 
 	private void iniciarHilos() {
-		HiloJugador hiloJugador = new HiloJugador(nivelActual);
+		hiloJugador = new HiloJugador(nivelActual);
 		hiloJugador.start();
-		HiloEntidades hiloEntidades = new HiloEntidades(nivelActual);
+		hiloEntidades = new HiloEntidades(nivelActual);
 		hiloEntidades.start();
 	}
 
-	/*
+	private void detenerHilos() {
+		if(hiloJugador != null && hiloJugador.isAlive()) {
+			hiloJugador.detener();
+			try {
+				hiloJugador.join(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+		if(hiloEntidades != null && hiloEntidades.isAlive()) {
+			hiloEntidades.detener();
+			try {
+				hiloEntidades.join(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	private void juegoCompletado() {
 		detenerHilos();
-		controlaGrafica.mostrarPantallaVictoria();
+		controlaGrafica.mostrarPantallaGameOver();
 	}
-	*/
 
 	protected void registrarObservers() {
 		registrarObserverJugador(nivelActual.getSnowBro());

@@ -23,6 +23,7 @@ public class Nivel {
     protected List<PowerUp> misPowerUps;
     protected List<Proyectil> misProyectiles;
     protected FabricaEntidades miFabrica;
+    protected ModoDeJuego miJuego;
 
 
     public Nivel(int num, List<Estructura> misEstructuras, List<Enemigo> misEnemigos, SnowBro snowBro, FabricaEntidades miFabrica) {
@@ -33,6 +34,7 @@ public class Nivel {
         misPowerUps = new LinkedList<PowerUp>();
         misProyectiles = new LinkedList<Proyectil>();
         this.miFabrica = miFabrica;
+        miJuego = null;
     }
 
     public int getNumero() {
@@ -63,6 +65,14 @@ public class Nivel {
 
     public FabricaEntidades getMiFabrica() {
         return miFabrica;
+    }
+
+    public ModoDeJuego getJuego() {
+        return miJuego;
+    }
+
+    public void setJuego(ModoDeJuego juego) {
+        miJuego = juego;
     }
 
     public void agregarSnowBro(SnowBro snowBro){
