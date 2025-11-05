@@ -11,15 +11,23 @@ import Fabricas.Skin;
 import Juego.ModoDeJuego;
 import Visitors.Colisionable;
 
-public class Calabaza extends Enemigo implements EstadoEnemigo{
+public class Calabaza extends Enemigo{
 
+    protected static final int ESTADO_INICIAL = 0;
+    protected static final int ESTADO_ESTUNEADO = 1;
+
+    protected int estadoInicial;
     protected FabricaEntidades mFabricaEntidades;
     protected int movimientoActual;
     private static final int VELOCIDAD = 1;
 
+    private long tiempoFinCongelado = 0;
+    private static final int DURACION_ESTUNEADO_MS = 3000;
+
+
     public Calabaza(Skin skins , ModoDeJuego juego , int posX, int posY){
         super(skins, juego, posX, posY, 0,300);
-        // Inicializar con un estado aleatorio para movimiento libre
+        estadoInicial = ESTADO_INICIAL;
         int estadoInicial = (int) (Math.random()*4+1);
         switch(estadoInicial){
             case 1:
@@ -65,14 +73,39 @@ public class Calabaza extends Enemigo implements EstadoEnemigo{
 
     @Override
     public void moverse() {
-        cambiarEstado();
+        if ( estadoInicial > ESTADO_INICIAL) {
+            estadoMovimiento = new EnemigoQuieto();
+        } else {
+            cambiarEstado();
+        }
+
+        verificarEstuneo();
         estadoMovimiento.moverse(this, VELOCIDAD);
     }
 
     @Override
     public void recibirDisparo() {
-        // TODO Auto-generated method stub
-        
+        if(estadoInicial != ESTADO_ESTUNEADO){
+            estadoInicial++;
+            actualizarEstadoEstuneado();
+        }
+    }
+
+    private void actualizarEstadoEstuneado(){
+        if (estadoInicial > ESTADO_INICIAL) {
+            tiempoFinCongelado = System.currentTimeMillis() + DURACION_ESTUNEADO_MS;
+        }
+        else {
+            tiempoFinCongelado = 0; 
+        }
+    }
+
+        private void verificarEstuneo() {
+        if (estadoInicial <= ESTADO_INICIAL || tiempoFinCongelado == 0 || System.currentTimeMillis() < tiempoFinCongelado) {
+            return;
+        }
+        estadoInicial--;
+        actualizarEstadoEstuneado();
     }
 
     @Override
@@ -135,8 +168,9 @@ public class Calabaza extends Enemigo implements EstadoEnemigo{
 
     @Override
     public void colisionarPowerUp(PowerUp p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'colisionarPowerUp'");
+        if (this.colisionaAABB(miHitbox, p.getHitbox())) {
+            p.afectar(this);
+        }
     }
 
     @Override
@@ -158,13 +192,11 @@ public class Calabaza extends Enemigo implements EstadoEnemigo{
 
     @Override
     public void colisionarProyectil(Proyectil p) {
+        if (this.colisionaAABB(miHitbox, p.getHitbox())) {
+            p.afectar(this);
+        }
     }
 
-    @Override
-    public void recibirDisparo(DemonioRojo dr) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'recibirDisparo'");
-    }
 
     public boolean esVolador() {
         return true;
