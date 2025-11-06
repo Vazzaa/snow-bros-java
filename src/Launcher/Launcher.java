@@ -12,10 +12,8 @@ public class Launcher {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ControladorGrafica controlador_grafica = new GUI();
-					ModoDeJuego juego = new Clasico(controlador_grafica);
-					controlador_grafica.registrarControladorJuego(juego);
-					juego.configurar();
+					ControladorGrafica controladorGrafica = new GUI();
+					controladorGrafica.mostrarPantallaPrincipal();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

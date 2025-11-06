@@ -73,7 +73,7 @@ public class PanelPantallaElegirDominio extends PanelVista{
                 }
                 agregarNombre();
                 System.out.println("Nombre jugador: " + campoNombre.getText());
-                controladorVistas.accionarPantallaElegirModoJuego();
+                controladorVistas.getControladorJuego().iniciar();
             }
         });
     }
@@ -86,7 +86,7 @@ public class PanelPantallaElegirDominio extends PanelVista{
                 }
                 agregarNombre();
                 System.out.println("Nombre jugador: " + campoNombre.getText());
-                controladorVistas.accionarPantallaElegirModoJuego();
+                controladorVistas.getControladorJuego().iniciar();
             }
         });
     }

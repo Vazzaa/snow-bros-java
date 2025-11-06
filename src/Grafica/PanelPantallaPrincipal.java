@@ -59,7 +59,7 @@ public class PanelPantallaPrincipal extends PanelVista{
     protected void registrarOyenteBotonInicio() {
         botonIniciar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                controladorVistas.accionarPantallaElegirDominio();
+                controladorVistas.accionarPantallaElegirModoJuego();
             }
         });
     }
