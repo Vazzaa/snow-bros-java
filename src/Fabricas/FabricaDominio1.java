@@ -75,7 +75,7 @@ public class FabricaDominio1 extends FabricaSkin {
 
     public Skin crearSkinPincho(){
         Map<Integer,String> mapeo = new HashMap<>();
-        mapeo.put(1, rutaCarpetaImagenes + "Pincho.png");
+        mapeo.put(1, rutaCarpetaImagenes + "pincho.png");
         return new Skin(mapeo, 1);
     }
 
@@ -87,7 +87,7 @@ public class FabricaDominio1 extends FabricaSkin {
 
     public Skin crearSkinPared(){
         Map<Integer,String> mapeo = new HashMap<>();
-        mapeo.put(1, rutaCarpetaImagenes + "Pared1.png");
+        mapeo.put(1, rutaCarpetaImagenes + "pared1.png");
         return new Skin(mapeo, 1);
     }
 
@@ -97,7 +97,7 @@ public class FabricaDominio1 extends FabricaSkin {
 
     public Skin crearSkinPlataforma(){
         Map<Integer,String> mapeoparaplataforma= new HashMap<Integer,String>();
-        mapeoparaplataforma.put(1,"Imagenes/SkinsOriginales/plataforma1.png");
+        mapeoparaplataforma.put(1,"Imagenes/SkinsOriginales/Plataforma1.png");
         return new Skin(mapeoparaplataforma, 1);
     }
 
