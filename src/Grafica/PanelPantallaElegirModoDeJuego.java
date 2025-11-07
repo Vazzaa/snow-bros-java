@@ -63,10 +63,10 @@ public class PanelPantallaElegirModoDeJuego extends PanelVista{
     }
 
 
-     protected void registrarOyenteBotonClasico() {
+    protected void registrarOyenteBotonClasico() {
         botonJugarClasico.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                controladorVistas.accionarInicioJuego();
+                controladorVistas.accionarInicioJuego(ConstantesModoDeJuego.CLASICO);
             }
         });
     }
@@ -74,7 +74,7 @@ public class PanelPantallaElegirModoDeJuego extends PanelVista{
     protected void registrarOyenteBotonContrareloj() {
         botonJugarContrareloj.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                controladorVistas.accionarInicioJuego();
+                controladorVistas.accionarInicioJuego(ConstantesModoDeJuego.CONTRARELOJ);
             }
         });
     }
@@ -82,7 +82,7 @@ public class PanelPantallaElegirModoDeJuego extends PanelVista{
     protected void registrarOyenteBotonSupervivencia() {
         botonJugarSupervivencia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                controladorVistas.accionarInicioJuego();
+                controladorVistas.accionarInicioJuego(ConstantesModoDeJuego.SUPERVIVENCIA);
             }
         });
     }

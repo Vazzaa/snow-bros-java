@@ -2,10 +2,14 @@ package Grafica;
 
 import javax.swing.JFrame;
 
+import Juego.Clasico;
+import Juego.ContraReloj;
+import Juego.Supervivencia;
 import Juego.ControladorJuego;
 import Juego.Entidad;
 import Juego.EntidadJugador;
 import Juego.EntidadLogica;
+import Juego.ModoDeJuego;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -210,8 +214,22 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 
 
 	@Override
-	public void accionarInicioJuego() {
-		controlarJuego.iniciar();
+	public void accionarInicioJuego(int modo) {
+		switch(modo) {
+			case ConstantesModoDeJuego.CLASICO:
+				controlarJuego = new Clasico(this);
+				this.registrarControladorJuego(controlarJuego);
+				break;
+			case ConstantesModoDeJuego.CONTRARELOJ:
+				controlarJuego = new ContraReloj(this);
+				this.registrarControladorJuego(controlarJuego);
+				break;
+			case ConstantesModoDeJuego.SUPERVIVENCIA:
+				controlarJuego = new Supervivencia(this);
+				this.registrarControladorJuego(controlarJuego);
+				break;
+		}
+		this.accionarPantallaElegirDominio();
 	}
 
 	@Override
