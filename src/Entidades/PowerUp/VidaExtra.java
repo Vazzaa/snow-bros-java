@@ -10,16 +10,18 @@ public class VidaExtra extends PowerUp {
 
     public VidaExtra(Skin s,ModoDeJuego juego ,int x, int y) {
         super(s, juego, x, y, 300, 10);
-        puntaje = 0;
-        tiempoDeVida = 10;
+        tiempoDeVida = 10000;
     }
 
     public int getPuntaje() {
         return puntaje;
     }
 
-    public void afectar(SnowBro s) {
-        
+    public void afectar(SnowBro snowBro) {
+        snowBro.sumarPuntaje(puntaje);
+        snowBro.setVida(snowBro.getVida() + 1);
+        notificarObserver();
+        eliminar();
     }
 
     
