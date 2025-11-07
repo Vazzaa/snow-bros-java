@@ -119,10 +119,11 @@ public class DemonioRojo extends Enemigo {
         estaVivo=false;
         crearPowerUp();
         getJuego().getNivel().getSnowBro().sumarPuntaje(this.puntaje);
-        int dir = (Math.random() < 0.5) ? 0 : 180;
-        BolaDeNieve bola = this.getJuego().getNivelActual().getMiFabrica().getBolaDeNieve(miHitbox.getPosX(), miHitbox.getPosY(), dir);
+        BolaDeNieve bola = this.getJuego().getNivelActual().getMiFabrica().getBolaDeNieve(miHitbox.getPosX(), miHitbox.getPosY(), 0);
+        bola.getSkin().setEstadoActual(4);
         this.getJuego().registrarObserver(bola);
         this.getJuego().getNivelActual().agregarProyectiles(bola);
+        System.out.println("Enemigo murio: Se crea bola de nieve. ");
         return;
     }
 

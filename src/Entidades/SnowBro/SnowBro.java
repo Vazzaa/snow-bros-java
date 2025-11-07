@@ -246,6 +246,13 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         return;
     }
 
+    public void colisionarBolaDeNieve(BolaDeNieve b) {
+        boolean colisiona = this.colisionaAABB(this.miHitbox, b.getHitbox());
+        if (!colisiona) return;
+        b.afectar(this);
+        return;
+    }
+
     public void resetVelocidad() {
         this.velocidad = 3;
     }
@@ -289,6 +296,10 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
 
     public int getDañoProyectil() {
         return dañoProyectil;
+    }
+
+    public EstadoMovimietoSnowBro getEstadoMovimiento() {
+        return estadoMovimiento;
     }
     
 }

@@ -25,6 +25,7 @@ public abstract class Proyectil extends Entidad implements Colisionable{
         daño = dañ;
         alcance = alc;
         direccion = dir;
+        activarTemporizadorVida();
     }
 
     public void mover() {

@@ -129,6 +129,6 @@ public class FabricaEntidades {
     }
 
     public BolaDeNieve getBolaDeNieve(int x, int y, int direccion) {
-        return new BolaDeNieve(this.fabricaSkin.crearSkinBolaDeNieve(), miJuego, x, y, 5, 1, 1000, direccion);
+        return new BolaDeNieve(this.fabricaSkin.crearSkinBolaDeNieve(), miJuego, x, y, 5, 1, 1000000, direccion);
     }
 }
