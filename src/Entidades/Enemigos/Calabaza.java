@@ -202,4 +202,9 @@ public class Calabaza extends Enemigo{
         return true;
     }
 
+    @Override
+    public boolean esInmortal() {
+        return true;
+    }
+
 }

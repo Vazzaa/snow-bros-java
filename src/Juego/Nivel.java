@@ -1,5 +1,6 @@
 package Juego;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -217,6 +218,28 @@ public class Nivel {
         if (System.currentTimeMillis() >= tiempoFinDetencionEnemigos) {
             reanudarEnemigos();
             tiempoFinDetencionEnemigos = 0;
+        }
+    }
+
+    public void limpiarEnemigosCaidosDelMapa() {
+        List<Enemigo> aEliminar = new ArrayList<>();
+        
+        for (Enemigo e : misEnemigos) {
+            // Si el enemigo está fuera del mapa
+            if (e.getPosY() > 8100 || e.getPosY() < 7600) {  // Ajusta estos límites
+                aEliminar.add(e);
+            }
+        }
+        
+        for (Enemigo e : aEliminar) {
+            misEnemigos.remove(e);
+            e.getJuego().getControladoraGrafica().sacarEntidad(e);
+        }
+    }
+
+    public void limpiarSnowBroCaidoDelMapa() {
+        if (snowBro != null && (snowBro.getPosY() > 8100 || snowBro.getPosY() < 7600)) {
+            snowBro.morir();
         }
     }
 }
