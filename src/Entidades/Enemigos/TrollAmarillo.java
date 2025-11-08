@@ -238,4 +238,10 @@ public class TrollAmarillo extends Enemigo{
         }
     }
 
+    @Override
+    public void moverHorizontalmente(int i) {
+        setPosX(getPosX() + i);
+        notificarObserver();
+    }
+
 }

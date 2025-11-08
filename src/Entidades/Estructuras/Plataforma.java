@@ -51,4 +51,9 @@ public class Plataforma extends Estructura{
     public boolean esSuelo() {
         return esPlataformaSuelo;
     }
+
+    @Override
+    public boolean esMovible() {
+        return false;
+    }
 }

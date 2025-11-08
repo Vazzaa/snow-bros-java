@@ -248,4 +248,10 @@ public class DemonioRojo extends Enemigo {
             tiempoFinCongelado = 0; 
         }
     }
+
+    @Override
+    public void moverHorizontalmente(int i) {
+        setPosX(getPosX() + i);
+        notificarObserver();
+    }
 }

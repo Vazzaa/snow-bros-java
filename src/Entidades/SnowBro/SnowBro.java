@@ -117,11 +117,6 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         notificarObserver();
     }
     
-    public void setDireccion(int direccion){
-        estadoMovimiento.cambiar_direccion(direccion);
-		misAspectos.setEstadoActual(getClaveRepreEstado());
-		notificarObserver();
-	}
     
     public void morir() {
         jugador.sumarPuntaje(puntaje);
@@ -296,6 +291,16 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
 
     public EstadoMovimietoSnowBro getEstadoMovimiento() {
         return estadoMovimiento;
+    }
+
+	public void moverHorizontalmente(int deltaX) {
+		setPosX(getPosX() + deltaX);
+        notificarObserver();
+	}
+
+    public void moverVerticalmente(int deltaY) {
+        setPosY(getPosY() + deltaY);
+        notificarObserver();
     }
     
 }

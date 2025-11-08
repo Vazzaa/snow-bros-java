@@ -212,4 +212,10 @@ public class Moghera extends Enemigo{
     public boolean esVolador() {
         return false;
     }
+
+    @Override
+    public void moverHorizontalmente(int i) {
+        setPosX(getPosX() + i);
+        notificarObserver();
+    }
 }

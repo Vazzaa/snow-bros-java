@@ -26,4 +26,6 @@ public abstract class Estructura extends Entidad implements Colisionable{
     public abstract boolean bloquearMovimientoHorizontal();
 
     public abstract boolean esSuelo();
+
+    public abstract boolean esMovible();
 }

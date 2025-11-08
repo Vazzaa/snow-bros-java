@@ -33,6 +33,11 @@ public class Escalera extends Obstaculo{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'esSuelo'");
     }
+
+    @Override
+    public boolean esMovible() {
+        return false;
+    }
 }
 
 

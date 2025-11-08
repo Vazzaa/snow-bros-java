@@ -177,6 +177,15 @@ public class Nivel {
         misEnemigos.removeIf(e -> !e.estaVivo());
     }
 
+    public void moverEstructurasMoviles(){
+        // if (misEstructuras == null) return;
+        // for (Estructura estru : misEstructuras) {
+        //     if(estru.esMovible())
+        //         estru.moverse();
+        // }
+    }
+
+
     public void moverProyectiles() {
         if (misProyectiles == null) return;
         for (Proyectil p : misProyectiles) {

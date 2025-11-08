@@ -26,7 +26,7 @@ import Entidades.Estructuras.Estructura;
 import Entidades.Estructuras.Pared;
 import Entidades.Estructuras.ParedDestructible;
 import Entidades.Estructuras.Pincho;
-import Entidades.Estructuras.PlatMovil;
+import Entidades.Estructuras.PlatMovilHorizontal;
 import Entidades.Estructuras.PlatQuebradiza;
 import Entidades.Estructuras.Plataforma;
 import Entidades.Estructuras.SueloResbaladizo;

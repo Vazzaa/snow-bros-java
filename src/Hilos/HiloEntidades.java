@@ -1,7 +1,7 @@
 package Hilos;
 
 import Entidades.Enemigos.Enemigo;
-import Entidades.Estructuras.PlatMovil;
+import Entidades.Estructuras.PlatMovilHorizontal;
 import EstadoMovimiento.Movible;
 import Juego.Nivel;
 
@@ -23,6 +23,7 @@ public class HiloEntidades  extends Thread {
         try {
             Thread.sleep(16);
             juego.moverEnemigos();
+            juego.moverEstructurasMoviles();
             juego.moverProyectiles();
             juego.verificarColisiones();
             juego.actualizarPowerUps();

@@ -17,7 +17,6 @@ import EstadoMovimiento.EnemigoVoladorDiagonal;
 
 public class Fantasma extends Enemigo{
     
-    protected FabricaEntidades mFabricaEntidades;
     protected int movimientoActual;
     private static final int VELOCIDAD = 1;
 
@@ -141,5 +140,10 @@ public class Fantasma extends Enemigo{
     @Override
     public boolean esInmortal() {
         return true;
+    }
+
+    @Override
+    public void moverHorizontalmente(int i) {
+            //no hace nada a este porque vuela
     }
 }
