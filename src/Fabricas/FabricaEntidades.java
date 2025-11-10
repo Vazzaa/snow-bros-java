@@ -91,17 +91,17 @@ public class FabricaEntidades {
     }
 
     public Pared getPared(int x, int y) {
-        Skin skinPared;
-        if (x >= 700) { 
-            skinPared = this.fabricaSkin.crearSkinParedDerecha();
-            } else { 
-            skinPared = this.fabricaSkin.crearSkinParedIzquierda();
-            }
-        return new Pared(skinPared, miJuego, x, y);
+        Pared pared;
+        if (x >= 700) {
+            pared = new Pared(this.fabricaSkin.crearSkinParedDerecha(), miJuego, x, y);
+        } else {
+            pared = new Pared(this.fabricaSkin.crearSkinParedIzquierda(), miJuego, x, y);
+        }
+        pared.getSkin().setEstadoActual(miJuego.getNivelActual().getNumero());
+        return pared;
     }
 
     public SueloResbaladizo getSueloResbaladizo(int x, int y) {
-        System.out.println("DEBUG PASO 1: Creando SueloResbaladizo en la fábrica.");
         return new SueloResbaladizo(this.fabricaSkin.crearSkinSueloResbaladizo(), miJuego, x, y);
     }
 
