@@ -5,7 +5,7 @@ import Grafica.ControladorGrafica;
 
 public class Clasico extends ModoDeJuego {
 
-    private static final int CANTIDAD_NIVELES = 2;
+    private static final int CANTIDAD_NIVELES = 3;
 
     public Clasico (ControladorGrafica controladorGrafica) {
         super(controladorGrafica);

@@ -5,7 +5,7 @@ import Grafica.ControladorGrafica;
 
 public class ContraReloj extends ModoDeJuego{
 
-    private static final int CANTIDAD_NIVELES = 2;
+    private static final int CANTIDAD_NIVELES = 3;
     private static final long TIEMPO_LIMITE_MS = 180000;
 
     protected long tiempoInicio;

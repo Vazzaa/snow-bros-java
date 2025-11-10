@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class Supervivencia extends ModoDeJuego {
 
-    private static final int CANTIDAD_NIVELES = 2;
+    private static final int CANTIDAD_NIVELES = 3;
     private static final int PUNTUACION_OBJETIVO = 50000;
     private static final int ENEMIGOS_POR_OLEADA = 3;
     private static final int MIN_ENEMIGOS = 2;
