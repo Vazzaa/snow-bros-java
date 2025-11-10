@@ -72,6 +72,10 @@ public class EstadoMovimietoSnowBro {
             actualizar();
         } else {
             modoEscalera = false;
+            // Actualizar el estado de resbalar basado en si está sobre suelo resbaladizo
+            boolean enSueloResbaladizo = estaEnSueloResbaladizo();
+            snowBro.setEstaResbalando(enSueloResbaladizo);
+            
             if (derecha) {
                 moverDerecha();
             } else if (izquierda) {
@@ -93,14 +97,23 @@ public class EstadoMovimietoSnowBro {
             actualizar();
         }
     }
-
-    protected void moverDerecha() {
-        this.velocidadHorizontal = snowBro.getVelocidad();
-    }
-
-    protected void moverIzquierda() {
-        this.velocidadHorizontal = -snowBro.getVelocidad();
-    }
+        protected void moverDerecha() {
+            int velocidadBase = snowBro.getVelocidad();
+            if (snowBro.estaResbalando()) {
+                this.velocidadHorizontal = (int)(velocidadBase * 0.5); // 50% de velocidad
+            } else {
+                this.velocidadHorizontal = velocidadBase;
+            }
+        }
+    
+        protected void moverIzquierda() {
+            int velocidadBase = snowBro.getVelocidad();
+            if (snowBro.estaResbalando()) {
+                this.velocidadHorizontal = -(int)(velocidadBase * 0.5); // 50% de velocidad
+            } else {
+                this.velocidadHorizontal = -velocidadBase;
+            }
+        }
     
     protected void saltar() {
     	if (enElSuelo()) {
@@ -117,6 +130,13 @@ public class EstadoMovimietoSnowBro {
             return true;
         }
         return false;
+    }
+
+    public boolean estaEnSueloResbaladizo() {
+        if (snowBro.getNivel() == null || snowBro.getNivel().getMisEstructuras() == null) {
+            return false;
+        }
+        return controladorColisiones.estaEnSueloResbaladizo(snowBro, snowBro.getNivel().getMisEstructuras());
     }
 
     public void detenerMovimientoHorizontal() {

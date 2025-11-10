@@ -1,5 +1,7 @@
 package Juego;
 
+import Entidades.Estructuras.Estructura;
+import Entidades.Estructuras.Obstaculo;
 import Entidades.Jugador.Jugador;
 import Grafica.ControladorGrafica;
 import Sonidos.GestorSonidos;
@@ -51,7 +53,6 @@ public class Clasico extends ModoDeJuego {
             System.out.println("No hay mas niveles. Fin.");
             juegoCompletado();
 		}
-
     }
 
     @Override

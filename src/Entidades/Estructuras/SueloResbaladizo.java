@@ -8,6 +8,8 @@ public class SueloResbaladizo extends Obstaculo {
 
     public SueloResbaladizo(Skin s,ModoDeJuego juego ,int x, int y) {
         super(s, juego, x, y);
+        miHitbox.setAncho(16);
+        miHitbox.setAlto(32);
     }
 
     public void afectar(SnowBro s) {
@@ -29,13 +31,22 @@ public class SueloResbaladizo extends Obstaculo {
 
     @Override
     public boolean esSuelo() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'esSuelo'");
+        return true;
+    }
+
+    @Override
+    public boolean bloquearMovimientoHorizontal() {
+        return false;
     }
 
     @Override
     public boolean esMovible() {
         return false;
+    }
+
+    @Override
+    public boolean esSueloResbaladizo() {
+        return true;
     }
 }
 

@@ -35,4 +35,8 @@ public abstract class Estructura extends Entidad implements Colisionable{
     public boolean esEscalera() {
         return false;
     }
+
+    public boolean esSueloResbaladizo() {
+        return false;
+    }
 }
