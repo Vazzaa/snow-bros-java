@@ -111,15 +111,24 @@ public class CreadorDeNivel {
                             estructuras.add(sueloResbaladizo);
                         }
 
-                    } else if (linea.startsWith("PARED:")) {
+                    } else if (linea.startsWith("PAREDDERECHA:")) {
                         String[] coords = linea.substring(6).split(",");
                         int x = Integer.parseInt(coords[0].trim());
                         int y = Integer.parseInt(coords[1].trim());
                         Estructura pared = fabEntidades.getPared(x, y);
                         if (pared != null) {
                             estructuras.add(pared);
-                        }
-                        
+                            System.out.println("DEBUG: Pared agregada - x=" + x + ", tipo=" + (x >= 700 ? "DERECHA" : "IZQUIERDA"));
+                    }
+                    } else if (linea.startsWith("PAREDIZQUIERDA:")) {
+                        String[] coords = linea.substring(6).split(",");
+                        int x = Integer.parseInt(coords[0].trim());
+                        int y = Integer.parseInt(coords[1].trim());
+                        Estructura pared = fabEntidades.getPared(x, y);
+                        if (pared != null) {
+                            estructuras.add(pared);
+                            System.out.println("DEBUG: Pared agregada - x=" + x + ", tipo=" + (x >= 700 ? "DERECHA" : "IZQUIERDA"));
+                    }
                     } else if (linea.startsWith("PINCHO:")) {
                         String[] coords = linea.substring(7).split(",");
                         int x = Integer.parseInt(coords[0].trim());

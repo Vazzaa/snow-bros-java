@@ -20,14 +20,12 @@ public class BolaDeNieve extends Proyectil{
 
     @Override
     public void afectar(Enemigo enemigo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'afectar'");
+        //TODO: Donde esta el comportamiento al afectar a un enemigo?
     }
 
     @Override
     public void afectar(Estructura estructura) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'afectar'");
+        //No hace nada
     }
 
     public int getAlcance() {

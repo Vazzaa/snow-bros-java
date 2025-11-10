@@ -101,6 +101,10 @@ public class Nivel {
         p.eliminar();
         misPowerUps.remove(p);
     }
+    public void eliminarEstructura(Destructible e){
+        misEstructuras.remove(e);
+        e.destruir();
+    }
 
     public void agregarEstructura(Estructura e){
         misEstructuras.add(e);
