@@ -228,4 +228,14 @@ public class Calabaza extends Enemigo{
         //no hace nada a este porque vuela
     }
 
+    @Override
+    public void morir() {
+        //TODO: Muere?
+    }
+
+    @Override
+    public boolean estaCompletamenteCongelado() {
+        return false;
+    }
+
 }

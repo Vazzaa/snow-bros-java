@@ -51,7 +51,7 @@ public abstract class ModoDeJuego implements ControladorJuego {
 	}
 	
 	public void cambiarDireccionJugador(int direccion) {
-		nivelActual.getSnowBro().setDireccion(direccion);
+		//nivelActual.getSnowBro().setDireccion(direccion);
 	}
 
 	public Nivel getNivel(){

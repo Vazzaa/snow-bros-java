@@ -27,7 +27,11 @@ public class Nivel {
     protected FabricaEntidades miFabrica;
     protected ModoDeJuego miJuego;
     private long tiempoFinDetencionEnemigos = 0;
+    private long tiempoParaAparecerCalabaza;
+    private long tiempoParaAparecerVida;
 
+    private static final int TIEMPO_APARICION_CALABAZA = 60000;
+    private static final int TIEMPO_APARICION_VIDA = 30000;
 
     public Nivel(int num, List<Estructura> misEstructuras, List<Enemigo> misEnemigos, SnowBro snowBro, FabricaEntidades miFabrica) {
         numero = num;
@@ -38,6 +42,7 @@ public class Nivel {
         misProyectiles = new CopyOnWriteArrayList<Proyectil>();
         this.miFabrica = miFabrica;
         miJuego = null;
+        tiempoParaAparecerCalabaza = System.currentTimeMillis() + TIEMPO_APARICION_CALABAZA;
     }
 
     public int getNumero() {
@@ -256,6 +261,26 @@ public class Nivel {
     public void limpiarSnowBroCaidoDelMapa() {
         if (snowBro != null && (snowBro.getPosY() > 8100 || snowBro.getPosY() < 7600)) {
             snowBro.morir();
+        }
+    }
+
+    public void actualizarAparicionCalabaza() {
+        if (System.currentTimeMillis() >= tiempoParaAparecerCalabaza) {
+            Enemigo calabaza = miFabrica.getCalabaza(100, 8000);
+            agregarEnemigos(calabaza);
+            miJuego.registrarObserver(calabaza);
+            System.out.println("¡Ha aparecido una calabaza!");
+            tiempoParaAparecerCalabaza = System.currentTimeMillis() + TIEMPO_APARICION_CALABAZA;
+        }
+    }
+
+    public void actualizarAparicionVida() {
+        if (System.currentTimeMillis() >= tiempoParaAparecerVida) {
+            PowerUp vida = miFabrica.getVidaExtra(200, 8000);
+            agregarPowerUps(vida);
+            miJuego.registrarObserver(vida);
+            System.out.println("¡Ha aparecido un power-up de vida!");
+            tiempoParaAparecerVida = System.currentTimeMillis() + TIEMPO_APARICION_VIDA;
         }
     }
 }
