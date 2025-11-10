@@ -1,4 +1,4 @@
-NIVEL:2
+NIVEL:3
 JUGADOR:50,7650
 
 # Plataformas base (y=7610)
