@@ -13,6 +13,7 @@ import Fabricas.FabricaEntidades;
 import Fabricas.Skin;
 import Juego.ColisionManagerEntidades;
 import Juego.ModoDeJuego;
+import Sonidos.GestorSonidos;
 import Visitors.Colisionable;
 
 public class Kamakichi extends Enemigo {
@@ -38,6 +39,7 @@ public class Kamakichi extends Enemigo {
     @Override
     public void morir(){
         estaVivo = false;
+        GestorSonidos.getInstancia().reproducirEfecto("enemy_death");
         getJuego().getNivel().getSnowBro().sumarPuntaje(puntaje);
         getJuego().getControladoraGrafica().sacarEntidad(this);
     }
