@@ -5,8 +5,6 @@ import Grafica.ControladorGrafica;
 
 public class Clasico extends ModoDeJuego {
 
-    private static final int CANTIDAD_NIVELES = 3;
-
     public Clasico (ControladorGrafica controladorGrafica) {
         super(controladorGrafica);
     }
@@ -40,22 +38,17 @@ public class Clasico extends ModoDeJuego {
 
 		int siguienteNivel = numeroNivelActual + 1;
 
-		if(siguienteNivel <= CANTIDAD_NIVELES) {
-            String archivoSiguienteNivel = "nivel" + siguienteNivel + ".txt";
-            java.io.File archivo = new java.io.File(archivoSiguienteNivel);
+        String archivoSiguienteNivel = "nivel" + siguienteNivel + ".txt";
+        java.io.File archivo = new java.io.File(archivoSiguienteNivel);
 
-		    if(archivo.exists()) {
-                cargarNivel(siguienteNivel, puntajeActual);
-                iniciarHilos();
-                System.out.println("Nivel " + siguienteNivel + " cargado.");
-		    } else {
-                System.out.println("ERROR: No se encontró el archivo " + archivoSiguienteNivel);
-                juegoCompletado();
-		    }
-        } else {
+		if(archivo.exists()) {
+            cargarNivel(siguienteNivel, puntajeActual);
+            iniciarHilos();
+            System.out.println("Nivel " + siguienteNivel + " cargado.");
+		} else {
             System.out.println("No hay mas niveles. Fin.");
             juegoCompletado();
-        }
+		}
 
     }
 
