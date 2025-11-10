@@ -221,4 +221,10 @@ public class Moghera extends Enemigo{
     public boolean estaCompletamenteCongelado() {
         return faseActual == FASE_CONGELADO;
     }
+
+    @Override
+    public void moverVerticalmente(int i) {
+        setPosY(getPosY()+1);
+        notificarObserver();
+    }
 }

@@ -35,7 +35,8 @@ public class Kamakichi extends Enemigo {
         
     }
 
-    protected void morir(){
+    @Override
+    public void morir(){
         estaVivo = false;
         getJuego().getNivel().getSnowBro().sumarPuntaje(puntaje);
         getJuego().getControladoraGrafica().sacarEntidad(this);
@@ -164,5 +165,17 @@ public class Kamakichi extends Enemigo {
     public void moverHorizontalmente(int i) {
         setPosX(getPosX() + i);
         notificarObserver();
+    }
+
+    @Override
+    public boolean estaCompletamenteCongelado() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'estaCompletamenteCongelado'");
+    }
+
+    @Override
+    public void moverVerticalmente(int i) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'moverVerticalmente'");
     }
 }

@@ -17,11 +17,11 @@ public class PlatMovilHorizontal extends Plataforma implements Movible{
 
     public PlatMovilHorizontal(Skin s, ModoDeJuego juego, int x, int y) {
         super(s, juego, x, y);
-        this.posicionInicialX = x;
-        this.velocidad = 1;
-        this.direccion = 1; 
-        this.rangoMovimiento = 100; 
-        this.puntajeOtorgado = false;
+        posicionInicialX = x;
+        velocidad = 1;
+        direccion = 1; 
+        rangoMovimiento = 100; 
+        puntajeOtorgado = false;
     }
 
     public void afectar(SnowBro s) {
@@ -37,7 +37,7 @@ public class PlatMovilHorizontal extends Plataforma implements Movible{
 
     public void afectar (Enemigo e) {
         boolean colisiona = this.colisionaAABB(this.miHitbox, e.getHitbox());
-        if (colisiona && !e.esVolador()) { // Solo afecta a enemigos terrestres
+        if (colisiona && !e.esVolador()) { 
             e.moverHorizontalmente(velocidad * direccion);
         }
     }
@@ -50,8 +50,13 @@ public class PlatMovilHorizontal extends Plataforma implements Movible{
     public void moverse() {
         miHitbox.setPosX(miHitbox.getPosX() + velocidad * direccion);
         if (miHitbox.getPosX() >= posicionInicialX + rangoMovimiento || miHitbox.getPosX() <= posicionInicialX - rangoMovimiento) {
-            direccion *= -1; // Invertir dirección
+            direccion *= -1;
         }
         notificarObserver();
+    }
+    
+    @Override
+    public boolean esMovible() {
+        return true;
     }
 }
