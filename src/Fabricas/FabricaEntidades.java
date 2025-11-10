@@ -85,14 +85,14 @@ public class FabricaEntidades {
         return new Escalera(this.fabricaSkin.crearSkinEscalera(), miJuego, x, y);
     }
 
-    public Pared getPared(int x, int y) {
+    public Pared getPared(int x, int y, int numeroNivel) {
         Pared pared;
         if (x >= 700) {
             pared = new Pared(this.fabricaSkin.crearSkinParedDerecha(), miJuego, x, y);
         } else {
             pared = new Pared(this.fabricaSkin.crearSkinParedIzquierda(), miJuego, x, y);
         }
-        pared.getSkin().setEstadoActual(miJuego.getNivelActual().getNumero());
+        pared.getSkin().setEstadoActual(numeroNivel);
         return pared;
     }
 
@@ -108,12 +108,15 @@ public class FabricaEntidades {
         return new PlatMovilHorizontal(this.fabricaSkin.crearSkinPlatMovil(), miJuego, x, y);
     }
 
-    public Plataforma getPlataforma(int x, int y) {
-        return new Plataforma(this.fabricaSkin.crearSkinPlataforma(), miJuego, x, y);
+    public Plataforma getPlataforma(int x, int y, int numeroNivel) {
+        Plataforma plataforma = new Plataforma(this.fabricaSkin.crearSkinPlataforma(), miJuego, x, y);
+        plataforma.getSkin().setEstadoActual(numeroNivel);
+        return plataforma;
     }
 
-    public Plataforma getPlataformaSuelo(int x, int y) {
+    public Plataforma getPlataformaSuelo(int x, int y, int numeroNivel) {
         Plataforma platSuelo = new Plataforma(this.fabricaSkin.crearSkinPlataforma(), miJuego, x, y, true);
+        platSuelo.getSkin().setEstadoActual(numeroNivel);
         return platSuelo;
     }
 

@@ -63,7 +63,7 @@ public class CreadorDeNivel {
                         String[] coords = linea.substring(11).split(",");
                         int x = Integer.parseInt(coords[0].trim());
                         int y = Integer.parseInt(coords[1].trim());
-                        Estructura plataforma = fabEntidades.getPlataforma(x, y);
+                        Estructura plataforma = fabEntidades.getPlataforma(x, y, numeroNivel);
                         if (plataforma != null) {
                             estructuras.add(plataforma);
                         }
@@ -94,35 +94,24 @@ public class CreadorDeNivel {
                         if (sueloResbaladizo != null) {
                             estructuras.add(sueloResbaladizo);
                         }
-
-                    } else if (linea.startsWith("PAREDDERECHA:")) {
-                        String[] coords = linea.substring(6).split(",");
-                        int x = Integer.parseInt(coords[0].trim());
-                        int y = Integer.parseInt(coords[1].trim());
-                        Estructura pared = fabEntidades.getPared(x, y);
-                        if (pared != null) {
-                            estructuras.add(pared);
-                            System.out.println("DEBUG: Pared agregada - x=" + x + ", tipo=" + (x >= 700 ? "DERECHA" : "IZQUIERDA"));
+                } else if (linea.startsWith("PARED:")) {
+                    String[] coords = linea.substring(6).split(",");
+                    int x = Integer.parseInt(coords[0].trim());
+                    int y = Integer.parseInt(coords[1].trim());
+                    Estructura pared = fabEntidades.getPared(x, y, numeroNivel);
+                    if (pared != null) {
+                        estructuras.add(pared);
+                        System.out.println("DEBUG: Pared agregada - x=" + x + ", tipo=" + (x >= 700 ? "DERECHA" : "IZQUIERDA"));
                     }
-                    } else if (linea.startsWith("PAREDIZQUIERDA:")) {
-                        String[] coords = linea.substring(6).split(",");
-                        int x = Integer.parseInt(coords[0].trim());
-                        int y = Integer.parseInt(coords[1].trim());
-                        Estructura pared = fabEntidades.getPared(x, y);
-                        if (pared != null) {
-                            estructuras.add(pared);
-                            System.out.println("DEBUG: Pared agregada - x=" + x + ", tipo=" + (x >= 700 ? "DERECHA" : "IZQUIERDA"));
+                } else if (linea.startsWith("PINCHO:")) {
+                    String[] coords = linea.substring(7).split(",");
+                    int x = Integer.parseInt(coords[0].trim());
+                    int y = Integer.parseInt(coords[1].trim());
+                    Estructura pincho = fabEntidades.getPincho(x, y);
+                    if (pincho != null) {
+                        estructuras.add(pincho);
                     }
-                    } else if (linea.startsWith("PINCHO:")) {
-                        String[] coords = linea.substring(7).split(",");
-                        int x = Integer.parseInt(coords[0].trim());
-                        int y = Integer.parseInt(coords[1].trim());
-                        Estructura pincho = fabEntidades.getPincho(x, y);
-                        if (pincho != null) {
-                            estructuras.add(pincho);
-                        }
-                        
-                    } else if (linea.startsWith("ESCALERA:")) {
+                }  else if (linea.startsWith("ESCALERA:")) {
                         String[] coords = linea.substring(9).split(",");
                         int x = Integer.parseInt(coords[0].trim());
                         int y = Integer.parseInt(coords[1].trim());
