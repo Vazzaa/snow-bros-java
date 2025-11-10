@@ -147,6 +147,13 @@ public class Nivel {
                             snowBro.colisionarProyectil(proyectil);
                         }
                     }
+                    if (misEstructuras != null) {
+                        for (Estructura estructura : misEstructuras) {
+                            if (proyectil.colisionaAABB(proyectil.getHitbox(), estructura.getHitbox())) {
+                                proyectil.afectar(estructura);
+                            }
+                        }
+                    }
                 }
             }
         } catch (Exception e) {

@@ -9,6 +9,8 @@ public class ConstantesTeclado implements KeyListener {
     public static int DERECHA = KeyEvent.VK_D;  // Tecla D
     public static int IZQUIERDA = KeyEvent.VK_A;  // Tecla A
     public static int SALTAR = KeyEvent.VK_W;  // Tecla W
+    public static int SUBIR_ESCALERA = KeyEvent.VK_W;  // Tecla W para subir
+    public static int BAJAR_ESCALERA = KeyEvent.VK_S;  // Tecla S para bajar
     
     public static Set<Integer> teclasPresionadas = new HashSet<>();
     

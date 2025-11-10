@@ -211,6 +211,18 @@ PLATAFORMA:480,7920
 PLATAFORMA:496,7920
 PLATAFORMA:512,7920
 
+# Escaleras - Primera escalera conectando fila 1 (7610) con fila 2 (7680) en x=112
+ESCALERA:112,7626
+ESCALERA:112,7642
+ESCALERA:112,7658
+ESCALERA:112,7674
+
+# Escaleras - Segunda escalera conectando fila 2 (7680) con fila 3 (7740) en x=304
+ESCALERA:304,7680
+ESCALERA:304,7696
+ESCALERA:304,7712
+ESCALERA:304,7728
+
 # Paredes izquierdas (x=0)
 PARED:0,7000
 PARED:0,7016
@@ -369,3 +381,6 @@ ENEMIGO:TrollAmarillo,448,7950
 POWERUP:comida,150,7650
 POWERUP:comida,460,7950
 POWERUP:pocionverde,700,7650
+
+# Obstaculos
+PINCHO:300,7635

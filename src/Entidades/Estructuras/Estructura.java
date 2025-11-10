@@ -7,6 +7,7 @@ import Juego.Entidad;
 import Visitors.Colisionable;
 import Visitors.Colisionador;
 import Juego.ModoDeJuego;
+import Entidades.Proyectiles.*;
 
 public abstract class Estructura extends Entidad implements Colisionable{
 
@@ -18,6 +19,8 @@ public abstract class Estructura extends Entidad implements Colisionable{
 
     public void afectar (Enemigo e){};
 
+    public void afectar(Proyectil p){};
+
     @Override
     public void aceptarColision(Colisionador c){
         c.colisionarEstructura(this);
@@ -26,4 +29,8 @@ public abstract class Estructura extends Entidad implements Colisionable{
     public abstract boolean bloquearMovimientoHorizontal();
 
     public abstract boolean esSuelo();
+
+    public boolean esEscalera() {
+        return false;
+    }
 }

@@ -4,6 +4,7 @@ import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
 import Visitors.Colisionador;
 import Juego.ModoDeJuego;
+import Entidades.Proyectiles.Proyectil;
 
 public class Plataforma extends Estructura{
 
@@ -29,6 +30,18 @@ public class Plataforma extends Estructura{
 
     public void afectar (Enemigo e) {
 
+    }
+
+    public void afectar(Proyectil p) {
+        long tiempoActual = System.currentTimeMillis();
+        long tiempoCreacion = p.getTiempoCreacion();
+        if (tiempoActual - tiempoCreacion > 50) {
+            int pieProyectil = miHitbox.getPosY();
+            int techoPlataforma = this.miHitbox.getPosY() + this.miHitbox.getAlto();
+            if (pieProyectil <= techoPlataforma + 5) {
+                p.eliminar();
+            }
+        }  
     }
 
     public void setSkin (Skin s) {

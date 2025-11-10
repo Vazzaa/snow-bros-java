@@ -10,6 +10,8 @@ import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.*;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
+import Juego.ColisionManagerEntidades;
+import Juego.Hitbox;
 import Visitors.Colisionable;
 import Visitors.Colisionador;
 
@@ -28,6 +30,8 @@ public class DemonioRojo extends Enemigo {
     protected int estadoNieve;
     protected int movimientoActual;
     private static final int VELOCIDAD = 1;
+    protected int velocidadVerticalDeslizamiento = 0;
+    protected int gravedadDeslizamiento = 1;
     
     // Atributos para el temporizador de derretimiento
     private long tiempoFinCongelado = 0;
@@ -93,6 +97,10 @@ public class DemonioRojo extends Enemigo {
 
     @Override
     public void moverse() {
+        if (estaSiendoEmpujado() && estaCompletamenteCongelado()) {
+            deslizarse();
+            return;
+        }
         if (detenidoGlobalmente) return;
         if (estadoNieve > ESTADO_INICIAL) {
             estadoMovimiento = new EnemigoQuieto();
@@ -102,6 +110,63 @@ public class DemonioRojo extends Enemigo {
 
         verificarDerretimiento();
         estadoMovimiento.moverse(this, VELOCIDAD);
+    }
+
+    public void deslizarse() {
+        if (getJuego() == null || getJuego().getNivel() == null) {
+            return;
+        }
+        
+        ColisionManagerEntidades colisionManager = new ColisionManagerEntidades();
+        int nuevaX = getPosX() + velocidadDeslizamiento;
+        for (Estructura estructura : getJuego().getNivel().getMisEstructuras()) {
+            if (estructura.bloquearMovimientoHorizontal()) {
+                Hitbox hitboxFutura = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), nuevaX, getPosY());
+                if (colisionaAABB(hitboxFutura, estructura.getHitbox())) {
+                    morir();
+                    return;
+                }
+            }
+        }
+        for (Enemigo otroEnemigo : getJuego().getNivel().getMisEnemigos()) {
+            if (otroEnemigo != this && otroEnemigo.estaVivo() && !otroEnemigo.estaCompletamenteCongelado()) {
+                if (colisionaAABB(getHitbox(), otroEnemigo.getHitbox())) {
+                    otroEnemigo.morir();
+                    getJuego().getNivel().getSnowBro().sumarPuntaje(otroEnemigo.getPuntaje());
+                }
+            }
+        }
+        if (!colisionManager.estaEnSuelo(this, getJuego().getNivel().getMisEstructuras())) {
+            velocidadVerticalDeslizamiento -= gravedadDeslizamiento;
+            int nuevaY = getPosY() + velocidadVerticalDeslizamiento;
+            boolean colisionaVertical = false;
+            for (Estructura estructura : getJuego().getNivel().getMisEstructuras()) {
+                Hitbox hitboxFutura = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), nuevaX, nuevaY);
+                if (colisionaAABB(hitboxFutura, estructura.getHitbox())) {
+                    int techoEstructura = estructura.getHitbox().getPosY() + estructura.getHitbox().getAlto();
+                    int pieEnemigo = nuevaY;
+                    if (pieEnemigo >= techoEstructura - 5 && pieEnemigo <= techoEstructura + 10) {
+                        setPosY(techoEstructura);
+                        velocidadVerticalDeslizamiento = 0;
+                        colisionaVertical = true;
+                        break;
+                    }
+                }
+            }
+            
+            if (!colisionaVertical) {
+                setPosY(nuevaY);
+            }
+        } else {
+            velocidadVerticalDeslizamiento = 0;
+            Estructura plataformaDebajo = colisionManager.getPlataformaDebajo(this, getJuego().getNivel().getMisEstructuras());
+            if (plataformaDebajo != null) {
+                int techoPlataforma = plataformaDebajo.getHitbox().getPosY() + plataformaDebajo.getHitbox().getAlto();
+                setPosY(techoPlataforma);
+            }
+        }
+        setPosX(nuevaX);
+        notificarObserver();
     }
 
     @Override
@@ -203,7 +268,7 @@ public class DemonioRojo extends Enemigo {
     @Override
     public void recibirDisparo() {
         if (estadoNieve >= ESTADO_NIEVE_COMPLETO) {
-            morir();
+            return;
         } else {
             estadoNieve += getJuego().getNivel().getSnowBro().getDañoProyectil();
             actualizarEstadoNieve();
@@ -246,5 +311,9 @@ public class DemonioRojo extends Enemigo {
         else {
             tiempoFinCongelado = 0; 
         }
+    }
+
+    public boolean estaCompletamenteCongelado() {
+        return estadoNieve >= ESTADO_NIEVE_COMPLETO;
     }
 }

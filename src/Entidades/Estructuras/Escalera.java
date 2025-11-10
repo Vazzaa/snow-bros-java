@@ -9,6 +9,8 @@ public class Escalera extends Obstaculo{
 
     public Escalera(Skin s, ModoDeJuego juego,int x, int y) {
         super(s, juego, x, y);
+        miHitbox.setAncho(16);
+        miHitbox.setAlto(16);
     }
 
     public void afectar(SnowBro s) {
@@ -28,10 +30,17 @@ public class Escalera extends Obstaculo{
         return misAspectos;
     }
 
+    public boolean bloquearMovimientoHorizontal() {
+        return false; 
+    }
+
     @Override
     public boolean esSuelo() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'esSuelo'");
+        return false; 
+    }
+
+    public boolean esEscalera() {
+        return true;
     }
 }
 

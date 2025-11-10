@@ -52,8 +52,21 @@ public class Kamakichi extends Enemigo {
 
     @Override
     public void recibirDisparo() {
-        // TODO Auto-generated method stub
-        
+        if (faseActual == FASE_CONGELADO) {
+            // No morir, solo ignorar el disparo
+            return;
+        }
+
+        contadorGolpes++;
+        misAspectos.setEstadoActual(2); 
+
+        if (contadorGolpes >= golpesParaCongelar) {
+            faseActual = FASE_CONGELADO;
+            misAspectos.setEstadoActual(4); 
+        } else if (contadorGolpes >= golpesParaEnfurecer) {
+            faseActual = FASE_ENFURECIDO;
+            misAspectos.setEstadoActual(3); 
+        }
     }
 
     @Override
@@ -116,5 +129,9 @@ public class Kamakichi extends Enemigo {
 
     public boolean esVolador() {
         return false;
+    }
+
+    public boolean estaCompletamenteCongelado() {
+        return faseActual == FASE_CONGELADO;
     }
 }

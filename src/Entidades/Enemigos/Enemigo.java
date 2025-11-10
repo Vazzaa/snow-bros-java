@@ -20,6 +20,9 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
     protected boolean estaVivo = true;
     protected boolean detenidoGlobalmente = false;
     protected Skin skinOriginal;
+    protected int velocidadDeslizamiento = 0; 
+    protected boolean siendoEmpujado = false;  
+    
     
     
     public Enemigo(Skin skins, ModoDeJuego juego , int posX, int posY, int v, int p) {
@@ -36,6 +39,19 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
 
     public void setPuntaje(int p){
         puntaje = p;
+    }
+
+    public void setVelocidadDeslizamiento(int v){
+        velocidadDeslizamiento = v;
+        siendoEmpujado = (v != 0);
+    }
+
+    public int getVelocidadDeslizamiento() {
+        return velocidadDeslizamiento;
+    }
+    
+    public boolean estaSiendoEmpujado() {
+        return siendoEmpujado;
     }
 
     public int getVida(){
@@ -62,6 +78,8 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
     public abstract EstadoEnemigo getEstado();
 
     public abstract void cambiarEstado();
+
+    public abstract void morir();
     
     public void cambiarEstadoMovimiento(EstadoMovimientoEnemigo nuevoEstado) {
         this.estadoMovimiento = nuevoEstado;
@@ -80,7 +98,10 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
         return estaVivo;
     }
 
-      public void setSkin(Skin nuevaSkin) {
+    public abstract boolean estaCompletamenteCongelado();
+
+
+    public void setSkin(Skin nuevaSkin) {
         this.misAspectos = nuevaSkin;
     }
 

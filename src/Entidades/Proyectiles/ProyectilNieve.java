@@ -8,12 +8,29 @@ import Juego.Hitbox;
 import Juego.ModoDeJuego;
 
 public class ProyectilNieve extends Proyectil{
+
+    protected int velocidadVertical = 0;  
+    protected int gravedad = 1;
     
     public ProyectilNieve (Skin s, ModoDeJuego juego,int x, int y,int dir) {
-        super(s, juego, x, y, 5, 1, 1000, dir);
+        super(s, juego, x, y, 9, 1, 1000, dir);
         activarTemporizadorVida();
+        velocidadVertical = 6;
     }
 
+    public void mover() {
+        if (direccion == 0) { 
+            miHitbox.setPosX(miHitbox.getPosX() + velocidad);
+        } else { 
+            miHitbox.setPosX(miHitbox.getPosX() - velocidad);
+        }
+
+        velocidadVertical -= gravedad;
+        miHitbox.setPosY(miHitbox.getPosY() + velocidadVertical);
+        verificarTemporizadorVida();
+        notificarObserver();
+
+    }
     public void afectar(SnowBro s) {
 
     }
@@ -24,7 +41,7 @@ public class ProyectilNieve extends Proyectil{
     }
 
     public void afectar(Estructura es) {
-        
+        es.afectar(this);  
     }
 
     public void setSkin(Skin s) {

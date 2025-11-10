@@ -3,12 +3,14 @@ import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
-import Entidades.Proyectiles.ProyectilNieve;
+import Entidades.Proyectiles.*;
 
 public class Pincho extends Obstaculo{
 
     public Pincho(Skin s,ModoDeJuego juego ,int x, int y) {
         super(s, juego, x, y);
+        miHitbox.setAncho(32);  
+        miHitbox.setAlto(32);   
     }
     
     public void afectar(SnowBro s) {
@@ -26,9 +28,20 @@ public class Pincho extends Obstaculo{
     public void afectar (Enemigo e) {
 
     }
+    public void afectar(Proyectil p) {
+        long tiempoActual = System.currentTimeMillis();
+        long tiempoCreacion = p.getTiempoCreacion();
+        if (tiempoActual - tiempoCreacion > 50) {
+            p.eliminar();
+        }
+    }
 
     public void destruir (ProyectilNieve n) {
-
+        long tiempoActual = System.currentTimeMillis();
+        long tiempoCreacion = n.getTiempoCreacion();
+        if (tiempoActual - tiempoCreacion > 50) {
+            n.eliminar();
+        }
     }
 
     public void setSkin(Skin s) {
@@ -48,5 +61,10 @@ public class Pincho extends Obstaculo{
     public boolean esSuelo() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'esSuelo'");
+    }
+
+    @Override
+    public boolean bloquearMovimientoHorizontal() {
+        return false;  // Cambiar a false para que no bloquee el movimiento
     }
 }

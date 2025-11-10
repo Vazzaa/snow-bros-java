@@ -16,7 +16,7 @@ public class FabricaDominio1 extends FabricaSkin {
         Map<Integer,String> mapeoEstadoImagen = new HashMap<Integer,String>();
         String rutaImagen = rutaCarpetaImagenes + imagen;
         for (int estado = 1; estado <= cantidadEstados; estado++){
-            mapeoEstadoImagen.put(estado, rutaImagen + estado + ".png");
+            mapeoEstadoImagen.put(estado, rutaImagen + estado + ".gif");
         }
         return mapeoEstadoImagen;
     }
@@ -26,11 +26,11 @@ public class FabricaDominio1 extends FabricaSkin {
     }
 
     public Skin crearSkinTrollAmarillo() {
-        return new Skin(getMapeoEstadoImagen("TrollAmarillo", 9), 1);
+        return new Skin(getMapeoEstadoImagen("TrollAmarillo", 3), 1);
     }
 
     public Skin crearSkinRanaDeFuego() {
-        return new Skin(getMapeoEstadoImagen("RanaDeFuego", 14), 1);
+        return new Skin(getMapeoEstadoImagen("RanaDeFuego", 6), 1);
     }
 
     public Skin crearSkinCalabaza() {
@@ -50,15 +50,15 @@ public class FabricaDominio1 extends FabricaSkin {
     }
 
     public Skin crearSkinPowerUpAzul(){
-        return new Skin(getMapeoEstadoImagen("PocionAzul", 2), 1);
+        return new Skin(getMapeoEstadoImagen("PocionAzul", 1), 1);
     }
 
     public Skin crearSkinPowerUpRojo(){
-        return new Skin(getMapeoEstadoImagen("PocionRojo", 2), 1);
+        return new Skin(getMapeoEstadoImagen("PocionRojo", 1), 1);
     }
 
     public Skin crearSkinPowerUpVerde(){
-        return new Skin(getMapeoEstadoImagen("PocionVerde", 2), 1);
+        return new Skin(getMapeoEstadoImagen("PocionVerde", 1), 1);
     }
 
     public Skin crearSkinFruta(){
@@ -70,24 +70,24 @@ public class FabricaDominio1 extends FabricaSkin {
     }
 
     public Skin crearSkinSnowBro(){
-        return new Skin(getMapeoEstadoImagen("SnowBro", 26), 1);
+        return new Skin(getMapeoEstadoImagen("SnowBro", 11), 1);
     }
 
     public Skin crearSkinPincho(){
         Map<Integer,String> mapeo = new HashMap<>();
-        mapeo.put(1, rutaCarpetaImagenes + "pincho.png");
+        mapeo.put(1, rutaCarpetaImagenes + "pincho.gif");
         return new Skin(mapeo, 1);
     }
 
     public Skin crearSkinEscalera(){
         Map<Integer,String> mapeo = new HashMap<>();
-        mapeo.put(1, rutaCarpetaImagenes + "escalera.png");
+        mapeo.put(1, rutaCarpetaImagenes + "escalera.gif");
         return new Skin(mapeo, 1);
     }
 
     public Skin crearSkinPared(){
         Map<Integer,String> mapeo = new HashMap<>();
-        mapeo.put(1, rutaCarpetaImagenes + "pared1.png");
+        mapeo.put(1, rutaCarpetaImagenes + "pared1.gif");
         return new Skin(mapeo, 1);
     }
 
@@ -97,7 +97,7 @@ public class FabricaDominio1 extends FabricaSkin {
 
     public Skin crearSkinPlataforma(){
         Map<Integer,String> mapeoparaplataforma= new HashMap<Integer,String>();
-        mapeoparaplataforma.put(1,"Imagenes/SkinsOriginales/Plataforma1.png");
+        mapeoparaplataforma.put(1,"Imagenes/SkinsOriginales/Plataforma1.gif");
         return new Skin(mapeoparaplataforma, 1);
     }
 

@@ -133,10 +133,8 @@ public class Moghera extends Enemigo{
 
     @Override
     public void recibirDisparo() {
-        // TODO Auto-generated method stub
-        
         if (faseActual == FASE_CONGELADO) {
-            morir();
+            // No morir, solo ignorar el disparo
             return;
         }
 
@@ -151,7 +149,6 @@ public class Moghera extends Enemigo{
             misAspectos.setEstadoActual(3); 
         }
     }
-
     @Override
     public void setEstado(EstadoEnemigo estado) {
         // TODO Auto-generated method stub
@@ -216,5 +213,9 @@ public class Moghera extends Enemigo{
 
     public boolean esVolador() {
         return false;
+    }
+
+    public boolean estaCompletamenteCongelado() {
+        return faseActual == FASE_CONGELADO;
     }
 }

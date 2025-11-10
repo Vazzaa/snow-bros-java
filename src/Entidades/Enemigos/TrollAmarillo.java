@@ -10,6 +10,8 @@ import Fabricas.Skin;
 import Juego.ModoDeJuego;
 import Visitors.Colisionable;
 import EstadoMovimiento.*;
+import Juego.ColisionManagerEntidades;
+import Juego.Hitbox;
 
 public class TrollAmarillo extends Enemigo{
     
@@ -26,6 +28,8 @@ public class TrollAmarillo extends Enemigo{
     private int estadoNieve;
     private static final int VELOCIDAD = 3;
     private int movimientoActual;
+    protected int velocidadVerticalDeslizamiento = 0;
+    protected int gravedadDeslizamiento = 1;
     private long tiempoFinCongelado = 0;
     private static final int DURACION_CONGELADO_MS = 3000;
 
@@ -108,6 +112,10 @@ public class TrollAmarillo extends Enemigo{
 
     @Override
     public void moverse() {
+        if (estaSiendoEmpujado() && estaCompletamenteCongelado()) {
+            deslizarse();
+            return;
+        }
         if (detenidoGlobalmente) return;
         if (estadoNieve > ESTADO_INICIAL) {
             estadoMovimiento = new EnemigoQuieto();
@@ -119,16 +127,70 @@ public class TrollAmarillo extends Enemigo{
         estadoMovimiento.moverse(this, VELOCIDAD);
     }
     
+    public void deslizarse() {
+        if (getJuego() == null || getJuego().getNivel() == null) {
+            return;
+        }
+        
+        ColisionManagerEntidades colisionManager = new ColisionManagerEntidades();
+        int nuevaX = getPosX() + velocidadDeslizamiento;
+        for (Estructura estructura : getJuego().getNivel().getMisEstructuras()) {
+            if (estructura.bloquearMovimientoHorizontal()) {
+                Hitbox hitboxFutura = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), nuevaX, getPosY());
+                if (colisionaAABB(hitboxFutura, estructura.getHitbox())) {
+                    morir();
+                    return;
+                }
+            }
+        }
+        for (Enemigo otroEnemigo : getJuego().getNivel().getMisEnemigos()) {
+            if (otroEnemigo != this && otroEnemigo.estaVivo() && !otroEnemigo.estaCompletamenteCongelado()) {
+                if (colisionaAABB(getHitbox(), otroEnemigo.getHitbox())) {
+                    otroEnemigo.morir();
+                    getJuego().getNivel().getSnowBro().sumarPuntaje(otroEnemigo.getPuntaje());
+                }
+            }
+        }
+        if (!colisionManager.estaEnSuelo(this, getJuego().getNivel().getMisEstructuras())) {
+            velocidadVerticalDeslizamiento -= gravedadDeslizamiento;
+            int nuevaY = getPosY() + velocidadVerticalDeslizamiento;
+            boolean colisionaVertical = false;
+            for (Estructura estructura : getJuego().getNivel().getMisEstructuras()) {
+                Hitbox hitboxFutura = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), nuevaX, nuevaY);
+                if (colisionaAABB(hitboxFutura, estructura.getHitbox())) {
+                    int techoEstructura = estructura.getHitbox().getPosY() + estructura.getHitbox().getAlto();
+                    int pieEnemigo = nuevaY;
+                    if (pieEnemigo >= techoEstructura - 5 && pieEnemigo <= techoEstructura + 10) {
+                        setPosY(techoEstructura);
+                        velocidadVerticalDeslizamiento = 0;
+                        colisionaVertical = true;
+                        break;
+                    }
+                }
+            }
+            if (!colisionaVertical) {
+                setPosY(nuevaY);
+            }
+        } else {
+            velocidadVerticalDeslizamiento = 0;
+            Estructura plataformaDebajo = colisionManager.getPlataformaDebajo(this, getJuego().getNivel().getMisEstructuras());
+            if (plataformaDebajo != null) {
+                int techoPlataforma = plataformaDebajo.getHitbox().getPosY() + plataformaDebajo.getHitbox().getAlto();
+                setPosY(techoPlataforma);
+            }
+        }
+        setPosX(nuevaX);
+        notificarObserver();
+    }
 
     @Override
     public void recibirDisparo() {
         if (estadoNieve >= ESTADO_NIEVE_COMPLETO) {
-            morir();
+            return;
         } else {
             estadoNieve += getJuego().getNivel().getSnowBro().getDañoProyectil();
             actualizarEstadoNieve();
         }
-        
     }
 
     @Override
@@ -236,6 +298,10 @@ public class TrollAmarillo extends Enemigo{
         else {
             tiempoFinCongelado = 0; 
         }
+    }
+    
+    public boolean estaCompletamenteCongelado() {
+        return estadoNieve >= ESTADO_NIEVE_COMPLETO;
     }
 
 }
