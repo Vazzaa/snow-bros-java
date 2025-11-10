@@ -2,6 +2,7 @@ package Juego;
 
 import Entidades.Jugador.Jugador;
 import Grafica.ControladorGrafica;
+import Sonidos.GestorSonidos;
 
 public class Clasico extends ModoDeJuego {
 
@@ -15,6 +16,7 @@ public class Clasico extends ModoDeJuego {
         cargarNivel(1, 0);
         controlaGrafica.mostrarPantallaNivel();
         iniciarHilos();
+        GestorSonidos.getInstancia().reproducirMusica("src/Sonidos/Background/02_Yukidama-Ondo_(Stage1_3).wav");
         System.out.println("Modo Clásico iniciado - Nivel 1");
     }
 
@@ -55,6 +57,8 @@ public class Clasico extends ModoDeJuego {
     @Override
     public void juegoCompletado() {
         detenerHilos();
+        GestorSonidos.getInstancia().detenerMusica();
+        GestorSonidos.getInstancia().reproducirEfecto("gameover");
         controlaGrafica.mostrarPantallaGameOver();
     }
 }
