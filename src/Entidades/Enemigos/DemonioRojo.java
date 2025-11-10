@@ -323,4 +323,10 @@ public class DemonioRojo extends Enemigo {
     public boolean estaCompletamenteCongelado() {
         return estadoNieve >= ESTADO_NIEVE_COMPLETO;
     }
+
+    @Override
+    public void moverVerticalmente(int i) {
+        setPosY(getPosY()+i);
+        notificarObserver();
+    }
 }

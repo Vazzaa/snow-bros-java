@@ -408,4 +408,10 @@ public class RanaDeFuego extends Enemigo {
         return estadoNieve >= ESTADO_NIEVE_COMPLETO;
     }
 
+    @Override
+    public void moverVerticalmente(int i) {
+        setPosY(getPosY()+i);
+        notificarObserver();
+    }
+
 }

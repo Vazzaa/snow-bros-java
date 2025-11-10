@@ -238,4 +238,9 @@ public class Calabaza extends Enemigo{
         return false;
     }
 
+    @Override
+    public void moverVerticalmente(int i) {
+        // No hace nada
+    }
+
 }

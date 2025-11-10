@@ -123,4 +123,7 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
 
 	public abstract void moverHorizontalmente(int i);
 
+    public abstract void moverVerticalmente(int i);
+
+
 } 

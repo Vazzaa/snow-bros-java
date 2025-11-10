@@ -149,11 +149,16 @@ public class Fantasma extends Enemigo{
 
     @Override
     public void morir() {
-        //TODO: Muere?
+        //no hace nada
     }
 
     @Override
     public boolean estaCompletamenteCongelado() {
         return false;
+    }
+
+    @Override
+    public void moverVerticalmente(int i) {
+        //no hace nada a este porque vuela
     }
 }

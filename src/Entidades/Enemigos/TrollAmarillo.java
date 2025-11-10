@@ -310,4 +310,10 @@ public class TrollAmarillo extends Enemigo{
         notificarObserver();
     }
 
+    @Override
+    public void moverVerticalmente(int i) {
+        setPosY(getPosY()+i);
+        notificarObserver();
+    }
+
 }
