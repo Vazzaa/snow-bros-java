@@ -1,7 +1,5 @@
 package Juego;
 
-import Entidades.Estructuras.Estructura;
-import Entidades.Estructuras.Obstaculo;
 import Entidades.Jugador.Jugador;
 import Grafica.ControladorGrafica;
 import Sonidos.GestorSonidos;

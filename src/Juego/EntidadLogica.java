@@ -1,7 +1,6 @@
 package Juego;
 
 import Fabricas.Skin;
-import java.util.List;
 import Grafica.ObserverGrafico;
 
 public interface EntidadLogica {

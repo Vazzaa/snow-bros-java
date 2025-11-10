@@ -3,7 +3,6 @@ package Entidades.PowerUp;
 import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
-import Juego.Hitbox;
 import Juego.ModoDeJuego;
 
 public class VidaExtra extends PowerUp {

@@ -3,17 +3,17 @@ package Entidades.Enemigos;
 import Entidades.Estructuras.Estructura;
 import Entidades.Estructuras.Obstaculo;
 import Entidades.PowerUp.PowerUp;
-import Entidades.Proyectiles.BolaDeNieve;
 import Entidades.Proyectiles.Proyectil;
 import Entidades.Proyectiles.ProyectilNieve;
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.*;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
+import Sonidos.GestorSonidos;
 import Juego.ColisionManagerEntidades;
 import Juego.Hitbox;
 import Visitors.Colisionable;
-import Visitors.Colisionador;
+
 
 public class DemonioRojo extends Enemigo {
     
@@ -182,6 +182,7 @@ public class DemonioRojo extends Enemigo {
 
     public void morir() {
         estaVivo=false;
+        GestorSonidos.getInstancia().reproducirEfecto("enemy_death");
         crearPowerUp();
         getJuego().getNivel().getSnowBro().sumarPuntaje(this.puntaje); // El puntaje se suma en el método morir del enemigo arrollado
         return;

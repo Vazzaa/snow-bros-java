@@ -6,12 +6,7 @@ import Entidades.Jugador.Jugador;
 import Entidades.PowerUp.*;
 import Entidades.Proyectiles.*;
 import Entidades.SnowBro.SnowBro;
-import Fabricas.FabricaSkin;
-import Grafica.Observer;
-import Grafica.ObserverGrafico;
-import Juego.Hitbox;
-//import Entidades.BolaDeNieve;
-//import Entidades.Proyectiles.ProyectilBomba;
+import Entidades.Proyectiles.ProyectilBomba;
 import Juego.ModoDeJuego;
 
 public class FabricaEntidades {

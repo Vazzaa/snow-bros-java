@@ -6,18 +6,12 @@ import Entidades.Estructuras.Obstaculo;
 import Entidades.PowerUp.PowerUp;
 import Entidades.Proyectiles.BolaDeNieve;
 import Entidades.Proyectiles.Proyectil;
-import Entidades.Proyectiles.ProyectilFuego;
 import Entidades.Proyectiles.ProyectilNieve;
-
-import java.util.List;
-
 import Entidades.Enemigos.Enemigo;
 import EstadoMovimiento.EstadoMovimietoSnowBro;
 import Fabricas.FabricaEntidades;
 import Fabricas.Skin;
 import Grafica.ConstantesTeclado;
-import Grafica.ObserverGrafico;
-import Grafica.ObserverJugador;
 import Visitors.Colisionable;
 import Visitors.Colisionador;
 import Juego.Entidad;
@@ -128,10 +122,12 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         } else if (izquierda && estadoMovimiento.direccion != 180) {
             estadoMovimiento.cambiar_direccion(ConstantesTeclado.IZQUIERDA);
         }
-        
+
         estadoMovimiento.mover(derecha, izquierda, salto);
         misAspectos.setEstadoActual(getClaveRepreEstado());
         notificarObserver();
+        if (salto)
+            GestorSonidos.getInstancia().reproducirEfecto("jump");
     }
     
     
@@ -139,6 +135,8 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         jugador.sumarPuntaje(puntaje);
         System.out.println("SnowBro ha muerto");
         if (miJuego != null && miJuego.getControladoraGrafica() != null) {
+            GestorSonidos.getInstancia().reproducirEfecto("death");
+            GestorSonidos.getInstancia().detenerMusica();
             miJuego.getControladoraGrafica().mostrarPantallaGameOver();
             miJuego.reiniciarNivel();
         }
@@ -232,6 +230,7 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
 
     public void colisionarPowerUp(PowerUp p) {
         boolean colisiona = this.colisionaAABB(this.miHitbox, p.getHitbox());
+        GestorSonidos.getInstancia().reproducirEfecto("powerup");
         if (!colisiona) return;
         afectar(p);
         return;

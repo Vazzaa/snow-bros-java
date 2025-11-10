@@ -6,7 +6,6 @@ import Entidades.PowerUp.PowerUp;
 import Entidades.Proyectiles.Proyectil;
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.EstadoEnemigo;
-import Fabricas.FabricaEntidades;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
 import Visitors.Colisionable;

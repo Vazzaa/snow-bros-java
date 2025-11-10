@@ -1,5 +1,4 @@
 package Grafica;
-import javax.print.DocFlavor.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import Juego.Entidad;

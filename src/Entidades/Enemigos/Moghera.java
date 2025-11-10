@@ -2,11 +2,9 @@ package Entidades.Enemigos;
 
 import Entidades.Estructuras.Estructura;
 import Entidades.Estructuras.Obstaculo;
-import Entidades.PowerUp.Azul;
 import Entidades.PowerUp.PowerUp;
 import Entidades.Proyectiles.Proyectil;
 import Entidades.Proyectiles.ProyectilFuego;
-import Entidades.Proyectiles.BolaDeNieve;
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.*;
 import Fabricas.FabricaEntidades;
@@ -16,7 +14,6 @@ import Visitors.Colisionable;
 
 public class Moghera extends Enemigo{
     
-    // Fases del jefe
     protected static final int FASE_NORMAL = 0;
     protected static final int FASE_ENFURECIDO = 1;
     protected static final int FASE_CONGELADO = 2;
@@ -36,7 +33,7 @@ public class Moghera extends Enemigo{
     private long tiempoUltimaDecision = 0;
     private long intervaloDecision = 1000;
 
-    private boolean saltando = false;
+    protected boolean saltando = false;
 
     protected int direccionDisparo = 180; 
     protected FabricaEntidades creacionFuego;

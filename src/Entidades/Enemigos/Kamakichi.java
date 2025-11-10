@@ -1,6 +1,5 @@
 package Entidades.Enemigos;
 
-import java.util.List;
 
 import Entidades.Estructuras.Estructura;
 import Entidades.Estructuras.Obstaculo;
@@ -13,13 +12,14 @@ import Fabricas.FabricaEntidades;
 import Fabricas.Skin;
 import Juego.ColisionManagerEntidades;
 import Juego.ModoDeJuego;
+import Sonidos.GestorSonidos;
 import Visitors.Colisionable;
 
 public class Kamakichi extends Enemigo {
     
     protected FabricaEntidades fabParaBomba;
     private static final int VELOCIDAD = 2;
-    private ColisionManagerEntidades colisionManager;
+    protected ColisionManagerEntidades colisionManager;
     protected int movimientoActual;
     protected int vida;
 
@@ -38,6 +38,7 @@ public class Kamakichi extends Enemigo {
     @Override
     public void morir(){
         estaVivo = false;
+        GestorSonidos.getInstancia().reproducirEfecto("enemy_death");
         getJuego().getNivel().getSnowBro().sumarPuntaje(puntaje);
         getJuego().getControladoraGrafica().sacarEntidad(this);
     }

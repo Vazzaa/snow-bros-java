@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
-import java.util.ResourceBundle.Control;
 
 import javax.swing.Box;
 import javax.swing.Icon;
@@ -13,7 +12,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Juego.Entidad;
 import Juego.EntidadJugador;
 import Juego.EntidadLogica;
 
@@ -22,7 +20,6 @@ public class PanelPantallaNivel extends PanelVista{
     private JPanel panelNivel;
     private JPanel panelInformacion;
     private JLabel imagenFondo;
-    private JLabel imagenFondoPanelInformacion;
     private JLabel labelVida;
     private JLabel labelPuntaje;
     private JLabel labelTextPuntaje;

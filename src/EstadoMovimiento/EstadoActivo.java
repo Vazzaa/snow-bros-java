@@ -1,6 +1,5 @@
 package EstadoMovimiento;
 
-import Entidades.Enemigos.DemonioRojo;
 import Entidades.Enemigos.Enemigo;
 
 public class EstadoActivo implements EstadoEnemigo {

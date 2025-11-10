@@ -40,6 +40,8 @@ public class GestorSonidos {
         cargarEfecto("hit", "src/Sonidos/Efectos/snowkick.wav");
         cargarEfecto("explosion", "src/Sonidos/Efectos/explosion.wav");
         cargarEfecto("gameover", "src/Sonidos/Background/10_GameOver.wav");
+
+        cargarEfecto("bossintro", "src/Sonidos/Background/05_BossIntro.wav");
         
         System.out.println("Sonidos cargados: " + efectosSonido.size() + " efectos");
     }
