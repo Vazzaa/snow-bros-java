@@ -2,10 +2,9 @@ package Juego;
 
 import Entidades.Jugador.Jugador;
 import Grafica.ControladorGrafica;
+import Sonidos.GestorSonidos;
 
 public class Clasico extends ModoDeJuego {
-
-    private static final int CANTIDAD_NIVELES = 2;
 
     public Clasico (ControladorGrafica controladorGrafica) {
         super(controladorGrafica);
@@ -17,6 +16,7 @@ public class Clasico extends ModoDeJuego {
         cargarNivel(1, 0);
         controlaGrafica.mostrarPantallaNivel();
         iniciarHilos();
+        GestorSonidos.getInstancia().reproducirMusica("src/Sonidos/Background/02_Yukidama-Ondo_(Stage1_3).wav");
         System.out.println("Modo Clásico iniciado - Nivel 1");
     }
 
@@ -40,28 +40,25 @@ public class Clasico extends ModoDeJuego {
 
 		int siguienteNivel = numeroNivelActual + 1;
 
-		if(siguienteNivel <= CANTIDAD_NIVELES) {
-            String archivoSiguienteNivel = "nivel" + siguienteNivel + ".txt";
-            java.io.File archivo = new java.io.File(archivoSiguienteNivel);
+        String archivoSiguienteNivel = "nivel" + siguienteNivel + ".txt";
+        java.io.File archivo = new java.io.File(archivoSiguienteNivel);
 
-		    if(archivo.exists()) {
-                cargarNivel(siguienteNivel, puntajeActual);
-                iniciarHilos();
-                System.out.println("Nivel " + siguienteNivel + " cargado.");
-		    } else {
-                System.out.println("ERROR: No se encontró el archivo " + archivoSiguienteNivel);
-                juegoCompletado();
-		    }
-        } else {
+		if(archivo.exists()) {
+            cargarNivel(siguienteNivel, puntajeActual);
+            iniciarHilos();
+            System.out.println("Nivel " + siguienteNivel + " cargado.");
+		} else {
             System.out.println("No hay mas niveles. Fin.");
             juegoCompletado();
-        }
+		}
 
     }
 
     @Override
     public void juegoCompletado() {
         detenerHilos();
+        GestorSonidos.getInstancia().detenerMusica();
+        GestorSonidos.getInstancia().reproducirEfecto("gameover");
         controlaGrafica.mostrarPantallaGameOver();
     }
 }

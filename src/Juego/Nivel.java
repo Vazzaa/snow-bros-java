@@ -3,6 +3,7 @@ package Juego;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import Entidades.SnowBro.SnowBro;
@@ -43,6 +44,7 @@ public class Nivel {
         this.miFabrica = miFabrica;
         miJuego = null;
         tiempoParaAparecerCalabaza = System.currentTimeMillis() + TIEMPO_APARICION_CALABAZA;
+        tiempoParaAparecerVida = System.currentTimeMillis() + TIEMPO_APARICION_VIDA;
     }
 
     public int getNumero() {
@@ -276,7 +278,10 @@ public class Nivel {
 
     public void actualizarAparicionVida() {
         if (System.currentTimeMillis() >= tiempoParaAparecerVida) {
-            PowerUp vida = miFabrica.getVidaExtra(200, 8000);
+            Random random = new Random();
+            int x = 100 + random.nextInt(600); // Posición X aleatoria entre 100 y 700
+            int y = 7650 + random.nextInt(350); // Posición Y aleatoria entre 7650 y 8000
+            PowerUp vida = miFabrica.getVidaExtra(x, y);
             agregarPowerUps(vida);
             miJuego.registrarObserver(vida);
             System.out.println("¡Ha aparecido un power-up de vida!");

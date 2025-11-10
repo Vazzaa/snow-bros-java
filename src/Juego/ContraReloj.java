@@ -5,7 +5,6 @@ import Grafica.ControladorGrafica;
 
 public class ContraReloj extends ModoDeJuego{
 
-    private static final int CANTIDAD_NIVELES = 2;
     private static final long TIEMPO_LIMITE_MS = 180000;
 
     protected long tiempoInicio;
@@ -102,20 +101,15 @@ public class ContraReloj extends ModoDeJuego{
         
         int siguienteNivel = numeroNivelActual + 1;
         
-        if (siguienteNivel <= CANTIDAD_NIVELES) {
-            String archivoSiguienteNivel = "nivel" + siguienteNivel + ".txt";
-            java.io.File archivo = new java.io.File(archivoSiguienteNivel);
+        String archivoSiguienteNivel = "nivel" + siguienteNivel + ".txt";
+        java.io.File archivo = new java.io.File(archivoSiguienteNivel);
             
-            if (archivo.exists()) {
-                System.out.println("Cargando nivel " + siguienteNivel + "...");
-                cargarNivel(siguienteNivel, puntajeActual);
-                iniciarHilos();
-            } else {
-                System.err.println("ERROR: No se encontró el archivo " + archivoSiguienteNivel);
-                juegoCompletado();
-            }
+        if (archivo.exists()) {
+            System.out.println("Cargando nivel " + siguienteNivel + "...");
+            cargarNivel(siguienteNivel, puntajeActual);
+            iniciarHilos();
         } else {
-            System.out.println("Todos los niveles completados a tiempo.");
+            System.out.println("No hay mas niveles. Fin.");
             juegoCompletado();
         }
     }

@@ -23,6 +23,7 @@ import Visitors.Colisionador;
 import Juego.Entidad;
 import Juego.EntidadJugador;
 import Juego.Nivel;
+import Sonidos.GestorSonidos;
 import Juego.ModoDeJuego;
 
 public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
@@ -108,6 +109,7 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         disparo.setDaño(dañoProyectil);
         nivel.agregarProyectiles(disparo);
         miJuego.registrarObserver(disparo);
+        GestorSonidos.getInstancia().reproducirEfecto("shoot");
         
         misAspectos.setEstadoActual(getClaveRepreEstado());
         notificarObserver();
