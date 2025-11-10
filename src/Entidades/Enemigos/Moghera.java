@@ -23,8 +23,8 @@ public class Moghera extends Enemigo{
     protected int golpesParaCongelar = 10; 
     protected int contadorGolpes = 0;
 
-    private static int VELOCIDAD_NORMAL = 2;
-    private static int VELOCIDAD_ENFURECIDO = 4;
+    private static int VELOCIDAD_NORMAL = 1;  
+    private static int VELOCIDAD_ENFURECIDO = 2;  
 
     private long tiempoUltimoDisparo = 0;
     private long intervaloDisparoNormal = 3000; 
