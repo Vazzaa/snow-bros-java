@@ -99,8 +99,21 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     
     public void disparar() {
         tiempoFinAnimacionDisparo = System.currentTimeMillis() + DURACION_ANIMACION_DISPARO_MS;
-        
         ProyectilNieve disparo = crearNieve.getProyectilNieve(miHitbox.getPosX(), miHitbox.getPosY() - 5, estadoMovimiento.direccion);
+
+        if (dañoProyectil == 1) {
+            if (estadoMovimiento.direccion == 0) { 
+                disparo.getSkin().setEstadoActual(1);
+            } else { 
+                disparo.getSkin().setEstadoActual(2);
+            }
+        } else {
+            if (estadoMovimiento.direccion == 0) {
+                disparo.getSkin().setEstadoActual(3);
+            } else { 
+                disparo.getSkin().setEstadoActual(4);
+            }
+        }
         disparo.setDaño(dañoProyectil);
         nivel.agregarProyectiles(disparo);
         miJuego.registrarObserver(disparo);
@@ -326,6 +339,7 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     private void verificarFinBoostRojo() {
         if (dañoProyectil == 2 && System.currentTimeMillis() >= tiempoFinalBoostRojo) {
             resetDañoProyectil();
+
             tiempoFinalBoostRojo = 0;
         }
     }

@@ -363,6 +363,9 @@ public class RanaDeFuego extends Enemigo {
     }
 
     private void actualizarEstadoNieve() {
+        if(getJuego().getNivel().getSnowBro().getDañoProyectil()==2 && estadoNieve==2){
+            estadoNieve = 1;
+        }
         if (estadoNieve > ESTADO_NIEVE_COMPLETO) {
             estadoNieve = ESTADO_NIEVE_COMPLETO;
         }
