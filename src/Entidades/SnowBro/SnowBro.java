@@ -41,6 +41,7 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     private long tiempoFinalBoostAzul=0;
     private long tiempoFinalBoostRojo=0;
     private long tiempoFinAnimacionDisparo = 0;
+    private boolean estaResbalando = false;
     private static final long DURACION_ANIMACION_DISPARO_MS = 300; 
     
     //Constructor
@@ -357,6 +358,14 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     public void moverVerticalmente(int deltaY) {
         setPosY(getPosY() + deltaY);
         notificarObserver();
+    }
+
+    public void setEstaResbalando(boolean resbalando) {
+        estaResbalando = resbalando;
+    }
+
+    public boolean estaResbalando() {
+        return estaResbalando;
     }
     
 }

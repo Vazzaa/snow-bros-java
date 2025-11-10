@@ -11,7 +11,7 @@ public class SueloResbaladizo extends Obstaculo {
     }
 
     public void afectar(SnowBro s) {
-
+        s.setEstaResbalando(true);
     }
 
     public void afectar (Enemigo e) {

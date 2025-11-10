@@ -95,6 +95,7 @@ public class FabricaEntidades {
     }
 
     public SueloResbaladizo getSueloResbaladizo(int x, int y) {
+        System.out.println("DEBUG PASO 1: Creando SueloResbaladizo en la fábrica.");
         return new SueloResbaladizo(this.fabricaSkin.crearSkinSueloResbaladizo(), miJuego, x, y);
     }
 

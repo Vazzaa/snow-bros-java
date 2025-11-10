@@ -94,7 +94,7 @@ public class FabricaDominio1 extends FabricaSkin {
     }
 
     public Skin crearSkinSueloResbaladizo(){
-        return new Skin(getMapeoEstadoImagen("Resbaladizo", 1), 1);//Falta
+        return new Skin(getMapeoEstadoImagen("Resbaladizo", 1), 1);
     }
 
     public Skin crearSkinPlataforma(){

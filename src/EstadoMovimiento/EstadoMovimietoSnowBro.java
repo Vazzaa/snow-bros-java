@@ -77,7 +77,14 @@ public class EstadoMovimietoSnowBro {
             } else if (izquierda) {
                 moverIzquierda();
             } else {
-                detenerMovimientoHorizontal();
+                if (snowBro.estaResbalando()) {
+                    velocidadHorizontal *= 0.97; 
+                    if (Math.abs(velocidadHorizontal) < 0.5) {
+                        velocidadHorizontal = 0;
+                    }
+                } else {
+                    detenerMovimientoHorizontal();
+                }
             }
             
             if (salto) {
