@@ -4,10 +4,9 @@ import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
-import Visitors.Colisionable;
 import Visitors.Colisionador;
 
-public abstract class Obstaculo extends Estructura implements Colisionable{
+public abstract class Obstaculo extends Estructura{
 
     public Obstaculo(Skin s, ModoDeJuego juego,int x, int y) {
         super(s, juego, x, y);

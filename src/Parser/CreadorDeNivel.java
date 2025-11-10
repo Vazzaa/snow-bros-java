@@ -3,11 +3,8 @@ package Parser;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import Entidades.Jugador.Jugador;
 import Entidades.PowerUp.PowerUp;
 import Entidades.SnowBro.SnowBro;
 import Excepciones.LevelLoadException;
@@ -15,29 +12,16 @@ import Fabricas.FabricaEntidades;
 import Fabricas.FabricaSkin;
 import Juego.ModoDeJuego;
 import Juego.Nivel;
-import Entidades.Enemigos.Calabaza;
-import Entidades.Enemigos.DemonioRojo;
 import Entidades.Enemigos.Enemigo;
-import Entidades.Enemigos.Moghera;
-import Entidades.Enemigos.RanaDeFuego;
-import Entidades.Enemigos.TrollAmarillo;
-import Entidades.Estructuras.Escalera;
 import Entidades.Estructuras.Estructura;
-import Entidades.Estructuras.Pared;
-import Entidades.Estructuras.ParedDestructible;
-import Entidades.Estructuras.Pincho;
-import Entidades.Estructuras.PlatMovilHorizontal;
-import Entidades.Estructuras.PlatQuebradiza;
-import Entidades.Estructuras.Plataforma;
-import Entidades.Estructuras.SueloResbaladizo;
 
 public class CreadorDeNivel {
 
     protected ModoDeJuego crearNaModo;
     protected FabricaSkin fabSkins;
     protected FabricaEntidades fabEntidades;
-    private final int ANCHO_TILE = 32;
-    private final int ALTO_TILE = 32;
+    protected final int ANCHO_TILE = 32;
+    protected final int ALTO_TILE = 32;
 
     public CreadorDeNivel(FabricaSkin fabricaSkins){
         this.fabSkins = fabricaSkins;

@@ -4,7 +4,6 @@ import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.Movible;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
-import Visitors.Colisionador;
 
 
 public class PlatMovilHorizontal extends Plataforma implements Movible{

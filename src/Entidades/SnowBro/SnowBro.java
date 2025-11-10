@@ -6,18 +6,12 @@ import Entidades.Estructuras.Obstaculo;
 import Entidades.PowerUp.PowerUp;
 import Entidades.Proyectiles.BolaDeNieve;
 import Entidades.Proyectiles.Proyectil;
-import Entidades.Proyectiles.ProyectilFuego;
 import Entidades.Proyectiles.ProyectilNieve;
-
-import java.util.List;
-
 import Entidades.Enemigos.Enemigo;
 import EstadoMovimiento.EstadoMovimietoSnowBro;
 import Fabricas.FabricaEntidades;
 import Fabricas.Skin;
 import Grafica.ConstantesTeclado;
-import Grafica.ObserverGrafico;
-import Grafica.ObserverJugador;
 import Visitors.Colisionable;
 import Visitors.Colisionador;
 import Juego.Entidad;

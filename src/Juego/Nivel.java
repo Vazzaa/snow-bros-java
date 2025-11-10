@@ -1,21 +1,18 @@
 package Juego;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
-
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.Movible;
 import Fabricas.FabricaEntidades;
-import Fabricas.FabricaSkin;
 import Entidades.Enemigos.*;
 import Entidades.PowerUp.*;
 import Entidades.Proyectiles.Proyectil;
 import Entidades.Estructuras.*;
-import Entidades.Proyectiles.Proyectil;
-import Entidades.Proyectiles.ProyectilFuego;
+
 
 public class Nivel {
 

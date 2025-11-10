@@ -1,12 +1,10 @@
 package EstadoMovimiento;
 
 import Entidades.Enemigos.Enemigo;
-import Entidades.Estructuras.Estructura;
 import Juego.ColisionManagerEntidades;
-import Juego.Hitbox;
 
 public class EnemigoDiagonal implements EstadoMovimientoEnemigo{
-    private ColisionManagerEntidades colisionManager;
+    protected ColisionManagerEntidades colisionManager;
     private int dirX;
     private int dirY;
     private long lastChangeTime;

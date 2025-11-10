@@ -1,8 +1,5 @@
 package Juego;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import Fabricas.Skin;
 import Grafica.*;
 

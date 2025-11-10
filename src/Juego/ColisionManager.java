@@ -3,9 +3,7 @@ package Juego;
 import java.util.List;
 
 import Entidades.Estructuras.Estructura;
-import Entidades.Estructuras.Plataforma;
 import Entidades.SnowBro.SnowBro;
-import Juego.Hitbox;
 
 public class ColisionManager {
     

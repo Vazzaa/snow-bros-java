@@ -3,7 +3,6 @@ package Entidades.Enemigos;
 import Entidades.Estructuras.Estructura;
 import Entidades.Estructuras.Obstaculo;
 import Entidades.PowerUp.PowerUp;
-import Entidades.Proyectiles.BolaDeNieve;
 import Entidades.Proyectiles.Proyectil;
 import Entidades.Proyectiles.ProyectilNieve;
 import Entidades.SnowBro.SnowBro;
@@ -13,7 +12,7 @@ import Juego.ModoDeJuego;
 import Juego.ColisionManagerEntidades;
 import Juego.Hitbox;
 import Visitors.Colisionable;
-import Visitors.Colisionador;
+
 
 public class DemonioRojo extends Enemigo {
     

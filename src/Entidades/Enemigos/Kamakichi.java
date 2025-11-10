@@ -1,6 +1,5 @@
 package Entidades.Enemigos;
 
-import java.util.List;
 
 import Entidades.Estructuras.Estructura;
 import Entidades.Estructuras.Obstaculo;
@@ -19,7 +18,7 @@ public class Kamakichi extends Enemigo {
     
     protected FabricaEntidades fabParaBomba;
     private static final int VELOCIDAD = 2;
-    private ColisionManagerEntidades colisionManager;
+    protected ColisionManagerEntidades colisionManager;
     protected int movimientoActual;
     protected int vida;
 

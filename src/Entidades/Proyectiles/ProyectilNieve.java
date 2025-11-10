@@ -4,7 +4,6 @@ import Entidades.Enemigos.Enemigo;
 import Entidades.Estructuras.Estructura;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
-import Juego.Hitbox;
 import Juego.ModoDeJuego;
 
 public class ProyectilNieve extends Proyectil{

@@ -1,15 +1,11 @@
 package Entidades.PowerUp;
 
-import java.util.List;
 
 import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
-import Grafica.ObserverGrafico;
-import Juego.Hitbox;
 import Juego.ModoDeJuego;
 
-import javax.swing.Timer;
 
 public class Azul extends PowerUp {
 
@@ -38,7 +34,6 @@ public class Azul extends PowerUp {
     
     @Override
     public void afectar(Enemigo enemigo) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'afectar'");
     }
     

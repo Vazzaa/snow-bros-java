@@ -3,7 +3,6 @@ package Entidades.Enemigos;
 import Entidades.Estructuras.Estructura;
 import Entidades.Estructuras.Obstaculo;
 import Entidades.PowerUp.PowerUp;
-import Entidades.Proyectiles.BolaDeNieve;
 import Entidades.Proyectiles.Proyectil;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;

@@ -2,7 +2,6 @@ package EstadoMovimiento;
 
 import Entidades.SnowBro.SnowBro;
 import Entidades.Estructuras.Estructura;
-import Entidades.Estructuras.Escalera;
 import Grafica.ConstantesTeclado;
 import Juego.ColisionManager;
 import Juego.Hitbox;
@@ -42,10 +41,6 @@ public class EstadoMovimietoSnowBro {
     
     
     public void mover(boolean derecha, boolean izquierda, boolean salto) {
-        // if (derecha || izquierda || salto) {
-        //     System.out.println("EstadoMovimiento.mover() - Derecha: " + derecha + ", Izquierda: " + izquierda + ", Salto: " + salto);
-        //     System.out.println("Velocidad horizontal antes: " + velocidadHorizontal);
-        // }
         boolean subirEscalera = ConstantesTeclado.estaPresionada(ConstantesTeclado.SUBIR_ESCALERA);
         boolean bajarEscalera = ConstantesTeclado.estaPresionada(ConstantesTeclado.BAJAR_ESCALERA);
         if (snowBro.estaEnEscalera()) {
@@ -148,9 +143,6 @@ public class EstadoMovimietoSnowBro {
         if (!snowBro.estaEnEscalera() && !enElSuelo()) {
             velocidadVertical -= gravedad;
         }
-
-        int posXAnterior = snowBro.getPosX();
-        int posYAnterior = snowBro.getPosY();
         
         if (snowBro.getNivel() != null && snowBro.getNivel().getMisEstructuras() != null && velocidadHorizontal != 0) {
             int nuevaX = snowBro.getPosX() + velocidadHorizontal;

@@ -3,8 +3,6 @@ package Launcher;
 import java.awt.EventQueue;
 import Grafica.ControladorGrafica;
 import Grafica.GUI;
-import Juego.ModoDeJuego;
-import Juego.Clasico;
 
 public class Launcher {
 

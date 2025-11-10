@@ -9,14 +9,12 @@ import Juego.ControladorJuego;
 import Juego.Entidad;
 import Juego.EntidadJugador;
 import Juego.EntidadLogica;
-import Juego.ModoDeJuego;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class GUI implements ControladorGrafica, ControladorVistas {
 
-	//Atributos
 	protected PanelPantallaPrincipal panelPrincipal;
 	protected PanelPantallaRanking panelRanking;
 	protected PanelPantallaElegirModoDeJuego panelElegirModoJuego;
