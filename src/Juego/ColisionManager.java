@@ -46,7 +46,24 @@ public class ColisionManager {
         }
         
         return false;
-}
+    }
+    
+    public boolean estaEnSueloResbaladizo(SnowBro s, List<Estructura> estructuras){
+        Hitbox hitboxSnowBro = s.miHitbox;    
+        Hitbox hitboxDeteccion = new Hitbox(hitboxSnowBro.getAncho(), hitboxSnowBro.getAlto() + TOLERANCIA_SUELO, hitboxSnowBro.getPosX(), hitboxSnowBro.getPosY() - TOLERANCIA_SUELO);
+        for (Estructura estructura : estructuras) {
+            if (estructura.esSueloResbaladizo()) {
+                if (colisionaAABB(hitboxDeteccion, estructura.miHitbox)) {
+                    int pieSnowBro = hitboxSnowBro.getPosY();
+                    int techoEstructura = estructura.miHitbox.getPosY() + estructura.miHitbox.getAlto();
+                    if (Math.abs(pieSnowBro - techoEstructura) <= TOLERANCIA_SUELO) {
+                        return true;
+                    }
+                }
+            }
+        }       
+        return false;
+    }
 
     public Estructura getPlataformaDebajo(SnowBro s, List<Estructura> estructuras){
         Hitbox hitboxSnowBro = s.miHitbox;
