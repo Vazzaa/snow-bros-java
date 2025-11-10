@@ -64,10 +64,6 @@ public class TrollAmarillo extends Enemigo{
         estaVivo=false;
         getJuego().getNivel().getSnowBro().sumarPuntaje(puntaje);
         crearPowerUp();
-        int dir = (Math.random() < 0.5) ? 0 : 180;
-        BolaDeNieve bola = getJuego().getNivelActual().getMiFabrica().getBolaDeNieve(miHitbox.getPosX(), miHitbox.getPosY(), dir);
-        getJuego().registrarObserver(bola);
-        getJuego().getNivelActual().agregarProyectiles(bola);
         return;
     }
     
@@ -137,7 +133,7 @@ public class TrollAmarillo extends Enemigo{
             if (estructura.bloquearMovimientoHorizontal()) {
                 Hitbox hitboxFutura = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), nuevaX, getPosY());
                 if (colisionaAABB(hitboxFutura, estructura.getHitbox())) {
-                    morir();
+                    destruirBolaDeNieve();
                     return;
                 }
             }
@@ -145,8 +141,8 @@ public class TrollAmarillo extends Enemigo{
         for (Enemigo otroEnemigo : getJuego().getNivel().getMisEnemigos()) {
             if (otroEnemigo != this && otroEnemigo.estaVivo() && !otroEnemigo.estaCompletamenteCongelado()) {
                 if (colisionaAABB(getHitbox(), otroEnemigo.getHitbox())) {
-                    otroEnemigo.morir();
-                    getJuego().getNivel().getSnowBro().sumarPuntaje(otroEnemigo.getPuntaje());
+                    otroEnemigo.morir(); // El otro enemigo muere
+                    return; // Salimos para no seguir procesando el deslizamiento
                 }
             }
         }
@@ -314,6 +310,13 @@ public class TrollAmarillo extends Enemigo{
     public void moverVerticalmente(int i) {
         setPosY(getPosY()+i);
         notificarObserver();
+    }
+
+    public void destruirBolaDeNieve() {
+        estaVivo = false;
+        crearPowerUp(); // Creamos el power-up al destruirse
+        getJuego().getNivel().getSnowBro().sumarPuntaje(this.puntaje); // Sumamos puntos por destruir la bola
+        // Opcional: podrías añadir un sonido o efecto visual de la bola rompiéndose aquí.
     }
 
 }

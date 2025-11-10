@@ -123,7 +123,7 @@ public class DemonioRojo extends Enemigo {
             if (estructura.bloquearMovimientoHorizontal()) {
                 Hitbox hitboxFutura = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), nuevaX, getPosY());
                 if (colisionaAABB(hitboxFutura, estructura.getHitbox())) {
-                    morir();
+                    destruirBolaDeNieve(); // Llamamos al nuevo método
                     return;
                 }
             }
@@ -131,8 +131,8 @@ public class DemonioRojo extends Enemigo {
         for (Enemigo otroEnemigo : getJuego().getNivel().getMisEnemigos()) {
             if (otroEnemigo != this && otroEnemigo.estaVivo() && !otroEnemigo.estaCompletamenteCongelado()) {
                 if (colisionaAABB(getHitbox(), otroEnemigo.getHitbox())) {
-                    otroEnemigo.morir();
-                    getJuego().getNivel().getSnowBro().sumarPuntaje(otroEnemigo.getPuntaje());
+                    otroEnemigo.morir(); // El otro enemigo muere
+                    return; // Salimos para no seguir procesando el deslizamiento
                 }
             }
         }
@@ -183,12 +183,7 @@ public class DemonioRojo extends Enemigo {
     public void morir() {
         estaVivo=false;
         crearPowerUp();
-        getJuego().getNivel().getSnowBro().sumarPuntaje(this.puntaje);
-        BolaDeNieve bola = this.getJuego().getNivelActual().getMiFabrica().getBolaDeNieve(miHitbox.getPosX(), miHitbox.getPosY(), 0);
-        bola.getSkin().setEstadoActual(4);
-        this.getJuego().registrarObserver(bola);
-        this.getJuego().getNivelActual().agregarProyectiles(bola);
-        System.out.println("Enemigo murio: Se crea bola de nieve. ");
+        getJuego().getNivel().getSnowBro().sumarPuntaje(this.puntaje); // El puntaje se suma en el método morir del enemigo arrollado
         return;
     }
 
@@ -328,5 +323,12 @@ public class DemonioRojo extends Enemigo {
     public void moverVerticalmente(int i) {
         setPosY(getPosY()+i);
         notificarObserver();
+    }
+
+    public void destruirBolaDeNieve() {
+        estaVivo = false;
+        crearPowerUp(); // Creamos el power-up al destruirse
+        getJuego().getNivel().getSnowBro().sumarPuntaje(this.puntaje); // Sumamos puntos por destruir la bola
+        // Opcional: podrías añadir un sonido o efecto visual de la bola rompiéndose aquí.
     }
 }
