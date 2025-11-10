@@ -105,7 +105,7 @@ public class Calabaza extends Enemigo{
         }
     }
 
-        private void verificarEstuneo() {
+    private void verificarEstuneo() {
         if (estadoInicial <= ESTADO_INICIAL || tiempoFinCongelado == 0 || System.currentTimeMillis() < tiempoFinCongelado) {
             return;
         }
@@ -230,7 +230,7 @@ public class Calabaza extends Enemigo{
 
     @Override
     public void morir() {
-        //TODO: Muere?
+        //no muere
     }
 
     @Override
