@@ -223,9 +223,11 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
             return 9; 
         }
         
-        if (!estadoMovimiento.enElSuelo()) {
-            return 4;
+        boolean estaSaltando = !estadoMovimiento.enElSuelo() || estadoMovimiento.getVelocidadVertical() != 0;
+        if (estaSaltando) {
+            return 4; 
         }
+        
         switch (estadoMovimiento.direccion) {
             case 0: 
                 return 2;
