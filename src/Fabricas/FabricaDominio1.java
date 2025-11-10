@@ -38,7 +38,9 @@ public class FabricaDominio1 extends FabricaSkin {
     }
 
     public Skin crearSkinFantasma() {
-        return new Skin(getMapeoEstadoImagen("Fantasma", 2), 1);
+        Map<Integer,String> mapeoparafantasma= new HashMap<Integer,String>();
+        mapeoparafantasma.put(1,"Imagenes/SkinsOriginales/Fantasma1.gif");
+        return new Skin(mapeoparafantasma, 1);
     }
 
     public Skin crearSkinMoghera(){
