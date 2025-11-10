@@ -10,4 +10,6 @@ public interface ControladorJuego {
 	public void moverAbajo();
 	public void setNombreJugador(String nombre);
 	public Nivel getNivelActual();
+	public void detenerHilos();
+	public boolean debeMostrarTiempo();
 }

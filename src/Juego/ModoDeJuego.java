@@ -124,7 +124,7 @@ public abstract class ModoDeJuego implements ControladorJuego {
 		hiloEntidades.start();
 	}
 
-	protected void detenerHilos() {
+	public void detenerHilos() {
 		if(hiloJugador != null && hiloJugador.isAlive()) {
 			hiloJugador.detener();
 			try {
@@ -213,6 +213,11 @@ public abstract class ModoDeJuego implements ControladorJuego {
 	public void reiniciarNivel() {
 		limpiarNivelActual();
 		nivelActual.reiniciarNivel();
+	}
+
+	@Override
+	public boolean debeMostrarTiempo() {
+		return false;
 	}
 
 }

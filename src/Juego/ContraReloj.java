@@ -69,6 +69,8 @@ public class ContraReloj extends ModoDeJuego{
             tiempoAgotado = true;
         }
         
+        controlaGrafica.actualizarTiempo(getTiempoRestanteFormateado());
+
         if (tiempoRestante <= 30000 && tiempoRestante > 29000) {
             System.out.println("ADVERTENCIA: 30 segundos restantes.");
         } else if (tiempoRestante <= 10000 && tiempoRestante > 9000) {
@@ -117,4 +119,9 @@ public class ContraReloj extends ModoDeJuego{
             juegoCompletado();
         }
     }
+
+    @Override
+	public boolean debeMostrarTiempo() {
+		return true;
+	}
 }

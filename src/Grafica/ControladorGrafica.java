@@ -18,4 +18,5 @@ public interface ControladorGrafica {
 	public void sacarEntidad(EntidadLogica e);
 	public void sacarJugador(EntidadJugador e);
 	public boolean verificarColisiones(Entidad e);
+	public void actualizarTiempo(String timepo);
 }

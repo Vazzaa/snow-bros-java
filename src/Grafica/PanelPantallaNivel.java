@@ -27,6 +27,8 @@ public class PanelPantallaNivel extends PanelVista{
     private JLabel labelPuntaje;
     private JLabel labelTextPuntaje;
     private JLabel labelTextVida;
+    private JLabel labelTiempo;
+    private JLabel labelTextTiempo;
 
     public PanelPantallaNivel(ControladorVistas c){
         super(c);
@@ -76,6 +78,16 @@ public class PanelPantallaNivel extends PanelVista{
         labelTextVida.setText(String.valueOf(jugador.getVida()));
 	}
 
+    public void actualizarTiempo(String tiempo) {
+        labelTextTiempo.setText(tiempo);
+    }
+
+    public void reiniciarPanel() {
+        labelTextPuntaje.setText("0");
+        labelTextVida.setText("3");
+        labelTextTiempo.setText("--:--");
+    }
+
     protected void agregarPanelNivelconImagenFondo() {
         imagenFondo = new JLabel();
         java.net.URL url = this.getClass().getResource("/Imagenes/Background/Fondo1.png");
@@ -110,11 +122,17 @@ public class PanelPantallaNivel extends PanelVista{
         labelTextVida = new JLabel("3");
         labelTextVida.setForeground(Color.WHITE);
 
+        labelTiempo = new JLabel("Tiempo:");
+        labelTiempo.setForeground(Color.WHITE);
+
+        labelTextTiempo = new JLabel("--:--");
+        labelTextTiempo.setForeground(Color.WHITE);
+
         Font fuenteEstandar = new Font("Monospaced", Font.BOLD, 24);
 
         labelPuntaje.setFont(fuenteEstandar);
         labelPuntaje.setForeground(new Color(255, 0, 0)); 
-        //labelPuntaje.setCaretColor(new Color(255, 0, 0)); 
+
         labelTextPuntaje.setFont(fuenteEstandar);
         labelTextPuntaje.setForeground(new Color(255, 0, 0));
 
@@ -123,10 +141,19 @@ public class PanelPantallaNivel extends PanelVista{
 
         labelTextVida.setFont(fuenteEstandar);
         labelTextVida.setForeground(new Color(255, 0, 0));
+
+        labelTiempo.setFont(fuenteEstandar);
+        labelTiempo.setForeground(new Color(255, 0, 0));
+        
+        labelTextTiempo.setFont(fuenteEstandar);
+        labelTextTiempo.setForeground(new Color(255, 0, 0));
         
         panelInformacion.add(labelPuntaje);
         panelInformacion.add(labelTextPuntaje);
-        panelInformacion.add(Box.createHorizontalStrut(400));
+        panelInformacion.add(Box.createHorizontalStrut(100));
+        panelInformacion.add(labelTiempo);
+        panelInformacion.add(labelTextTiempo);
+        panelInformacion.add(Box.createHorizontalStrut(100)); 
         panelInformacion.add(labelVida);
         panelInformacion.add(labelTextVida);
 
@@ -134,4 +161,3 @@ public class PanelPantallaNivel extends PanelVista{
         this.add(panelInformacion, BorderLayout.NORTH);
     }
 }
-

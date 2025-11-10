@@ -145,6 +145,7 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 
 	@Override
 	public void mostrarPantallaNivel() {
+		panelNivel.reiniciarPanel();
 		ventana.setContentPane(panelNivel);
 		refrescar();
 	}
@@ -215,6 +216,11 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 
 	@Override
 	public void accionarInicioJuego(int modo) {
+		// Si ya existe un juego en curso (de una partida anterior), lo detenemos.
+		if (controlarJuego != null) {
+			controlarJuego.detenerHilos();
+		}
+
 		switch(modo) {
 			case ConstantesModoDeJuego.CLASICO:
 				controlarJuego = new Clasico(this);
@@ -274,6 +280,13 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	protected void refrescar(){
 		ventana.revalidate();
 		ventana.repaint();
+	}
+
+	@Override
+	public void actualizarTiempo(String timepo) {
+		if (controlarJuego != null && controlarJuego.debeMostrarTiempo()) {
+			panelNivel.actualizarTiempo(timepo);
+		}
 	}
     
 }
