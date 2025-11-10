@@ -26,6 +26,7 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	protected JFrame ventana;
 	protected ControladorJuego controlarJuego;
 	protected ConstantesTeclado keyListener;
+	protected int modoDeJuegoActual;
 
 	public GUI(){
 		panelPrincipal = new PanelPantallaPrincipal(this);
@@ -203,7 +204,7 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	public void sacarJugador(EntidadJugador e) {
 		panelNivel.removerEntidad(e.getObserverGrafico());
 		System.out.println("se elimina observer jugador");
-		panelRanking.agregarJugadoresRanking(1, e.getJugador());
+		panelRanking.agregarJugadoresRanking(modoDeJuegoActual, e.getJugador());
 		refrescar();
 	}
 	
@@ -225,14 +226,17 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 			case ConstantesModoDeJuego.CLASICO:
 				controlarJuego = new Clasico(this);
 				this.registrarControladorJuego(controlarJuego);
+				modoDeJuegoActual = ConstantesModoDeJuego.CLASICO;
 				break;
 			case ConstantesModoDeJuego.CONTRARELOJ:
 				controlarJuego = new ContraReloj(this);
 				this.registrarControladorJuego(controlarJuego);
+				modoDeJuegoActual = ConstantesModoDeJuego.CONTRARELOJ;
 				break;
 			case ConstantesModoDeJuego.SUPERVIVENCIA:
 				controlarJuego = new Supervivencia(this);
 				this.registrarControladorJuego(controlarJuego);
+				modoDeJuegoActual = ConstantesModoDeJuego.SUPERVIVENCIA;
 				break;
 		}
 		this.accionarPantallaElegirDominio();

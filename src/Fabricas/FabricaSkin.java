@@ -17,7 +17,8 @@ public abstract class FabricaSkin {
     public abstract Skin crearSkinSnowBro();
     public abstract Skin crearSkinPincho();
     public abstract Skin crearSkinEscalera();
-    public abstract Skin crearSkinPared();
+    public abstract Skin crearSkinParedIzquierda();
+    public abstract Skin crearSkinParedDerecha();
     public abstract Skin crearSkinSueloResbaladizo();
     public abstract Skin crearSkinPlataforma();
     public abstract Skin crearSkinPlatQuebradiza();

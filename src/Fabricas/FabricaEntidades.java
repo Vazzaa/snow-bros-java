@@ -91,7 +91,13 @@ public class FabricaEntidades {
     }
 
     public Pared getPared(int x, int y) {
-        return new Pared(this.fabricaSkin.crearSkinPared(), miJuego, x, y);
+        Skin skinPared;
+        if (x >= 700) { 
+            skinPared = this.fabricaSkin.crearSkinParedDerecha();
+            } else { 
+            skinPared = this.fabricaSkin.crearSkinParedIzquierda();
+            }
+        return new Pared(skinPared, miJuego, x, y);
     }
 
     public SueloResbaladizo getSueloResbaladizo(int x, int y) {
