@@ -14,6 +14,7 @@ import EstadoMovimiento.EnemigoCaminandoDerecha;
 import EstadoMovimiento.EnemigoCaminandoIzquierda;
 import Entidades.Proyectiles.Proyectil;
 import Entidades.Proyectiles.ProyectilFuego;
+import Sonidos.GestorSonidos;
 import EstadoMovimiento.EstadoMovimientoEnemigo;
 import EstadoMovimiento.EstadoNormal;
 import EstadoMovimiento.EstadoPocoCongelado;
@@ -83,6 +84,7 @@ public class RanaDeFuego extends Enemigo {
 
     public void morir() {
         estaVivo=false;
+        GestorSonidos.getInstancia().reproducirEfecto("enemy_death");
         getJuego().getNivel().getSnowBro().sumarPuntaje(puntaje);
         crearPowerUp();
         return;

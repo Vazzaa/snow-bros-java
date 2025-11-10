@@ -7,6 +7,7 @@ import Entidades.Proyectiles.Proyectil;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
+import Sonidos.GestorSonidos;
 import Visitors.Colisionable;
 import EstadoMovimiento.*;
 import Juego.ColisionManagerEntidades;
@@ -61,6 +62,7 @@ public class TrollAmarillo extends Enemigo{
 
     public void morir() {
         estaVivo=false;
+        GestorSonidos.getInstancia().reproducirEfecto("enemy_death");
         getJuego().getNivel().getSnowBro().sumarPuntaje(puntaje);
         crearPowerUp();
         return;

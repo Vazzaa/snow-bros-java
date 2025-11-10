@@ -9,6 +9,7 @@ import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.*;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
+import Sonidos.GestorSonidos;
 import Juego.ColisionManagerEntidades;
 import Juego.Hitbox;
 import Visitors.Colisionable;
@@ -181,6 +182,7 @@ public class DemonioRojo extends Enemigo {
 
     public void morir() {
         estaVivo=false;
+        GestorSonidos.getInstancia().reproducirEfecto("enemy_death");
         crearPowerUp();
         getJuego().getNivel().getSnowBro().sumarPuntaje(this.puntaje); // El puntaje se suma en el método morir del enemigo arrollado
         return;
