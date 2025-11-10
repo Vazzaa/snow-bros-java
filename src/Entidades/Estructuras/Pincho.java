@@ -65,6 +65,11 @@ public class Pincho extends Obstaculo{
 
     @Override
     public boolean bloquearMovimientoHorizontal() {
-        return false;  // Cambiar a false para que no bloquee el movimiento
+        return false; 
+    }
+
+    @Override
+    public boolean esMovible() {
+        return false;
     }
 }

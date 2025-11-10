@@ -24,10 +24,13 @@ public class Calabaza extends Enemigo{
     private long tiempoFinCongelado = 0;
     private static final int DURACION_ESTUNEADO_MS = 3000;
 
+    private long tiempoUltimaCreacionFantasma = 0;
+    private static final long INTERVALO_CREACION_FANTASMA = 5000; // 5 segundos
 
-    public Calabaza(Skin skins , ModoDeJuego juego , int posX, int posY){
+    public Calabaza(Skin skins , ModoDeJuego juego , int posX, int posY, FabricaEntidades fab){
         super(skins, juego, posX, posY, 0,300);
         estadoInicial = ESTADO_INICIAL;
+        mFabricaEntidades = fab;
         int estadoInicial = (int) (Math.random()*4+1);
         switch(estadoInicial){
             case 1:
@@ -73,6 +76,7 @@ public class Calabaza extends Enemigo{
 
     @Override
     public void moverse() {
+        if (detenidoGlobalmente) return;
         if ( estadoInicial > ESTADO_INICIAL) {
             estadoMovimiento = new EnemigoQuieto();
         } else {
@@ -81,6 +85,7 @@ public class Calabaza extends Enemigo{
 
         verificarEstuneo();
         estadoMovimiento.moverse(this, VELOCIDAD);
+        crearFantasma();
     }
 
     @Override
@@ -120,12 +125,20 @@ public class Calabaza extends Enemigo{
     }
 
     public void crearFantasma(){
-        
+        long tiempoActual = System.currentTimeMillis();
+        if (tiempoActual - tiempoUltimaCreacionFantasma >= INTERVALO_CREACION_FANTASMA) {
+            if (miJuego != null && miJuego.getNivel() != null) {
+                Fantasma fantasma = miJuego.getNivelActual().getMiFabrica().getFantasma(miHitbox.getPosX(), miHitbox.getPosY());
+                miJuego.getNivelActual().agregarEnemigos(fantasma);
+                miJuego.registrarObserver(fantasma);
+                tiempoUltimaCreacionFantasma = tiempoActual;
+            }
+        }
     }
 
     @Override
     public void cambiarEstado() {
-        movimientoActual = (int) (Math.random()*4+1);
+        movimientoActual = (int) (Math.random()*5+1);
         long tiempoActual = System.currentTimeMillis();
         if (tiempoActual - tiempoUltimoCambio >= INTERVALO_CAMBIO) {
             switch(movimientoActual){
@@ -140,6 +153,9 @@ public class Calabaza extends Enemigo{
                     break;
                 case 4:
                     estadoMovimiento = new EnemigoVoladorDiagonal();
+                    break;
+                case 5:
+                    crearFantasma();
                     break;
                 }
             tiempoUltimoCambio = tiempoActual;
@@ -200,6 +216,16 @@ public class Calabaza extends Enemigo{
 
     public boolean esVolador() {
         return true;
+    }
+
+    @Override
+    public boolean esInmortal() {
+        return true;
+    }
+
+    @Override
+    public void moverHorizontalmente(int i) {
+        //no hace nada a este porque vuela
     }
 
 }

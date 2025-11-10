@@ -1,29 +1,44 @@
 package Entidades.Enemigos;
 
+import java.util.List;
+
 import Entidades.Estructuras.Estructura;
 import Entidades.Estructuras.Obstaculo;
 import Entidades.PowerUp.PowerUp;
 import Entidades.Proyectiles.Proyectil;
 import Entidades.Proyectiles.ProyectilBomba;
 import Entidades.SnowBro.SnowBro;
-import EstadoMovimiento.EstadoEnemigo;
+import EstadoMovimiento.*;
 import Fabricas.FabricaEntidades;
 import Fabricas.Skin;
+import Juego.ColisionManagerEntidades;
 import Juego.ModoDeJuego;
 import Visitors.Colisionable;
 
 public class Kamakichi extends Enemigo {
     
     protected FabricaEntidades fabParaBomba;
+    private static final int VELOCIDAD = 2;
+    private ColisionManagerEntidades colisionManager;
+    protected int movimientoActual;
+    protected int vida;
 
     public Kamakichi(Skin skins, ModoDeJuego juego, int posX, int posY){
         super(skins, juego, posX, posY, 5,300);
+        this.colisionManager = new ColisionManagerEntidades();
+        vida = 10;
     }
 
     @Override
     public void atacar(Enemigo e) {
         // TODO Auto-generated method stub
         
+    }
+
+    protected void morir(){
+        estaVivo = false;
+        getJuego().getNivel().getSnowBro().sumarPuntaje(puntaje);
+        getJuego().getControladoraGrafica().sacarEntidad(this);
     }
 
     @Override
@@ -46,27 +61,18 @@ public class Kamakichi extends Enemigo {
 
     @Override
     public void moverse() {
-        // TODO Auto-generated method stub
-        
+        if (detenidoGlobalmente) return;
+        cambiarEstado();
+        estadoMovimiento.moverse(this, VELOCIDAD);
     }
 
     @Override
     public void recibirDisparo() {
-        if (faseActual == FASE_CONGELADO) {
-            // No morir, solo ignorar el disparo
-            return;
+        vida--;
+        if (vida <= 0) {
+            morir();
         }
-
-        contadorGolpes++;
-        misAspectos.setEstadoActual(2); 
-
-        if (contadorGolpes >= golpesParaCongelar) {
-            faseActual = FASE_CONGELADO;
-            misAspectos.setEstadoActual(4); 
-        } else if (contadorGolpes >= golpesParaEnfurecer) {
-            faseActual = FASE_ENFURECIDO;
-            misAspectos.setEstadoActual(3); 
-        }
+        
     }
 
     @Override
@@ -86,8 +92,29 @@ public class Kamakichi extends Enemigo {
 
     @Override
     public void cambiarEstado() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cambiarEstado'");
+        movimientoActual = (int) (Math.random()*3+1);
+        long tiempoActual = System.currentTimeMillis();
+        if (tiempoActual - tiempoUltimoCambio >= INTERVALO_CAMBIO) {
+            switch(movimientoActual){
+                case 1:
+                     estadoMovimiento = new EnemigoBajandoPlataforma(null);
+                    break;
+                case 2:
+                    estadoMovimiento = new EnemigoSaltando();
+                    break;
+                case 3:
+                    estadoMovimiento = new EnemigoQuieto();
+                    break;
+                case 4:
+                    dispararBombas();
+                    break;
+                }
+            tiempoUltimoCambio = tiempoActual;
+        }
+    }
+
+    protected void dispararBombas(){
+
     }
 
     public void cambiarEstadoInmediato() {
@@ -124,14 +151,18 @@ public class Kamakichi extends Enemigo {
 
     @Override
     public void colisionarProyectil(Proyectil p) {
-        
+            if (this.colisionaAABB(miHitbox, p.getHitbox())) {
+            p.afectar(this);
+        }
     }
 
     public boolean esVolador() {
         return false;
     }
 
-    public boolean estaCompletamenteCongelado() {
-        return faseActual == FASE_CONGELADO;
+    @Override
+    public void moverHorizontalmente(int i) {
+        setPosX(getPosX() + i);
+        notificarObserver();
     }
 }

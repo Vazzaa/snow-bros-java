@@ -117,10 +117,6 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         boolean derecha = ConstantesTeclado.estaPresionada(ConstantesTeclado.DERECHA);
     	boolean izquierda = ConstantesTeclado.estaPresionada(ConstantesTeclado.IZQUIERDA);
     	boolean salto = ConstantesTeclado.estaPresionada(ConstantesTeclado.SALTAR);
-    	// if (derecha || izquierda || salto) {
-        //     System.out.println("MOVIMIENTO DETECTADO - Derecha: " + derecha + ", Izquierda: " + izquierda + ", Salto: " + salto);
-        //     System.out.println("Posición actual X: " + getPosX() + ", Y: " + getPosY());
-        // }
         verificarFinBoostAzul();
         verificarFinBoostRojo();
 
@@ -135,11 +131,6 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         notificarObserver();
     }
     
-    public void setDireccion(int direccion){
-        estadoMovimiento.cambiar_direccion(direccion);
-		misAspectos.setEstadoActual(getClaveRepreEstado());
-		notificarObserver();
-	}
     
     public void morir() {
         jugador.sumarPuntaje(puntaje);
@@ -290,6 +281,13 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         return;
     }
 
+    public void colisionarBolaDeNieve(BolaDeNieve b) {
+        boolean colisiona = this.colisionaAABB(this.miHitbox, b.getHitbox());
+        if (!colisiona) return;
+        b.afectar(this);
+        return;
+    }
+
     public void resetVelocidad() {
         this.velocidad = 3;
     }
@@ -346,5 +344,19 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         return false;
     }
     
+
+    public EstadoMovimietoSnowBro getEstadoMovimiento() {
+        return estadoMovimiento;
+    }
+
+	public void moverHorizontalmente(int deltaX) {
+		setPosX(getPosX() + deltaX);
+        notificarObserver();
+	}
+
+    public void moverVerticalmente(int deltaY) {
+        setPosY(getPosY() + deltaY);
+        notificarObserver();
+    }
     
 }

@@ -31,17 +31,17 @@ public class EnemigoBajandoPlataforma implements EstadoMovimientoEnemigo {
     }
 
     @Override
-    public EstadoMovimientoEnemigo getEstadoOpuesto() { 
-        return this; 
+    public EstadoMovimientoEnemigo getEstadoOpuesto() {
+        return this;
     }
 
     @Override
-    public boolean permiteMovimiento() { 
-        return false; 
+    public boolean permiteMovimiento() {
+        return false;
     }
 
     @Override
-    public EstadoMovimientoEnemigo getEstadoAnterior() { 
-        return null; 
+    public EstadoMovimientoEnemigo getEstadoAnterior() {
+        return null;
     }
 }

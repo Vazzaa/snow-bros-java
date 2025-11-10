@@ -65,36 +65,35 @@ public class TrollAmarillo extends Enemigo{
         getJuego().getNivel().getSnowBro().sumarPuntaje(puntaje);
         crearPowerUp();
         int dir = (Math.random() < 0.5) ? 0 : 180;
-        BolaDeNieve bola = this.getJuego().getNivelActual().getMiFabrica().getBolaDeNieve(miHitbox.getPosX(), miHitbox.getPosY(), dir);
-        this.getJuego().registrarObserver(bola);
-        this.getJuego().getNivelActual().agregarProyectiles(bola);
+        BolaDeNieve bola = getJuego().getNivelActual().getMiFabrica().getBolaDeNieve(miHitbox.getPosX(), miHitbox.getPosY(), dir);
+        getJuego().registrarObserver(bola);
+        getJuego().getNivelActual().agregarProyectiles(bola);
         return;
     }
     
     protected void crearPowerUp() {
-        this.getJuego().getControladoraGrafica().sacarEntidad(this);
-        PowerUp powerUp = this.getJuego().getNivelActual().getMiFabrica().getFruta(miHitbox.getPosX(), miHitbox.getPosY());
+        getJuego().getControladoraGrafica().sacarEntidad(this);
+        PowerUp powerUp = getJuego().getNivelActual().getMiFabrica().getFruta(miHitbox.getPosX(), miHitbox.getPosY());
         skinAleatoriaFruta(powerUp);
-        this.getJuego().registrarObserver(powerUp);
-        this.getJuego().getNivelActual().agregarPowerUps(powerUp);
+        getJuego().registrarObserver(powerUp);
+        getJuego().getNivelActual().agregarPowerUps(powerUp);
         int crearPocionONo = (int) (Math.random()*3+1);
-        System.out.println("numero tocado"+crearPocionONo);
         if(crearPocionONo == 2){
             PowerUp pocion = null;
             int color = (int) (Math.random()*3+1);
             switch (color) {
                 case 1:
-                    pocion = this.getJuego().getNivelActual().getMiFabrica().getPowerUpAzul(miHitbox.getPosX()+5, miHitbox.getPosY());
+                    pocion = getJuego().getNivelActual().getMiFabrica().getPowerUpAzul(miHitbox.getPosX()+5, miHitbox.getPosY());
                 break;
                 case 2:
-                    pocion = this.getJuego().getNivelActual().getMiFabrica().getPowerUpRojo(miHitbox.getPosX()+5, miHitbox.getPosY());
+                    pocion = getJuego().getNivelActual().getMiFabrica().getPowerUpRojo(miHitbox.getPosX()+5, miHitbox.getPosY());
                 break;
                 case 3:
-                    pocion = this.getJuego().getNivelActual().getMiFabrica().getPowerUpVerde(miHitbox.getPosX()+5, miHitbox.getPosY());
+                    pocion = getJuego().getNivelActual().getMiFabrica().getPowerUpVerde(miHitbox.getPosX()+5, miHitbox.getPosY());
                 break;
             }
-            this.getJuego().registrarObserver(pocion);
-            this.getJuego().getNivelActual().agregarPowerUps(pocion);
+            getJuego().registrarObserver(pocion);
+            getJuego().getNivelActual().agregarPowerUps(pocion);
         }
     }
 
@@ -206,7 +205,7 @@ public class TrollAmarillo extends Enemigo{
 
     @Override
     public void cambiarEstado() {
-        movimientoActual = (int) (Math.random()*3+1);
+        movimientoActual = (int) (Math.random()*4+1);
         long tiempoActual = System.currentTimeMillis();
         if (tiempoActual - tiempoUltimoCambio >= INTERVALO_CAMBIO) {
             switch(movimientoActual){
@@ -218,6 +217,9 @@ public class TrollAmarillo extends Enemigo{
                     break;
                 case 3:
                     estadoMovimiento = new EnemigoQuieto();
+                    break;
+                case 4:
+                    estadoMovimiento = new EnemigoSaltando();
                     break;
                 }
             tiempoUltimoCambio = tiempoActual;
@@ -232,14 +234,12 @@ public class TrollAmarillo extends Enemigo{
 
     @Override
     public void colisionarPowerUp(PowerUp p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'colisionarPowerUp'");
+        //no hace nada
     }
 
     @Override
     public void colisionarEnemigo(Enemigo e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'colisionarEnemigo'");
+        //no hace nada
     }
 
     @Override
@@ -256,7 +256,7 @@ public class TrollAmarillo extends Enemigo{
 
     @Override
     public void colisionarProyectil(Proyectil p) {
-        if (this.colisionaAABB(miHitbox, p.getHitbox())) {
+        if (colisionaAABB(miHitbox, p.getHitbox())) {
             p.afectar(this);
         }
     }
@@ -302,6 +302,12 @@ public class TrollAmarillo extends Enemigo{
     
     public boolean estaCompletamenteCongelado() {
         return estadoNieve >= ESTADO_NIEVE_COMPLETO;
+    }
+
+    @Override
+    public void moverHorizontalmente(int i) {
+        setPosX(getPosX() + i);
+        notificarObserver();
     }
 
 }

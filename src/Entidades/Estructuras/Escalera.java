@@ -42,6 +42,11 @@ public class Escalera extends Obstaculo{
     public boolean esEscalera() {
         return true;
     }
+
+    @Override
+    public boolean esMovible() {
+        return false;
+    }
 }
 
 

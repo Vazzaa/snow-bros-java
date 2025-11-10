@@ -4,7 +4,7 @@ import Juego.ControladorJuego;
 
 public interface ControladorVistas {
     
-    public void accionarInicioJuego();
+    public void accionarInicioJuego(int modo);
     public void accionarPantallaRanking();
     public void accionarPantallaGameOver();
     public void accionarPantallaElegirDominio();

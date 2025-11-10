@@ -160,8 +160,7 @@ public class Moghera extends Enemigo{
         return misAspectos;
     }
 
-    public void morir(){
-        
+    public void morir(){   
         estaVivo = false;
         getJuego().getNivel().getSnowBro().sumarPuntaje(puntaje);
         getJuego().getControladoraGrafica().sacarEntidad(this);
@@ -204,15 +203,19 @@ public class Moghera extends Enemigo{
 
     @Override
     public void colisionarProyectil(Proyectil p) {
-
          if (this.colisionaAABB(miHitbox, p.getHitbox())) {
             p.afectar(this);
-        }
-        
+        }   
     }
 
     public boolean esVolador() {
         return false;
+    }
+
+    @Override
+    public void moverHorizontalmente(int i) {
+        setPosX(getPosX() + i);
+        notificarObserver();
     }
 
     public boolean estaCompletamenteCongelado() {

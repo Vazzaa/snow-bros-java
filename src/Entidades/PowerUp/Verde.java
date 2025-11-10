@@ -41,10 +41,6 @@ public class Verde extends PowerUp {
         misAspectos = s;
     }
 
-    public void detenerEnemigos() {
-
-    }
- 
     @Override
     public Skin getSkin() {
         return misAspectos;

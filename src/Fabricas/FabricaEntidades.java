@@ -47,7 +47,7 @@ public class FabricaEntidades {
     }
 
     public Calabaza getCalabaza(int x, int y) {
-        return new Calabaza(this.fabricaSkin.crearSkinCalabaza(), miJuego, x, y);
+        return new Calabaza(this.fabricaSkin.crearSkinCalabaza(), miJuego, x, y,this);
     }
 
     public Fantasma getFantasma(int x, int y) {
@@ -102,8 +102,8 @@ public class FabricaEntidades {
         return new PlatQuebradiza(this.fabricaSkin.crearSkinPlatQuebradiza(), miJuego, x, y);
     }
 
-    public PlatMovil getPlatMovil(int x, int y) {
-        return new PlatMovil(this.fabricaSkin.crearSkinPlatMovil(), miJuego, x, y);
+    public PlatMovilHorizontal getPlatMovil(int x, int y) {
+        return new PlatMovilHorizontal(this.fabricaSkin.crearSkinPlatMovil(), miJuego, x, y);
     }
 
     public Plataforma getPlataforma(int x, int y) {
@@ -129,6 +129,6 @@ public class FabricaEntidades {
     }
 
     public BolaDeNieve getBolaDeNieve(int x, int y, int direccion) {
-        return new BolaDeNieve(this.fabricaSkin.crearSkinBolaDeNieve(), miJuego, x, y, 5, 1, 1000, direccion);
+        return new BolaDeNieve(this.fabricaSkin.crearSkinBolaDeNieve(), miJuego, x, y, 5, 1, 1000000, direccion);
     }
 }

@@ -13,9 +13,9 @@ public class BolaDeNieve extends Proyectil{
     }
 
     @Override
-    public void afectar(SnowBro snowNBro) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'afectar'");
+    public void afectar(SnowBro snowBro) {
+        this.velocidad = 5;
+        this.direccion = snowBro.getEstadoMovimiento().direccion;
     }
 
     @Override
@@ -32,6 +32,10 @@ public class BolaDeNieve extends Proyectil{
 
     public int getAlcance() {
         return alcance;
+    }
+
+    public void setVelocidad(int nuevaVelocidad) {
+        this.velocidad = nuevaVelocidad;
     }
 
     public boolean afectaAEnemigos() {
