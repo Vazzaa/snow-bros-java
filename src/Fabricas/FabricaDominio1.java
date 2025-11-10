@@ -52,15 +52,15 @@ public class FabricaDominio1 extends FabricaSkin {
     }
 
     public Skin crearSkinPowerUpAzul(){
-        return new Skin(getMapeoEstadoImagen("PocionAzul", 1), 1);
+        return new Skin(getMapeoEstadoImagen("pocion_azul", 1), 1);
     }
 
     public Skin crearSkinPowerUpRojo(){
-        return new Skin(getMapeoEstadoImagen("PocionRojo", 1), 1);
+        return new Skin(getMapeoEstadoImagen("pocion_roja", 1), 1);
     }
 
     public Skin crearSkinPowerUpVerde(){
-        return new Skin(getMapeoEstadoImagen("PocionVerde", 1), 1);
+        return new Skin(getMapeoEstadoImagen("pocion_verde", 1), 1);
     }
 
     public Skin crearSkinFruta(){

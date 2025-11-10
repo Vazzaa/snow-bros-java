@@ -68,5 +68,9 @@ public class EnemigoDiagonal implements EstadoMovimientoEnemigo{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getEstadoAnterior'");
     }
+
+    public boolean permiteSalto() {
+        return false;
+    }
     
 }

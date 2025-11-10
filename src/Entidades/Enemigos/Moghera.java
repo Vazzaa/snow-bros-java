@@ -111,9 +111,11 @@ public class Moghera extends Enemigo{
         int distanciaY = snowBro.getPosY() - this.getPosY();
 
         if (distanciaY > 30 && Math.abs(distanciaX) < 100) { 
-            if (estadoMovimiento instanceof EnemigoCaminandoDerecha || estadoMovimiento instanceof EnemigoCaminandoIzquierda) {
-                estadoMovimiento = new EnemigoSaltando();
-                return;
+            if (distanciaY > 30 && Math.abs(distanciaX) < 100) {
+                if(estadoMovimiento.permiteSalto()){
+                    estadoMovimiento= new EnemigoSaltando();
+                    return;
+                }
             }
         }
 

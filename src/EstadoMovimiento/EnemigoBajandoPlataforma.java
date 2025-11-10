@@ -44,4 +44,8 @@ public class EnemigoBajandoPlataforma implements EstadoMovimientoEnemigo {
     public EstadoMovimientoEnemigo getEstadoAnterior() {
         return null;
     }
+
+    public boolean permiteSalto() {
+        return false;
+    }
 }

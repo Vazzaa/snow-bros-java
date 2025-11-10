@@ -33,4 +33,8 @@ public class EnemigoVoladorQuieto implements EstadoMovimientoEnemigo {
     public boolean permiteMovimiento() {
         return false;
     }
+
+    public boolean permiteSalto() {
+        return false;
+    }
 }

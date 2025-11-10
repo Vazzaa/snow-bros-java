@@ -31,11 +31,15 @@ public class EnemigoSaltando implements EstadoMovimientoEnemigo {
 
     @Override
     public boolean permiteMovimiento() {
-        return false; // No permite cambiar de dirección mientras salta.
+        return false;
     }
 
     @Override
     public EstadoMovimientoEnemigo getEstadoAnterior() {
         return null;
+    }
+
+    public boolean permiteSalto() {
+        return false; 
     }
 }

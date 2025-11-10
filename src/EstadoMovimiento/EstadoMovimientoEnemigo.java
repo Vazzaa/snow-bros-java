@@ -9,4 +9,5 @@ public interface EstadoMovimientoEnemigo {
     public EstadoMovimientoEnemigo getEstadoOpuesto();
     public boolean permiteMovimiento();
     public EstadoMovimientoEnemigo getEstadoAnterior();
+    public boolean permiteSalto();
 }
