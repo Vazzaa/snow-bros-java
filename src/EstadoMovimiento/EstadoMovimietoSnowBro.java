@@ -110,12 +110,12 @@ public class EstadoMovimietoSnowBro {
             }
         }
     
-    protected void saltar() {
-    	if (enElSuelo()) {
-    		this.velocidadVertical = fuerzaSalto;
-            enElSuelo = false;
-    	}
-    }
+        protected void saltar() {
+            if (enElSuelo()) {
+                this.velocidadVertical = fuerzaSalto;
+                enElSuelo = false;
+            }
+        }
     
     public boolean enElSuelo() {
         if (snowBro.getNivel() == null || snowBro.getNivel().getMisEstructuras() == null) {
@@ -140,9 +140,9 @@ public class EstadoMovimietoSnowBro {
 
     
     public void actualizar() {
-        if (!snowBro.estaEnEscalera() && !enElSuelo()) {
-            velocidadVertical -= gravedad;
-        }
+    if (!snowBro.estaEnEscalera() && !enElSuelo()) {
+        velocidadVertical -= gravedad;
+    }
         
         if (snowBro.getNivel() != null && snowBro.getNivel().getMisEstructuras() != null && velocidadHorizontal != 0) {
             int nuevaX = snowBro.getPosX() + velocidadHorizontal;
@@ -163,6 +163,35 @@ public class EstadoMovimietoSnowBro {
             }
         } else {
             snowBro.setPosX(snowBro.getPosX() + velocidadHorizontal);
+        }
+
+        // Detectar colisión cuando está subiendo (choca con plataforma desde abajo)
+        if (snowBro.getNivel() != null && snowBro.getNivel().getMisEstructuras() != null && velocidadVertical > 0) {
+            int nuevaY = snowBro.getPosY() + velocidadVertical;
+            int posYActual = snowBro.getPosY();
+            
+            for (int y = posYActual; y <= nuevaY; y++) {
+                Hitbox hitboxFutura = new Hitbox(snowBro.getHitbox().getAncho(), snowBro.getHitbox().getAlto(), snowBro.getPosX(), y);
+                
+                for (Estructura estructura : snowBro.getNivel().getMisEstructuras()) {
+                    if (snowBro.estaEnEscalera() && estructura.esEscalera()) {
+                        continue;
+                    }
+                    if (estructura.bloquearMovimientoHorizontal()) { // Paredes también bloquean verticalmente
+                        if (controladorColisiones.colisionaAABB(hitboxFutura, estructura.getHitbox())) {
+                            int cabezaSnowBro = y + snowBro.getHitbox().getAlto();
+                            int sueloEstructura = estructura.getHitbox().getPosY();
+                            
+                            // Si la cabeza choca con el suelo de la plataforma, detener el movimiento vertical
+                            if (cabezaSnowBro >= sueloEstructura - 5 && cabezaSnowBro <= sueloEstructura + 10) {
+                                snowBro.setPosY(sueloEstructura - snowBro.getHitbox().getAlto());
+                                velocidadVertical = 0;
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         if (snowBro.getNivel() != null && snowBro.getNivel().getMisEstructuras() != null && velocidadVertical < 0) {
@@ -200,20 +229,15 @@ public class EstadoMovimietoSnowBro {
         //     System.out.println("ACTUALIZAR - PosX: " + posXAnterior + " -> " + snowBro.getPosX() + " (velocidad: " + velocidadHorizontal + ")");
         // }
 
-        if (!snowBro.estaEnEscalera() && enElSuelo()) {
-            if (velocidadVertical <= 0) {
-                velocidadVertical = 0;
-                enElSuelo = true;
-                Estructura plataformaDebajo = controladorColisiones.getPlataformaDebajo(snowBro, snowBro.getNivel().getMisEstructuras());
-                if (plataformaDebajo != null) {
-                    int techoPlataforma = plataformaDebajo.getHitbox().getPosY() + plataformaDebajo.getHitbox().getAlto();
-                    int pieSnowBro = snowBro.getPosY();
-                    if (Math.abs(pieSnowBro - techoPlataforma) <= 5) {
-                        snowBro.setPosY(techoPlataforma);
-                    }
+        if (!snowBro.estaEnEscalera() && enElSuelo() && velocidadVertical == 0) {
+            enElSuelo = true;
+            Estructura plataformaDebajo = controladorColisiones.getPlataformaDebajo(snowBro, snowBro.getNivel().getMisEstructuras());
+            if (plataformaDebajo != null) {
+                int techoPlataforma = plataformaDebajo.getHitbox().getPosY() + plataformaDebajo.getHitbox().getAlto();
+                int pieSnowBro = snowBro.getPosY();
+                if (Math.abs(pieSnowBro - techoPlataforma) <= 5) {
+                    snowBro.setPosY(techoPlataforma);
                 }
-            } else {
-                enElSuelo = false;
             }
         }
     
@@ -242,5 +266,9 @@ public class EstadoMovimietoSnowBro {
     
     public boolean estaEnModoEscalera() {
         return modoEscalera && snowBro.estaEnEscalera();
+    }
+
+    public int getVelocidadVertical() {
+        return velocidadVertical;
     }
 }
