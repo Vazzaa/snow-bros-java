@@ -31,7 +31,9 @@ public class Plataforma extends Estructura{
     }
 
     public void afectar (Enemigo e) {
-
+        if (e != null) {
+            e.afectar(this);
+        }
     }
 
     public void afectar(Proyectil p) {
@@ -69,5 +71,13 @@ public class Plataforma extends Estructura{
     @Override
     public boolean esSueloSolido() {
         return true;
+    }
+
+    public int getVelocidadDeArrastreX() {
+        return 0;
+    }
+
+    public int getVelocidadDeArrastreY() {
+        return 0;
     }
 }

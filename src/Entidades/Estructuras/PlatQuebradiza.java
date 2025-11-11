@@ -67,4 +67,14 @@ public class PlatQuebradiza extends Plataforma implements Destructible {
             this.destruir();
         }
     }
+
+    @Override
+    public int getVelocidadDeArrastreX() {
+        return 0; // Plataforma quebradiza no arrastra horizontalmente
+    }
+
+    @Override
+    public int getVelocidadDeArrastreY() {
+        return 0; // Plataforma quebradiza no arrastra verticalmente
+    }
 }

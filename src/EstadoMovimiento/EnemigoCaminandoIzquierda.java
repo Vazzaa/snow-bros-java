@@ -5,6 +5,8 @@ import Entidades.Estructuras.Estructura;
 import Juego.ColisionManagerEntidades;
 import Juego.Hitbox;
 import Juego.Nivel;
+import Entidades.Estructuras.Plataforma;
+
 
 
 public class EnemigoCaminandoIzquierda implements EstadoMovimientoEnemigo {
@@ -106,4 +108,19 @@ public class EnemigoCaminandoIzquierda implements EstadoMovimientoEnemigo {
     public boolean permiteSalto() {
         return true;
     }
+
+    @Override
+    public void afectar(Enemigo enemigo, Plataforma plataforma) {
+        int pieEnemigo = enemigo.getPosY();
+        int techoPlataforma = plataforma.getHitbox().getPosY() + plataforma.getHitbox().getAlto();
+
+        // Si el enemigo está encima de la plataforma (con una pequeña tolerancia)
+        if (colisionManager.colisionaAABB(enemigo.getHitbox(), plataforma.getHitbox()) && Math.abs(pieEnemigo - techoPlataforma) < 5) {
+            // "Pega" al enemigo a la superficie para que no la atraviese por la gravedad
+            enemigo.setPosY(techoPlataforma);
+            // Transfiere la velocidad de arrastre de la plataforma al enemigo
+            enemigo.setVelocidadPlataforma(plataforma.getVelocidadDeArrastreX(), plataforma.getVelocidadDeArrastreY());
+        }
+    }
+
 }

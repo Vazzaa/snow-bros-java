@@ -43,15 +43,7 @@ public class PlatMovilHorizontal extends Plataforma {
     }
 
     public void afectar (Enemigo e) {
-        int pieEnemigo = e.getPosY();
-        int techoPlataforma = this.miHitbox.getPosY() + this.miHitbox.getAlto();
-
-        if (colisionaAABB(this.miHitbox, e.getHitbox()) && Math.abs(pieEnemigo - techoPlataforma) < 5 && !e.esVolador()) {
-            // "Pega" al enemigo a la superficie
-            e.setPosY(techoPlataforma);
-            // Transfiere la velocidad de la plataforma al enemigo
-            e.setVelocidadPlataforma(velocidad * direccion, 0);
-        }
+        e.afectar(this);
     }
 
     public void setSkin (Skin s) {
@@ -65,5 +57,15 @@ public class PlatMovilHorizontal extends Plataforma {
             direccion *= -1;
         }
         notificarObserver();
+    }
+
+    @Override
+    public int getVelocidadDeArrastreX() {
+        return velocidad * direccion;
+    }
+
+    @Override
+    public int getVelocidadDeArrastreY() {
+        return 0;
     }
 }

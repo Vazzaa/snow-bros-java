@@ -22,15 +22,15 @@ public class FabricaDominio1 extends FabricaSkin {
     }
 
     public Skin crearSkinDemonioRojo() {
-        return new Skin(getMapeoEstadoImagen("DemonioRojo", 12), 1);
+        return new Skin(getMapeoEstadoImagen("DemonioRojo", 4), 3);
     }
 
     public Skin crearSkinTrollAmarillo() {
-        return new Skin(getMapeoEstadoImagen("TrollAmarillo", 3), 1);
+        return new Skin(getMapeoEstadoImagen("TrollAmarillo", 4), 4);
     }
 
     public Skin crearSkinRanaDeFuego() {
-        return new Skin(getMapeoEstadoImagen("RanaDeFuego", 6), 1);
+        return new Skin(getMapeoEstadoImagen("RanaDeFuego", 7), 1);
     }
 
     public Skin crearSkinCalabaza() {

@@ -91,7 +91,8 @@ public class FabricaEntidades {
         } else {
             pared = new Pared(this.fabricaSkin.crearSkinParedIzquierda(), miJuego, x, y);
         }
-        pared.getSkin().setEstadoActual(numeroNivel);
+        int estadoSkin = ((numeroNivel - 1) / 3) + 1;
+        pared.getSkin().setEstadoActual(estadoSkin);
         return pared;
     }
     public ParedDestructible getParedDestructible(int x, int y) {
@@ -117,13 +118,15 @@ public Estructura getPlatMovil(int x, int y) {
 
     public Plataforma getPlataforma(int x, int y, int numeroNivel) {
         Plataforma plataforma = new Plataforma(this.fabricaSkin.crearSkinPlataforma(), miJuego, x, y);
-        plataforma.getSkin().setEstadoActual(numeroNivel);
+        int estadoSkin = ((numeroNivel - 1) / 3) + 1;
+        plataforma.getSkin().setEstadoActual(estadoSkin);
         return plataforma;
     }
 
     public Plataforma getPlataformaSuelo(int x, int y, int numeroNivel) {
         Plataforma platSuelo = new Plataforma(this.fabricaSkin.crearSkinPlataforma(), miJuego, x, y, true);
-        platSuelo.getSkin().setEstadoActual(numeroNivel);
+        int estadoSkin = ((numeroNivel - 1) / 3) + 1;
+        platSuelo.getSkin().setEstadoActual(estadoSkin);
         return platSuelo;
     }
 

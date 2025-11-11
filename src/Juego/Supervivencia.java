@@ -10,8 +10,10 @@ public class Supervivencia extends ModoDeJuego {
 
     private static final int PUNTUACION_OBJETIVO = 50000;
     private static final int ENEMIGOS_POR_OLEADA = 3;
-    private static final int MIN_ENEMIGOS = 2;
+    private static final long TIEMPO_ENTRE_OLEADAS = 10000;
 
+    protected boolean aparecioMoghera;
+    protected long tiempoActual;
     protected int numeroOleada;
     protected Random random;
 
@@ -29,6 +31,9 @@ public class Supervivencia extends ModoDeJuego {
         
         controlaGrafica.mostrarPantallaNivel();
         iniciarHilos();
+
+        aparecioMoghera = false;
+        tiempoActual = System.currentTimeMillis();
         
         System.out.println("Modo Supervivencia iniciado");
         System.out.println("Objetivo: Alcanzar " + PUNTUACION_OBJETIVO + " puntos");
@@ -46,29 +51,11 @@ public class Supervivencia extends ModoDeJuego {
             avanzarSiguienteNivel();
             return;
         }
-
-        int enemigosMortales = contarEnemigosMortales();
         
-        if (enemigosMortales <= MIN_ENEMIGOS) {
+        if (tiempoActual > TIEMPO_ENTRE_OLEADAS) {
             crearOleadaEnemigos();
+            tiempoActual = 0;
         }
-    }
-
-    private int contarEnemigosMortales() {
-        int cont = 0;
-        for (Enemigo e : nivelActual.getMisEnemigos()) {
-            if (!e.esInmortal())
-                cont++;
-        }
-        return cont;
-    }
-
-    private boolean hayEnemigoInmortal() {
-        for (Enemigo e : nivelActual.getMisEnemigos()) {
-            if (e.esInmortal())
-                return true;
-        }
-        return false;
     }
 
     private void crearOleadaEnemigos() {
@@ -78,6 +65,8 @@ public class Supervivencia extends ModoDeJuego {
         for (int i = 0; i < ENEMIGOS_POR_OLEADA; i++) {
             crearEnemigoAleatorio();
         }
+
+        tiempoActual = System.currentTimeMillis();
     }
 
     private void crearEnemigoAleatorio() {
@@ -88,13 +77,7 @@ public class Supervivencia extends ModoDeJuego {
         int x = 100 + random.nextInt(600); // Entre 100 y 700
         int y = 7600 + random.nextInt(200); // Entre 7600 y 7800
         
-        String[] tiposEnemigos;
-        if (hayEnemigoInmortal()) {
-            tiposEnemigos = new String[]{"demonioRojo", "trollAmarillo", "ranaDeFuego", "moghera"};
-        } else {
-            tiposEnemigos = new String[]{"demonioRojo", "calabaza", "trollAmarillo", "ranaDeFuego", "moghera"};
-        }
-
+        String[] tiposEnemigos = {"demonioRojo", "calabaza", "trollAmarillo", "ranaDeFuego", "moghera"};
         String tipoEnemigo = tiposEnemigos[random.nextInt(tiposEnemigos.length)];
         
         Enemigo nuevoEnemigo = null;
@@ -113,7 +96,10 @@ public class Supervivencia extends ModoDeJuego {
                 nuevoEnemigo = miFabricaEntidades.getRanaDeFuego(x, y);
                 break;
             case "moghera":
-                //nuevoEnemigo = miFabricaEntidades.getMoghera(x, y); // Lo comenté porque esta muy OP
+                if (!aparecioMoghera) {
+                    nuevoEnemigo = miFabricaEntidades.getMoghera(x, y);
+                    aparecioMoghera = true;
+                }
                 break;
         }
         
@@ -129,7 +115,9 @@ public class Supervivencia extends ModoDeJuego {
         
         detenerHilos();
         limpiarNivelActual();
-        
+        aparecioMoghera = false;
+        tiempoActual = 0;
+
         int siguienteNivel = numeroNivelActual + 1;
         
         String archivoSiguienteNivel = "nivel" + siguienteNivel + ".txt";

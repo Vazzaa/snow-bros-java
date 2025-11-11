@@ -3,6 +3,7 @@ package EstadoMovimiento;
 import Entidades.Enemigos.Enemigo;
 import Entidades.Estructuras.Estructura;
 import Juego.Hitbox;
+import Entidades.Estructuras.Plataforma;
 import Juego.ColisionManagerEntidades;
 
 public class EnemigoSaltando implements EstadoMovimientoEnemigo {
@@ -72,5 +73,21 @@ public class EnemigoSaltando implements EstadoMovimientoEnemigo {
 
     public boolean permiteSalto() {
         return false; 
+    }
+
+    @Override
+    public void afectar(Enemigo enemigo, Plataforma plataforma) {
+        int pieEnemigo = enemigo.getPosY();
+        int techoPlataforma = plataforma.getHitbox().getPosY() + plataforma.getHitbox().getAlto();
+
+        // Si el enemigo está encima de la plataforma (con una pequeña tolerancia)
+        if (colisionManager.colisionaAABB(enemigo.getHitbox(), plataforma.getHitbox()) && Math.abs(pieEnemigo - techoPlataforma) < 5) {
+            // "Pega" al enemigo a la superficie para que no la atraviese por la gravedad
+            enemigo.setPosY(techoPlataforma);
+            // Transfiere la velocidad de arrastre de la plataforma al enemigo
+            enemigo.setVelocidadPlataforma(plataforma.getVelocidadDeArrastreX(), plataforma.getVelocidadDeArrastreY());
+            // Nota: Un enemigo saltando que es afectado por una plataforma móvil debería seguir su movimiento vertical,
+            // pero su velocidad de salto propia podría verse afectada. Esto ya se maneja en el método moverse.
+        }
     }
 }
