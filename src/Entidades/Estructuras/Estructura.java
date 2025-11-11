@@ -21,6 +21,8 @@ public abstract class Estructura extends Entidad implements Colisionable{
 
     public void afectar(Proyectil p){};
 
+    public void actualizar(){};
+
     @Override
     public void aceptarColision(Colisionador c){
         c.colisionarEstructura(this);
