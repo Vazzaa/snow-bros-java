@@ -32,6 +32,7 @@ public class PlatMovilHorizontal extends Plataforma implements Movible{
             s.sumarPuntaje(300);
             puntajeOtorgado = true;
         }
+        s.setEnContactoConEscalera(false);
     }
 
     public void afectar (Enemigo e) {

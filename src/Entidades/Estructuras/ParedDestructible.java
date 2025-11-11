@@ -20,7 +20,7 @@ public class ParedDestructible extends Pared {
     }
 
     public void afectar(SnowBro s) {
-
+        s.setEnContactoConEscalera(false);
     }
 
     public void afectar (Enemigo e) {

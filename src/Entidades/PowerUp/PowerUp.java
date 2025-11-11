@@ -49,10 +49,6 @@ public abstract class PowerUp extends Entidad implements Colisionable {
         c.colisionarPowerUp(this);
     }
 
-    public boolean esColisionable() {
-        return true;
-    }
-
     public void eliminar() {
         vidaActiva = false;
         miJuego.getControladoraGrafica().sacarEntidad(this);

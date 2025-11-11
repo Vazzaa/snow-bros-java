@@ -25,7 +25,8 @@ public class Plataforma extends Estructura{
     }
 
     public void afectar(SnowBro s) {
-
+        s.setEstaResbalando(false);
+        s.setEnContactoConEscalera(false);
     }
 
     public void afectar (Enemigo e) {
@@ -61,12 +62,12 @@ public class Plataforma extends Estructura{
         return false;
     }
 
-    public boolean esSuelo() {
-        return esPlataformaSuelo;
-    }
-
     @Override
     public boolean esMovible() {
         return false;
+    }
+
+    public boolean esSueloSolido() {
+        return true;
     }
 }

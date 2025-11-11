@@ -43,54 +43,43 @@ public class EstadoMovimietoSnowBro {
     public void mover(boolean derecha, boolean izquierda, boolean salto) {
         boolean subirEscalera = ConstantesTeclado.estaPresionada(ConstantesTeclado.SUBIR_ESCALERA);
         boolean bajarEscalera = ConstantesTeclado.estaPresionada(ConstantesTeclado.BAJAR_ESCALERA);
-        if (snowBro.estaEnEscalera()) {
-            if (subirEscalera) {
-                modoEscalera = true;
+
+    // 1. Handle horizontal movement input
+    if (derecha) {
+        moverDerecha();
+    } else if (izquierda) {
+        moverIzquierda();
+    } else {
+        if (snowBro.estaResbalando()) { // Apply friction if resbalando
+            velocidadHorizontal *= 0.97;
+            if (Math.abs(velocidadHorizontal) < 0.5) {
+                velocidadHorizontal = 0;
             }
-            if (derecha) {
-                moverDerecha();
-            } else if (izquierda) {
-                moverIzquierda();
-            } else {
-                detenerMovimientoHorizontal();
-            }
-            
-            if (subirEscalera) {
-                velocidadVertical = 3; 
-                enElSuelo = false; 
-            } else if (bajarEscalera) {
-                velocidadVertical = -3; 
-                enElSuelo = false;
-            } else {
-                velocidadVertical = 0;
-            }
-            actualizar();
         } else {
-            modoEscalera = false;
-            // Actualizar el estado de resbalar basado en si está sobre suelo resbaladizo
-            boolean enSueloResbaladizo = estaEnSueloResbaladizo();
-            snowBro.setEstaResbalando(enSueloResbaladizo);
-            
-            if (derecha) {
-                moverDerecha();
-            } else if (izquierda) {
-                moverIzquierda();
-            } else {
-                if (snowBro.estaResbalando()) {
-                    velocidadHorizontal *= 0.97; 
-                    if (Math.abs(velocidadHorizontal) < 0.5) {
-                        velocidadHorizontal = 0;
-                    }
-                } else {
-                    detenerMovimientoHorizontal();
-                }
-            }
-            
-            if (salto) {
-                saltar();
-            }
-            actualizar();
+            detenerMovimientoHorizontal(); // Stop immediately if not resbalando
         }
+    }
+
+    // 2. Handle vertical movement input (ladder vs. jump)
+    // Reset modoEscalera at the start of vertical logic for this frame
+    modoEscalera = false; 
+    if (snowBro.estaEnEscalera()) { // If currently colliding with a ladder
+        if (subirEscalera) {
+            modoEscalera = true;
+            velocidadVertical = 3;
+        } else if (bajarEscalera) {
+            modoEscalera = true;
+            velocidadVertical = -3;
+        } else {
+            velocidadVertical = 0; // Stop vertical movement if on ladder but no input
+        }
+    } else if (salto && enElSuelo()) { // Only jump if not on ladder and on solid ground
+        saltar();
+    }
+    // If not on ladder, not jumping, gravity will be applied in actualizar()
+
+    // 3. Apply physics and update position
+    actualizar();
     }
         protected void moverDerecha() {
             int velocidadBase = snowBro.getVelocidad();
@@ -127,20 +116,13 @@ public class EstadoMovimietoSnowBro {
         return false;
     }
 
-    public boolean estaEnSueloResbaladizo() {
-        if (snowBro.getNivel() == null || snowBro.getNivel().getMisEstructuras() == null) {
-            return false;
-        }
-        return controladorColisiones.estaEnSueloResbaladizo(snowBro, snowBro.getNivel().getMisEstructuras());
-    }
-
     public void detenerMovimientoHorizontal() {
         this.velocidadHorizontal = 0;
     }
 
     
     public void actualizar() {
-    if (!snowBro.estaEnEscalera() && !enElSuelo()) {
+    if (!modoEscalera && !enElSuelo()) { // Apply gravity if not climbing and not on solid ground
         velocidadVertical -= gravedad;
     }
         
@@ -165,59 +147,54 @@ public class EstadoMovimietoSnowBro {
             snowBro.setPosX(snowBro.getPosX() + velocidadHorizontal);
         }
 
-        // Detectar colisión cuando está subiendo (choca con plataforma desde abajo)
-        if (snowBro.getNivel() != null && snowBro.getNivel().getMisEstructuras() != null && velocidadVertical > 0) {
-            int nuevaY = snowBro.getPosY() + velocidadVertical;
-            int posYActual = snowBro.getPosY();
-            
-            for (int y = posYActual; y <= nuevaY; y++) {
-                Hitbox hitboxFutura = new Hitbox(snowBro.getHitbox().getAncho(), snowBro.getHitbox().getAlto(), snowBro.getPosX(), y);
+        if (!snowBro.estaEnEscalera()) {
+            if (snowBro.getNivel() != null && snowBro.getNivel().getMisEstructuras() != null && velocidadVertical > 0) {
+                int nuevaY = snowBro.getPosY() + velocidadVertical;
+                int posYActual = snowBro.getPosY();
                 
-                for (Estructura estructura : snowBro.getNivel().getMisEstructuras()) {
-                    if (snowBro.estaEnEscalera() && estructura.esEscalera()) {
-                        continue;
-                    }
-                    if (estructura.bloquearMovimientoHorizontal()) { // Paredes también bloquean verticalmente
-                        if (controladorColisiones.colisionaAABB(hitboxFutura, estructura.getHitbox())) {
-                            int cabezaSnowBro = y + snowBro.getHitbox().getAlto();
-                            int sueloEstructura = estructura.getHitbox().getPosY();
-                            
-                            // Si la cabeza choca con el suelo de la plataforma, detener el movimiento vertical
-                            if (cabezaSnowBro >= sueloEstructura - 5 && cabezaSnowBro <= sueloEstructura + 10) {
-                                snowBro.setPosY(sueloEstructura - snowBro.getHitbox().getAlto());
-                                velocidadVertical = 0;
-                                return;
+                for (int y = posYActual; y <= nuevaY; y++) {
+                    Hitbox hitboxFutura = new Hitbox(snowBro.getHitbox().getAncho(), snowBro.getHitbox().getAlto(), snowBro.getPosX(), y);
+                    
+                    for (Estructura estructura : snowBro.getNivel().getMisEstructuras()) {
+                        if (estructura.bloquearMovimientoHorizontal()) { // Paredes también bloquean verticalmente
+                            if (controladorColisiones.colisionaAABB(hitboxFutura, estructura.getHitbox())) {
+                                int cabezaSnowBro = y + snowBro.getHitbox().getAlto();
+                                int sueloEstructura = estructura.getHitbox().getPosY();
+                                
+                                // Si la cabeza choca con el suelo de la plataforma, detener el movimiento vertical
+                                if (cabezaSnowBro >= sueloEstructura - 5 && cabezaSnowBro <= sueloEstructura + 10) {
+                                    snowBro.setPosY(sueloEstructura - snowBro.getHitbox().getAlto());
+                                    velocidadVertical = 0;
+                                    return;
+                                }
                             }
                         }
                     }
                 }
             }
-        }
 
-        if (snowBro.getNivel() != null && snowBro.getNivel().getMisEstructuras() != null && velocidadVertical < 0) {
-            int nuevaY = snowBro.getPosY() + velocidadVertical;
-            int posYActual = snowBro.getPosY();
-            
-            int paso = velocidadVertical < -5 ? -1 : velocidadVertical;
-            
-            for (int y = posYActual; y >= nuevaY; y += paso) {
-                Hitbox hitboxFutura = new Hitbox(snowBro.getHitbox().getAncho(), snowBro.getHitbox().getAlto(), snowBro.getPosX(), y);
+            if (snowBro.getNivel() != null && snowBro.getNivel().getMisEstructuras() != null && velocidadVertical < 0) {
+                int nuevaY = snowBro.getPosY() + velocidadVertical;
+                int posYActual = snowBro.getPosY();
                 
-                for (Estructura estructura : snowBro.getNivel().getMisEstructuras()) {
-                    if (snowBro.estaEnEscalera() && estructura.esEscalera()) {
-                        continue;
-                    }
-                        if (controladorColisiones.colisionaAABB(hitboxFutura, estructura.getHitbox())) {
-                            int techoEstructura = estructura.getHitbox().getPosY() + estructura.getHitbox().getAlto();
-                            int pieSnowBro = y;
-                            
-                            if (pieSnowBro >= techoEstructura - 5 && pieSnowBro <= techoEstructura + 10) {
-                                snowBro.setPosY(techoEstructura);
-                                velocidadVertical = 0;
-                                enElSuelo = true;
-                                return; 
-                            }
-                        }   
+                int paso = velocidadVertical < -5 ? -1 : velocidadVertical;
+                
+                for (int y = posYActual; y >= nuevaY; y += paso) {
+                    Hitbox hitboxFutura = new Hitbox(snowBro.getHitbox().getAncho(), snowBro.getHitbox().getAlto(), snowBro.getPosX(), y);
+                    
+                    for (Estructura estructura : snowBro.getNivel().getMisEstructuras()) {
+                            if (controladorColisiones.colisionaAABB(hitboxFutura, estructura.getHitbox())) {
+                                int techoEstructura = estructura.getHitbox().getPosY() + estructura.getHitbox().getAlto();
+                                int pieSnowBro = y;
+                                
+                                if (pieSnowBro >= techoEstructura - 5 && pieSnowBro <= techoEstructura + 10) {
+                                    snowBro.setPosY(techoEstructura);
+                                    velocidadVertical = 0;
+                                    enElSuelo = true;
+                                    return; 
+                                }
+                            }   
+                        }
                     }
                 }
             }

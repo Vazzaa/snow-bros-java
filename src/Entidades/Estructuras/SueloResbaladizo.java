@@ -14,6 +14,7 @@ public class SueloResbaladizo extends Obstaculo {
 
     public void afectar(SnowBro s) {
         s.setEstaResbalando(true);
+        s.setEnContactoConEscalera(false);
     }
 
     public void afectar (Enemigo e) {
@@ -30,11 +31,6 @@ public class SueloResbaladizo extends Obstaculo {
     }
 
     @Override
-    public boolean esSuelo() {
-        return true;
-    }
-
-    @Override
     public boolean bloquearMovimientoHorizontal() {
         return false;
     }
@@ -44,9 +40,7 @@ public class SueloResbaladizo extends Obstaculo {
         return false;
     }
 
-    @Override
-    public boolean esSueloResbaladizo() {
+    public boolean esSueloSolido() {
         return true;
     }
 }
-
