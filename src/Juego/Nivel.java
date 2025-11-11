@@ -187,19 +187,22 @@ public class Nivel {
         }
     }
 
-    public void moverEnemigos(){
-        if (misEnemigos == null) return;
-        verificarFinDetencionEnemigos();
-        for (Enemigo enemigo : misEnemigos) {
-            if (enemigo != null) enemigo.moverse();
+    public void moverEnemigos() {
+        if (misEnemigos != null) {
+            verificarFinDetencionEnemigos();
+            for (Enemigo enemigo : misEnemigos) {
+                if (enemigo != null)
+                    enemigo.moverse();
+            }
+            misEnemigos.removeIf(e -> !e.estaVivo());
         }
-        misEnemigos.removeIf(e -> !e.estaVivo());
     }
 
     public void moverEstructurasMoviles(){
-        if (misEstructuras == null) return;
-        for (Estructura estru : misEstructuras) {
-            estru.mover();
+        if (misEstructuras != null) {
+            for (Estructura estru : misEstructuras) {
+                estru.mover();
+            }   
         }
     }
 
@@ -211,19 +214,21 @@ public class Nivel {
 
 
     public void moverProyectiles() {
-        if (misProyectiles == null) return;
-        for (Proyectil p : misProyectiles) {
-            p.mover();
+        if (misProyectiles != null) {
+            for (Proyectil p : misProyectiles) {
+                p.mover();
+            }
+            misProyectiles.removeIf(p -> !p.estaActivo());
         }
-        misProyectiles.removeIf(p -> !p.estaActivo());
     }
 
     public void actualizarPowerUps() {
-        if (misPowerUps == null) return;
-        for (PowerUp p : misPowerUps) {
-            p.verificarTiempoDeVida();
+        if (misPowerUps != null) {
+            for (PowerUp p : misPowerUps) {
+                p.verificarTiempoDeVida();
+            }
+            misPowerUps.removeIf(p -> !p.estaActivo());
         }
-        misPowerUps.removeIf(p -> !p.estaActivo());
     }
 
     public boolean estaCompletado() {
@@ -247,10 +252,11 @@ public class Nivel {
     }
 
     private void verificarFinDetencionEnemigos() {
-        if (tiempoFinDetencionEnemigos == 0) return;
-        if (System.currentTimeMillis() >= tiempoFinDetencionEnemigos) {
-            reanudarEnemigos();
-            tiempoFinDetencionEnemigos = 0;
+        if (tiempoFinDetencionEnemigos != 0) {
+            if (System.currentTimeMillis() >= tiempoFinDetencionEnemigos) {
+                reanudarEnemigos();
+                tiempoFinDetencionEnemigos = 0;
+            }
         }
     }
 
