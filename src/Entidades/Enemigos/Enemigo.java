@@ -117,10 +117,6 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
         this.detenidoGlobalmente = false;
     }
 
-    public boolean esInmortal() {
-        return false;
-    }
-
 	public abstract void moverHorizontalmente(int i);
 
     public abstract void moverVerticalmente(int i);
