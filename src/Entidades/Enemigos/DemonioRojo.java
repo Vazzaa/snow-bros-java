@@ -201,12 +201,15 @@ public class DemonioRojo extends Enemigo {
             switch(movimientoActual){
                 case 1:
                      estadoMovimiento = new EnemigoCaminandoIzquierda();
+                     misAspectos.setEstadoActual(1);
                     break;
                 case 2:
                     estadoMovimiento = new EnemigoCaminandoDerecha();
+                    misAspectos.setEstadoActual(2);
                     break;
                 case 3:
                     estadoMovimiento = new EnemigoQuieto();
+                    misAspectos.setEstadoActual(3);
                     break;
                 }
             tiempoUltimoCambio = tiempoActual;

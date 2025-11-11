@@ -57,7 +57,7 @@ public class RanaDeFuego extends Enemigo {
         super(skins, juego ,posX, posY, 3,300);
         estadoMovimiento = new EnemigoCaminandoDerecha();
         fabParaFuego = fabricaFuego;
-                estadoNieve = ESTADO_INICIAL;
+        estadoNieve = ESTADO_INICIAL;
         estadoNormal = new EstadoNormal();
         estadoPocoCongelado = new EstadoPocoCongelado();
         estadoMedioCongelado = new EstadoMedioCongelado();
@@ -143,57 +143,6 @@ public class RanaDeFuego extends Enemigo {
         verificarDerretimiento();
         estadoMovimiento.moverse(this, VELOCIDAD);
     }
-    //    if (estadoMovimiento == null) {
-    //     estadoMovimiento = new EnemigoCaminandoDerecha();
-    //     direccion=0;
-    //    }
-
-    //    long tiempoActual = System.currentTimeMillis();
-
-
-    //    if (!estadoMovimiento.permiteMovimiento()) {
-
-    //     if(!estadoMovimiento.permiteMovimiento()) {
-    //         if(tiempoInicioQuieto == 0) {
-    //             tiempoInicioQuieto = tiempoActual;
-    //         }
-    //     }
-
-    //     if(tiempoActual - tiempoInicioQuieto >= TIEMPO_QUIETA) {
-
-    //         if(tiempoActual - tiempoUltimoDisparo >= INTERVALO_DISPARO) {
-    //             dispararFuego();
-    //             tiempoUltimoDisparo = tiempoActual;
-    //         }
-
-    //         if(tiempoActual - tiempoInicioQuieto >= TIEMPO_QUIETA + TIEMPO_DISPARO) {
-    //             EstadoMovimientoEnemigo estadoAnterior = estadoMovimiento.getEstadoAnterior();
-    //             if(estadoAnterior != null) {
-    //                 estadoMovimiento = estadoAnterior.getEstadoOpuesto();
-    //                 actualizarDireccion();
-    //             } else {
-    //                 estadoMovimiento = new EnemigoCaminandoDerecha();
-    //                 direccion=0;
-    //             }
-    //             estadoAntesDeQuieto = null;
-    //             estabaQuieto = false;
-    //             tiempoInicioQuieto = 0;
-    //         } 
-    //     }
-    //     estadoMovimiento.moverse(this, VELOCIDAD);
-    //    } else {
-    //     int posXAntes = getPosX();
-    //     cambiarEstado();
-    //     estadoMovimiento.moverse(this, VELOCIDAD);
-    //     int posXDespues = getPosX();
-
-    //     if(posXAntes == posXDespues) {
-    //         estadoAntesDeQuieto = estadoMovimiento;
-    //         estadoMovimiento = new EnemigoQuieto(estadoAntesDeQuieto);
-    //         tiempoInicioQuieto = tiempoActual;
-    //         estabaQuieto = true;
-    //         }
-    //     }
 
     public void deslizarse() {
         if (getJuego() == null || getJuego().getNivel() == null) {
@@ -273,6 +222,11 @@ public class RanaDeFuego extends Enemigo {
     public void dispararFuego() {        
         if (miJuego != null && miJuego.getNivel() != null) {
             ProyectilFuego disparo= fabParaFuego.getProyectilFuego(miHitbox.getPosX(), miHitbox.getPosY(), direccion);
+            if (direccion == 0) {
+                disparo.getSkin().setEstadoActual(2);
+            } else { 
+                disparo.getSkin().setEstadoActual(1);
+            }
             miJuego.registrarObserver(disparo);
             miJuego.getNivel().agregarProyectiles(disparo);
         }
@@ -304,17 +258,24 @@ public class RanaDeFuego extends Enemigo {
                 case 1:
                      estadoMovimiento = new EnemigoCaminandoIzquierda();
                      direccion=180;
+                     misAspectos.setEstadoActual(2);
                     break;
                 case 2:
                     estadoMovimiento = new EnemigoCaminandoDerecha();
                     direccion=0;
+                    misAspectos.setEstadoActual(1);
                     break;
                 case 3:
                     estadoAntesDeQuieto = estadoMovimiento;
                     estadoMovimiento = new EnemigoQuieto();
                     tiempoInicioQuieto = tiempoActual;
+                    misAspectos.setEstadoActual(4);
                     if (tiempoActual - tiempoUltimoDisparo >= INTERVALO_DISPARO) {
                         tiempoUltimoDisparo = tiempoActual;
+                        if(direccion == 0)
+                            misAspectos.setEstadoActual(7);
+                        else
+                            misAspectos.setEstadoActual(3);
                         dispararFuego();
                     }
                     break;

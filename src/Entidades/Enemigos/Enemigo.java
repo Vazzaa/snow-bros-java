@@ -16,7 +16,7 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
     protected EstadoEnemigo estadoEnemigo;
     protected EstadoMovimientoEnemigo estadoMovimiento;
     protected long tiempoUltimoCambio;
-    protected static final long INTERVALO_CAMBIO = 2800;
+    protected static final long INTERVALO_CAMBIO = 500;
     protected boolean estaVivo = true;
     protected boolean detenidoGlobalmente = false;
     protected Skin skinOriginal;

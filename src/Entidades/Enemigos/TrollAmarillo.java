@@ -32,6 +32,8 @@ public class TrollAmarillo extends Enemigo{
     protected int gravedadDeslizamiento = 1;
     private long tiempoFinCongelado = 0;
     private static final int DURACION_CONGELADO_MS = 3000;
+    private long tiempoUltimoSalto = 0;
+    private static final long INTERVALO_SALTO = 3000; // 3 segundos
 
     public TrollAmarillo(Skin skins, ModoDeJuego juego,int posX, int posY){
         super(skins, juego,posX, posY, 3,300);
@@ -208,15 +210,21 @@ public class TrollAmarillo extends Enemigo{
             switch(movimientoActual){
                 case 1:
                      estadoMovimiento = new EnemigoCaminandoIzquierda();
+                     misAspectos.setEstadoActual(2);
                     break;
                 case 2:
                     estadoMovimiento = new EnemigoCaminandoDerecha();
+                    misAspectos.setEstadoActual(1);
                     break;
                 case 3:
                     estadoMovimiento = new EnemigoQuieto();
+                    misAspectos.setEstadoActual(4);
                     break;
                 case 4:
-                    estadoMovimiento = new EnemigoSaltando();
+                    if (tiempoActual - tiempoUltimoSalto >= INTERVALO_SALTO) {
+                        iniciarSalto();
+                        tiempoUltimoSalto = tiempoActual;
+                    }
                     break;
                 }
             tiempoUltimoCambio = tiempoActual;
@@ -227,6 +235,11 @@ public class TrollAmarillo extends Enemigo{
             estadoMovimiento = estadoMovimiento.getEstadoOpuesto();
             tiempoUltimoCambio = System.currentTimeMillis();
         }
+    }
+
+    protected void iniciarSalto() {
+        estadoMovimiento = new EnemigoSaltando();
+        misAspectos.setEstadoActual(3); // Skin de salto
     }
 
     @Override

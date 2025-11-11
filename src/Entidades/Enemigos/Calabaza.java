@@ -35,9 +35,11 @@ public class Calabaza extends Enemigo{
         switch(estadoInicial){
             case 1:
                 estadoMovimiento = new EnemigoVoladorCaminandoIzquierda();
+                misAspectos.setEstadoActual(2);
                 break;
             case 2:
                 estadoMovimiento = new EnemigoVoladorCaminandoDerecha();
+                misAspectos.setEstadoActual(1);
                 break;
             case 3:
                 estadoMovimiento = new EnemigoVoladorQuieto();
