@@ -14,7 +14,7 @@ public class Escalera extends Obstaculo{
     }
 
     public void afectar(SnowBro s) {
-
+        s.setEnContactoConEscalera(true);
     }
 
     public void afectar (Enemigo e) {
@@ -35,19 +35,11 @@ public class Escalera extends Obstaculo{
     }
 
     @Override
-    public boolean esSuelo() {
-        return false; 
-    }
-
-    public boolean esEscalera() {
-        return true;
-    }
-
-    @Override
     public boolean esMovible() {
         return false;
     }
+
+    public boolean esSueloSolido() {
+        return false;
+    }
 }
-
-
-

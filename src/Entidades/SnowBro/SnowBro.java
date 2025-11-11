@@ -37,6 +37,7 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     private long tiempoFinalBoostRojo=0;
     private long tiempoFinAnimacionDisparo = 0;
     private boolean estaResbalando = false;
+    private boolean enContactoConEscalera = false;
     private static final long DURACION_ANIMACION_DISPARO_MS = 300; 
     
     //Constructor
@@ -95,6 +96,10 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     
     public void setVelocidad(int v){
         velocidad = v;
+    }
+    
+    public void setEnContactoConEscalera(boolean enContacto) {
+        this.enContactoConEscalera = enContacto;
     }
     
     public void disparar() {
@@ -351,15 +356,7 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         return dañoProyectil;
     }
     public boolean estaEnEscalera() {
-        if (nivel == null || nivel.getMisEstructuras() == null) {
-            return false;
-        }
-        for (Estructura estructura : nivel.getMisEstructuras()) {
-            if (estructura.esEscalera() && colisionaAABB(this.miHitbox, estructura.getHitbox())) {
-                return true;
-            }
-        }
-        return false;
+        return enContactoConEscalera;
     }
     
 
@@ -385,4 +382,9 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         return estaResbalando;
     }
     
+    // Nuevo método para resetear estados temporales al inicio de cada fotograma
+    public void resetTemporaryStates() {
+        this.enContactoConEscalera = false;
+        this.estaResbalando = false;
+    }
 }

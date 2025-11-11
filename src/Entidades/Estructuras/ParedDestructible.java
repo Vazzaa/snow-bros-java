@@ -23,7 +23,7 @@ public class ParedDestructible extends Pared implements Destructible {
     }
 
     public void afectar(SnowBro s) {
-        s.sumarPuntaje(puntaje);
+        s.setEnContactoConEscalera(false);
     }
 
     public void afectar (Enemigo e) {

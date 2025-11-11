@@ -23,6 +23,7 @@ public class PlatQuebradiza extends Plataforma implements Destructible{
     public void afectar(SnowBro s) {
         this.destruir();
         s.sumarPuntaje(puntaje);
+        s.setEnContactoConEscalera(false);
     }
 
     public void afectar (Enemigo e) {

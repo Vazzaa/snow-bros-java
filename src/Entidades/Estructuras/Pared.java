@@ -29,6 +29,7 @@ public class Pared extends Obstaculo{
         }
         s.detenerMovimiento();
         s.notificarObserver();
+        s.setEnContactoConEscalera(false);
     }
 
     public void afectar (Enemigo e) {
@@ -44,19 +45,12 @@ public class Pared extends Obstaculo{
         return misAspectos;
     }
 
-    public boolean esColisionable() {
-        return true;
-    }
-
-    @Override
-    public boolean esSuelo() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'esSuelo'");
-    }
-
     @Override
     public boolean esMovible() {
         return false;
     }
-}
 
+    public boolean esSueloSolido() {
+        return false;
+    }
+}

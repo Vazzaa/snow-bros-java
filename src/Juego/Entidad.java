@@ -66,9 +66,5 @@ public abstract class Entidad implements EntidadLogica {
 		ColisionManager cm = new ColisionManager();
 		return cm.colisionaAABB(h1, h2);
 	}
-	
-	public boolean esColisionable() {
-		return false;
-	}
 
 }
