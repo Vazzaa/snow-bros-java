@@ -43,7 +43,7 @@ public class PlatMovilVertical extends Plataforma {
 
     public void afectar (Enemigo e) {
         e.afectar(this);
-    }
+    } 
 
     public void setSkin (Skin s) {
 
@@ -56,5 +56,15 @@ public class PlatMovilVertical extends Plataforma {
             direccion *= -1;
         }
         notificarObserver();
+    }
+
+    @Override
+    public int getVelocidadDeArrastreX() {
+        return 0;
+    }
+
+    @Override
+    public int getVelocidadDeArrastreY() {
+        return velocidad * direccion;
     }
 }

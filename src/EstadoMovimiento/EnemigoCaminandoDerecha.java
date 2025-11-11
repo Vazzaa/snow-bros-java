@@ -121,3 +121,4 @@ public class EnemigoCaminandoDerecha implements EstadoMovimientoEnemigo {
         }
     }
 }
+

@@ -7,6 +7,7 @@ import Juego.ModoDeJuego;
 import Entidades.SnowBro.SnowBro;
 import Visitors.Colisionable;
 import Visitors.Colisionador;
+import Entidades.Estructuras.Plataforma;
 
 public abstract class Enemigo extends Entidad implements Colisionable, Movible, Colisionador{
 
@@ -144,6 +145,12 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
 
     public boolean estaEnPlataformaMovil() {
         return velocidadPlataformaX != 0 || velocidadPlataformaY != 0;
+    }
+
+    public void afectar(Plataforma p) {
+        if (estadoMovimiento != null) {
+            estadoMovimiento.afectar(this, p);
+        }
     }
 
 

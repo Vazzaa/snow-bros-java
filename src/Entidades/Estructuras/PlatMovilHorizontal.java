@@ -58,4 +58,14 @@ public class PlatMovilHorizontal extends Plataforma {
         }
         notificarObserver();
     }
+
+    @Override
+    public int getVelocidadDeArrastreX() {
+        return velocidad * direccion;
+    }
+
+    @Override
+    public int getVelocidadDeArrastreY() {
+        return 0;
+    }
 }
