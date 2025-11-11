@@ -46,10 +46,6 @@ public class Pared extends Obstaculo{
     }
 
     @Override
-    public boolean esMovible() {
-        return false;
-    }
-
     public boolean esSueloSolido() {
         return false;
     }

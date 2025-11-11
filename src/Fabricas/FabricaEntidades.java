@@ -6,7 +6,6 @@ import Entidades.Jugador.Jugador;
 import Entidades.PowerUp.*;
 import Entidades.Proyectiles.*;
 import Entidades.SnowBro.SnowBro;
-import Entidades.Proyectiles.ProyectilBomba;
 import Juego.ModoDeJuego;
 
 public class FabricaEntidades {
@@ -104,9 +103,15 @@ public class FabricaEntidades {
         return new PlatQuebradiza(this.fabricaSkin.crearSkinPlatQuebradiza(), miJuego, x, y);
     }
 
-    public PlatMovilHorizontal getPlatMovil(int x, int y) {
-        return new PlatMovilHorizontal(this.fabricaSkin.crearSkinPlatMovil(), miJuego, x, y);
+public Estructura getPlatMovil(int x, int y) {
+    if (y % 2 == 0) { // Si 'y' es par, crea una horizontal
+        return new PlatMovilHorizontal(fabricaSkin.crearSkinPlatMovil(), miJuego, x, y);
+    } 
+    else {
+        return new PlatMovilVertical(fabricaSkin.crearSkinPlatMovil(), miJuego, x, y);
     }
+}
+
 
     public Plataforma getPlataforma(int x, int y, int numeroNivel) {
         Plataforma plataforma = new Plataforma(this.fabricaSkin.crearSkinPlataforma(), miJuego, x, y);

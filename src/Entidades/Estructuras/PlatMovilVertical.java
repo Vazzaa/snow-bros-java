@@ -2,11 +2,10 @@ package Entidades.Estructuras;
 
 import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
-import EstadoMovimiento.Movible;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
 
-public class PlatMovilVertical extends Plataforma implements Movible {
+public class PlatMovilVertical extends Plataforma {
 
     private int velocidad;
     private int direccion;
@@ -24,10 +23,17 @@ public class PlatMovilVertical extends Plataforma implements Movible {
     }
 
     public void afectar(SnowBro s) {
-        boolean colisiona = this.colisionaAABB(this.miHitbox, s.getHitbox());
-        if (s.getEstadoMovimiento().enElSuelo() && colisiona) {
-            s.moverVerticalmente(velocidad * direccion);
-        }
+        int pieSnowBro = s.getPosY();
+        int techoPlataforma = this.miHitbox.getPosY() + this.miHitbox.getAlto();
+
+        // Si el jugador está encima de la plataforma (con una pequeña tolerancia)
+        if (colisionaAABB(this.miHitbox, s.getHitbox()) && Math.abs(pieSnowBro - techoPlataforma) < 5) {
+            // "Pega" al jugador a la superficie para que no la atraviese por la gravedad
+            s.setPosY(techoPlataforma);
+            // Transfiere la velocidad de la plataforma al jugador
+            s.setVelocidadPlataforma(0, velocidad * direccion); // Esto ya era correcto
+            s.getEstadoMovimiento().enElSuelo = true; // Forzamos el estado a "enElSuelo"
+        } 
         if (!puntajeOtorgado) {
             s.sumarPuntaje(300);
             puntajeOtorgado = true;
@@ -36,9 +42,14 @@ public class PlatMovilVertical extends Plataforma implements Movible {
     }
 
     public void afectar (Enemigo e) {
-        boolean colisiona = this.colisionaAABB(this.miHitbox, e.getHitbox());
-        if (colisiona && !e.esVolador()) { 
-            e.moverVerticalmente(velocidad * direccion);
+        int pieEnemigo = e.getPosY();
+        int techoPlataforma = this.miHitbox.getPosY() + this.miHitbox.getAlto();
+
+        if (colisionaAABB(this.miHitbox, e.getHitbox()) && Math.abs(pieEnemigo - techoPlataforma) < 5 && !e.esVolador()) {
+            // "Pega" al enemigo a la superficie
+            e.setPosY(techoPlataforma);
+            // Transfiere la velocidad de la plataforma al enemigo
+            e.setVelocidadPlataforma(0, velocidad * direccion);
         }
     }
 
@@ -47,17 +58,11 @@ public class PlatMovilVertical extends Plataforma implements Movible {
     }
 
     @Override
-    public void moverse() {
+    public void mover() {
         miHitbox.setPosY(miHitbox.getPosY() + velocidad * direccion);
         if (miHitbox.getPosY() >= posicionInicialY + rangoMovimiento || miHitbox.getPosY() <= posicionInicialY - rangoMovimiento) {
             direccion *= -1;
         }
         notificarObserver();
     }
-
-    @Override
-    public boolean esMovible() {
-        return true;
-    }
-    
 }
