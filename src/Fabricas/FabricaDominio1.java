@@ -44,7 +44,7 @@ public class FabricaDominio1 extends FabricaSkin {
     }
 
     public Skin crearSkinMoghera(){
-        return new Skin(getMapeoEstadoImagen("Moghera", 5), 4);
+        return new Skin(getMapeoEstadoImagen("Moghera", 8), 4);
     }
 
     public Skin crearSkinKamakichi(){
@@ -124,7 +124,7 @@ public class FabricaDominio1 extends FabricaSkin {
     }
 
     public Skin crearSkinBolaDeNieve(){
-        return new Skin(getMapeoEstadoImagen("BolaDeNieve", 10), 1);
+        return new Skin(getMapeoEstadoImagen("BolaDeNieve", 5), 1);
     }
 
     public Skin crearSkinParedDestructible(){
