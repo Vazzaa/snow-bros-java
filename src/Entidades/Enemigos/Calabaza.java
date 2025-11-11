@@ -2,6 +2,7 @@ package Entidades.Enemigos;
 
 import Entidades.Estructuras.Estructura;
 import Entidades.Estructuras.Obstaculo;
+import Entidades.Estructuras.Plataforma;
 import Entidades.PowerUp.PowerUp;
 import Entidades.Proyectiles.Proyectil;
 import Entidades.SnowBro.SnowBro;
@@ -200,6 +201,14 @@ public class Calabaza extends Enemigo{
     public void colisionarEstructura(Estructura e) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'colisionarEstructura'");
+    }
+    public void colisionarPlataforma(Plataforma p) {
+        if (p.getPosY() >= 8100) {
+            this.cambiarEstadoInmediato();
+        }
+        else if (p.getPosY() <= 7600) {
+            this.cambiarEstadoInmediato();
+        }
     }
 
     @Override
