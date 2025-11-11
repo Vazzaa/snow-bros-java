@@ -130,9 +130,8 @@ public Estructura getPlatMovil(int x, int y) {
         return platSuelo;
     }
 
-    public ProyectilBomba getProyectilBomba(int x, int y) {
-        return null;
-        //return new ProyetilBomba(this.fabricaSkin.crearSkinProyectilBomba(), x, y);
+    public Bomba getBomba(int x, int y) {
+        return new Bomba(this.fabricaSkin.crearSkinBomba(), miJuego, x, y);
     }
 
     public ProyectilFuego getProyectilFuego(int x, int y, int direccion) {

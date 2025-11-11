@@ -5,7 +5,6 @@ import Entidades.Estructuras.Estructura;
 import Entidades.Estructuras.Obstaculo;
 import Entidades.PowerUp.PowerUp;
 import Entidades.Proyectiles.Proyectil;
-import Entidades.Proyectiles.ProyectilBomba;
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.*;
 import Fabricas.FabricaEntidades;
@@ -88,7 +87,7 @@ public class Kamakichi extends Enemigo {
         return misAspectos;
     }
 
-    public ProyectilBomba crearBomba(){
+    public Bomba crearBomba(){
         return null;
     }
 

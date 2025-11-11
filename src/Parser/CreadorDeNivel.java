@@ -189,6 +189,9 @@ public class CreadorDeNivel {
                 return fabEntidades.getMoghera(x, y);
             case "fantasma":
                 return fabEntidades.getFantasma(x, y);
+            case "bomba":
+                return fabEntidades.getBomba(x, y);
+
             default:
                 System.err.println("Tipo de enemigo no reconocido: " + tipo);
                 return null;
