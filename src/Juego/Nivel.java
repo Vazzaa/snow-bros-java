@@ -100,7 +100,6 @@ public class Nivel {
     }
     public void eliminarEstructura(Destructible e){
         misEstructuras.remove(e);
-        e.destruir();
     }
 
     public void agregarEstructura(Estructura e){

@@ -25,7 +25,7 @@ public class BolaDeNieve extends Proyectil{
 
     @Override
     public void afectar(Estructura estructura) {
-        //No hace nada
+        estructura.afectar(this);
     }
 
     public int getAlcance() {

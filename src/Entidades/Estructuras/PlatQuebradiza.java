@@ -21,6 +21,7 @@ public class PlatQuebradiza extends Plataforma implements Destructible{
     }
 
     public void afectar(SnowBro s) {
+        this.destruir();
         s.sumarPuntaje(puntaje);
         s.setEnContactoConEscalera(false);
     }
@@ -35,10 +36,6 @@ public class PlatQuebradiza extends Plataforma implements Destructible{
             int pieProyectil = miHitbox.getPosY();
             int techoPlataforma = this.miHitbox.getPosY() + this.miHitbox.getAlto();
             if (pieProyectil <= techoPlataforma + 5) {
-                Vida -= 1;
-                if (Vida <= 0) {
-                    this.destruir();
-                }
                 p.eliminar();
             }
         }  
