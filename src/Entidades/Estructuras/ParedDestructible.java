@@ -15,6 +15,7 @@ public class ParedDestructible extends Pared implements Destructible {
         super(s, juego, x, y);
         Vida = 1;
         puntaje = 150;
+        miHitbox.setAlto(32);
     }
 
     public void destruir() {
