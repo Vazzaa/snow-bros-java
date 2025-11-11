@@ -12,8 +12,12 @@ public class Supervivencia extends ModoDeJuego {
     private static final int ENEMIGOS_POR_OLEADA = 3;
     private static final long TIEMPO_ENTRE_OLEADAS = 10000;
 
+    protected boolean aparecioCalabaza;
     protected boolean aparecioMoghera;
-    protected long tiempoActual;
+
+    protected long tiempoInicio;
+    protected long tiempoRestante;
+
     protected int numeroOleada;
     protected Random random;
 
@@ -33,7 +37,9 @@ public class Supervivencia extends ModoDeJuego {
         iniciarHilos();
 
         aparecioMoghera = false;
-        tiempoActual = System.currentTimeMillis();
+
+        tiempoInicio = System.currentTimeMillis();
+        tiempoRestante = TIEMPO_ENTRE_OLEADAS;
         
         System.out.println("Modo Supervivencia iniciado");
         System.out.println("Objetivo: Alcanzar " + PUNTUACION_OBJETIVO + " puntos");
@@ -41,20 +47,16 @@ public class Supervivencia extends ModoDeJuego {
 
     @Override
     public void verificarNivelCompletado() {
-        if (nivelActual == null)
-            return;
-        
-        int puntajeActual = nivelActual.getSnowBro().getPuntaje();
+        if (nivelActual != null) {
+            int puntajeActual = nivelActual.getSnowBro().getPuntaje();
 
-        if (puntajeActual >= PUNTUACION_OBJETIVO) {
-            System.out.println("Objetivo alcanzado.");
-            avanzarSiguienteNivel();
-            return;
-        }
-        
-        if (tiempoActual > TIEMPO_ENTRE_OLEADAS) {
-            crearOleadaEnemigos();
-            tiempoActual = 0;
+            if (puntajeActual >= PUNTUACION_OBJETIVO) {
+                System.out.println("Objetivo alcanzado.");
+                avanzarSiguienteNivel();
+            }
+            else {
+                actualizarTiempo();
+            }
         }
     }
 
@@ -65,48 +67,64 @@ public class Supervivencia extends ModoDeJuego {
         for (int i = 0; i < ENEMIGOS_POR_OLEADA; i++) {
             crearEnemigoAleatorio();
         }
+    }
 
-        tiempoActual = System.currentTimeMillis();
+    private void actualizarTiempo() {
+        long tiempoTranscurrido = System.currentTimeMillis() - tiempoInicio;
+        tiempoRestante = TIEMPO_ENTRE_OLEADAS - tiempoTranscurrido;
+        
+        if (tiempoRestante <= 0) {
+            tiempoRestante = 0;
+            crearOleadaEnemigos();
+
+            tiempoInicio = System.currentTimeMillis();
+            tiempoRestante = TIEMPO_ENTRE_OLEADAS;
+        }
     }
 
     private void crearEnemigoAleatorio() {
-        if (nivelActual == null || miFabricaEntidades == null) return;
+        if (nivelActual != null && miFabricaEntidades != null) {
+            
+            // Posiciones aleatorias dentro del nivel
+            // Ajusta estos valores según el tamaño de tu nivel
+            int x = 100 + random.nextInt(600); // Entre 100 y 700
+            int y = 7600 + random.nextInt(200); // Entre 7600 y 7800
+            
+            String[] tiposEnemigos = {"demonioRojo", "calabaza", "trollAmarillo", "ranaDeFuego", "moghera"};
+            String tipoEnemigo = tiposEnemigos[random.nextInt(tiposEnemigos.length)];
+            
+            Enemigo nuevoEnemigo = null;
         
-        // Posiciones aleatorias dentro del nivel
-        // Ajusta estos valores según el tamaño de tu nivel
-        int x = 100 + random.nextInt(600); // Entre 100 y 700
-        int y = 7600 + random.nextInt(200); // Entre 7600 y 7800
+            switch (tipoEnemigo) {
+                case "demonioRojo":
+                    nuevoEnemigo = miFabricaEntidades.getDemonioRojo(x, y);
+                    break;
+                case "calabaza":
+                    if (!aparecioCalabaza) {
+                        nuevoEnemigo = miFabricaEntidades.getCalabaza(x, y);
+                        aparecioCalabaza = true;
+                    }
+                    break;
+                case "trollAmarillo":
+                    nuevoEnemigo = miFabricaEntidades.getTrollAmarillo(x, y);
+                    break;
+                case "ranaDeFuego":
+                    nuevoEnemigo = miFabricaEntidades.getRanaDeFuego(x, y);
+                    break;
+                case "moghera":
+                    if (!aparecioMoghera) {
+                        // nuevoEnemigo = miFabricaEntidades.getMoghera(x, y);
+                        // pls nerf moghera :(
+                        aparecioMoghera = true;
+                    }
+                    break;
+            }
         
-        String[] tiposEnemigos = {"demonioRojo", "calabaza", "trollAmarillo", "ranaDeFuego", "moghera"};
-        String tipoEnemigo = tiposEnemigos[random.nextInt(tiposEnemigos.length)];
-        
-        Enemigo nuevoEnemigo = null;
-        
-        switch (tipoEnemigo) {
-            case "demonioRojo":
-                nuevoEnemigo = miFabricaEntidades.getDemonioRojo(x, y);
-                break;
-            case "calabaza":
-                nuevoEnemigo = miFabricaEntidades.getCalabaza(x, y);
-                break;
-            case "trollAmarillo":
-                nuevoEnemigo = miFabricaEntidades.getTrollAmarillo(x, y);
-                break;
-            case "ranaDeFuego":
-                nuevoEnemigo = miFabricaEntidades.getRanaDeFuego(x, y);
-                break;
-            case "moghera":
-                if (!aparecioMoghera) {
-                    nuevoEnemigo = miFabricaEntidades.getMoghera(x, y);
-                    aparecioMoghera = true;
-                }
-                break;
-        }
-        
-        if (nuevoEnemigo != null) {
-            nivelActual.agregarEnemigos(nuevoEnemigo);
-            registrarObserver(nuevoEnemigo);
-            System.out.println("Enemigo creado: " + tipoEnemigo + " en (" + x + ", " + y + ")");
+            if (nuevoEnemigo != null) {
+                nivelActual.agregarEnemigos(nuevoEnemigo);
+                registrarObserver(nuevoEnemigo);
+                System.out.println("Enemigo creado: " + tipoEnemigo + " en (" + x + ", " + y + ")");
+            }
         }
     }
 
@@ -116,7 +134,6 @@ public class Supervivencia extends ModoDeJuego {
         detenerHilos();
         limpiarNivelActual();
         aparecioMoghera = false;
-        tiempoActual = 0;
 
         int siguienteNivel = numeroNivelActual + 1;
         
