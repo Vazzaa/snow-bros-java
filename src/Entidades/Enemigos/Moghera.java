@@ -6,205 +6,145 @@ import Entidades.PowerUp.PowerUp;
 import Entidades.Proyectiles.Proyectil;
 import Entidades.Proyectiles.ProyectilFuego;
 import Entidades.SnowBro.SnowBro;
-import EstadoMovimiento.*;
-import Fabricas.FabricaEntidades;
+import EstadoMovimiento.EnemigoBajandoPlataforma;
+import EstadoMovimiento.EnemigoCaminandoIzquierda;
+import EstadoMovimiento.EnemigoCaminandoDerecha;
+import EstadoMovimiento.EnemigoQuieto;
+import EstadoMovimiento.EnemigoSaltando;
+import EstadoMovimiento.EstadoEnemigo;
 import Fabricas.Skin;
+import Juego.ColisionManagerEntidades;
 import Juego.ModoDeJuego;
+import Sonidos.GestorSonidos;
 import Visitors.Colisionable;
+import Fabricas.FabricaEntidades;
 
-public class Moghera extends Enemigo{
-    
-    protected static final int FASE_NORMAL = 0;
-    protected static final int FASE_ENFURECIDO = 1;
-    protected static final int FASE_CONGELADO = 2;
+public class Moghera extends Enemigo {
 
-    protected int faseActual;
-    protected int golpesParaEnfurecer = 5; 
-    protected int golpesParaCongelar = 10; 
-    protected int contadorGolpes = 0;
+    private static final int VELOCIDAD = 2;
+    protected ColisionManagerEntidades colisionManager;
+    protected int movimientoActual;
+    protected int vida;
+    protected FabricaEntidades fabParaFuego;
+    protected int direccion = 0;
 
-    private static int VELOCIDAD_NORMAL = 1;  
-    private static int VELOCIDAD_ENFURECIDO = 2;  
-
-    private long tiempoUltimoDisparo = 0;
-    private long intervaloDisparoNormal = 3000; 
-    private long intervaloDisparoEnfurecido = 1500; 
-    
-    private long tiempoUltimaDecision = 0;
-    private long intervaloDecision = 1000;
-
-    protected boolean saltando = false;
-
-    protected int direccionDisparo = 180; 
-    protected FabricaEntidades creacionFuego;
-
-
-
-    public Moghera(Skin skins, ModoDeJuego juego, int posX, int posY, FabricaEntidades fabrica) {
-        super(skins, juego, posX, posY, 10, 2000); 
-        this.creacionFuego = fabrica;
-        this.faseActual = FASE_NORMAL;
-        this.estadoMovimiento = new EnemigoCaminandoIzquierda();
+    public Moghera(Skin skins, ModoDeJuego juego, int posX, int posY, FabricaEntidades fabParaFuego) {
+        super(skins, juego, posX, posY, 10, 500); // Vida y puntaje
+        this.colisionManager = new ColisionManagerEntidades();
+        this.vida = 10;
+        this.fabParaFuego = fabParaFuego;
+        this.estadoMovimiento = new EnemigoQuieto();
     }
 
     @Override
     public void atacar(Enemigo e) {
-        // TODO Auto-generated method stub
-        
+        // Moghera no ataca a otros enemigos
+    }
+
+    @Override
+    public void morir() {
+        estaVivo = false;
+        GestorSonidos.getInstancia().reproducirEfecto("enemy_death");
+        getJuego().getNivel().getSnowBro().sumarPuntaje(puntaje);
+        getJuego().getControladoraGrafica().sacarEntidad(this);
     }
 
     @Override
     public void atacar(SnowBro s) {
-        // TODO Auto-generated method stub
-        
+        if(this.colisionaAABB(miHitbox, s.getHitbox())){
+            s.disminuirVida();
+        }
     }
 
     @Override
     public void chocar(Colisionable c) {
-        // TODO Auto-generated method stub
-        
+        // Lógica de choque general
     }
 
-    public void dispararFuego() {
-        if (miJuego != null && miJuego.getNivel() != null && creacionFuego != null) {
-            ProyectilFuego disparo = creacionFuego.getProyectilFuego(miHitbox.getPosX(), miHitbox.getPosY(), direccionDisparo);
+    @Override
+    public EstadoEnemigo getEstado() {
+        return null; // Moghera no usa el sistema de estados de congelamiento
+    }
+
+    @Override
+    public void moverse() {
+        if (detenidoGlobalmente) return;
+        cambiarEstado();
+        if (estadoMovimiento != null) {
+            estadoMovimiento.moverse(this, VELOCIDAD);
+        }
+    }
+
+    @Override
+    public void recibirDisparo() {
+        vida--;
+        if (vida <= 0) {
+            morir();
+        }
+    }
+
+    @Override
+    public void setEstado(EstadoEnemigo estado) {
+        // Moghera no se congela
+    }
+
+    @Override
+    public void cambiarEstado() {
+        long tiempoActual = System.currentTimeMillis();
+        if (tiempoActual - tiempoUltimoCambio >= INTERVALO_CAMBIO) {
+            movimientoActual = (int) (Math.random() * 5 + 1);
+            switch (movimientoActual) {
+                case 1:
+                    estadoMovimiento = new EnemigoSaltando();
+                    misAspectos.setEstadoActual(5);
+                    break;
+                case 2:
+                    estadoMovimiento = new EnemigoQuieto();
+                    misAspectos.setEstadoActual(4);
+                    break;
+                case 3:
+                    dispararFuego();
+                    misAspectos.setEstadoActual(8);
+                    break;
+                case 4:
+                    direccion = 180;
+                    estadoMovimiento = new EnemigoCaminandoIzquierda();
+                    misAspectos.setEstadoActual(6);
+                    break;
+                case 5:
+                    direccion = 0;
+                    estadoMovimiento = new EnemigoCaminandoDerecha();
+                    misAspectos.setEstadoActual(7);
+                    break;
+            }
+            tiempoUltimoCambio = tiempoActual;
+        }
+    }
+
+    protected void dispararFuego() {
+        if (miJuego != null && miJuego.getNivel() != null) {
+            ProyectilFuego disparo = fabParaFuego.getProyectilFuego(miHitbox.getPosX(), miHitbox.getPosY(), direccion);
+            if (direccion == 0) { 
+                disparo.getSkin().setEstadoActual(2);
+            } else { 
+                disparo.getSkin().setEstadoActual(1);
+            }
             miJuego.registrarObserver(disparo);
             miJuego.getNivel().agregarProyectiles(disparo);
         }
     }
 
     @Override
-    public EstadoEnemigo getEstado() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void moverse() {
-        if (detenidoGlobalmente || faseActual == FASE_CONGELADO) {
-            estadoMovimiento = new EnemigoQuieto();
-            estadoMovimiento.moverse(this, 0);
-            return;
-        }
-
-        long tiempoActual = System.currentTimeMillis();
-        long intervaloDisparo = (faseActual == FASE_NORMAL) ? intervaloDisparoNormal : intervaloDisparoEnfurecido;
-        if (tiempoActual - tiempoUltimoDisparo > intervaloDisparo) {
-            dispararFuego();
-            tiempoUltimoDisparo = tiempoActual;
-        }
-
-        if (tiempoActual - tiempoUltimaDecision > intervaloDecision) {
-            tomarDecisionDeMovimiento();
-            tiempoUltimaDecision = tiempoActual;
-        }
-
-        int velocidad = (faseActual == FASE_NORMAL) ? VELOCIDAD_NORMAL : VELOCIDAD_ENFURECIDO;
-        estadoMovimiento.moverse(this, velocidad);
-    }
-
-    private void tomarDecisionDeMovimiento() {
-        SnowBro snowBro = miJuego.getNivel().getSnowBro();
-        if (snowBro == null) return;
-
-        int distanciaX = snowBro.getPosX() - this.getPosX();
-        int distanciaY = snowBro.getPosY() - this.getPosY();
-
-        if (distanciaY > 30 && Math.abs(distanciaX) < 100) { 
-            if (distanciaY > 30 && Math.abs(distanciaX) < 100) {
-                if(estadoMovimiento.permiteSalto()){
-                    estadoMovimiento= new EnemigoSaltando();
-                    return;
-                }
-            }
-        }
-
-        if (distanciaX > 10) { 
-            estadoMovimiento = new EnemigoCaminandoDerecha();
-            direccionDisparo = 0;
-        } else if (distanciaX < -10) {
-            estadoMovimiento = new EnemigoCaminandoIzquierda();
-            direccionDisparo = 180;
-        } else {
-            estadoMovimiento = new EnemigoQuieto();
-        }
-    }
-
-    @Override
-    public void recibirDisparo() {
-        if (faseActual == FASE_CONGELADO) {
-            // No morir, solo ignorar el disparo
-            return;
-        }
-
-        contadorGolpes++;
-        misAspectos.setEstadoActual(2); 
-
-        if (contadorGolpes >= golpesParaCongelar) {
-            faseActual = FASE_CONGELADO;
-            misAspectos.setEstadoActual(4); 
-        } else if (contadorGolpes >= golpesParaEnfurecer) {
-            faseActual = FASE_ENFURECIDO;
-            misAspectos.setEstadoActual(3); 
-        }
-    }
-    @Override
-    public void setEstado(EstadoEnemigo estado) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setEstado'");
-    }
-
-    @Override
-    public Skin getSkin() {
-        return misAspectos;
-    }
-
-    public void morir(){   
-        estaVivo = false;
-        getJuego().getNivel().getSnowBro().sumarPuntaje(puntaje);
-        getJuego().getControladoraGrafica().sacarEntidad(this);
-    }
-
-    @Override
-    public void cambiarEstado() {
-        cambiarEstadoInmediato();
-    }
-    
-
     public void cambiarEstadoInmediato() {
         if (estadoMovimiento != null) {
             estadoMovimiento = estadoMovimiento.getEstadoOpuesto();
-            direccionDisparo = (direccionDisparo == 0) ? 180 : 0;
             tiempoUltimoCambio = System.currentTimeMillis();
         }
     }
 
-
     @Override
-    public void colisionarPowerUp(PowerUp p) {
-
-    }
-
-    @Override
-    public void colisionarEnemigo(Enemigo e) {
-
-    }
-
-    @Override
-    public void colisionarEstructura(Estructura e) {
-
-    }
-
-    @Override
-    public void colisionarObstaculo(Obstaculo o) {
-    
-    }
-
-    @Override
-    public void colisionarProyectil(Proyectil p) {
-         if (this.colisionaAABB(miHitbox, p.getHitbox())) {
-            p.afectar(this);
-        }   
+    public boolean estaCompletamenteCongelado() {
+        return false; // Moghera no se congela
     }
 
     @Override
@@ -213,13 +153,32 @@ public class Moghera extends Enemigo{
         notificarObserver();
     }
 
-    public boolean estaCompletamenteCongelado() {
-        return faseActual == FASE_CONGELADO;
+    @Override
+    public void moverVerticalmente(int i) {
+        setPosY(getPosY() + i);
+        notificarObserver();
     }
 
     @Override
-    public void moverVerticalmente(int i) {
-        setPosY(getPosY()+1);
-        notificarObserver();
+    public void colisionarProyectil(Proyectil p) {
+        if (this.colisionaAABB(miHitbox, p.getHitbox())) {
+            p.afectar(this);
+        }
+    }
+
+    // --- Métodos de colisión no implementados ---
+    @Override
+    public void colisionarPowerUp(PowerUp p) {}
+
+    @Override
+    public void colisionarEnemigo(Enemigo e) {}
+
+    @Override
+    public void colisionarObstaculo(Obstaculo o) {}
+
+    @Override
+    public void colisionarEstructura(Estructura e) {
+        // TODO Auto-generated method stub
+        
     }
 }

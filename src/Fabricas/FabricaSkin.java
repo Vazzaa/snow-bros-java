@@ -24,7 +24,7 @@ public abstract class FabricaSkin {
     public abstract Skin crearSkinPlatQuebradiza();
     public abstract Skin crearSkinPlatTecho();
     public abstract Skin crearSkinPlatMovil();
-    public abstract Skin crearSkinProyectilBomba();
+    public abstract Skin crearSkinBomba();
     public abstract Skin crearSkinProyectilFuego();
     public abstract Skin crearSkinProyectilNieve();
     public abstract Skin crearSkinBolaDeNieve();

@@ -1,5 +1,5 @@
 NIVEL:2
-JUGADOR:384,7880
+JUGADOR:10,7650
 
 # Plataforma base completa (y=7610) - igual que nivel 1
 PLATAFORMA:16,7610
