@@ -4,6 +4,7 @@ import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
 import Visitors.Colisionador;
 import Juego.ModoDeJuego;
+import Entidades.Proyectiles.BolaDeNieve;
 import Entidades.Proyectiles.Proyectil;
 
 public class Plataforma extends Estructura{
@@ -42,6 +43,9 @@ public class Plataforma extends Estructura{
                 p.eliminar();
             }
         }  
+    }
+    public void afectar(BolaDeNieve b) {
+        //No hace nada
     }
 
     public void setSkin (Skin s) {
