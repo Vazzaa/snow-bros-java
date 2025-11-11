@@ -46,6 +46,9 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
     public void setVelocidadDeslizamiento(int v){
         velocidadDeslizamiento = v;
         siendoEmpujado = (v != 0);
+        if(siendoEmpujado){
+            this.getSkin().setEstadoActual(5);
+        }
     }
 
     public int getVelocidadDeslizamiento() {
@@ -150,4 +153,4 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
     }
 
 
-} 
+}
