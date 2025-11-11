@@ -128,6 +128,6 @@ public class FabricaDominio1 extends FabricaSkin {
     }
 
     public Skin crearSkinParedDestructible(){
-        return new Skin(getMapeoEstadoImagen("ParedDestructible", 0), 1);//Falta
+        return new Skin(getMapeoEstadoImagen("ParedDestructible", 1), 1);
     }
 }

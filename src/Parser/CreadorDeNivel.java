@@ -102,6 +102,14 @@ public class CreadorDeNivel {
                     if (pared != null) {
                         estructuras.add(pared);
                         System.out.println("DEBUG: Pared agregada - x=" + x + ", tipo=" + (x >= 700 ? "DERECHA" : "IZQUIERDA"));
+                    } 
+                } else if (linea.startsWith("PAREDDESTRUCTIBLE:")) {
+                    String[] coords = linea.substring(18).split(",");
+                    int x = Integer.parseInt(coords[0].trim());
+                    int y = Integer.parseInt(coords[1].trim());
+                    Estructura paredDestructible = fabEntidades.getParedDestructible(x, y);
+                    if (paredDestructible != null) {
+                        estructuras.add(paredDestructible);
                     }
                 } else if (linea.startsWith("PINCHO:")) {
                     String[] coords = linea.substring(7).split(",");

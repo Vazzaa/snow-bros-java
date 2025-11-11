@@ -94,7 +94,9 @@ public class FabricaEntidades {
         pared.getSkin().setEstadoActual(numeroNivel);
         return pared;
     }
-
+    public ParedDestructible getParedDestructible(int x, int y) {
+        return new ParedDestructible(this.fabricaSkin.crearSkinParedDestructible(), miJuego, x, y);
+    }
     public SueloResbaladizo getSueloResbaladizo(int x, int y) {
         return new SueloResbaladizo(this.fabricaSkin.crearSkinSueloResbaladizo(), miJuego, x, y);
     }
