@@ -63,10 +63,6 @@ public class Plataforma extends Estructura{
     }
 
     @Override
-    public boolean esMovible() {
-        return false;
-    }
-
     public boolean esSueloSolido() {
         return true;
     }

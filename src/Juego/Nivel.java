@@ -118,10 +118,15 @@ public class Nivel {
     
     public void verificarColisiones() {
         try {
+            if (snowBro != null) {
+                snowBro.resetVelocidadPlataforma();
+            }
             if (misEnemigos != null) {
                 for (Enemigo enemigo : misEnemigos) {
-                    if (snowBro != null)
+                    if (snowBro != null) {
                         snowBro.colisionarEnemigo(enemigo);
+                    }
+                    enemigo.resetVelocidadPlataforma();
                 }
             }
             if (misPowerUps != null) {
@@ -193,11 +198,10 @@ public class Nivel {
     }
 
     public void moverEstructurasMoviles(){
-        // if (misEstructuras == null) return;
-        // for (Estructura estru : misEstructuras) {
-        //     if(estru.esMovible())
-        //         estru.moverse();
-        // }
+        if (misEstructuras == null) return;
+        for (Estructura estru : misEstructuras) {
+            estru.mover();
+        }
     }
 
 

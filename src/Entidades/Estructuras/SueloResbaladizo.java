@@ -35,11 +35,6 @@ public class SueloResbaladizo extends Obstaculo {
         return false;
     }
 
-    @Override
-    public boolean esMovible() {
-        return false;
-    }
-
     public boolean esSueloSolido() {
         return true;
     }

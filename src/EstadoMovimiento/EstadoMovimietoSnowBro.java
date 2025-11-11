@@ -125,8 +125,11 @@ public class EstadoMovimietoSnowBro {
     if (!modoEscalera && !enElSuelo()) { // Apply gravity if not climbing and not on solid ground
         velocidadVertical -= gravedad;
     }
+
+    int velocidadHorizontalTotal = velocidadHorizontal + snowBro.getVelocidadPlataformaX();
+    int velocidadVerticalTotal = velocidadVertical + snowBro.getVelocidadPlataformaY();
         
-        if (snowBro.getNivel() != null && snowBro.getNivel().getMisEstructuras() != null && velocidadHorizontal != 0) {
+        if (snowBro.getNivel() != null && snowBro.getNivel().getMisEstructuras() != null && velocidadHorizontalTotal != 0) {
             int nuevaX = snowBro.getPosX() + velocidadHorizontal;
             boolean colisionaria = false;
             for (Estructura estructura : snowBro.getNivel().getMisEstructuras()) {
@@ -139,16 +142,16 @@ public class EstadoMovimietoSnowBro {
                 }
             }
             if (colisionaria) {
-                velocidadHorizontal = 0;
+                // No cambiamos la velocidad, solo no aplicamos el movimiento
             } else {
-                snowBro.setPosX(snowBro.getPosX() + velocidadHorizontal);
+                snowBro.setPosX(snowBro.getPosX() + velocidadHorizontalTotal); // Esta línea ya era correcta para X
             }
         } else {
-            snowBro.setPosX(snowBro.getPosX() + velocidadHorizontal);
+            snowBro.setPosX(snowBro.getPosX() + velocidadHorizontalTotal);
         }
-
+        
         if (!snowBro.estaEnEscalera()) {
-            if (snowBro.getNivel() != null && snowBro.getNivel().getMisEstructuras() != null && velocidadVertical > 0) {
+            if (snowBro.getNivel() != null && snowBro.getNivel().getMisEstructuras() != null && velocidadVerticalTotal > 0) {
                 int nuevaY = snowBro.getPosY() + velocidadVertical;
                 int posYActual = snowBro.getPosY();
                 
@@ -161,7 +164,7 @@ public class EstadoMovimietoSnowBro {
                                 int cabezaSnowBro = y + snowBro.getHitbox().getAlto();
                                 int sueloEstructura = estructura.getHitbox().getPosY();
                                 
-                                // Si la cabeza choca con el suelo de la plataforma, detener el movimiento vertical
+                                // Si la cabeza choca con el suelo de la plataforma, detener el movimiento vertical (incluyendo la velocidad de la plataforma)
                                 if (cabezaSnowBro >= sueloEstructura - 5 && cabezaSnowBro <= sueloEstructura + 10) {
                                     snowBro.setPosY(sueloEstructura - snowBro.getHitbox().getAlto());
                                     velocidadVertical = 0;
@@ -173,7 +176,7 @@ public class EstadoMovimietoSnowBro {
                 }
             }
 
-            if (snowBro.getNivel() != null && snowBro.getNivel().getMisEstructuras() != null && velocidadVertical < 0) {
+            if (snowBro.getNivel() != null && snowBro.getNivel().getMisEstructuras() != null && velocidadVerticalTotal < 0) {
                 int nuevaY = snowBro.getPosY() + velocidadVertical;
                 int posYActual = snowBro.getPosY();
                 
@@ -199,7 +202,7 @@ public class EstadoMovimietoSnowBro {
                 }
             }
         
-        snowBro.setPosY(snowBro.getPosY() + velocidadVertical);
+        snowBro.setPosY(snowBro.getPosY() + velocidadVerticalTotal); // Aplicar la velocidad vertical total
 
 
         // if (velocidadHorizontal != 0) {
