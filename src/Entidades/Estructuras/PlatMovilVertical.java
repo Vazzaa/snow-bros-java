@@ -42,15 +42,7 @@ public class PlatMovilVertical extends Plataforma {
     }
 
     public void afectar (Enemigo e) {
-        int pieEnemigo = e.getPosY();
-        int techoPlataforma = this.miHitbox.getPosY() + this.miHitbox.getAlto();
-
-        if (colisionaAABB(this.miHitbox, e.getHitbox()) && Math.abs(pieEnemigo - techoPlataforma) < 5 && !e.esVolador()) {
-            // "Pega" al enemigo a la superficie
-            e.setPosY(techoPlataforma);
-            // Transfiere la velocidad de la plataforma al enemigo
-            e.setVelocidadPlataforma(0, velocidad * direccion);
-        }
+        e.afectar(this);
     }
 
     public void setSkin (Skin s) {

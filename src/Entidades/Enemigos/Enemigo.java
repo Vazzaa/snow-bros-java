@@ -93,8 +93,6 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
 
     public abstract void cambiarEstadoInmediato();
 
-    public abstract boolean esVolador();
-
     public boolean estaVivo() {
         return estaVivo;
     }

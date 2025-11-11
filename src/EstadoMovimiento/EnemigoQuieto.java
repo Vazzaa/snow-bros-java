@@ -4,6 +4,7 @@ import Entidades.Enemigos.Enemigo;
 import Entidades.Estructuras.Estructura;
 import Juego.ColisionManagerEntidades;
 import Juego.Hitbox;
+import Entidades.Estructuras.Plataforma;
 
 public class EnemigoQuieto implements EstadoMovimientoEnemigo {
     private static final int GRAVEDAD = 1;
@@ -30,8 +31,8 @@ public class EnemigoQuieto implements EstadoMovimientoEnemigo {
     
     @Override
     public void moverse(Enemigo enemigo, int velocidad) {
-        if (enemigo.getJuego() != null && enemigo.getJuego().getNivel() != null && 
-            enemigo.getJuego().getNivel().getMisEstructuras() != null && !enemigo.esVolador()) { 
+        if (enemigo.getJuego() != null && enemigo.getJuego().getNivel() != null &&
+            enemigo.getJuego().getNivel().getMisEstructuras() != null) {
 
             if (!colisionManager.estaEnSuelo(enemigo, enemigo.getJuego().getNivel().getMisEstructuras())) {
                 enemigo.setPosY(enemigo.getPosY() - GRAVEDAD);
@@ -85,4 +86,19 @@ public class EnemigoQuieto implements EstadoMovimientoEnemigo {
     public boolean permiteSalto() {
         return false;
     }
+
+    @Override
+    public void afectar(Enemigo enemigo, Plataforma plataforma) {
+        int pieEnemigo = enemigo.getPosY();
+        int techoPlataforma = plataforma.getHitbox().getPosY() + plataforma.getHitbox().getAlto();
+
+        // Si el enemigo está encima de la plataforma (con una pequeña tolerancia)
+        if (colisionManager.colisionaAABB(enemigo.getHitbox(), plataforma.getHitbox()) && Math.abs(pieEnemigo - techoPlataforma) < 5) {
+            // "Pega" al enemigo a la superficie para que no la atraviese por la gravedad
+            enemigo.setPosY(techoPlataforma);
+            // Transfiere la velocidad de arrastre de la plataforma al enemigo
+            enemigo.setVelocidadPlataforma(plataforma.getVelocidadDeArrastreX(), plataforma.getVelocidadDeArrastreY());
+        }
+    }
+
 }

@@ -213,11 +213,6 @@ public class Calabaza extends Enemigo{
         }
     }
 
-
-    public boolean esVolador() {
-        return true;
-    }
-
     @Override
     public boolean esInmortal() {
         return true;

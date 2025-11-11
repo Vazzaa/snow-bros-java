@@ -259,10 +259,6 @@ public class DemonioRojo extends Enemigo {
         }
     }
 
-    public boolean esVolador() {
-        return false;
-    }
-    @Override
     public void recibirDisparo() {
         if (estadoNieve >= ESTADO_NIEVE_COMPLETO) {
             return;

@@ -1,6 +1,7 @@
 package EstadoMovimiento;
 
 import Entidades.Enemigos.Enemigo;
+import Entidades.Estructuras.Plataforma;
 import Entidades.Estructuras.Estructura;
 import Juego.ColisionManagerEntidades;
 import Juego.Hitbox;
@@ -107,5 +108,16 @@ public class EnemigoCaminandoDerecha implements EstadoMovimientoEnemigo {
 
     public boolean permiteSalto() {
         return true;
+    }
+
+    @Override
+    public void afectar(Enemigo enemigo, Plataforma plataforma) {
+        int pieEnemigo = enemigo.getPosY();
+        int techoPlataforma = plataforma.getHitbox().getPosY() + plataforma.getHitbox().getAlto();
+
+        if (colisionManager.colisionaAABB(enemigo.getHitbox(), plataforma.getHitbox()) && Math.abs(pieEnemigo - techoPlataforma) < 5) {
+            enemigo.setPosY(techoPlataforma); // Ajusta la posición Y del enemigo
+            enemigo.setVelocidadPlataforma(plataforma.getVelocidadDeArrastreX(), plataforma.getVelocidadDeArrastreY());
+        }
     }
 }

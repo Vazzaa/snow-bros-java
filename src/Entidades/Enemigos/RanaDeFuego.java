@@ -392,10 +392,6 @@ public class RanaDeFuego extends Enemigo {
         }
     }
 
-    public boolean esVolador() {
-        return false;
-    }
-
     @Override
     public void moverHorizontalmente(int i) {
         setPosX(getPosX() + i);
