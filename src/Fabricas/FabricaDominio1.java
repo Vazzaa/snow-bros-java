@@ -77,13 +77,13 @@ public class FabricaDominio1 extends FabricaSkin {
 
     public Skin crearSkinPincho(){
         Map<Integer,String> mapeo = new HashMap<>();
-        mapeo.put(1, rutaCarpetaImagenes + "pincho.gif");
+        mapeo.put(1, rutaCarpetaImagenes + "Pincho.gif");
         return new Skin(mapeo, 1);
     }
 
     public Skin crearSkinEscalera(){
         Map<Integer,String> mapeo = new HashMap<>();
-        mapeo.put(1, rutaCarpetaImagenes + "escalera.gif");
+        mapeo.put(1, rutaCarpetaImagenes + "Escalera.gif");
         return new Skin(mapeo, 1);
     }
 
