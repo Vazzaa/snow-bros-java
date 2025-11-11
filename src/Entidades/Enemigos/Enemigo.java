@@ -7,6 +7,7 @@ import Juego.ModoDeJuego;
 import Entidades.SnowBro.SnowBro;
 import Visitors.Colisionable;
 import Visitors.Colisionador;
+import Entidades.Estructuras.Plataforma;
 
 public abstract class Enemigo extends Entidad implements Colisionable, Movible, Colisionador{
 
@@ -22,7 +23,8 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
     protected Skin skinOriginal;
     protected int velocidadDeslizamiento = 0; 
     protected boolean siendoEmpujado = false;  
-    
+    protected int velocidadPlataformaX = 0;
+    protected int velocidadPlataformaY = 0;
     
     
     public Enemigo(Skin skins, ModoDeJuego juego , int posX, int posY, int v, int p) {
@@ -92,8 +94,6 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
 
     public abstract void cambiarEstadoInmediato();
 
-    public abstract boolean esVolador();
-
     public boolean estaVivo() {
         return estaVivo;
     }
@@ -117,13 +117,37 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
         this.detenidoGlobalmente = false;
     }
 
-    public boolean esInmortal() {
-        return false;
-    }
-
 	public abstract void moverHorizontalmente(int i);
 
-    public abstract void moverVerticalmente(int i);
+	public abstract void moverVerticalmente(int i);
+
+    public void resetVelocidadPlataforma() {
+        this.velocidadPlataformaX = 0;
+        this.velocidadPlataformaY = 0;
+    }
+
+    public void setVelocidadPlataforma(int velX, int velY) {
+        this.velocidadPlataformaX = velX;
+        this.velocidadPlataformaY = velY;
+    }
+
+    public int getVelocidadPlataformaX() {
+        return velocidadPlataformaX;
+    }
+
+    public int getVelocidadPlataformaY() {
+        return velocidadPlataformaY;
+    }
+
+    public boolean estaEnPlataformaMovil() {
+        return velocidadPlataformaX != 0 || velocidadPlataformaY != 0;
+    }
+
+    public void afectar(Plataforma p) {
+        if (estadoMovimiento != null) {
+            estadoMovimiento.afectar(this, p);
+        }
+    }
 
 
 } 

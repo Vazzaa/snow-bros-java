@@ -37,6 +37,9 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     private long tiempoFinalBoostRojo=0;
     private long tiempoFinAnimacionDisparo = 0;
     private boolean estaResbalando = false;
+    private boolean enContactoConEscalera = false;
+    private int velocidadPlataformaX = 0;
+    private int velocidadPlataformaY = 0;
     private static final long DURACION_ANIMACION_DISPARO_MS = 300; 
     
     //Constructor
@@ -50,6 +53,16 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         estadoMovimiento = new EstadoMovimietoSnowBro(this);
         nivel = nivelPerteneciente;
         this.crearNieve = crearNieve;
+    }
+
+    public void resetVelocidadPlataforma() {
+        this.velocidadPlataformaX = 0;
+        this.velocidadPlataformaY = 0;
+    }
+
+    public void setVelocidadPlataforma(int velX, int velY) {
+        this.velocidadPlataformaX = velX;
+        this.velocidadPlataformaY = velY;
     }
 
     //Comandos
@@ -95,6 +108,10 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     
     public void setVelocidad(int v){
         velocidad = v;
+    }
+    
+    public void setEnContactoConEscalera(boolean enContacto) {
+        this.enContactoConEscalera = enContacto;
     }
     
     public void disparar() {
@@ -351,15 +368,7 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         return dañoProyectil;
     }
     public boolean estaEnEscalera() {
-        if (nivel == null || nivel.getMisEstructuras() == null) {
-            return false;
-        }
-        for (Estructura estructura : nivel.getMisEstructuras()) {
-            if (estructura.esEscalera() && colisionaAABB(this.miHitbox, estructura.getHitbox())) {
-                return true;
-            }
-        }
-        return false;
+        return enContactoConEscalera;
     }
     
 
@@ -368,12 +377,14 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     }
 
 	public void moverHorizontalmente(int deltaX) {
-		setPosX(getPosX() + deltaX);
+        // Este método ahora es solo para movimientos que no son de plataforma.
+		// setPosX(getPosX() + deltaX);
         notificarObserver();
 	}
 
     public void moverVerticalmente(int deltaY) {
-        setPosY(getPosY() + deltaY);
+        // Este método ahora es solo para movimientos que no son de plataforma.
+        // setPosY(getPosY() + deltaY);
         notificarObserver();
     }
 
@@ -385,4 +396,25 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         return estaResbalando;
     }
     
+    // Nuevo método para resetear estados temporales al inicio de cada fotograma
+    public void resetTemporaryStates() {
+        this.enContactoConEscalera = false;
+        this.estaResbalando = false;
+    }
+
+    public int getVelocidadPlataformaX() {
+        return velocidadPlataformaX;
+    }
+
+    public int getVelocidadPlataformaY() {
+        return velocidadPlataformaY;
+    }
+
+    public boolean estaEnPlataformaMovil() {
+        return velocidadPlataformaX != 0 || velocidadPlataformaY != 0;
+    }
+
+    public void setVelocidadPlataformaX(int velocidadPlataformaX) {
+        this.velocidadPlataformaX = velocidadPlataformaX;
+    }
 }

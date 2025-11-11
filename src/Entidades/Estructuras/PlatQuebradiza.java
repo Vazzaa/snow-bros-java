@@ -6,22 +6,27 @@ import Fabricas.Skin;
 import Juego.ModoDeJuego;
 import Visitors.Colisionador;
 
-public class PlatQuebradiza extends Plataforma implements Destructible{
+public class PlatQuebradiza extends Plataforma implements Destructible {
 
     protected int puntaje;
     protected int Vida;
+    private long tiempoParaRomperse = 0;
+    private static final long DURACION_ANTES_DE_ROMPERSE = 1000;
 
     public PlatQuebradiza(Skin s,ModoDeJuego juego ,int x, int y) {
         super(s, juego, x, y);
         miHitbox.setAncho(12);
         miHitbox.setAlto(32);
         esPlataformaSuelo = false;
-        puntaje = 300;
+        puntaje = 150; 
         Vida = 1;
     }
 
     public void afectar(SnowBro s) {
-        s.sumarPuntaje(puntaje);
+        if (tiempoParaRomperse == 0) { 
+            tiempoParaRomperse = System.currentTimeMillis() + DURACION_ANTES_DE_ROMPERSE;
+            s.sumarPuntaje(puntaje);
+        }
     }
 
     public void afectar (Enemigo e) {
@@ -34,10 +39,6 @@ public class PlatQuebradiza extends Plataforma implements Destructible{
             int pieProyectil = miHitbox.getPosY();
             int techoPlataforma = this.miHitbox.getPosY() + this.miHitbox.getAlto();
             if (pieProyectil <= techoPlataforma + 5) {
-                Vida -= 1;
-                if (Vida <= 0) {
-                    this.destruir();
-                }
                 p.eliminar();
             }
         }  
@@ -58,5 +59,22 @@ public class PlatQuebradiza extends Plataforma implements Destructible{
     public void destruir() {
         this.miJuego.getNivel().eliminarEstructura(this);
         miJuego.getControladoraGrafica().sacarEntidad(this);
+    }
+
+    @Override
+    public void actualizar() {
+        if (tiempoParaRomperse > 0 && System.currentTimeMillis() >= tiempoParaRomperse) {
+            this.destruir();
+        }
+    }
+
+    @Override
+    public int getVelocidadDeArrastreX() {
+        return 0; // Plataforma quebradiza no arrastra horizontalmente
+    }
+
+    @Override
+    public int getVelocidadDeArrastreY() {
+        return 0; // Plataforma quebradiza no arrastra verticalmente
     }
 }

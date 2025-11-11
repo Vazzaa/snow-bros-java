@@ -6,7 +6,6 @@ import Entidades.Jugador.Jugador;
 import Entidades.PowerUp.*;
 import Entidades.Proyectiles.*;
 import Entidades.SnowBro.SnowBro;
-import Entidades.Proyectiles.ProyectilBomba;
 import Juego.ModoDeJuego;
 
 public class FabricaEntidades {
@@ -92,7 +91,8 @@ public class FabricaEntidades {
         } else {
             pared = new Pared(this.fabricaSkin.crearSkinParedIzquierda(), miJuego, x, y);
         }
-        pared.getSkin().setEstadoActual(numeroNivel);
+        int estadoSkin = ((numeroNivel - 1) / 3) + 1;
+        pared.getSkin().setEstadoActual(estadoSkin);
         return pared;
     }
 
@@ -104,19 +104,27 @@ public class FabricaEntidades {
         return new PlatQuebradiza(this.fabricaSkin.crearSkinPlatQuebradiza(), miJuego, x, y);
     }
 
-    public PlatMovilHorizontal getPlatMovil(int x, int y) {
-        return new PlatMovilHorizontal(this.fabricaSkin.crearSkinPlatMovil(), miJuego, x, y);
+public Estructura getPlatMovil(int x, int y) {
+    if (y % 2 == 0) { // Si 'y' es par, crea una horizontal
+        return new PlatMovilHorizontal(fabricaSkin.crearSkinPlatMovil(), miJuego, x, y);
+    } 
+    else {
+        return new PlatMovilVertical(fabricaSkin.crearSkinPlatMovil(), miJuego, x, y);
     }
+}
+
 
     public Plataforma getPlataforma(int x, int y, int numeroNivel) {
         Plataforma plataforma = new Plataforma(this.fabricaSkin.crearSkinPlataforma(), miJuego, x, y);
-        plataforma.getSkin().setEstadoActual(numeroNivel);
+        int estadoSkin = ((numeroNivel - 1) / 3) + 1;
+        plataforma.getSkin().setEstadoActual(estadoSkin);
         return plataforma;
     }
 
     public Plataforma getPlataformaSuelo(int x, int y, int numeroNivel) {
         Plataforma platSuelo = new Plataforma(this.fabricaSkin.crearSkinPlataforma(), miJuego, x, y, true);
-        platSuelo.getSkin().setEstadoActual(numeroNivel);
+        int estadoSkin = ((numeroNivel - 1) / 3) + 1;
+        platSuelo.getSkin().setEstadoActual(estadoSkin);
         return platSuelo;
     }
 

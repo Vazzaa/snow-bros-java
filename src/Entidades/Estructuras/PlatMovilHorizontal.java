@@ -6,7 +6,7 @@ import Fabricas.Skin;
 import Juego.ModoDeJuego;
 
 
-public class PlatMovilHorizontal extends Plataforma implements Movible{
+public class PlatMovilHorizontal extends Plataforma {
 
     private int velocidad;
     private int direccion;
@@ -24,21 +24,26 @@ public class PlatMovilHorizontal extends Plataforma implements Movible{
     }
 
     public void afectar(SnowBro s) {
-        boolean colisiona = this.colisionaAABB(this.miHitbox, s.getHitbox());
-        if (s.getEstadoMovimiento().enElSuelo() && colisiona) {
-            s.moverHorizontalmente(velocidad * direccion);
-        }
+        int pieSnowBro = s.getPosY();
+        int techoPlataforma = this.miHitbox.getPosY() + this.miHitbox.getAlto();
+
+        // Si el jugador está encima de la plataforma (con una pequeña tolerancia)
+        if (colisionaAABB(this.miHitbox, s.getHitbox()) && Math.abs(pieSnowBro - techoPlataforma) < 5) {
+            // "Pega" al jugador a la superficie para que no la atraviese por la gravedad
+            s.setPosY(techoPlataforma);
+            // Transfiere la velocidad de la plataforma al jugador
+            s.setVelocidadPlataformaX(velocidad * direccion);
+            s.getEstadoMovimiento().enElSuelo = true; // Forzamos el estado a "enElSuelo"
+        } 
         if (!puntajeOtorgado) {
             s.sumarPuntaje(300);
             puntajeOtorgado = true;
         }
+        s.setEnContactoConEscalera(false);
     }
 
     public void afectar (Enemigo e) {
-        boolean colisiona = this.colisionaAABB(this.miHitbox, e.getHitbox());
-        if (colisiona && !e.esVolador()) { 
-            e.moverHorizontalmente(velocidad * direccion);
-        }
+        e.afectar(this);
     }
 
     public void setSkin (Skin s) {
@@ -46,16 +51,21 @@ public class PlatMovilHorizontal extends Plataforma implements Movible{
     }
 
     @Override
-    public void moverse() {
+    public void mover() {
         miHitbox.setPosX(miHitbox.getPosX() + velocidad * direccion);
         if (miHitbox.getPosX() >= posicionInicialX + rangoMovimiento || miHitbox.getPosX() <= posicionInicialX - rangoMovimiento) {
             direccion *= -1;
         }
         notificarObserver();
     }
-    
+
     @Override
-    public boolean esMovible() {
-        return true;
+    public int getVelocidadDeArrastreX() {
+        return velocidad * direccion;
+    }
+
+    @Override
+    public int getVelocidadDeArrastreY() {
+        return 0;
     }
 }

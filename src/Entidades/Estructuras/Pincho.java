@@ -23,6 +23,7 @@ public class Pincho extends Obstaculo{
         if (s.getVida() <= 0) {
             s.morir();
         }
+        s.setEnContactoConEscalera(false);
         }
 
     public void afectar (Enemigo e) {
@@ -53,23 +54,13 @@ public class Pincho extends Obstaculo{
         return misAspectos;
     }
 
-    public boolean esColisionable() {
-        return true;
-    }
-
-    @Override
-    public boolean esSuelo() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'esSuelo'");
-    }
-
     @Override
     public boolean bloquearMovimientoHorizontal() {
         return false; 
     }
 
     @Override
-    public boolean esMovible() {
+    public boolean esSueloSolido() {
         return false;
     }
 }

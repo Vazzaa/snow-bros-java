@@ -1,6 +1,7 @@
 package EstadoMovimiento;
 
 import Entidades.Enemigos.Enemigo;
+import Entidades.Estructuras.Plataforma;
 import Juego.ColisionManagerEntidades;
 
 public interface EstadoMovimientoEnemigo {
@@ -10,4 +11,7 @@ public interface EstadoMovimientoEnemigo {
     public boolean permiteMovimiento();
     public EstadoMovimientoEnemigo getEstadoAnterior();
     public boolean permiteSalto();
+
+    default void afectar(Enemigo enemigo, Plataforma plataforma) {
+    }
 }

@@ -271,10 +271,6 @@ public class TrollAmarillo extends Enemigo{
         }
     }
 
-    public boolean esVolador() {
-        return false;
-    }
-
     private void verificarDerretimiento() {
         if (estadoNieve <= ESTADO_INICIAL || tiempoFinCongelado == 0 || System.currentTimeMillis() < tiempoFinCongelado) {
             return;

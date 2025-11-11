@@ -4,6 +4,7 @@ import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
 import Visitors.Colisionador;
 import Juego.ModoDeJuego;
+import Entidades.Proyectiles.BolaDeNieve;
 import Entidades.Proyectiles.Proyectil;
 
 public class Plataforma extends Estructura{
@@ -25,11 +26,14 @@ public class Plataforma extends Estructura{
     }
 
     public void afectar(SnowBro s) {
-
+        s.setEstaResbalando(false);
+        s.setEnContactoConEscalera(false);
     }
 
     public void afectar (Enemigo e) {
-
+        if (e != null) {
+            e.afectar(this);
+        }
     }
 
     public void afectar(Proyectil p) {
@@ -42,6 +46,9 @@ public class Plataforma extends Estructura{
                 p.eliminar();
             }
         }  
+    }
+    public void afectar(BolaDeNieve b) {
+        //No hace nada
     }
 
     public void setSkin (Skin s) {
@@ -61,12 +68,16 @@ public class Plataforma extends Estructura{
         return false;
     }
 
-    public boolean esSuelo() {
-        return esPlataformaSuelo;
+    @Override
+    public boolean esSueloSolido() {
+        return true;
     }
 
-    @Override
-    public boolean esMovible() {
-        return false;
+    public int getVelocidadDeArrastreX() {
+        return 0;
+    }
+
+    public int getVelocidadDeArrastreY() {
+        return 0;
     }
 }
