@@ -29,7 +29,7 @@ public class HiloEntidades  extends Thread {
             juego.limpiarEnemigosCaidosDelMapa();
             juego.actualizarAparicionCalabaza();
             juego.actualizarAparicionVida();
-
+            juego.actualizarEstructuras();
             if(juego.getJuego() != null) {
                 juego.getJuego().verificarNivelCompletado();
             }

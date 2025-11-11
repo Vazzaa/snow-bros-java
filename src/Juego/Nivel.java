@@ -203,6 +203,12 @@ public class Nivel {
         }
     }
 
+    public void actualizarEstructuras() {
+        for (Estructura est : misEstructuras) {
+            est.actualizar();
+        }
+    }
+
 
     public void moverProyectiles() {
         if (misProyectiles == null) return;
