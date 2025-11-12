@@ -118,6 +118,7 @@ public class Nivel {
     public void verificarColisiones() {
         try {
             if (snowBro != null) {
+                snowBro.resetTemporaryStates();
                 snowBro.resetVelocidadPlataforma();
             }
             if (misEnemigos != null) {

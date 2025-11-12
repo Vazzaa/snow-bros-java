@@ -44,42 +44,50 @@ public class EstadoMovimietoSnowBro {
         boolean subirEscalera = ConstantesTeclado.estaPresionada(ConstantesTeclado.SUBIR_ESCALERA);
         boolean bajarEscalera = ConstantesTeclado.estaPresionada(ConstantesTeclado.BAJAR_ESCALERA);
 
-    // 1. Handle horizontal movement input
-    if (derecha) {
-        moverDerecha();
-    } else if (izquierda) {
-        moverIzquierda();
-    } else {
-        if (snowBro.estaResbalando()) { // Apply friction if resbalando
-            velocidadHorizontal *= 0.97;
-            if (Math.abs(velocidadHorizontal) < 0.5) {
-                velocidadHorizontal = 0;
+        if (derecha) {
+            moverDerecha();
+        } else if (izquierda) {
+            moverIzquierda();
+        } else {
+            if (snowBro.estaResbalando()) { 
+                velocidadHorizontal *= 0.97;
+                if (Math.abs(velocidadHorizontal) < 0.5) {
+                    velocidadHorizontal = 0;
+                }
+            } else {
+                detenerMovimientoHorizontal();
+            }
+        }
+
+        boolean estabaEnEscalera = snowBro.estaEnEscalera();
+        modoEscalera = false; 
+        
+        if (snowBro.estaEnEscalera()) { // If currently colliding with a ladder
+            if (subirEscalera) {
+                modoEscalera = true;
+                velocidadVertical = 3;
+            } else if (bajarEscalera) {
+                modoEscalera = true;
+                velocidadVertical = -3;
+            } else {
+                velocidadVertical = 0; // Stop vertical movement if on ladder but no input
             }
         } else {
-            detenerMovimientoHorizontal(); // Stop immediately if not resbalando
+            // Si el jugador estaba en escalera pero ya no lo está, resetear velocidad vertical
+            if (estabaEnEscalera && !snowBro.estaEnEscalera()) {
+                velocidadVertical = 0;
+            }
+            
+            if (salto && enElSuelo() && snowBro.puedeSaltar()) { // Only jump if not on ladder and on solid ground and can jump
+                saltar();
+                // Resetear estado de resbalando al saltar
+                snowBro.setEstaResbalando(false);
+            }
         }
-    }
-
-    // 2. Handle vertical movement input (ladder vs. jump)
-    // Reset modoEscalera at the start of vertical logic for this frame
-    modoEscalera = false; 
-    if (snowBro.estaEnEscalera()) { // If currently colliding with a ladder
-        if (subirEscalera) {
-            modoEscalera = true;
-            velocidadVertical = 3;
-        } else if (bajarEscalera) {
-            modoEscalera = true;
-            velocidadVertical = -3;
-        } else {
-            velocidadVertical = 0; // Stop vertical movement if on ladder but no input
-        }
-    } else if (salto && enElSuelo() && snowBro.puedeSaltar()) { // Only jump if not on ladder and on solid ground and can jump
-        saltar();
-    }
-    // If not on ladder, not jumping, gravity will be applied in actualizar()
-
-    // 3. Apply physics and update position
-    actualizar();
+        // If not on ladder, not jumping, gravity will be applied in actualizar()
+    
+        // 3. Apply physics and update position
+        actualizar();
     }
         protected void moverDerecha() {
             int velocidadBase = snowBro.getVelocidad();
@@ -126,25 +134,32 @@ public class EstadoMovimietoSnowBro {
         // Sincronizar enElSuelo con la realidad ANTES de aplicar física
         // Si el jugador tiene velocidad de plataforma vertical, verificar si realmente está en suelo
         boolean realmenteEnSuelo = enElSuelo();
-        if (snowBro.getVelocidadPlataformaY() != 0) {
-            // Si tiene velocidad de plataforma vertical, verificar si realmente está en contacto
-            if (!realmenteEnSuelo && enElSuelo) {
-                // El jugador pensaba que estaba en suelo pero no lo está
-                enElSuelo = false;
-            } else if (realmenteEnSuelo && !enElSuelo) {
-                // El jugador está en suelo pero la variable no lo refleja
-                enElSuelo = true;
-            }
-        } else {
-            // Si no tiene velocidad de plataforma, sincronizar normalmente
-            if (!realmenteEnSuelo && enElSuelo) {
-                enElSuelo = false;
-            }
+    if (snowBro.getVelocidadPlataformaY() != 0) {
+        // Si tiene velocidad de plataforma vertical, verificar si realmente está en contacto
+        if (!realmenteEnSuelo && enElSuelo) {
+            // El jugador pensaba que estaba en suelo pero no lo está
+            enElSuelo = false;
+        } else if (realmenteEnSuelo && !enElSuelo) {
+            // El jugador está en suelo pero la variable no lo refleja
+            enElSuelo = true;
         }
-        
-        if (!modoEscalera && !enElSuelo()) { // Apply gravity if not climbing and not on solid ground
-            velocidadVertical -= gravedad;
+    } else {
+        // Si no tiene velocidad de plataforma, sincronizar normalmente
+        if (!realmenteEnSuelo && enElSuelo) {
+            enElSuelo = false;
         }
+    }
+    
+    // Si el jugador se movió horizontalmente y ya no está en escalera, resetear velocidad vertical
+    if (!snowBro.estaEnEscalera() && modoEscalera) {
+        // El jugador se movió fuera de la escalera, resetear velocidad vertical
+        velocidadVertical = 0;
+        modoEscalera = false;
+    }
+    
+    if (!modoEscalera && !enElSuelo()) { // Apply gravity if not climbing and not on solid ground
+        velocidadVertical -= gravedad;
+    }
 
     int velocidadHorizontalTotal = velocidadHorizontal + snowBro.getVelocidadPlataformaX();
     int velocidadVerticalTotal = velocidadVertical + snowBro.getVelocidadPlataformaY();
