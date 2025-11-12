@@ -11,6 +11,8 @@ public class EnemigoVoladorDiagonal implements EstadoMovimientoEnemigo {
     private int dirY;
     private long lastChangeTime;
     private static final long CHANGE_INTERVAL = 1000;
+    private static final int TECHO_MUNDO= 8100;
+    public static final int PISO_MUNDO= 7600;
 
     public EnemigoVoladorDiagonal() {
         colisionManager = new ColisionManagerEntidades();
@@ -43,6 +45,7 @@ public class EnemigoVoladorDiagonal implements EstadoMovimientoEnemigo {
     public void moverse(Enemigo enemigo, int velocidad) {
         if (enemigo.getJuego() == null || enemigo.getJuego().getNivel() == null || 
             enemigo.getJuego().getNivel().getMisEstructuras() == null) {
+
             int nuevaX = enemigo.getPosX() + (dirX * velocidad);
             int nuevaY = enemigo.getPosY() + (dirY * velocidad);
             enemigo.setPosX(nuevaX);
@@ -59,29 +62,56 @@ public class EnemigoVoladorDiagonal implements EstadoMovimientoEnemigo {
         int nuevaX = enemigo.getPosX() + (dirX * velocidad);
         int nuevaY = enemigo.getPosY() + (dirY * velocidad);
 
-        boolean colisionariaPared = false;
+        boolean colisionariaHorizontal = false;
+        boolean colisionariaVertical = false;
+
+        Hitbox hitboxFuturaY = new Hitbox(
+            enemigo.getHitbox().getAncho(),
+            enemigo.getHitbox().getAlto(),
+            enemigo.getPosX(),
+            nuevaY
+        );
+
+        Hitbox hitboxFuturaX = new Hitbox(
+            enemigo.getHitbox().getAncho(),
+            enemigo.getHitbox().getAlto(),
+            nuevaX,
+            enemigo.getPosY() 
+        );
+
         for (Estructura estructura : enemigo.getJuego().getNivel().getMisEstructuras()) {
+            
             if (estructura.bloquearMovimientoHorizontal()) {
-                Hitbox hitboxFutura = new Hitbox(
-                    enemigo.getHitbox().getAncho(),
-                    enemigo.getHitbox().getAlto(),
-                    nuevaX,
-                    enemigo.getPosY()
-                );
-                if (colisionManager.colisionaAABB(hitboxFutura, estructura.getHitbox())) {
-                    colisionariaPared = true;
+                if (colisionManager.colisionaAABB(hitboxFuturaX, estructura.getHitbox())) {
+                    colisionariaHorizontal = true;
                     dirX *= -1;
-                    nuevaX = enemigo.getPosX();
-                    break;
+                    nuevaX = enemigo.getPosX(); 
                 }
             }
-        }
 
-        // Aplicar movimiento
-        if (!colisionariaPared) {
+            if (colisionManager.colisionaAABB(hitboxFuturaY, estructura.getHitbox())) {
+                
+                if (dirY > 0 && nuevaY > TECHO_MUNDO) {
+                    colisionariaVertical = true;
+                    dirY *= -1;
+                    nuevaY = enemigo.getPosY();
+                }
+
+                else if (dirY < 0 && nuevaY < PISO_MUNDO) {
+                    colisionariaVertical = true;
+                    dirY *= -1; 
+                    nuevaY = enemigo.getPosY(); 
+                }
+            }
+        } 
+
+        if (!colisionariaHorizontal) {
             enemigo.setPosX(nuevaX);
         }
-        enemigo.setPosY(nuevaY);
+        if (!colisionariaVertical) {
+            enemigo.setPosY(nuevaY);
+        }
+
         enemigo.notificarObserver();
     }
 
