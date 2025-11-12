@@ -34,10 +34,12 @@ public class ColisionManagerEntidades {
         
         for (Estructura estructura : estructuras) {
             if (colisionaAABB(hitboxDeteccion, estructura.miHitbox)) {
-                int pieEntidad = hitboxEntidad.getPosY();
-                int techoEstructura = estructura.miHitbox.getPosY() + estructura.miHitbox.getAlto();
-                if (Math.abs(pieEntidad - techoEstructura) <= TOLERANCIA_SUELO) {
-                    return true;
+                if (estructura.esSueloSolido()) {
+                    int pieEntidad = hitboxEntidad.getPosY();
+                    int techoEstructura = estructura.miHitbox.getPosY() + estructura.miHitbox.getAlto();
+                    if (Math.abs(pieEntidad - techoEstructura) <= TOLERANCIA_SUELO) {
+                        return true;
+                    }
                 }
             }
         }
@@ -52,6 +54,11 @@ public class ColisionManagerEntidades {
         int distanciaMinima = Integer.MAX_VALUE;
         
         for (Estructura estructura : estructuras) {
+            // Solo considerar estructuras que sean suelo sólido (excluir escaleras)
+            if (!estructura.esSueloSolido()) {
+                continue;
+            }
+            
             Hitbox hitboxEstructura = estructura.miHitbox;
             
             int pieEntidad = hitboxEntidad.getPosY();

@@ -149,12 +149,43 @@ public class TrollAmarillo extends Enemigo{
                 }
             }
         }
-        if (!colisionManager.estaEnSuelo(this, getJuego().getNivel().getMisEstructuras())) {
+        setPosX(nuevaX);
+        
+        // Verificar si hay una plataforma sólida directamente debajo en la nueva posición
+        boolean hayPlataformaDebajo = false;
+        Hitbox hitboxActual = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), getPosX(), getPosY());
+        Hitbox hitboxDeteccion = new Hitbox(
+            hitboxActual.getAncho(),
+            hitboxActual.getAlto() + 5, // TOLERANCIA_SUELO
+            hitboxActual.getPosX(),
+            hitboxActual.getPosY() - 5
+        );
+        
+        for (Estructura estructura : getJuego().getNivel().getMisEstructuras()) {
+            if (colisionManager.colisionaAABB(hitboxDeteccion, estructura.getHitbox())) {
+                if (estructura.esSueloSolido()) {
+                    int pieEntidad = hitboxActual.getPosY();
+                    int techoEstructura = estructura.getHitbox().getPosY() + estructura.getHitbox().getAlto();
+                    if (Math.abs(pieEntidad - techoEstructura) <= 5) {
+                        hayPlataformaDebajo = true;
+                        // Ajustar posición Y para mantenerla pegada a la plataforma
+                        setPosY(techoEstructura);
+                        break;
+                    }
+                }
+            }
+        }
+        
+        if (!hayPlataformaDebajo) {
+            // No hay plataforma sólida debajo, aplicar gravedad
             velocidadVerticalDeslizamiento -= gravedadDeslizamiento;
             int nuevaY = getPosY() + velocidadVerticalDeslizamiento;
             boolean colisionaVertical = false;
             for (Estructura estructura : getJuego().getNivel().getMisEstructuras()) {
-                Hitbox hitboxFutura = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), nuevaX, nuevaY);
+                if (!estructura.esSueloSolido()) {
+                    continue;
+                }
+                Hitbox hitboxFutura = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), getPosX(), nuevaY);
                 if (colisionaAABB(hitboxFutura, estructura.getHitbox())) {
                     int techoEstructura = estructura.getHitbox().getPosY() + estructura.getHitbox().getAlto();
                     int pieEnemigo = nuevaY;
@@ -166,18 +197,13 @@ public class TrollAmarillo extends Enemigo{
                     }
                 }
             }
+            
             if (!colisionaVertical) {
                 setPosY(nuevaY);
             }
         } else {
             velocidadVerticalDeslizamiento = 0;
-            Estructura plataformaDebajo = colisionManager.getPlataformaDebajo(this, getJuego().getNivel().getMisEstructuras());
-            if (plataformaDebajo != null) {
-                int techoPlataforma = plataformaDebajo.getHitbox().getPosY() + plataformaDebajo.getHitbox().getAlto();
-                setPosY(techoPlataforma);
-            }
         }
-        setPosX(nuevaX);
         notificarObserver();
     }
 

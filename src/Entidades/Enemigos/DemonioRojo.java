@@ -136,12 +136,40 @@ public class DemonioRojo extends Enemigo {
                 }
             }
         }
-        if (!colisionManager.estaEnSuelo(this, getJuego().getNivel().getMisEstructuras())) {
+        setPosX(nuevaX);
+        
+        boolean hayPlataformaDebajo = false;
+        Hitbox hitboxActual = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), getPosX(), getPosY());
+        Hitbox hitboxDeteccion = new Hitbox(
+            hitboxActual.getAncho(),
+            hitboxActual.getAlto() + 5, 
+            hitboxActual.getPosX(),
+            hitboxActual.getPosY() - 5
+        );
+        
+        for (Estructura estructura : getJuego().getNivel().getMisEstructuras()) {
+            if (colisionManager.colisionaAABB(hitboxDeteccion, estructura.getHitbox())) {
+                if (estructura.esSueloSolido()) {
+                    int pieEntidad = hitboxActual.getPosY();
+                    int techoEstructura = estructura.getHitbox().getPosY() + estructura.getHitbox().getAlto();
+                    if (Math.abs(pieEntidad - techoEstructura) <= 5) {
+                        hayPlataformaDebajo = true;
+                        setPosY(techoEstructura);
+                        break;
+                    }
+                }
+            }
+        }
+        
+        if (!hayPlataformaDebajo) {
             velocidadVerticalDeslizamiento -= gravedadDeslizamiento;
             int nuevaY = getPosY() + velocidadVerticalDeslizamiento;
             boolean colisionaVertical = false;
             for (Estructura estructura : getJuego().getNivel().getMisEstructuras()) {
-                Hitbox hitboxFutura = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), nuevaX, nuevaY);
+                if (!estructura.esSueloSolido()) {
+                    continue;
+                }
+                Hitbox hitboxFutura = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), getPosX(), nuevaY);
                 if (colisionaAABB(hitboxFutura, estructura.getHitbox())) {
                     int techoEstructura = estructura.getHitbox().getPosY() + estructura.getHitbox().getAlto();
                     int pieEnemigo = nuevaY;
@@ -159,13 +187,7 @@ public class DemonioRojo extends Enemigo {
             }
         } else {
             velocidadVerticalDeslizamiento = 0;
-            Estructura plataformaDebajo = colisionManager.getPlataformaDebajo(this, getJuego().getNivel().getMisEstructuras());
-            if (plataformaDebajo != null) {
-                int techoPlataforma = plataformaDebajo.getHitbox().getPosY() + plataformaDebajo.getHitbox().getAlto();
-                setPosY(techoPlataforma);
-            }
         }
-        setPosX(nuevaX);
         notificarObserver();
     }
 
