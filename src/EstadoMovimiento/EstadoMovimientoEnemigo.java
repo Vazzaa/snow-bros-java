@@ -14,4 +14,12 @@ public interface EstadoMovimientoEnemigo {
 
     default void afectar(Enemigo enemigo, Plataforma plataforma) {
     }
+
+    default EstadoMovimientoEnemigo obtenerSiguienteEstado(Enemigo enemigo) {
+        return null; 
+    }
+    
+    default boolean puedeCambiarEstado(Enemigo enemigo) {
+        return false; 
+    }
 }

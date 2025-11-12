@@ -412,6 +412,7 @@ ENEMIGO:demoniorojo,192,7890
 ENEMIGO:demoniorojo,608,7890
 ENEMIGO:ranadefuego,304,7950
 ENEMIGO:trollamarillo,448,7950
+ENEMIGO:kamakichi,400,7715
 
 # Obstaculos
 PINCHO:150,7880

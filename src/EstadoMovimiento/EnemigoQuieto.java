@@ -101,4 +101,13 @@ public class EnemigoQuieto implements EstadoMovimientoEnemigo {
         }
     }
 
+        @Override
+    public EstadoMovimientoEnemigo obtenerSiguienteEstado(Enemigo enemigo) {
+        return null;
+    }
+
+    @Override
+    public boolean puedeCambiarEstado(Enemigo enemigo) {
+        return colisionManager.estaEnSuelo(enemigo, enemigo.getJuego().getNivel().getMisEstructuras());
+    }
 }
