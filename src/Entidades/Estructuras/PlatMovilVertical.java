@@ -12,6 +12,7 @@ public class PlatMovilVertical extends Plataforma {
     private int rangoMovimiento;
     private int posicionInicialY;
     private boolean puntajeOtorgado;
+    private SnowBro jugadorEncima; // Referencia al jugador que está encima
 
     public PlatMovilVertical(Skin s, ModoDeJuego juego, int x, int y) {
         super(s, juego, x, y);
@@ -20,20 +21,28 @@ public class PlatMovilVertical extends Plataforma {
         direccion = 1; 
         rangoMovimiento = 100; 
         puntajeOtorgado = false;
+        jugadorEncima = null;
     }
 
     public void afectar(SnowBro s) {
         int pieSnowBro = s.getPosY();
         int techoPlataforma = this.miHitbox.getPosY() + this.miHitbox.getAlto();
-
-        // Si el jugador está encima de la plataforma (con una pequeña tolerancia)
-        if (colisionaAABB(this.miHitbox, s.getHitbox()) && Math.abs(pieSnowBro - techoPlataforma) < 5) {
-            // "Pega" al jugador a la superficie para que no la atraviese por la gravedad
+        
+        boolean estaHorizontalmenteSobre = !(s.getPosX() > this.miHitbox.getPosX() + this.miHitbox.getAncho() || s.getPosX() + s.getHitbox().getAncho() < this.miHitbox.getPosX());
+        
+        int distanciaVertical = pieSnowBro - techoPlataforma;
+        
+        if (estaHorizontalmenteSobre && distanciaVertical >= -10 && distanciaVertical <= 5) {
             s.setPosY(techoPlataforma);
-            // Transfiere la velocidad de la plataforma al jugador
-            s.setVelocidadPlataforma(0, velocidad * direccion); // Esto ya era correcto
-            s.getEstadoMovimiento().enElSuelo = true; // Forzamos el estado a "enElSuelo"
-        } 
+            jugadorEncima = s;
+            s.setVelocidadPlataforma(0, velocidad * direccion);
+            s.getEstadoMovimiento().enElSuelo = true;
+        } else {
+            if (jugadorEncima == s) {
+                jugadorEncima = null;
+            }
+        }
+        
         if (!puntajeOtorgado) {
             s.sumarPuntaje(300);
             puntajeOtorgado = true;
@@ -51,7 +60,24 @@ public class PlatMovilVertical extends Plataforma {
 
     @Override
     public void mover() {
+        int posYAnterior = miHitbox.getPosY();
         miHitbox.setPosY(miHitbox.getPosY() + velocidad * direccion);
+        
+        if (jugadorEncima != null) {
+            int deltaY = miHitbox.getPosY() - posYAnterior;
+            int pieSnowBro = jugadorEncima.getPosY();
+            int techoPlataforma = this.miHitbox.getPosY() + this.miHitbox.getAlto();
+            boolean estaHorizontalmenteSobre = !(jugadorEncima.getPosX() > this.miHitbox.getPosX() + this.miHitbox.getAncho() ||
+                                                 jugadorEncima.getPosX() + jugadorEncima.getHitbox().getAncho() < this.miHitbox.getPosX());
+            
+            if (estaHorizontalmenteSobre && Math.abs(pieSnowBro - techoPlataforma) <= 10) {
+                jugadorEncima.setPosY(techoPlataforma);
+                jugadorEncima.setVelocidadPlataforma(0, velocidad * direccion);
+            } else {
+                jugadorEncima = null;
+            }
+        }
+        
         if (miHitbox.getPosY() >= posicionInicialY + rangoMovimiento || miHitbox.getPosY() <= posicionInicialY - rangoMovimiento) {
             direccion *= -1;
         }

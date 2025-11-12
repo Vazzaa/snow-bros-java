@@ -123,9 +123,28 @@ public class EstadoMovimietoSnowBro {
 
     
     public void actualizar() {
-    if (!modoEscalera && !enElSuelo()) { // Apply gravity if not climbing and not on solid ground
-        velocidadVertical -= gravedad;
-    }
+        // Sincronizar enElSuelo con la realidad ANTES de aplicar física
+        // Si el jugador tiene velocidad de plataforma vertical, verificar si realmente está en suelo
+        boolean realmenteEnSuelo = enElSuelo();
+        if (snowBro.getVelocidadPlataformaY() != 0) {
+            // Si tiene velocidad de plataforma vertical, verificar si realmente está en contacto
+            if (!realmenteEnSuelo && enElSuelo) {
+                // El jugador pensaba que estaba en suelo pero no lo está
+                enElSuelo = false;
+            } else if (realmenteEnSuelo && !enElSuelo) {
+                // El jugador está en suelo pero la variable no lo refleja
+                enElSuelo = true;
+            }
+        } else {
+            // Si no tiene velocidad de plataforma, sincronizar normalmente
+            if (!realmenteEnSuelo && enElSuelo) {
+                enElSuelo = false;
+            }
+        }
+        
+        if (!modoEscalera && !enElSuelo()) { // Apply gravity if not climbing and not on solid ground
+            velocidadVertical -= gravedad;
+        }
 
     int velocidadHorizontalTotal = velocidadHorizontal + snowBro.getVelocidadPlataformaX();
     int velocidadVerticalTotal = velocidadVertical + snowBro.getVelocidadPlataformaY();

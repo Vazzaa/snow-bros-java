@@ -130,8 +130,9 @@ public class Nivel {
             }
             if (misPowerUps != null) {
                 for (PowerUp powerUp : misPowerUps) {
-                    if (snowBro != null)
+                    if (snowBro != null && powerUp.estaActivo()) { 
                         snowBro.colisionarPowerUp(powerUp);
+                    }
                 }
             }
             if (misEstructuras != null) {

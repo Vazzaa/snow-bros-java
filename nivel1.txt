@@ -112,7 +112,7 @@ PLATAFORMA:640,7740
 
 # Plataformas de prueba
 PLATMOVIL:200,7700
-PLATMOVIL:600,7751
+PLATMOVIL:600,7951
 
 # Plataformas cuarta fila (y=7800)
 PLATAFORMA:16,7800
@@ -413,6 +413,9 @@ ENEMIGO:demoniorojo,608,7890
 ENEMIGO:ranadefuego,304,7950
 ENEMIGO:trollamarillo,448,7950
 ENEMIGO:kamakichi,400,7715
+
+#Power up prueba
+POWERUP:pocionverde,180,7700
 
 # Obstaculos
 PINCHO:150,7880
