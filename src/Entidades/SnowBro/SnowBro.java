@@ -167,8 +167,8 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         jugador.sumarPuntaje(puntaje);
         System.out.println("SnowBro ha muerto");
         if (miJuego != null && miJuego.getControladoraGrafica() != null) {
-            GestorSonidos.getInstancia().reproducirEfecto("death");
             GestorSonidos.getInstancia().detenerMusica();
+            GestorSonidos.getInstancia().reproducirEfecto("gameover");
             miJuego.getControladoraGrafica().mostrarPantallaGameOver();
             miJuego.reiniciarNivel();
         }
@@ -186,17 +186,17 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     }
     
     public void afectar(Enemigo e) {
-        if (e.estaCompletamenteCongelado()) {
-            return;
-        }
-        vida -= 1;
-        miHitbox.setPosX(10);
-        miHitbox.setPosY(7650);
-        resetVelocidad();
-        resetDañoProyectil();
-        notificarObserver();
-        if (vida <= 0) {
-            morir();
+        if (!e.estaCompletamenteCongelado()) {
+            vida -= 1;
+            miHitbox.setPosX(10);
+            miHitbox.setPosY(7650);
+            resetVelocidad();
+            resetDañoProyectil();
+            notificarObserver();
+            GestorSonidos.getInstancia().reproducirEfecto("death");
+            if (vida <= 0) {
+                morir();
+            }
         }
     }
     
@@ -220,6 +220,7 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         resetVelocidad();
         resetDañoProyectil();
         notificarObserver();
+        GestorSonidos.getInstancia().reproducirEfecto("death");
         if (vida <= 0) {
             morir();
         }
@@ -264,16 +265,14 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
 
     public void colisionarPowerUp(PowerUp p) {
         boolean colisiona = this.colisionaAABB(this.miHitbox, p.getHitbox());
-        if (!colisiona) return;
-        afectar(p);
-        return;
+        if (colisiona)
+            afectar(p);
     }
 
     public void colisionarEnemigo(Enemigo e) {
         boolean colisiona = this.colisionaAABB(this.miHitbox, e.getHitbox());
-        if (!colisiona) return;
-        if (e.estaCompletamenteCongelado()) {
-            if (!e.estaSiendoEmpujado()) {
+        if (colisiona) {
+            if (e.estaCompletamenteCongelado() && !e.estaSiendoEmpujado()) {
                 int direccionEmpuje = 0;
                 if (estadoMovimiento.direccion == 0) { 
                     direccionEmpuje = 5;
@@ -286,41 +285,36 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
                         direccionEmpuje = 5;
                     }
                 }
-                e.setVelocidadDeslizamiento(direccionEmpuje);
+                    e.setVelocidadDeslizamiento(direccionEmpuje);
+            } else {
+                afectar(e);
             }
-            return;
         }
-        afectar(e);
-        return;
     }
     
     public void colisionarEstructura(Estructura e) {
         boolean colisiona = this.colisionaAABB(this.miHitbox, e.getHitbox());
-        if (!colisiona) return;
-        afectar(e);
-        return;
+        if (colisiona)
+            afectar(e);
     }
 
     public void colisionarObstaculo(Obstaculo o) {
         boolean colisiona = this.colisionaAABB(this.miHitbox, o.getHitbox());
-        if (!colisiona) return;
-        afectar(o);
-        return;
+        if (colisiona)
+            afectar(o);
     }
 
     @Override
     public void colisionarProyectil(Proyectil p) {
         boolean colisiona = this.colisionaAABB(this.miHitbox, p.getHitbox());
-        if (!colisiona) return;
-        afectar(p);
-        return;
+        if (colisiona)
+            afectar(p);
     }
 
     public void colisionarBolaDeNieve(BolaDeNieve b) {
         boolean colisiona = this.colisionaAABB(this.miHitbox, b.getHitbox());
-        if (!colisiona) return;
-        b.afectar(this);
-        return;
+        if (colisiona)
+            b.afectar(this);
     }
 
     public void resetVelocidad() {

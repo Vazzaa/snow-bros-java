@@ -3,6 +3,7 @@ import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
+import Sonidos.GestorSonidos;
 import Entidades.Proyectiles.*;
 
 public class Pincho extends Obstaculo{
@@ -19,6 +20,7 @@ public class Pincho extends Obstaculo{
         s.setPosY(7650);
         s.resetVelocidad();
         s.notificarObserver();
+        GestorSonidos.getInstancia().reproducirEfecto("death");
         System.out.println("Pincho: SnowBro afectado");
         if (s.getVida() <= 0) {
             s.morir();
