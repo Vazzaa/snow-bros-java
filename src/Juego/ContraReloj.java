@@ -2,6 +2,7 @@ package Juego;
 
 import Entidades.Jugador.Jugador;
 import Grafica.ControladorGrafica;
+import Sonidos.GestorSonidos;
 
 public class ContraReloj extends ModoDeJuego{
 
@@ -25,6 +26,7 @@ public class ContraReloj extends ModoDeJuego{
         tiempoRestante = TIEMPO_LIMITE_MS;
         tiempoAgotado = false;
 
+        GestorSonidos.getInstancia().reproducirMusica("src/Sonidos/Background/03_Yukida-March_(Stage2_4).wav");
         cargarNivel(1, 0);
         
         controlaGrafica.mostrarPantallaNivel();
@@ -91,6 +93,8 @@ public class ContraReloj extends ModoDeJuego{
     public void juegoCompletado() {
         detenerHilos();
         controlaGrafica.mostrarPantallaGameOver();
+        GestorSonidos.getInstancia().detenerMusica();
+        GestorSonidos.getInstancia().reproducirMusica("src/Sonidos/Background/09_Yoh_(Ending).wav");
     }
 
     protected void avanzarSiguienteNivel() {

@@ -196,12 +196,10 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	@Override
 	public void sacarEntidad(EntidadLogica e) {
 		panelNivel.removerEntidad(e.getObserverGrafico());
-		System.out.println("se elimina observer");
 		refrescar();
 	}
 	public void sacarJugador(EntidadJugador e) {
 		panelNivel.removerEntidad(e.getObserverGrafico());
-		System.out.println("se elimina observer jugador");
 		panelRanking.agregarJugadoresRanking(modoDeJuegoActual, e.getJugador());
 		refrescar();
 	}

@@ -56,8 +56,8 @@ public class Clasico extends ModoDeJuego {
     @Override
     public void juegoCompletado() {
         detenerHilos();
-        GestorSonidos.getInstancia().detenerMusica();
-        GestorSonidos.getInstancia().reproducirEfecto("gameover");
         controlaGrafica.mostrarPantallaGameOver();
+        GestorSonidos.getInstancia().detenerMusica();
+        GestorSonidos.getInstancia().reproducirMusica("src/Sonidos/Background/09_Yoh_(Ending).wav");
     }
 }

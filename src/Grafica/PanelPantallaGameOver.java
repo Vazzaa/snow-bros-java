@@ -4,6 +4,9 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+
+import Sonidos.GestorSonidos;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -58,6 +61,7 @@ public class PanelPantallaGameOver extends PanelVista{
     protected void registrarOyenteBotonVolverMenu(){
         botonVolverMenu.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                GestorSonidos.getInstancia().detenerMusica();
                 controladorVistas.accionarPantallaPrincipal();
             }
         });

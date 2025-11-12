@@ -1,6 +1,7 @@
 package Juego;
 
 import Grafica.ControladorGrafica;
+import Sonidos.GestorSonidos;
 import Entidades.Enemigos.Enemigo;
 import Entidades.Jugador.Jugador;
 
@@ -35,6 +36,8 @@ public class Supervivencia extends ModoDeJuego {
         
         controlaGrafica.mostrarPantallaNivel();
         iniciarHilos();
+
+        GestorSonidos.getInstancia().reproducirMusica("src/Sonidos/Background/06_Boss-Yade_(Boss).wav");
 
         aparecioMoghera = false;
 
@@ -102,6 +105,7 @@ public class Supervivencia extends ModoDeJuego {
                 case "calabaza":
                     if (!aparecioCalabaza) {
                         nuevoEnemigo = miFabricaEntidades.getCalabaza(x, y);
+                        System.out.println("Apareció la calabaza.");
                         aparecioCalabaza = true;
                     }
                     break;
@@ -154,5 +158,7 @@ public class Supervivencia extends ModoDeJuego {
     public void juegoCompletado() {
         detenerHilos();
         controlaGrafica.mostrarPantallaGameOver();
+        GestorSonidos.getInstancia().detenerMusica();
+        GestorSonidos.getInstancia().reproducirMusica("src/Sonidos/Background/09_Yoh_(Ending).wav");
     }
 }
