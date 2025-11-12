@@ -90,4 +90,17 @@ public class EnemigoSaltando implements EstadoMovimientoEnemigo {
             // pero su velocidad de salto propia podría verse afectada. Esto ya se maneja en el método moverse.
         }
     }
+
+    @Override
+    public EstadoMovimientoEnemigo obtenerSiguienteEstado(Enemigo enemigo) {
+        if (colisionManager.estaEnSuelo(enemigo, enemigo.getJuego().getNivel().getMisEstructuras())) {
+            return new EnemigoQuieto();
+        }
+        return null;
+    }
+
+    @Override
+    public boolean puedeCambiarEstado(Enemigo enemigo) {
+        return velocidadVertical <= 0 && colisionManager.estaEnSuelo(enemigo, enemigo.getJuego().getNivel().getMisEstructuras());
+    }
 }

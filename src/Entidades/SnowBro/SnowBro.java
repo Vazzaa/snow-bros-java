@@ -36,11 +36,13 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     private long tiempoFinalBoostAzul=0;
     private long tiempoFinalBoostRojo=0;
     private long tiempoFinAnimacionDisparo = 0;
+    private long tiempoFinAnimacionSalto = 0;
     private boolean estaResbalando = false;
     private boolean enContactoConEscalera = false;
     private int velocidadPlataformaX = 0;
     private int velocidadPlataformaY = 0;
-    private static final long DURACION_ANIMACION_DISPARO_MS = 300; 
+    private static final long DURACION_ANIMACION_DISPARO_MS = 300;
+    private static final long DURACION_ANIMACION_SALTO_MS = 400; // Duración estimada de la animación de salto
     
     //Constructor
     public SnowBro (Skin aspectos, ModoDeJuego juego, int x, int y, Jugador jug, Nivel nivelPerteneciente, FabricaEntidades crearNieve) {
@@ -362,6 +364,13 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         }
     }
 
+    public void iniciarAnimacionSalto() {
+        tiempoFinAnimacionSalto = System.currentTimeMillis() + DURACION_ANIMACION_SALTO_MS;
+    }
+    
+    public boolean puedeSaltar() {
+        return System.currentTimeMillis() >= tiempoFinAnimacionSalto;
+    }
 
     public int getDañoProyectil() {
         return dañoProyectil;

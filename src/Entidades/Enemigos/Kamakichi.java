@@ -22,10 +22,14 @@ public class Kamakichi extends Enemigo {
     protected int movimientoActual;
     protected int vida;
 
+    private static final long INTERVALO_CAMBIO_KAMAKICHI = 2000;
+
     public Kamakichi(Skin skins, ModoDeJuego juego, int posX, int posY){
         super(skins, juego, posX, posY, 5,300);
         this.colisionManager = new ColisionManagerEntidades();
         vida = 10;
+        this.estadoMovimiento = new EnemigoQuieto();
+        this.tiempoUltimoCambio = System.currentTimeMillis();
     }
 
     @Override
@@ -92,27 +96,36 @@ public class Kamakichi extends Enemigo {
     }
 
     @Override
-    public void cambiarEstado() {
-        movimientoActual = (int) (Math.random()*3+1);
-        long tiempoActual = System.currentTimeMillis();
-        if (tiempoActual - tiempoUltimoCambio >= INTERVALO_CAMBIO) {
-            switch(movimientoActual){
-                case 1:
-                     estadoMovimiento = new EnemigoBajandoPlataforma(null);
-                    break;
-                case 2:
-                    estadoMovimiento = new EnemigoSaltando();
-                    break;
-                case 3:
-                    estadoMovimiento = new EnemigoQuieto();
-                    break;
-                case 4:
-                    dispararBombas();
-                    break;
-                }
-            tiempoUltimoCambio = tiempoActual;
+public void cambiarEstado() {
+    long tiempoActual = System.currentTimeMillis();
+    if (tiempoActual - tiempoUltimoCambio >= INTERVALO_CAMBIO_KAMAKICHI) {
+        if (estadoMovimiento != null && estadoMovimiento.puedeCambiarEstado(this)) {
+            EstadoMovimientoEnemigo siguienteEstado = estadoMovimiento.obtenerSiguienteEstado(this);
+            if (siguienteEstado != null) {
+                estadoMovimiento = siguienteEstado;
+                tiempoUltimoCambio = tiempoActual;
+                return;
+            }
+            // Si puede cambiar pero obtenerSiguienteEstado devuelve null,
+            // significa que Kamakichi debe decidir su propio siguiente estado
         }
+        
+        // Lógica propia de Kamakichi cuando el estado permite decidir
+        movimientoActual = (int) (Math.random() * 3 + 1);
+        switch(movimientoActual) {
+            case 1:
+                estadoMovimiento = new EnemigoKamakichiBajando(this);
+                break;
+            case 2:
+                estadoMovimiento = new EnemigoKamakichiVertical(1);
+                break;
+            case 3:
+                estadoMovimiento = new EnemigoQuieto();
+                break;
+        }
+        tiempoUltimoCambio = tiempoActual;
     }
+}
 
     protected void dispararBombas(){
 
@@ -165,13 +178,12 @@ public class Kamakichi extends Enemigo {
 
     @Override
     public boolean estaCompletamenteCongelado() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'estaCompletamenteCongelado'");
+        return false;
     }
 
     @Override
     public void moverVerticalmente(int i) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'moverVerticalmente'");
-    }
+        setPosY(getPosY() + i);
+        notificarObserver();
+}
 }
