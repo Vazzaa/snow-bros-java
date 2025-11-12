@@ -204,7 +204,7 @@ public class TrollAmarillo extends Enemigo{
 
     @Override
     public void cambiarEstado() {
-        movimientoActual = (int) (Math.random()*4+1);
+        movimientoActual =(int) (Math.random()*5+1);
         long tiempoActual = System.currentTimeMillis();
         if (tiempoActual - tiempoUltimoCambio >= INTERVALO_CAMBIO) {
             switch(movimientoActual){
@@ -222,9 +222,13 @@ public class TrollAmarillo extends Enemigo{
                     break;
                 case 4:
                     if (tiempoActual - tiempoUltimoSalto >= INTERVALO_SALTO) {
-                        iniciarSalto();
+                        estadoMovimiento = new EnemigoSaltando();
+                        misAspectos.setEstadoActual(3); 
                         tiempoUltimoSalto = tiempoActual;
                     }
+                    break;
+                case 5:
+                    estadoMovimiento = new EnemigoBajandoPlataforma(this);
                     break;
                 }
             tiempoUltimoCambio = tiempoActual;
@@ -235,11 +239,6 @@ public class TrollAmarillo extends Enemigo{
             estadoMovimiento = estadoMovimiento.getEstadoOpuesto();
             tiempoUltimoCambio = System.currentTimeMillis();
         }
-    }
-
-    protected void iniciarSalto() {
-        estadoMovimiento = new EnemigoSaltando();
-        misAspectos.setEstadoActual(3); // Skin de salto
     }
 
     @Override
@@ -328,6 +327,7 @@ public class TrollAmarillo extends Enemigo{
     public void destruirBolaDeNieve() {
         estaVivo = false;
         crearPowerUp(); // Creamos el power-up al destruirse
+        puntaje=500;
         getJuego().getNivel().getSnowBro().sumarPuntaje(this.puntaje); // Sumamos puntos por destruir la bola
         // Opcional: podrías añadir un sonido o efecto visual de la bola rompiéndose aquí.
     }
