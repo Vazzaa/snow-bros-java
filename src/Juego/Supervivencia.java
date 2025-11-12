@@ -119,6 +119,7 @@ public class Supervivencia extends ModoDeJuego {
                     if (!aparecioMoghera) {
                         // nuevoEnemigo = miFabricaEntidades.getMoghera(x, y);
                         // pls nerf moghera :(
+                        GestorSonidos.getInstancia().reproducirEfecto("bossintro");
                         aparecioMoghera = true;
                     }
                     break;

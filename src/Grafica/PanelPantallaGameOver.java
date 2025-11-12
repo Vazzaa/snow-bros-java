@@ -62,6 +62,7 @@ public class PanelPantallaGameOver extends PanelVista{
         botonVolverMenu.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 GestorSonidos.getInstancia().detenerMusica();
+                GestorSonidos.getInstancia().reproducirEfecto("press_button");
                 controladorVistas.accionarPantallaPrincipal();
             }
         });

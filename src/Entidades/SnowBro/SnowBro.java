@@ -262,7 +262,6 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
 
     public void colisionarPowerUp(PowerUp p) {
         boolean colisiona = this.colisionaAABB(this.miHitbox, p.getHitbox());
-        GestorSonidos.getInstancia().reproducirEfecto("powerup");
         if (!colisiona) return;
         afectar(p);
         return;

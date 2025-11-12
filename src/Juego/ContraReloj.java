@@ -112,6 +112,9 @@ public class ContraReloj extends ModoDeJuego{
             System.out.println("Cargando nivel " + siguienteNivel + "...");
             cargarNivel(siguienteNivel, puntajeActual);
             iniciarHilos();
+            if (numeroNivelActual == 3) {
+                GestorSonidos.getInstancia().reproducirEfecto("bossintro");
+            }
         } else {
             System.out.println("No hay mas niveles. Fin.");
             juegoCompletado();

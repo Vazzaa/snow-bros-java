@@ -4,6 +4,7 @@ import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
+import Sonidos.GestorSonidos;
 
 public class VidaExtra extends PowerUp {
 
@@ -18,6 +19,7 @@ public class VidaExtra extends PowerUp {
     public void afectar(SnowBro snowBro) {
         snowBro.sumarPuntaje(puntaje);
         snowBro.setVida(snowBro.getVida() + 1);
+        GestorSonidos.getInstancia().reproducirEfecto("powerup");
         notificarObserver();
         eliminar();
     }

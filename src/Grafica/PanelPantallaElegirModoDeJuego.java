@@ -4,6 +4,9 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+
+import Sonidos.GestorSonidos;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -66,6 +69,7 @@ public class PanelPantallaElegirModoDeJuego extends PanelVista{
     protected void registrarOyenteBotonClasico() {
         botonJugarClasico.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                GestorSonidos.getInstancia().reproducirEfecto("press_button");
                 controladorVistas.accionarInicioJuego(ConstantesModoDeJuego.CLASICO);
             }
         });
@@ -74,6 +78,7 @@ public class PanelPantallaElegirModoDeJuego extends PanelVista{
     protected void registrarOyenteBotonContrareloj() {
         botonJugarContrareloj.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                GestorSonidos.getInstancia().reproducirEfecto("press_button");
                 controladorVistas.accionarInicioJuego(ConstantesModoDeJuego.CONTRARELOJ);
             }
         });
@@ -82,6 +87,7 @@ public class PanelPantallaElegirModoDeJuego extends PanelVista{
     protected void registrarOyenteBotonSupervivencia() {
         botonJugarSupervivencia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                GestorSonidos.getInstancia().reproducirEfecto("press_button");
                 controladorVistas.accionarInicioJuego(ConstantesModoDeJuego.SUPERVIVENCIA);
             }
         });

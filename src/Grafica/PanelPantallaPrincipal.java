@@ -8,6 +8,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import Sonidos.GestorSonidos;
+
 
 
 public class PanelPantallaPrincipal extends PanelVista{
@@ -59,6 +61,7 @@ public class PanelPantallaPrincipal extends PanelVista{
     protected void registrarOyenteBotonInicio() {
         botonIniciar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                GestorSonidos.getInstancia().reproducirEfecto("press_button");
                 controladorVistas.accionarPantallaElegirModoJuego();
             }
         });
@@ -67,6 +70,7 @@ public class PanelPantallaPrincipal extends PanelVista{
     protected void registrarOyenteBotonRanking() {
         botonRanking.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                GestorSonidos.getInstancia().reproducirEfecto("press_button");
                 controladorVistas.accionarPantallaRanking();
             }
         });

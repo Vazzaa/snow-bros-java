@@ -10,10 +10,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import Sonidos.GestorSonidos;
+
 
 
 public class PanelPantallaElegirDominio extends PanelVista{
     
+    protected JButton botonParaAtr;
     private JButton botonDominio1;
     private JButton botonDominio2;
     private JLabel imagenFondo;
@@ -30,6 +33,7 @@ public class PanelPantallaElegirDominio extends PanelVista{
         agregarImagenFondo();
         agregarBotonDominio1();
         agregarBotonDominio2();
+        agregarBotonParaAtr();
         agregarCampoNombre();
     }
     
@@ -57,6 +61,13 @@ public class PanelPantallaElegirDominio extends PanelVista{
         add(botonDominio2);
     }
 
+    protected void agregarBotonParaAtr(){
+        botonParaAtr = new JButton();
+        decorarBotonParaAtr();
+        registrarOyenteBotonParaAtr();
+        add(botonParaAtr);
+    }
+
     protected void agregarCampoNombre(){
         campoNombre = new JTextField();
         campoNombre.setBounds(273, 180, 220, 40);
@@ -72,6 +83,7 @@ public class PanelPantallaElegirDominio extends PanelVista{
                 }
                 agregarNombre();
                 System.out.println("Nombre jugador: " + campoNombre.getText());
+                GestorSonidos.getInstancia().reproducirEfecto("press_start");
                 controladorVistas.getControladorJuego().iniciar();
             }
         });
@@ -85,7 +97,17 @@ public class PanelPantallaElegirDominio extends PanelVista{
                 }
                 agregarNombre();
                 System.out.println("Nombre jugador: " + campoNombre.getText());
+                GestorSonidos.getInstancia().reproducirEfecto("press_start");
                 controladorVistas.getControladorJuego().iniciar();
+            }
+        });
+    }
+
+    protected void registrarOyenteBotonParaAtr(){
+        botonParaAtr.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                GestorSonidos.getInstancia().reproducirEfecto("press_button");
+                controladorVistas.accionarPantallaPrincipal();
             }
         });
     }
@@ -113,6 +135,11 @@ public class PanelPantallaElegirDominio extends PanelVista{
 		transparentarBoton(botonDominio2);
 		botonDominio2.setBounds(500 ,ConstantesVistas.PANEL_ALTO - 190, 200 , 50);
 	}
+
+    protected void decorarBotonParaAtr(){
+        transparentarBoton(botonParaAtr);
+        botonParaAtr.setBounds(220, 500, 350, 50);
+    }
 
     protected void agregarNombre() {
         String nombreJugador = campoNombre.getText();

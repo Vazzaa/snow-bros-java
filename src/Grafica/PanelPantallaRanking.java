@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import Entidades.Jugador.Jugador;
 import Juego.Ranking;
+import Sonidos.GestorSonidos;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -116,6 +117,7 @@ public class PanelPantallaRanking extends PanelVista{
     protected void registrarOyenteBotonParaAtr(){
         botonParaAtr.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                GestorSonidos.getInstancia().reproducirEfecto("press_button");
                 controladorVistas.accionarPantallaPrincipal();
             }
         });

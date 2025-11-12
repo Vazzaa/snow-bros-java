@@ -4,6 +4,7 @@ import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
+import Sonidos.GestorSonidos;
 
 public class Rojo extends PowerUp {
     
@@ -35,6 +36,7 @@ public class Rojo extends PowerUp {
     public void afectar(SnowBro snowBro) {
         snowBro.sumarPuntaje(puntaje);
         snowBro.activarBoostRojo(duracionSnowBro);
+        GestorSonidos.getInstancia().reproducirEfecto("powerup");
         notificarObserver();
         eliminar();
     }
