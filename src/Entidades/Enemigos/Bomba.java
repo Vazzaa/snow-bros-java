@@ -42,10 +42,10 @@ public class Bomba extends Enemigo{
     private EstadoBomba estadoActual;
     private long tiempoCambioEstado;
 
-    private static final long DURACION_NORMAL = 5000;
-    private static final long DURACION_ENCENDIDA = 2000;
-    private static final long DURACION_EXPLOSION = 500;
-    private static final long DURACION_CONGELADO_MS = 8000; // 8 segundos para derretirse
+    private static final long DURACION_NORMAL = 6500;
+    private static final long DURACION_ENCENDIDA = 3000;
+    private static final long DURACION_EXPLOSION = 750;
+    private static final long DURACION_CONGELADO_MS = 3000; // 8 segundos para derretirse
 
     private int estadoNieve;
     private long tiempoFinCongelado = 0;
@@ -61,7 +61,6 @@ public class Bomba extends Enemigo{
         this.tiempoCambioEstado = System.currentTimeMillis();
         this.estadoNieve = ESTADO_INICIAL;
         this.estadoMovimiento = new EnemigoQuieto();
-        // INICIALIZACIÓN DE ESTADOS FALTANTE
         estadoNormal = new EstadoNormal();
         estadoPocoCongelado = new EstadoPocoCongelado();
         estadoMedioCongelado = new EstadoMedioCongelado();
@@ -133,7 +132,15 @@ public class Bomba extends Enemigo{
             if (estructura.bloquearMovimientoHorizontal()) {
                 Hitbox hitboxFutura = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), nuevaX, getPosY());
                 if (colisionaAABB(hitboxFutura, estructura.getHitbox())) {
-                    explotarYMorir();
+                    morir();
+                    return;
+                }
+            }
+        }
+        for (Enemigo otroEnemigo : getJuego().getNivel().getMisEnemigos()) {
+            if (otroEnemigo != this && otroEnemigo.estaVivo() && !otroEnemigo.estaCompletamenteCongelado()) {
+                if (colisionaAABB(getHitbox(), otroEnemigo.getHitbox())) {
+                    otroEnemigo.morir();
                     return;
                 }
             }
@@ -153,26 +160,25 @@ public class Bomba extends Enemigo{
         estadoActual = EstadoBomba.EXPLOTANDO;
         tiempoCambioEstado = System.currentTimeMillis();
         misAspectos.setEstadoActual(5);
-        explotar();
-        notificarObserver();
-    }
-
-    private void explotar() {
         GestorSonidos.getInstancia().reproducirEfecto("explosion");
+        notificarObserver();
     }
 
     @Override
     public void morir() {
-        this.estadoActual = EstadoBomba.FINALIZADA;
+        estadoActual = EstadoBomba.FINALIZADA;
+        explotarYMorir();
         this.estaVivo = false;
         getJuego().getControladoraGrafica().sacarEntidad(this);
     }
 
     @Override
     public void recibirDisparo() {
-        if (estadoNieve >= ESTADO_NIEVE_COMPLETO) {
-            return;
-        } else {
+        if (estadoNieve < ESTADO_NIEVE_COMPLETO && estadoActual != EstadoBomba.EXPLOTANDO) {
+            if (estadoActual == EstadoBomba.ENCENDIDA) {
+                estadoActual = EstadoBomba.NORMAL;
+                tiempoCambioEstado = System.currentTimeMillis();
+            }
             estadoNieve += getJuego().getNivel().getSnowBro().getDañoProyectil();
             actualizarEstadoNieve();
         }
@@ -229,7 +235,7 @@ public class Bomba extends Enemigo{
             switch (movimientoActual) {
                 case 1:
                     estadoMovimiento = new EnemigoCaminandoDerecha();
-                    misAspectos.setEstadoActual(estadoActual == EstadoBomba.NORMAL ? 1 : 3);
+                    misAspectos.setEstadoActual(estadoActual == EstadoBomba.NORMAL ? 2 : 4);
                     break;
                 case 2:
                     estadoMovimiento = new EnemigoCaminandoIzquierda();
@@ -241,6 +247,10 @@ public class Bomba extends Enemigo{
             }
             tiempoUltimoCambio = tiempoActual;
         }
+    }
+
+    public void afectar(Estructura e) {
+        e.afectar(this);
     }
 
     @Override
@@ -256,15 +266,26 @@ public class Bomba extends Enemigo{
     @Override
     public void cambiarEstadoInmediato() { }
     @Override
-    public void moverHorizontalmente(int i) { }
+    public void moverHorizontalmente(int i) {
+        setPosX(getPosX() + i);
+        notificarObserver();
+     }
     @Override
-    public void moverVerticalmente(int i) { }
+    public void moverVerticalmente(int i) { 
+        setPosY(getPosY()+i);
+        notificarObserver();
+    }
     @Override
     public void colisionarPowerUp(PowerUp p) { }
     @Override
     public void colisionarEnemigo(Enemigo e) { }
     @Override
-    public void colisionarEstructura(Estructura e) { }
+    public void colisionarEstructura(Estructura e) { 
+        boolean colisiona = this.colisionaAABB(this.miHitbox, e.getHitbox());
+        if (!colisiona) return;
+        afectar(e);
+        return;
+    }
     @Override
     public void colisionarObstaculo(Obstaculo o) { }
     @Override

@@ -31,7 +31,7 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
         super(skins,juego,posX,posY);
         vida = v;
         puntaje = p;
-        skinOriginal = skins; // Guardamos la skin con la que fue creado
+        skinOriginal = skins;
         estadoEnemigo = new EstadoActivo();
     }
 

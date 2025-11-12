@@ -407,11 +407,11 @@ PARED:768,8092
 PARED:768,8108
 
 # Enemigos
-ENEMIGO:demonioRojo,464,7950
-ENEMIGO:demonioRojo,192,7890
-ENEMIGO:Bomba,608,7890
-ENEMIGO:RanaDeFuego,304,7950
-ENEMIGO:TrollAmarillo,448,7950
+ENEMIGO:demoniorojo,464,7950
+ENEMIGO:demoniorojo,192,7890
+ENEMIGO:demoniorojo,608,7890
+ENEMIGO:ranadefuego,304,7950
+ENEMIGO:trollamarillo,448,7950
 
 # Obstaculos
 PINCHO:150,7880
