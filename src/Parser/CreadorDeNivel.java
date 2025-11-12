@@ -59,6 +59,15 @@ public class CreadorDeNivel {
                         int y = Integer.parseInt(coords[1].trim());
                         jugador = fabEntidades.getSnowBro(x, y);
 
+                    } else if (linea.startsWith("PLATAFORMATECHO:")) {
+                        String[] coords = linea.substring(16).split(",");
+                        int x = Integer.parseInt(coords[0].trim());
+                        int y = Integer.parseInt(coords[1].trim());
+                        Estructura plataformatecho = fabEntidades.getPlataformaTecho(x, y, numeroNivel);
+                        if (plataformatecho != null) {
+                            estructuras.add(plataformatecho);
+                        }
+
                     } else if (linea.startsWith("PLATAFORMA:")) {
                         String[] coords = linea.substring(11).split(",");
                         int x = Integer.parseInt(coords[0].trim());

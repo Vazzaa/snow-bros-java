@@ -76,6 +76,7 @@ public class ColisionManagerEntidades {
         return plataformaMasCercana;
     }
 
+    
 
 }
 

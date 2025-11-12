@@ -129,6 +129,12 @@ public Estructura getPlatMovil(int x, int y) {
         platSuelo.getSkin().setEstadoActual(estadoSkin);
         return platSuelo;
     }
+    public Plataforma getPlataformaTecho(int x, int y, int numeroNivel) {
+        Plataforma platTecho = new Plataforma(this.fabricaSkin.crearSkinPlatTecho(), miJuego, x, y, false, true);
+        int estadoSkin = ((numeroNivel - 1) / 3) + 1;
+        platTecho.getSkin().setEstadoActual(estadoSkin);
+        return platTecho;
+    }
 
     public Bomba getBomba(int x, int y) {
         return new Bomba(this.fabricaSkin.crearSkinBomba(), miJuego, x, y);

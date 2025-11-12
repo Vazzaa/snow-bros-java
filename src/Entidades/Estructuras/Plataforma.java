@@ -10,12 +10,21 @@ import Entidades.Proyectiles.Proyectil;
 public class Plataforma extends Estructura{
 
     protected boolean esPlataformaSuelo;
+    protected boolean esPlataformaTecho;
 
     public Plataforma(Skin s, ModoDeJuego juego, int x, int y) {
         super(s, juego, x, y);
         miHitbox.setAncho(12);
         miHitbox.setAlto(32);
         esPlataformaSuelo = false;
+    }
+
+    public Plataforma(Skin s, ModoDeJuego juego, int x, int y, boolean esSuelo, boolean esTecho) {
+        super(s, juego, x, y);
+        miHitbox.setAncho(12);
+        miHitbox.setAlto(32);
+        esPlataformaSuelo = esSuelo;
+        esPlataformaTecho = esTecho;
     }
 
     public Plataforma(Skin s, ModoDeJuego juego, int x, int y, boolean esSuelo) {
