@@ -46,9 +46,6 @@ public class Clasico extends ModoDeJuego {
 		if(archivo.exists()) {
             cargarNivel(siguienteNivel, puntajeActual);
             iniciarHilos();
-            if (numeroNivelActual == 3) {
-                GestorSonidos.getInstancia().reproducirEfecto("bossintro");
-            }
             System.out.println("Nivel " + siguienteNivel + " cargado.");
 		} else {
             System.out.println("No hay mas niveles. Fin.");
