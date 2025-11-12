@@ -253,11 +253,10 @@ PARED:768,8108
 
 # Enemigos
 
-ENEMIGO:demonioRojo,200,7640
-ENEMIGO:demonioRojo,64,7870
-ENEMIGO:demonioRojo,336,7820
-ENEMIGO:demonioRojo,96.7750
-ENEMIGO:moghera,608,7800
+ENEMIGO:demonioRojo,64,7890
+ENEMIGO:demonioRojo,336,7830
+ENEMIGO:demonioRojo,80,7750
+ENEMIGO:demonioRojo,304,7690
 
 # Obsculos
 
