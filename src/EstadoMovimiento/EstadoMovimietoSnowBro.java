@@ -73,7 +73,7 @@ public class EstadoMovimietoSnowBro {
         } else {
             velocidadVertical = 0; // Stop vertical movement if on ladder but no input
         }
-    } else if (salto && enElSuelo()) { // Only jump if not on ladder and on solid ground
+    } else if (salto && enElSuelo() && snowBro.puedeSaltar()) { // Only jump if not on ladder and on solid ground and can jump
         saltar();
     }
     // If not on ladder, not jumping, gravity will be applied in actualizar()
@@ -103,6 +103,7 @@ public class EstadoMovimietoSnowBro {
             if (enElSuelo()) {
                 this.velocidadVertical = fuerzaSalto;
                 enElSuelo = false;
+                snowBro.iniciarAnimacionSalto(); 
             }
         }
     
