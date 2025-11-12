@@ -15,7 +15,6 @@ public class HiloJugador extends Thread {
         while(ejecutando){
             juego.moverSnowBro();
             juego.verificarColisiones();
-            juego.limpiarSnowBroCaidoDelMapa();
             try {
                 sleep(16);
             } catch (InterruptedException e) {

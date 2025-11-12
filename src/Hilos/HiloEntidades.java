@@ -26,7 +26,6 @@ public class HiloEntidades  extends Thread {
             juego.verificarColisiones();
             juego.actualizarPowerUps();
             juego.verificarColisionesProyectiles();
-            juego.limpiarEnemigosCaidosDelMapa();
             juego.actualizarAparicionCalabaza();
             juego.actualizarAparicionVida();
             juego.actualizarEstructuras();

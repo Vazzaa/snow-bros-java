@@ -262,28 +262,6 @@ public class Nivel {
         }
     }
 
-    public void limpiarEnemigosCaidosDelMapa() {
-        List<Enemigo> aEliminar = new ArrayList<>();
-        
-        for (Enemigo e : misEnemigos) {
-            // Si el enemigo está fuera del mapa
-            if (e.getPosY() > 8100 || e.getPosY() < 7600) {  // Ajusta estos límites
-                aEliminar.add(e);
-            }
-        }
-        
-        for (Enemigo e : aEliminar) {
-            misEnemigos.remove(e);
-            e.getJuego().getControladoraGrafica().sacarEntidad(e);
-        }
-    }
-
-    public void limpiarSnowBroCaidoDelMapa() {
-        if (snowBro != null && (snowBro.getPosY() > 8100 || snowBro.getPosY() < 7600)) {
-            snowBro.morir();
-        }
-    }
-
     public void actualizarAparicionCalabaza() {
         if (System.currentTimeMillis() >= tiempoParaAparecerCalabaza) {
             Enemigo calabaza = miFabrica.getCalabaza(100, 8000);
