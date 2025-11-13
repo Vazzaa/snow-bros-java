@@ -65,9 +65,7 @@ public class TrollAmarillo extends Enemigo{
     public void morir() {
         estaVivo=false;
         GestorSonidos.getInstancia().reproducirEfecto("enemy_death");
-        getJuego().getNivel().getSnowBro().sumarPuntaje(puntaje);
         crearPowerUp();
-        return;
     }
     
     protected void crearPowerUp() {
@@ -133,7 +131,7 @@ public class TrollAmarillo extends Enemigo{
         ColisionManagerEntidades colisionManager = new ColisionManagerEntidades();
         int nuevaX = getPosX() + velocidadDeslizamiento;
         for (Estructura estructura : getJuego().getNivel().getMisEstructuras()) {
-            if (estructura.bloquearMovimientoHorizontal()) {
+            if (estructura.bloquearMovimientoHorizontal() || estructura.destruyeBolaDeNieve()) {
                 Hitbox hitboxFutura = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), nuevaX, getPosY());
                 if (colisionaAABB(hitboxFutura, estructura.getHitbox())) {
                     destruirBolaDeNieve();

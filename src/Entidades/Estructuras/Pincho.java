@@ -65,4 +65,9 @@ public class Pincho extends Obstaculo{
     public boolean esSueloSolido() {
         return false;
     }
+
+    @Override
+    public boolean destruyeBolaDeNieve() {
+        return true;
+    }
 }
