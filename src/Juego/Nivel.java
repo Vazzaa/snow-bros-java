@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
+
+import java.util.Iterator;
+
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.Movible;
 import Fabricas.FabricaEntidades;
@@ -234,10 +237,25 @@ public class Nivel {
     }
 
     public boolean estaCompletado() {
-        if(snowBro != null && snowBro.getVida() > 0)
-            return misEnemigos.isEmpty();
-        else
-            return false;
+
+        boolean nivelIncompleto = false; 
+
+        if (snowBro != null && snowBro.getVida() > 0) {
+            Iterator<Enemigo> iteEnemigos = misEnemigos.iterator();
+            while (iteEnemigos.hasNext() && !nivelIncompleto) {
+                Enemigo enemigoActual = iteEnemigos.next();
+                
+                if (enemigoActual.cuentaParaCompletarNivel()) {
+                    nivelIncompleto = true;
+                }
+            }
+
+        } else {
+
+            nivelIncompleto = true; 
+        }
+
+        return !nivelIncompleto;
     }
 
     public void detenerEnemigos(int duracion) {

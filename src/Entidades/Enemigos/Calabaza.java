@@ -244,4 +244,8 @@ public class Calabaza extends Enemigo{
         // No hace nada
     }
 
+    @Override
+    public boolean cuentaParaCompletarNivel() {
+        return false;
+    }
 }
