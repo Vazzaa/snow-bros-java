@@ -29,6 +29,7 @@ public class PanelPantallaPrincipal extends PanelVista{
         agregarImagenFondo();
         agregarBotonIniciar();
         agregarBotonRanking();
+        GestorSonidos.getInstancia().reproducirMusica("src/Sonidos/Background/02_Yukidama-Ondo_(Stage1_3).wav");
     }
     
     protected void agregarImagenFondo() {

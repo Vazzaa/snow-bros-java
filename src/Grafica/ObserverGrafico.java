@@ -1,10 +1,8 @@
 package Grafica;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import Juego.Entidad;
 import Juego.EntidadLogica;
-import Juego.Hitbox;
 
 public class ObserverGrafico extends JLabel implements Observer {
 	

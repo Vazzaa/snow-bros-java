@@ -30,8 +30,6 @@ public class Kamakichi extends Enemigo {
         vida = 10;
         this.estadoMovimiento = new EnemigoQuieto();
         this.tiempoUltimoCambio = System.currentTimeMillis();
-        this.miHitbox.setAlto(73);
-        this.miHitbox.setAncho(144);
     }
 
     @Override

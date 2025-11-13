@@ -9,4 +9,5 @@ public interface EntidadLogica {
 	public int getPosX();
 	public int getPosY();
 	public ObserverGrafico getObserverGrafico();
+	
 }
