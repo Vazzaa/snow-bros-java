@@ -64,6 +64,7 @@ public class PanelPantallaGameOver extends PanelVista{
                 GestorSonidos.getInstancia().detenerMusica();
                 GestorSonidos.getInstancia().reproducirEfecto("press_button");
                 controladorVistas.accionarPantallaPrincipal();
+                GestorSonidos.getInstancia().reproducirMusica("src/Sonidos/Background/02_Yukidama-Ondo_(Stage1_3).wav");
             }
         });
     }

@@ -16,7 +16,6 @@ public class Clasico extends ModoDeJuego {
         cargarNivel(1, 0);
         controlaGrafica.mostrarPantallaNivel();
         iniciarHilos();
-        GestorSonidos.getInstancia().reproducirMusica("src/Sonidos/Background/02_Yukidama-Ondo_(Stage1_3).wav");
         System.out.println("Modo Clásico iniciado - Nivel 1");
     }
 
