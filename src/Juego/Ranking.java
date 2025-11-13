@@ -10,26 +10,28 @@ public class Ranking {
         puntajes = new Jugador [5];
     }
 
-    public void agregarJugador(Jugador jug) {
-        int posicionExistente = buscarJugador(jug.getNombre());
+    public void agregarJugador(String nombre, int puntaje) {
+        int posicionExistente = buscarJugador(nombre);
         
         if (posicionExistente != -1) {
-            if (jug.getPuntaje() > puntajes[posicionExistente].getPuntaje())
+            if (puntaje > puntajes[posicionExistente].getPuntaje())
                 eliminarEnPosicion(posicionExistente);
             else
                 return;
         }
 
-        if (cantJugadores < 5 || (puntajes[4] != null && jug.getPuntaje() > puntajes[4].getPuntaje())) {
+        Jugador nuevoJugador = new Jugador(nombre, puntaje);
+
+        if (cantJugadores < 5 || (puntajes[4] != null && puntaje > puntajes[4].getPuntaje())) {
             int posAAgregar = 0;
-            while (posAAgregar < cantJugadores && puntajes[posAAgregar].getPuntaje() > jug.getPuntaje()) {
+            while (posAAgregar < cantJugadores && puntajes[posAAgregar].getPuntaje() > puntaje) {
                 posAAgregar++;
             }
             int limite = Math.min(cantJugadores, 4);
             for (int i = limite; i > posAAgregar; i--) {
                 puntajes[i] = puntajes[i - 1];
             }
-            puntajes[posAAgregar] = jug;
+            puntajes[posAAgregar] = nuevoJugador;
             if (cantJugadores < 5) {
                 cantJugadores++;
             }

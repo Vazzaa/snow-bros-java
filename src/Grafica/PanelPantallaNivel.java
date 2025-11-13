@@ -85,6 +85,26 @@ public class PanelPantallaNivel extends PanelVista{
         labelTextTiempo.setText("--:--");
     }
 
+    /**
+     * Carga y establece la imagen de fondo del panel del nivel.
+     * @param rutaImagen La ruta al archivo de imagen, relativa al classpath.
+     */
+    public void setImagenDeFondo(String rutaImagen) {
+        try {
+            java.net.URL url = this.getClass().getResource(rutaImagen);
+            if (url == null) {
+                System.err.println("Error: No se pudo encontrar la imagen de fondo en: " + rutaImagen);
+                return;
+            }
+            ImageIcon iconoImagen = new ImageIcon(url);
+            Image imagenEscalada = iconoImagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
+            Icon iconoImagenEscalada = new ImageIcon(imagenEscalada);
+            imagenFondo.setIcon(iconoImagenEscalada);
+        } catch (Exception e) {
+            System.err.println("Error al cargar la imagen de fondo: " + rutaImagen);
+            e.printStackTrace();
+        }
+    }
     protected void agregarPanelNivelconImagenFondo() {
         imagenFondo = new JLabel();
         java.net.URL url = this.getClass().getResource("/Imagenes/Background/Fondo1.png");

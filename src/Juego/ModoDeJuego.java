@@ -96,6 +96,16 @@ public abstract class ModoDeJuego implements ControladorJuego {
 		creador.setFrabricaEntidades(miFabricaEntidades);
 		nivelActual = creador.leerArchivo(archivoNivel);
 
+		// Lógica para cambiar el fondo según el número de nivel
+		String rutaFondo;
+		if (numeroNivel >= 4 && numeroNivel <= 6) {
+			rutaFondo = "/Imagenes/Background/Fondo3.png"; // Ruta para niveles 4, 5, 6
+		} else {
+			rutaFondo = "/Imagenes/Background/Fondo1.png"; // Ruta para niveles 1, 2, 3
+		}
+		controlaGrafica.setImagenDeFondoNivel(rutaFondo);
+		// Fin de la lógica de cambio de fondo
+
 		nivelActual.setJuego(this);
 
 		nivelActual.getSnowBro().setNivel(nivelActual);
@@ -219,6 +229,12 @@ public abstract class ModoDeJuego implements ControladorJuego {
 	public void reiniciarNivel() {
 		limpiarNivelActual();
 		nivelActual.reiniciarNivel();
+	}
+
+	public void actualizarRanking(String nombre, int puntaje) {
+		if (rank != null) {
+			rank.agregarJugador(nombre, puntaje);
+		}
 	}
 
 	@Override

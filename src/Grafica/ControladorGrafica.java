@@ -19,4 +19,5 @@ public interface ControladorGrafica {
 	public void sacarJugador(EntidadJugador e);
 	public boolean verificarColisiones(Entidad e);
 	public void actualizarTiempo(String timepo);
+	public void setImagenDeFondoNivel(String rutaImagen);
 }
