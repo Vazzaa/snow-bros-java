@@ -152,5 +152,8 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
         }
     }
 
+    public boolean cuentaParaCompletarNivel() {
+        return true;
+    }
 
 }

@@ -186,4 +186,9 @@ public class Fantasma extends Enemigo{
     public void moverVerticalmente(int i) {
         //no hace nada a este porque vuela
     }
+
+    @Override
+    public boolean cuentaParaCompletarNivel() {
+        return false;
+    }
 }
