@@ -1,4 +1,4 @@
-NIVEL:1
+NIVEL:5
 JUGADOR:10,7650
 
 # Plataformas primera fila (y=7610)

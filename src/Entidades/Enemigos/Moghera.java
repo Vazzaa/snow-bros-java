@@ -133,6 +133,7 @@ public class Moghera extends Enemigo {
             }
             miJuego.registrarObserver(disparo);
             miJuego.getNivel().agregarProyectiles(disparo);
+            GestorSonidos.getInstancia().reproducirEfecto("enemy_fire");
         }
     }
 

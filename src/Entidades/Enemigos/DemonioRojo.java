@@ -347,8 +347,8 @@ public class DemonioRojo extends Enemigo {
 
     public void destruirBolaDeNieve() {
         estaVivo = false;
-        crearPowerUp(); // Creamos el power-up al destruirse
-        getJuego().getNivel().getSnowBro().sumarPuntaje(this.puntaje); // Sumamos puntos por destruir la bola
-        // Opcional: podrías añadir un sonido o efecto visual de la bola rompiéndose aquí.
+        crearPowerUp();
+        getJuego().getNivel().getSnowBro().sumarPuntaje(this.puntaje);
+        GestorSonidos.getInstancia().reproducirEfecto("enemy_death");
     }
 }

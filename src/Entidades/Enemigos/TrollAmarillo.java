@@ -350,10 +350,10 @@ public class TrollAmarillo extends Enemigo{
 
     public void destruirBolaDeNieve() {
         estaVivo = false;
-        crearPowerUp(); // Creamos el power-up al destruirse
+        crearPowerUp();
         puntaje=500;
-        getJuego().getNivel().getSnowBro().sumarPuntaje(this.puntaje); // Sumamos puntos por destruir la bola
-        // Opcional: podrías añadir un sonido o efecto visual de la bola rompiéndose aquí.
+        getJuego().getNivel().getSnowBro().sumarPuntaje(this.puntaje);
+        GestorSonidos.getInstancia().reproducirEfecto("enemy_death");
     }
 
 }

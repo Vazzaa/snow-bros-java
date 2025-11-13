@@ -147,11 +147,13 @@ public class Supervivencia extends ModoDeJuego {
         java.io.File archivo = new java.io.File(archivoSiguienteNivel);
             
         if (archivo.exists()) {
+            GestorSonidos.getInstancia().reproducirEfecto("level_up");
             System.out.println("Cargando nivel " + siguienteNivel + "...");
             cargarNivel(siguienteNivel, puntajeActual);
             iniciarHilos();
         } else {
             System.out.println("No hay mas niveles. Fin.");
+            nivelActual.getSnowBro().sumarPuntaje(puntajeActual);
             juegoCompletado();
         }
     }

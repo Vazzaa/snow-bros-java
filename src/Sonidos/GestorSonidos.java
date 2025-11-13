@@ -35,12 +35,15 @@ public class GestorSonidos {
         cargarEfecto("shoot", "src/Sonidos/Efectos/snowshot.wav");
         cargarEfecto("death", "src/Sonidos/Efectos/snowdead.wav");
         cargarEfecto("enemy_death", "src/Sonidos/Efectos/enemydead.wav");
+        cargarEfecto("enemy_fire", "src/Sonidos/Efectos/enemyfire.wav");
         cargarEfecto("jump", "src/Sonidos/Efectos/jump.wav");
         cargarEfecto("powerup", "src/Sonidos/Efectos/powerup.wav");
         cargarEfecto("hit", "src/Sonidos/Efectos/snowkick.wav");
         cargarEfecto("explosion", "src/Sonidos/Efectos/explosion.wav");
         cargarEfecto("press_start", "src/Sonidos/Efectos/pressstartbutton.wav");
         cargarEfecto("press_button", "src/Sonidos/Efectos/nameinput.wav");
+        cargarEfecto("level_up", "src/Sonidos/Efectos/1up.wav");
+        cargarEfecto("clock", "src/Sonidos/Efectos/clock.wav");
 
         cargarEfecto("gameover", "src/Sonidos/Background/10_GameOver.wav");
         cargarEfecto("bossintro", "src/Sonidos/Background/05_BossIntro.wav");

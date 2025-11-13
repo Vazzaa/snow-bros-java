@@ -12,12 +12,11 @@ public class ContraReloj extends ModoDeJuego{
     protected long tiempoRestante;
     protected boolean tiempoAgotado;
 
-    //protected float Timer;
-
     public ContraReloj(ControladorGrafica controladorGrafica) {
         super(controladorGrafica);
         tiempoAgotado = false;
     }
+
     @Override
     public void iniciar() {
         jugador = new Jugador(nombreJugador, 0);
@@ -43,6 +42,7 @@ public class ContraReloj extends ModoDeJuego{
         
         if (tiempoAgotado) {
             System.out.println("¡Tiempo agotado!");
+            GestorSonidos.getInstancia().reproducirEfecto("clock");
             juegoCompletado();
             return;
         }
@@ -109,11 +109,15 @@ public class ContraReloj extends ModoDeJuego{
         java.io.File archivo = new java.io.File(archivoSiguienteNivel);
             
         if (archivo.exists()) {
+            GestorSonidos.getInstancia().reproducirEfecto("level_up");
             System.out.println("Cargando nivel " + siguienteNivel + "...");
             cargarNivel(siguienteNivel, puntajeActual);
             iniciarHilos();
+            if (numeroNivelActual == 3 || numeroNivelActual == 6)
+                GestorSonidos.getInstancia().reproducirEfecto("bossintro");
         } else {
             System.out.println("No hay mas niveles. Fin.");
+            nivelActual.getSnowBro().sumarPuntaje(puntajeActual);
             juegoCompletado();
         }
     }

@@ -43,11 +43,15 @@ public class Clasico extends ModoDeJuego {
         java.io.File archivo = new java.io.File(archivoSiguienteNivel);
 
 		if(archivo.exists()) {
+            GestorSonidos.getInstancia().reproducirEfecto("level_up");
+            System.out.println("Nivel " + siguienteNivel + " cargado.");
             cargarNivel(siguienteNivel, puntajeActual);
             iniciarHilos();
-            System.out.println("Nivel " + siguienteNivel + " cargado.");
+            if (numeroNivelActual == 3 || numeroNivelActual == 6)
+                GestorSonidos.getInstancia().reproducirEfecto("bossintro");
 		} else {
             System.out.println("No hay mas niveles. Fin.");
+            nivelActual.getSnowBro().sumarPuntaje(puntajeActual);
             juegoCompletado();
 		}
     }
