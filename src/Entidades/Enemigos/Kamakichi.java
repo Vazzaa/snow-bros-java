@@ -5,7 +5,6 @@ import Entidades.Estructuras.Estructura;
 import Entidades.Estructuras.Obstaculo;
 import Entidades.PowerUp.PowerUp;
 import Entidades.Proyectiles.Proyectil;
-import Entidades.Proyectiles.ProyectilFuego;
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.*;
 import Fabricas.FabricaEntidades;

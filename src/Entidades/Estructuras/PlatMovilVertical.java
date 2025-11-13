@@ -60,11 +60,8 @@ public class PlatMovilVertical extends Plataforma {
 
     @Override
     public void mover() {
-        int posYAnterior = miHitbox.getPosY();
         miHitbox.setPosY(miHitbox.getPosY() + velocidad * direccion);
-        
         if (jugadorEncima != null) {
-            int deltaY = miHitbox.getPosY() - posYAnterior;
             int pieSnowBro = jugadorEncima.getPosY();
             int techoPlataforma = this.miHitbox.getPosY() + this.miHitbox.getAlto();
             boolean estaHorizontalmenteSobre = !(jugadorEncima.getPosX() > this.miHitbox.getPosX() + this.miHitbox.getAncho() ||

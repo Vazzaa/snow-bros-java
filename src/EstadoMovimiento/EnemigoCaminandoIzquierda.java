@@ -4,7 +4,6 @@ import Entidades.Enemigos.Enemigo;
 import Entidades.Estructuras.Estructura;
 import Juego.ColisionManagerEntidades;
 import Juego.Hitbox;
-import Juego.Nivel;
 import Entidades.Estructuras.Plataforma;
 
 

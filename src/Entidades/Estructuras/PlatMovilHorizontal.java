@@ -1,7 +1,6 @@
 package Entidades.Estructuras;
 import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
-import EstadoMovimiento.Movible;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
 

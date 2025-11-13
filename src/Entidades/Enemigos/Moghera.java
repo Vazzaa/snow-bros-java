@@ -6,7 +6,6 @@ import Entidades.PowerUp.PowerUp;
 import Entidades.Proyectiles.Proyectil;
 import Entidades.Proyectiles.ProyectilFuego;
 import Entidades.SnowBro.SnowBro;
-import EstadoMovimiento.EnemigoBajandoPlataforma;
 import EstadoMovimiento.EnemigoCaminandoIzquierda;
 import EstadoMovimiento.EnemigoCaminandoDerecha;
 import EstadoMovimiento.EnemigoQuieto;
