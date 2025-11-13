@@ -5,6 +5,7 @@ import Entidades.Estructuras.Estructura;
 import Entidades.Estructuras.Obstaculo;
 import Entidades.PowerUp.PowerUp;
 import Entidades.Proyectiles.Proyectil;
+import Entidades.Proyectiles.ProyectilFuego;
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.*;
 import Fabricas.FabricaEntidades;
@@ -24,10 +25,11 @@ public class Kamakichi extends Enemigo {
 
     private static final long INTERVALO_CAMBIO_KAMAKICHI = 2000;
 
-    public Kamakichi(Skin skins, ModoDeJuego juego, int posX, int posY){
+    public Kamakichi(Skin skins, ModoDeJuego juego, int posX, int posY, FabricaEntidades fabParaBomba) {
         super(skins, juego, posX, posY, 5,300);
         this.colisionManager = new ColisionManagerEntidades();
-        vida = 10;
+        this.fabParaBomba = fabParaBomba;
+        vida = 50;
         this.estadoMovimiento = new EnemigoQuieto();
         this.tiempoUltimoCambio = System.currentTimeMillis();
     }
@@ -111,7 +113,7 @@ public void cambiarEstado() {
         }
         
         // Lógica propia de Kamakichi cuando el estado permite decidir
-        movimientoActual = (int) (Math.random() * 3 + 1);
+        movimientoActual = (int) (Math.random() * 4 + 1);
         switch(movimientoActual) {
             case 1:
                 estadoMovimiento = new EnemigoKamakichiBajando(this);
@@ -122,12 +124,22 @@ public void cambiarEstado() {
             case 3:
                 estadoMovimiento = new EnemigoQuieto();
                 break;
+            case 4:
+                dispararBombas();
+                dispararBombas();
+                break;
         }
         tiempoUltimoCambio = tiempoActual;
     }
 }
 
     protected void dispararBombas(){
+         if (miJuego != null && miJuego.getNivel() != null) {
+            Bomba enemigoBomba = fabParaBomba.getBomba(miHitbox.getPosX(), miHitbox.getPosY());
+            miJuego.registrarObserver(enemigoBomba);
+            miJuego.getNivel().agregarEnemigos(enemigoBomba);
+        }
+
 
     }
 

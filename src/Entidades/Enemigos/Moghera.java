@@ -31,7 +31,7 @@ public class Moghera extends Enemigo {
     public Moghera(Skin skins, ModoDeJuego juego, int posX, int posY, FabricaEntidades fabParaFuego) {
         super(skins, juego, posX, posY, 10, 500); // Vida y puntaje
         this.colisionManager = new ColisionManagerEntidades();
-        this.vida = 10;
+        this.vida = 50;
         this.fabParaFuego = fabParaFuego;
         this.estadoMovimiento = new EnemigoQuieto();
         this.miHitbox.setAlto(90);

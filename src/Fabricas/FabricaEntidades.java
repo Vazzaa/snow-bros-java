@@ -53,7 +53,7 @@ public class FabricaEntidades {
     }
 
     public Kamakichi getKamakichi(int x, int y) {
-        return new Kamakichi(this.fabricaSkin.crearSkinKamakichi(), miJuego, x, y);
+        return new Kamakichi(this.fabricaSkin.crearSkinKamakichi(), miJuego, x, y,this);
     }
 
     public Azul getPowerUpAzul(int x, int y) {
