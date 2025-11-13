@@ -14,7 +14,6 @@ public class ObserverGrafico extends JLabel implements Observer {
 	public ObserverGrafico(EntidadLogica entidadLogic) {
 		super();
 		entidadObservada = entidadLogic;
-		setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 1));
 		actualizar();
 	}
 	
@@ -53,58 +52,22 @@ public class ObserverGrafico extends JLabel implements Observer {
 	}
 
 	public void actualizarPosicionTamaño(){
-		// --- Lógica de X (sin cambios) ---
-		int x_logico_izq = entidadObservada.getPosX();
-		int x_screen_izq = AdaptadorPosicionPixel.transformar_x(x_logico_izq);
+		int x = AdaptadorPosicionPixel.transformar_x(entidadObservada.getPosX());
+		int y = AdaptadorPosicionPixel.transformar_y(entidadObservada.getPosY());
 		
-		
-		// --- Nueva Lógica de Y (Centrado) ---
-
-		// 1. Obtener el Hitbox y el Icono
-		Hitbox hitbox = entidadObservada.getHitbox();
-		Icon icono = this.getIcon();
-
-		if (icono == null) {
-			// Fallback si no hay imagen
-			int y_screen_bottom = AdaptadorPosicionPixel.transformar_y(entidadObservada.getPosY());
-			setBounds(x_screen_izq, y_screen_bottom - 32, 32, 32); // Asume 32x32
-			return;
-		}
-
-		// 2. Obtener dimensiones
-		int ancho_imagen = icono.getIconWidth();
-		int alto_imagen = icono.getIconHeight();
-		int alto_hitbox = hitbox.getAlto();
-
-		// 3. Calcular coordenadas Y del Hitbox en la pantalla
-		//    (posY es el borde inferior)
-		int y_screen_bottom_hitbox = AdaptadorPosicionPixel.transformar_y(entidadObservada.getPosY());
-		int y_screen_top_hitbox = y_screen_bottom_hitbox - alto_hitbox;
-		
-		// 4. Calcular el centro Y del Hitbox
-		int y_screen_centro_hitbox = y_screen_top_hitbox + (alto_hitbox / 2);
-		
-		// 5. Calcular el nuevo borde superior de la IMAGEN para que su centro
-		//    se alinee con el centro del Hitbox
-		int y_screen_top_imagen = y_screen_centro_hitbox - (alto_imagen / 2);
-
-		
-		// --- Lógica de X (Centrado, opcional pero recomendado) ---
-		int ancho_hitbox = hitbox.getAncho();
-		int x_screen_centro_hitbox = x_screen_izq + (ancho_hitbox / 2);
-		int x_screen_izq_imagen = x_screen_centro_hitbox - (ancho_imagen / 2);
-
-
-		// 6. Aplicar setBounds con las coordenadas de la IMAGEN
-		setBounds(x_screen_izq_imagen, y_screen_top_imagen, ancho_imagen, alto_imagen);
-
-
-		// --- DEBUG ---
+		// Debug temporal para paredes
 		if (entidadObservada.getSkin().getRutaImagenActual() != null && 
-			entidadObservada.getSkin().getRutaImagenActual().contains("Kamakichi")) {
-			System.out.println("KAMAKICHI DEBUG:");
-			System.out.println("  Hitbox (screen): y_top=" + y_screen_top_hitbox + ", y_bottom=" + y_screen_bottom_hitbox);
-			System.out.println("  Imagen (screen): y_top=" + y_screen_top_imagen + ", y_bottom=" + (y_screen_top_imagen + alto_imagen));
+			entidadObservada.getSkin().getRutaImagenActual().contains("pared")) {
+			System.out.println("DEBUG POSICION: Pared en mundo x=" + entidadObservada.getPosX() + 
+							 ", pantalla x=" + x + ", y pantalla=" + y);
+		}
+		
+		if (this.getIcon() != null) {
+			int ancho = this.getIcon().getIconWidth();
+			int alto = this.getIcon().getIconHeight();
+			setBounds(x, y, ancho, alto);
+		}else {
+			setBounds(x, y, 32, 32);
 		}
 	}
 }
