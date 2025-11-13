@@ -231,10 +231,8 @@ public abstract class ModoDeJuego implements ControladorJuego {
 		nivelActual.reiniciarNivel();
 	}
 
-	public void actualizarRanking(String nombre, int puntaje) {
-		if (rank != null) {
-			rank.agregarJugador(nombre, puntaje);
-		}
+	public void actualizarRanking(Jugador jugador) {
+		controlaGrafica.agregarAlRanking(jugador);
 	}
 
 	@Override

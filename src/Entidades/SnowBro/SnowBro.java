@@ -169,7 +169,7 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         if (miJuego != null && miJuego.getControladoraGrafica() != null) {
             GestorSonidos.getInstancia().detenerMusica();
             GestorSonidos.getInstancia().reproducirEfecto("gameover");
-            miJuego.actualizarRanking(jugador.getNombre(), puntaje);
+            miJuego.actualizarRanking(jugador);
             miJuego.getControladoraGrafica().mostrarPantallaGameOver();
             miJuego.reiniciarNivel();
         }

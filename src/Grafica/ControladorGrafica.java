@@ -1,4 +1,5 @@
 package Grafica;
+import Entidades.Jugador.Jugador;
 import Juego.ControladorJuego;
 import Juego.Entidad;
 import Juego.EntidadJugador;
@@ -20,4 +21,5 @@ public interface ControladorGrafica {
 	public boolean verificarColisiones(Entidad e);
 	public void actualizarTiempo(String timepo);
 	public void setImagenDeFondoNivel(String rutaImagen);
+	public void agregarAlRanking(Jugador jugador);
 }

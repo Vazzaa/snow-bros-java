@@ -2,6 +2,7 @@ package Grafica;
 
 import javax.swing.JFrame;
 
+import Entidades.Jugador.Jugador;
 import Juego.Clasico;
 import Juego.ContraReloj;
 import Juego.Supervivencia;
@@ -200,7 +201,6 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	}
 	public void sacarJugador(EntidadJugador e) {
 		panelNivel.removerEntidad(e.getObserverGrafico());
-		panelRanking.agregarJugadoresRanking(modoDeJuegoActual, e.getJugador());
 		refrescar();
 	}
 	
@@ -291,6 +291,12 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 
 	public void setImagenDeFondoNivel(String rutaImagen) {
 		panelNivel.setImagenDeFondo(rutaImagen);
+		refrescar();
+	}
+
+	@Override
+	public void agregarAlRanking(Jugador jugador) {
+		panelRanking.agregarJugadoresRanking(modoDeJuegoActual, jugador);
 		refrescar();
 	}
 }

@@ -59,6 +59,7 @@ public class Clasico extends ModoDeJuego {
     @Override
     public void juegoCompletado() {
         detenerHilos();
+        actualizarRanking(nivelActual.getSnowBro().getJugador());
         controlaGrafica.mostrarPantallaGameOver();
         GestorSonidos.getInstancia().detenerMusica();
         GestorSonidos.getInstancia().reproducirMusica("src/Sonidos/Background/09_Yoh_(Ending).wav");
