@@ -13,8 +13,8 @@ public class Supervivencia extends ModoDeJuego {
     private static final int ENEMIGOS_POR_OLEADA = 3;
     private static final long TIEMPO_ENTRE_OLEADAS = 10000;
 
-    protected boolean aparecioCalabaza;
     protected boolean aparecioMoghera;
+    protected boolean aparecioKamakichi;
 
     protected long tiempoInicio;
     protected long tiempoRestante;
@@ -40,6 +40,7 @@ public class Supervivencia extends ModoDeJuego {
         GestorSonidos.getInstancia().reproducirMusica("src/Sonidos/Background/06_Boss-Yade_(Boss).wav");
 
         aparecioMoghera = false;
+        aparecioKamakichi = false;
 
         tiempoInicio = System.currentTimeMillis();
         tiempoRestante = TIEMPO_ENTRE_OLEADAS;
@@ -93,7 +94,7 @@ public class Supervivencia extends ModoDeJuego {
             int x = 100 + random.nextInt(600); // Entre 100 y 700
             int y = 7600 + random.nextInt(200); // Entre 7600 y 7800
             
-            String[] tiposEnemigos = {"demonioRojo", "calabaza", "trollAmarillo", "ranaDeFuego", "moghera"};
+            String[] tiposEnemigos = {"demonioRojo", "trollAmarillo", "ranaDeFuego", "moghera", "kamakichi"};
             String tipoEnemigo = tiposEnemigos[random.nextInt(tiposEnemigos.length)];
             
             Enemigo nuevoEnemigo = null;
@@ -101,13 +102,6 @@ public class Supervivencia extends ModoDeJuego {
             switch (tipoEnemigo) {
                 case "demonioRojo":
                     nuevoEnemigo = miFabricaEntidades.getDemonioRojo(x, y);
-                    break;
-                case "calabaza":
-                    if (!aparecioCalabaza) {
-                        nuevoEnemigo = miFabricaEntidades.getCalabaza(x, y);
-                        System.out.println("Apareció la calabaza.");
-                        aparecioCalabaza = true;
-                    }
                     break;
                 case "trollAmarillo":
                     nuevoEnemigo = miFabricaEntidades.getTrollAmarillo(x, y);
@@ -117,10 +111,16 @@ public class Supervivencia extends ModoDeJuego {
                     break;
                 case "moghera":
                     if (!aparecioMoghera) {
-                        // nuevoEnemigo = miFabricaEntidades.getMoghera(x, y);
-                        // pls nerf moghera :(
+                        nuevoEnemigo = miFabricaEntidades.getMoghera(x, y);
                         GestorSonidos.getInstancia().reproducirEfecto("bossintro");
                         aparecioMoghera = true;
+                    }
+                    break;
+                case "kamakichi":
+                    if (!aparecioKamakichi) {
+                        nuevoEnemigo = miFabricaEntidades.getKamakichi(x, y);
+                        GestorSonidos.getInstancia().reproducirEfecto("bossintro");
+                        aparecioKamakichi = true;
                     }
                     break;
             }
@@ -139,6 +139,7 @@ public class Supervivencia extends ModoDeJuego {
         detenerHilos();
         limpiarNivelActual();
         aparecioMoghera = false;
+        aparecioKamakichi = false;
 
         int siguienteNivel = numeroNivelActual + 1;
         
