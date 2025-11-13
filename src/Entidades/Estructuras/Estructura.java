@@ -32,6 +32,10 @@ public abstract class Estructura extends Entidad implements Colisionable{
 
     public abstract boolean esSueloSolido();
 
+    public boolean destruyeBolaDeNieve() {
+        return false;
+    }
+
     public void mover() {}
 
 }

@@ -152,7 +152,7 @@ public class RanaDeFuego extends Enemigo {
         ColisionManagerEntidades colisionManager = new ColisionManagerEntidades();
         int nuevaX = getPosX() + velocidadDeslizamiento;
         for (Estructura estructura : getJuego().getNivel().getMisEstructuras()) {
-            if (estructura.bloquearMovimientoHorizontal()) {
+            if (estructura.bloquearMovimientoHorizontal() || estructura.destruyeBolaDeNieve()) {
                 Hitbox hitboxFutura = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), nuevaX, getPosY());
                 if (colisionaAABB(hitboxFutura, estructura.getHitbox())) {
                     destruirBolaDeNieve();
