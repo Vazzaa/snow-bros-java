@@ -76,15 +76,17 @@ public class PanelPantallaRanking extends PanelVista{
 
 
     public void agregarJugadoresRanking(int ModoDeJuego, Jugador j){
+        String nombre = j.getNombre();
+        int puntaje = j.getPuntaje();
         switch (ModoDeJuego) {
             case 1:
-                rankingClasico.agregarJugador(j);
+                rankingClasico.agregarJugador(nombre, puntaje);
                 break;
             case 2:
-                rankingContrarreloj.agregarJugador(j);
+                rankingContrarreloj.agregarJugador(nombre, puntaje);
                 break;
             case 3:
-                rankingSupervivencia.agregarJugador(j);
+                rankingSupervivencia.agregarJugador(nombre, puntaje);
                 break;
         }
         refrescarRankingsEnPantalla();

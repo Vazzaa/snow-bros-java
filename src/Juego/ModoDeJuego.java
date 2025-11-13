@@ -221,6 +221,12 @@ public abstract class ModoDeJuego implements ControladorJuego {
 		nivelActual.reiniciarNivel();
 	}
 
+	public void actualizarRanking(String nombre, int puntaje) {
+		if (rank != null) {
+			rank.agregarJugador(nombre, puntaje);
+		}
+	}
+
 	@Override
 	public boolean debeMostrarTiempo() {
 		return false;
