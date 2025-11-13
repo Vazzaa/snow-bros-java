@@ -9,5 +9,6 @@ public interface EntidadLogica {
 	public int getPosX();
 	public int getPosY();
 	public ObserverGrafico getObserverGrafico();
-	
+	public int getRenderAncho();
+	public int getRenderAlto();
 }

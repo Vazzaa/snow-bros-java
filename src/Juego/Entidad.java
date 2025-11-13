@@ -67,4 +67,14 @@ public abstract class Entidad implements EntidadLogica {
 		return cm.colisionaAABB(h1, h2);
 	}
 
+	@Override
+	public int getRenderAncho() {
+		return 0; // Por defecto, 0 significa "usar el tamaño de la imagen"
+	}
+
+	@Override
+	public int getRenderAlto() {
+		return 0; // Por defecto, 0 significa "usar el tamaño de la imagen"
+	}
+
 }

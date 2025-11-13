@@ -34,6 +34,8 @@ public class Moghera extends Enemigo {
         this.vida = 10;
         this.fabParaFuego = fabParaFuego;
         this.estadoMovimiento = new EnemigoQuieto();
+        this.miHitbox.setAlto(90);
+        this.miHitbox.setAncho(64);
     }
 
     @Override
@@ -180,5 +182,15 @@ public class Moghera extends Enemigo {
     public void colisionarEstructura(Estructura e) {
         // TODO Auto-generated method stub
         
+    }
+
+    @Override
+    public int getRenderAncho() {
+        return this.miHitbox.getAncho();
+    }
+
+    @Override
+    public int getRenderAlto() {
+        return this.miHitbox.getAlto();
     }
 }
