@@ -111,7 +111,7 @@ public class FabricaDominio2 extends FabricaSkin {
     }
 
     public Skin crearSkinPlatMovil(){
-        return new Skin(getMapeoEstadoImagen("Plataforma", 1), 1);
+        return new Skin(getMapeoEstadoImagen("Plataforma", 4), 1);
     }
 
     public Skin crearSkinBomba(){

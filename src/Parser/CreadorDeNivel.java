@@ -81,7 +81,7 @@ public class CreadorDeNivel {
                         String[] coords = linea.substring(10).split(",");
                         int x = Integer.parseInt(coords[0].trim());
                         int y = Integer.parseInt(coords[1].trim());
-                        Estructura platMovil = fabEntidades.getPlatMovil(x, y);
+                        Estructura platMovil = fabEntidades.getPlatMovil(x, y, numeroNivel);
                         if (platMovil != null) {
                             estructuras.add(platMovil);
                         }

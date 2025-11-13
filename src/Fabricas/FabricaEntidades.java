@@ -106,12 +106,14 @@ public class FabricaEntidades {
         return new PlatQuebradiza(this.fabricaSkin.crearSkinPlatQuebradiza(), miJuego, x, y);
     }
 
-public Estructura getPlatMovil(int x, int y) {
-    if (y % 2 == 0) { // Si 'y' es par, crea una horizontal
-        return new PlatMovilHorizontal(fabricaSkin.crearSkinPlatMovil(), miJuego, x, y);
-    } 
-    else {
-        return new PlatMovilVertical(fabricaSkin.crearSkinPlatMovil(), miJuego, x, y);
+public Estructura getPlatMovil(int x, int y,int numeroNivel) {
+    Skin skin = fabricaSkin.crearSkinPlatMovil();
+    int estadoSkin = ((numeroNivel - 1) / 3) + 1;
+    skin.setEstadoActual(estadoSkin);
+    if (y % 2 == 0) {
+        return new PlatMovilHorizontal(skin, miJuego, x, y);
+    } else {
+        return new PlatMovilVertical(skin, miJuego, x, y);
     }
 }
 
