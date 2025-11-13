@@ -288,5 +288,9 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 			panelNivel.actualizarTiempo(timepo);
 		}
 	}
-    
+
+	public void setImagenDeFondoNivel(String rutaImagen) {
+		panelNivel.setImagenDeFondo(rutaImagen);
+		refrescar();
+	}
 }
