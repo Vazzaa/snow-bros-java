@@ -24,7 +24,15 @@ public class ParedDestructible extends Pared implements Destructible {
     }
 
     public void afectar(SnowBro s) {
-        s.setEnContactoConEscalera(false);
+        int pieSnowBro = s.getPosY();
+        int techoPared = this.miHitbox.getPosY() + this.miHitbox.getAlto();
+        boolean estaEncima = Math.abs(pieSnowBro - techoPared) < 5;
+        if (estaEncima) {
+            s.getEstadoMovimiento().enElSuelo = true;
+            s.setPosY(techoPared); 
+        } else {
+            super.afectar(s);
+        }
     }
 
     public void afectar (Enemigo e) {
@@ -57,6 +65,11 @@ public class ParedDestructible extends Pared implements Destructible {
 
     public int getPuntaje() {
         return puntaje;
+    }
+
+    @Override
+    public boolean esSueloSolido() {
+        return true;
     }
 
 }
