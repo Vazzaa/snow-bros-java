@@ -6,6 +6,7 @@ import Entidades.Jugador.Jugador;
 import Entidades.PowerUp.PowerUp;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.FabricaDominio1;
+import Fabricas.FabricaDominio2;
 import Fabricas.FabricaEntidades;
 import Fabricas.FabricaSkin;
 import Parser.CreadorDeNivel;
@@ -31,10 +32,9 @@ public abstract class ModoDeJuego implements ControladorJuego {
 	// Comandos
 	public ModoDeJuego(ControladorGrafica controlador_grafica) {
 		this.controlaGrafica = controlador_grafica;
-		fabricaSkins = new FabricaDominio1();
-		miFabricaEntidades = new FabricaEntidades(fabricaSkins, this);
-		miCreadorNivel = new CreadorDeNivel(fabricaSkins);
-		miCreadorNivel.setFrabricaEntidades(miFabricaEntidades);
+		fabricaSkins = null;
+		miFabricaEntidades = null;
+		miCreadorNivel = null;
 		numeroNivelActual = 1;
 	}
 
@@ -67,11 +67,17 @@ public abstract class ModoDeJuego implements ControladorJuego {
 	}
 
 	public void activarDominio1(){
-
+		fabricaSkins = new FabricaDominio1();
+		miFabricaEntidades = new FabricaEntidades(fabricaSkins, this);
+		miCreadorNivel = new CreadorDeNivel(fabricaSkins);
+		miCreadorNivel.setFrabricaEntidades(miFabricaEntidades);
 	}
 
 	public void activarDominio2(){
-		
+		fabricaSkins = new FabricaDominio2();
+		miFabricaEntidades = new FabricaEntidades(fabricaSkins, this);
+		miCreadorNivel = new CreadorDeNivel(fabricaSkins);
+		miCreadorNivel.setFrabricaEntidades(miFabricaEntidades);
 	}
 
 	public void moverJugador(){
