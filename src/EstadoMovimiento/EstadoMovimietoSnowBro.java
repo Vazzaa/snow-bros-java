@@ -169,8 +169,12 @@ public class EstadoMovimietoSnowBro {
             boolean colisionaria = false;
             for (Estructura estructura : snowBro.getNivel().getMisEstructuras()) {
                 if (estructura.bloquearMovimientoHorizontal()){
+                    // Comprobación para evitar el bloqueo cuando SnowBro está encima de la estructura.
+                    int pieSnowBro = snowBro.getPosY();
+                    int techoEstructura = estructura.getHitbox().getPosY() + estructura.getHitbox().getAlto();
+                    boolean estaEncima = Math.abs(pieSnowBro - techoEstructura) < 5;
                     Hitbox hitboxFutura = new Hitbox(snowBro.getHitbox().getAncho(), snowBro.getHitbox().getAlto(), nuevaX, snowBro.getPosY());
-                    if (controladorColisiones.colisionaAABB(hitboxFutura, estructura.getHitbox())) {
+                    if (!estaEncima && controladorColisiones.colisionaAABB(hitboxFutura, estructura.getHitbox())) {
                         colisionaria = true;
                         break;
                     }
