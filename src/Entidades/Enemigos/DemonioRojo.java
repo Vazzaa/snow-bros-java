@@ -206,8 +206,6 @@ public class DemonioRojo extends Enemigo {
         estaVivo=false;
         GestorSonidos.getInstancia().reproducirEfecto("enemy_death");
         crearPowerUp();
-        getJuego().getNivel().getSnowBro().sumarPuntaje(this.puntaje); // El puntaje se suma en el método morir del enemigo arrollado
-        return;
     }
 
     private void skinAleatoriaFruta(PowerUp p) {

@@ -65,9 +65,7 @@ public class TrollAmarillo extends Enemigo{
     public void morir() {
         estaVivo=false;
         GestorSonidos.getInstancia().reproducirEfecto("enemy_death");
-        getJuego().getNivel().getSnowBro().sumarPuntaje(puntaje);
         crearPowerUp();
-        return;
     }
     
     protected void crearPowerUp() {
