@@ -10,22 +10,15 @@ import Fabricas.Skin;
 import Juego.ModoDeJuego;
 import Visitors.Colisionable;
 import EstadoMovimiento.EnemigoVoladorCaminandoIzquierda;
-import EstadoMovimiento.EnemigoQuieto;
 import EstadoMovimiento.EnemigoVoladorCaminandoDerecha;
 import EstadoMovimiento.EnemigoVoladorQuieto;
 import EstadoMovimiento.EnemigoVoladorDiagonal;
 
 public class Fantasma extends Enemigo{
     
-    protected static final int ESTADO_INICIAL = 0;
-    protected static final int ESTADO_ESTUNEADO = 1;
-
     protected int estadoInicial;
     protected int movimientoActual;
     private static final int VELOCIDAD = 1;
-
-    private long tiempoFinCongelado = 0;
-    private static final int DURACION_ESTUNEADO_MS = 3000;
 
     public Fantasma(Skin skins,ModoDeJuego juego ,int posX, int posY){
         super(skins, juego, posX, posY, 0,300);
@@ -60,40 +53,14 @@ public class Fantasma extends Enemigo{
     @Override
     public void moverse() {
         if (!detenidoGlobalmente) {
-            if (estadoInicial > ESTADO_INICIAL) {
-                estadoMovimiento = new EnemigoQuieto();
-            } else {
-                cambiarEstado();
-            }
-
-            verificarEstuneo();
+            cambiarEstado();
             estadoMovimiento.moverse(this, VELOCIDAD);
         }
     }
 
     @Override
     public void recibirDisparo() {
-        if(estadoInicial != ESTADO_ESTUNEADO){
-            estadoInicial++;
-            actualizarEstadoEstuneado();
-        }
-    }
-
-    private void actualizarEstadoEstuneado(){
-        if (estadoInicial > ESTADO_INICIAL) {
-            tiempoFinCongelado = System.currentTimeMillis() + DURACION_ESTUNEADO_MS;
-        }
-        else {
-            tiempoFinCongelado = 0; 
-        }
-    }
-
-    private void verificarEstuneo() {
-        if (estadoInicial <= ESTADO_INICIAL || tiempoFinCongelado == 0 || System.currentTimeMillis() < tiempoFinCongelado) {
-            return;
-        }
-        estadoInicial--;
-        actualizarEstadoEstuneado();
+        //no es alcanzado
     }
 
     @Override
@@ -163,9 +130,7 @@ public class Fantasma extends Enemigo{
 
     @Override
     public void colisionarProyectil(Proyectil p) {
-        if (this.colisionaAABB(miHitbox, p.getHitbox())) {
-            p.afectar(this);
-        }
+        //no hace nada
     }
 
     @Override

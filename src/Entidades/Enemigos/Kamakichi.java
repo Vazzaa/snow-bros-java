@@ -93,10 +93,6 @@ public class Kamakichi extends Enemigo {
         return misAspectos;
     }
 
-    public Bomba crearBomba(){
-        return null;
-    }
-
     @Override
     public void cambiarEstado() {
         long tiempoActual = System.currentTimeMillis();
