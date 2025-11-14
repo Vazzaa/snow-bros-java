@@ -70,7 +70,6 @@ public class ObserverGrafico extends JLabel implements Observer {
 			int alto = this.getIcon().getIconHeight();
 
 			if (entidadObservada.getRenderAncho() > 0) {
-				x_pantalla = x_pantalla - (ancho / 2);
 				y_pantalla = y_pantalla - (alto / 2);
 			}
 
