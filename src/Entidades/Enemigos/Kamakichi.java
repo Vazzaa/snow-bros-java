@@ -22,6 +22,7 @@ public class Kamakichi extends Enemigo {
     protected int movimientoActual;
     protected int vida;
 
+    private static final int VIDA_MAXIMA = 50;
     private static final long INTERVALO_CAMBIO_KAMAKICHI = 2000;
 
     public Kamakichi(Skin skins, ModoDeJuego juego, int posX, int posY, FabricaEntidades fabParaBomba) {
@@ -77,8 +78,26 @@ public class Kamakichi extends Enemigo {
         vida--;
         if (vida <= 0) {
             morir();
+        } else {
+            actualizarSkinPorVida();
         }
         
+    }
+
+    private void actualizarSkinPorVida() {
+        double ratioVida = (double)this.vida / VIDA_MAXIMA;
+
+        if (ratioVida >= 0.8) {
+            misAspectos.setEstadoActual(2);
+        } else if (ratioVida >= 0.6) {
+            misAspectos.setEstadoActual(1);
+        } else if (ratioVida >= 0.4) {
+            misAspectos.setEstadoActual(4);
+        } else {
+            misAspectos.setEstadoActual(5); 
+        }
+        
+        notificarObserver();
     }
 
     @Override
