@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class Supervivencia extends ModoDeJuego {
 
-    private static final int PUNTUACION_OBJETIVO = 50000;
+    private static final int PUNTUACION_OBJETIVO = 500;
     private static final int ENEMIGOS_POR_OLEADA = 3;
     private static final long TIEMPO_ENTRE_OLEADAS = 10000;
 
@@ -56,7 +56,8 @@ public class Supervivencia extends ModoDeJuego {
 
             if (puntajeActual >= PUNTUACION_OBJETIVO) {
                 System.out.println("Objetivo alcanzado.");
-                avanzarSiguienteNivel();
+                juegoCompletado();
+                return;
             }
             else {
                 actualizarTiempo();
@@ -132,34 +133,12 @@ public class Supervivencia extends ModoDeJuego {
         }
     }
 
-    protected void avanzarSiguienteNivel() {
-        int puntajeActual = nivelActual.getSnowBro().getPuntaje();
-        
-        detenerHilos();
-        limpiarNivelActual();
-        aparecioMoghera = false;
-        aparecioKamakichi = false;
-
-        int siguienteNivel = numeroNivelActual + 1;
-        
-        String archivoSiguienteNivel = "nivel" + siguienteNivel + ".txt";
-        java.io.File archivo = new java.io.File(archivoSiguienteNivel);
-            
-        if (archivo.exists()) {
-            GestorSonidos.getInstancia().reproducirEfecto("level_up");
-            System.out.println("Cargando nivel " + siguienteNivel + "...");
-            cargarNivel(siguienteNivel, puntajeActual);
-            iniciarHilos();
-        } else {
-            System.out.println("No hay mas niveles. Fin.");
-            nivelActual.getSnowBro().sumarPuntaje(puntajeActual);
-            juegoCompletado();
-        }
-    }
-
     @Override
     public void juegoCompletado() {
         detenerHilos();
+        Jugador jugadorFinal= nivelActual.getSnowBro().getJugador();
+        jugadorFinal.sumarPuntaje(nivelActual.getSnowBro().getPuntaje());
+        actualizarRanking(nivelActual.getSnowBro().getJugador());
         controlaGrafica.mostrarPantallaGameOver();
         GestorSonidos.getInstancia().detenerMusica();
         GestorSonidos.getInstancia().reproducirMusica("src/Sonidos/Background/09_Yoh_(Ending).wav");
