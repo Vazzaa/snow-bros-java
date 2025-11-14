@@ -20,7 +20,7 @@ import Fabricas.FabricaEntidades;
 
 public class Moghera extends Enemigo {
 
-    private static final int VELOCIDAD = 2;
+    private static final int VELOCIDAD = 1;
     protected ColisionManagerEntidades colisionManager;
     protected int movimientoActual;
     protected int vida;

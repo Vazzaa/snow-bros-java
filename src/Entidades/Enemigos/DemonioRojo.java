@@ -121,6 +121,7 @@ public class DemonioRojo extends Enemigo {
                     Hitbox hitboxFutura = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), nuevaX, getPosY());
                     if (colisionaAABB(hitboxFutura, estructura.getHitbox())) {
                         destruirBolaDeNieve();
+                        estructura.destruir();
                         return;
                     }
                 }

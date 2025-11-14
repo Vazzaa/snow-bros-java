@@ -176,12 +176,24 @@ public class Nivel {
                             snowBro.colisionarProyectil(proyectil);
                         }
                     }
+                    // Primero recopilar todas las estructuras con las que colisiona
+                    java.util.List<Estructura> estructurasColisionadas = new java.util.ArrayList<>();
                     if (misEstructuras != null) {
                         for (Estructura estructura : misEstructuras) {
                             if (proyectil.colisionaAABB(proyectil.getHitbox(), estructura.getHitbox())) {
-                                proyectil.afectar(estructura);
+                                estructurasColisionadas.add(estructura);
                             }
                         }
+                    }
+                    boolean debeEliminarse = false;
+                    for (Estructura estructura : estructurasColisionadas) {
+                        proyectil.afectar(estructura);
+                        if (estructura.destruyeBolaDeNieve()) {
+                            debeEliminarse = true;
+                        }
+                    }
+                    if (debeEliminarse) {
+                        proyectil.eliminar();
                     }
                 }
             }

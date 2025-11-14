@@ -190,7 +190,6 @@ public class RanaDeFuego extends Enemigo {
             }
             
             if (!hayPlataformaDebajo) {
-                // No hay plataforma sólida debajo, aplicar gravedad
                 velocidadVerticalDeslizamiento -= gravedadDeslizamiento;
                 int nuevaY = getPosY() + velocidadVerticalDeslizamiento;
                 boolean colisionaVertical = false;
@@ -216,7 +215,6 @@ public class RanaDeFuego extends Enemigo {
                 }
 
             } else {
-                // Hay plataforma debajo, mantener velocidad vertical en 0
                 velocidadVerticalDeslizamiento = 0;
             }
             

@@ -36,6 +36,7 @@ public abstract class Estructura extends Entidad implements Colisionable{
         return false;
     }
 
+    public void destruir() {};
     public void mover() {}
 
 }
