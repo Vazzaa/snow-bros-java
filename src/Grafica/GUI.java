@@ -298,4 +298,8 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 		panelRanking.agregarJugadoresRanking(modoDeJuegoActual, jugador);
 		refrescar();
 	}
+	public void limpiarNivel() {
+		panelNivel.limpiarPanel();
+		refrescar();
+	}
 }

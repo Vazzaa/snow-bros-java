@@ -4,6 +4,7 @@ import Entidades.Enemigos.Enemigo;
 import Entidades.Estructuras.Estructura;
 import Entidades.Jugador.Jugador;
 import Entidades.PowerUp.PowerUp;
+import Entidades.Proyectiles.Proyectil;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.FabricaDominio1;
 import Fabricas.FabricaDominio2;
@@ -118,7 +119,7 @@ public abstract class ModoDeJuego implements ControladorJuego {
 		if(nivelActual != null) {
 			if (nivelActual.getSnowBro() != null)
 				controlaGrafica.sacarJugador(nivelActual.getSnowBro());
-
+			controlaGrafica.limpiarNivel();
 			for(Estructura es : nivelActual.getMisEstructuras()){
 				controlaGrafica.sacarEntidad(es);
 			}
@@ -127,6 +128,9 @@ public abstract class ModoDeJuego implements ControladorJuego {
 			}
 			for(PowerUp pu : nivelActual.getMisPowerUps()){
 				controlaGrafica.sacarEntidad(pu);
+			}
+			for(Proyectil pr : nivelActual.getMisProyectiles()){
+				controlaGrafica.sacarEntidad(pr);
 			}
 		}
 	}
