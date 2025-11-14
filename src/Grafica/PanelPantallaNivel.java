@@ -174,4 +174,9 @@ public class PanelPantallaNivel extends PanelVista{
 
         this.add(panelInformacion, BorderLayout.NORTH);
     }
+    public void limpiarPanel() {
+        imagenFondo.removeAll();
+        imagenFondo.revalidate();
+        imagenFondo.repaint();
+    }
 }
