@@ -139,6 +139,7 @@ public class TrollAmarillo extends Enemigo{
                 if (otroEnemigo != this && otroEnemigo.estaVivo() && !otroEnemigo.estaCompletamenteCongelado()) {
                     if (colisionaAABB(getHitbox(), otroEnemigo.getHitbox())) {
                         otroEnemigo.morir();
+                        destruirBolaDeNieve();
                         return;
                     }
                 }
