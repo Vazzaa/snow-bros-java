@@ -1,7 +1,11 @@
 package Juego;
+import java.io.Serializable;
+
 import Entidades.Jugador.Jugador;
 
-public class Ranking {
+public class Ranking implements Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     protected Jugador puntajes [];
     protected int cantJugadores = 0;

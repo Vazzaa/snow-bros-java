@@ -92,6 +92,8 @@ public class ContraReloj extends ModoDeJuego{
 
     public void juegoCompletado() {
         detenerHilos();
+        Jugador jugadorFinal= nivelActual.getSnowBro().getJugador();
+        jugadorFinal.sumarPuntaje(nivelActual.getSnowBro().getPuntaje());
         actualizarRanking(nivelActual.getSnowBro().getJugador());
         controlaGrafica.mostrarPantallaGameOver();
         GestorSonidos.getInstancia().detenerMusica();
