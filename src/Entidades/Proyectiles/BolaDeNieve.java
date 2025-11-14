@@ -39,4 +39,8 @@ public class BolaDeNieve extends Proyectil{
     public boolean afectaAEnemigos() {
         return true;
     }
+
+    public boolean puedeRomperParedDestructible() {
+        return true;
+    }
 }

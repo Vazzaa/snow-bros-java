@@ -90,4 +90,9 @@ public class PlatMovilVertical extends Plataforma {
     public int getVelocidadDeArrastreY() {
         return velocidad * direccion;
     }
+
+    @Override
+    public boolean esSueloSolido() {
+        return true;
+    }
 }

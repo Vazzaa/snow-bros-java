@@ -70,6 +70,9 @@ public class ContraReloj extends ModoDeJuego{
             tiempoAgotado = true;
         }
         
+        if (numeroNivelActual == 3 && (tiempoTranscurrido >= 20000 || nivelActual.getMisEnemigos().isEmpty()))
+            nivelActual.spawnMoghera();
+
         controlaGrafica.actualizarTiempo(getTiempoRestanteFormateado());
 
         if (tiempoRestante <= 30000 && tiempoRestante > 29000) {
@@ -124,7 +127,7 @@ public class ContraReloj extends ModoDeJuego{
             System.out.println("Cargando nivel " + siguienteNivel + "...");
             cargarNivel(siguienteNivel, puntajeActual);
             iniciarHilos();
-            if (numeroNivelActual == 3 || numeroNivelActual == 6)
+            if (numeroNivelActual == 6)
                 GestorSonidos.getInstancia().reproducirEfecto("bossintro");
         } else {
             System.out.println("No hay mas niveles. Fin.");
