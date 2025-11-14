@@ -14,6 +14,7 @@ public interface ControladorGrafica {
 	public void mostrarPantallaRanking();
 	public void mostrarPantallaElegirDominio();
 	public void mostrarPantallaElegirModoJuego();
+	public void mostrarPantallaVictoria();
 	public Observer registrarEntidad(EntidadLogica e);
 	public Observer registrarJugador(EntidadJugador e);
 	public void sacarEntidad(EntidadLogica e);

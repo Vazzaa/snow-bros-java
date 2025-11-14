@@ -160,7 +160,7 @@ public class Supervivencia extends ModoDeJuego {
     @Override
     public void juegoCompletado() {
         detenerHilos();
-        controlaGrafica.mostrarPantallaGameOver();
+        controlaGrafica.mostrarPantallaVictoria();
         GestorSonidos.getInstancia().detenerMusica();
         GestorSonidos.getInstancia().reproducirMusica("src/Sonidos/Background/09_Yoh_(Ending).wav");
     }

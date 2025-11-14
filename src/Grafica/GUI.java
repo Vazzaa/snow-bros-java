@@ -22,6 +22,7 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	protected PanelPantallaElegirDominio panelElegirDominio;
 	protected PanelPantallaNivel panelNivel;
 	protected PanelPantallaGameOver panelGameOver;
+	protected PanelPantallaVictoria panelVictoria;
 	protected JFrame ventana;
 	protected ControladorJuego controlarJuego;
 	protected ConstantesTeclado keyListener;
@@ -34,6 +35,7 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 		panelElegirDominio = new PanelPantallaElegirDominio(this);
 		panelNivel = new PanelPantallaNivel(this);
 		panelGameOver = new PanelPantallaGameOver(this);
+		panelVictoria = new PanelPantallaVictoria(this);
 		configurarVentana();
 		registrarOyenteVentana();
 
@@ -170,6 +172,11 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	@Override
 	public void mostrarPantallaElegirModoJuego() {
 		ventana.setContentPane(panelElegirModoJuego);
+		refrescar();
+	}
+
+	public void mostrarPantallaVictoria() {
+		ventana.setContentPane(panelVictoria);
 		refrescar();
 	}
 	

@@ -98,6 +98,14 @@ public class ContraReloj extends ModoDeJuego{
         GestorSonidos.getInstancia().reproducirMusica("src/Sonidos/Background/09_Yoh_(Ending).wav");
     }
 
+    public void juegoGanado() {
+        detenerHilos();
+        actualizarRanking(nivelActual.getSnowBro().getJugador());
+        controlaGrafica.mostrarPantallaVictoria();
+        GestorSonidos.getInstancia().detenerMusica();
+        GestorSonidos.getInstancia().reproducirMusica("src/Sonidos/Background/09_Yoh_(Ending).wav");
+    }
+
     protected void avanzarSiguienteNivel() {
         int puntajeActual = nivelActual.getSnowBro().getPuntaje();
         
@@ -119,7 +127,7 @@ public class ContraReloj extends ModoDeJuego{
         } else {
             System.out.println("No hay mas niveles. Fin.");
             nivelActual.getSnowBro().sumarPuntaje(puntajeActual);
-            juegoCompletado();
+            juegoGanado();
         }
     }
 
