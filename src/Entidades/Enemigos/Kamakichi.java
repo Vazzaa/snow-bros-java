@@ -67,9 +67,10 @@ public class Kamakichi extends Enemigo {
 
     @Override
     public void moverse() {
-        if (detenidoGlobalmente) return;
-        cambiarEstado();
-        estadoMovimiento.moverse(this, VELOCIDAD);
+        if (!detenidoGlobalmente) {
+            cambiarEstado();
+            estadoMovimiento.moverse(this, VELOCIDAD);
+        } 
     }
 
     @Override
@@ -97,43 +98,40 @@ public class Kamakichi extends Enemigo {
     }
 
     @Override
-public void cambiarEstado() {
-    long tiempoActual = System.currentTimeMillis();
-    if (tiempoActual - tiempoUltimoCambio >= INTERVALO_CAMBIO_KAMAKICHI) {
-        if (estadoMovimiento != null && estadoMovimiento.puedeCambiarEstado(this)) {
-            EstadoMovimientoEnemigo siguienteEstado = estadoMovimiento.obtenerSiguienteEstado(this);
-            if (siguienteEstado != null) {
-                estadoMovimiento = siguienteEstado;
-                tiempoUltimoCambio = tiempoActual;
-                return;
+    public void cambiarEstado() {
+        long tiempoActual = System.currentTimeMillis();
+        if (tiempoActual - tiempoUltimoCambio >= INTERVALO_CAMBIO_KAMAKICHI) {
+            if (estadoMovimiento != null && estadoMovimiento.puedeCambiarEstado(this)) {
+                EstadoMovimientoEnemigo siguienteEstado = estadoMovimiento.obtenerSiguienteEstado(this);
+                if (siguienteEstado != null) {
+                    estadoMovimiento = siguienteEstado;
+                    tiempoUltimoCambio = tiempoActual;
+                    return;
+                }
             }
-            // Si puede cambiar pero obtenerSiguienteEstado devuelve null,
-            // significa que Kamakichi debe decidir su propio siguiente estado
+            
+            movimientoActual = (int) (Math.random() * 4 + 1);
+            switch(movimientoActual) {
+                case 1:
+                    estadoMovimiento = new EnemigoKamakichiBajando(this);
+                    break;
+                case 2:
+                    estadoMovimiento = new EnemigoKamakichiVertical(1);
+                    break;
+                case 3:
+                    estadoMovimiento = new EnemigoQuieto();
+                    break;
+                case 4:
+                    dispararBombas();
+                    dispararBombas();
+                    break;
+            }
+            tiempoUltimoCambio = tiempoActual;
         }
-        
-        // Lógica propia de Kamakichi cuando el estado permite decidir
-        movimientoActual = (int) (Math.random() * 4 + 1);
-        switch(movimientoActual) {
-            case 1:
-                estadoMovimiento = new EnemigoKamakichiBajando(this);
-                break;
-            case 2:
-                estadoMovimiento = new EnemigoKamakichiVertical(1);
-                break;
-            case 3:
-                estadoMovimiento = new EnemigoQuieto();
-                break;
-            case 4:
-                dispararBombas();
-                dispararBombas();
-                break;
-        }
-        tiempoUltimoCambio = tiempoActual;
     }
-}
 
     protected void dispararBombas(){
-         if (miJuego != null && miJuego.getNivel() != null) {
+        if (miJuego != null && miJuego.getNivel() != null) {
             Bomba enemigoBomba = fabParaBomba.getBomba(miHitbox.getPosX(), miHitbox.getPosY());
             miJuego.registrarObserver(enemigoBomba);
             miJuego.getNivel().agregarEnemigos(enemigoBomba);
@@ -176,7 +174,7 @@ public void cambiarEstado() {
 
     @Override
     public void colisionarProyectil(Proyectil p) {
-            if (this.colisionaAABB(miHitbox, p.getHitbox())) {
+        if (this.colisionaAABB(miHitbox, p.getHitbox())) {
             p.afectar(this);
         }
     }
@@ -196,5 +194,5 @@ public void cambiarEstado() {
     public void moverVerticalmente(int i) {
         setPosY(getPosY() + i);
         notificarObserver();
-}
+    }
 }

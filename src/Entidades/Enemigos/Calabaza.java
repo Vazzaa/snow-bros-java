@@ -79,16 +79,17 @@ public class Calabaza extends Enemigo{
 
     @Override
     public void moverse() {
-        if (detenidoGlobalmente) return;
-        if ( estadoInicial > ESTADO_INICIAL) {
-            estadoMovimiento = new EnemigoQuieto();
-        } else {
-            cambiarEstado();
-        }
+        if (!detenidoGlobalmente) {
+            if (estadoInicial > ESTADO_INICIAL) {
+                estadoMovimiento = new EnemigoQuieto();
+            } else {
+                cambiarEstado();
+            }
 
-        verificarEstuneo();
-        estadoMovimiento.moverse(this, VELOCIDAD);
-        crearFantasma();
+            verificarEstuneo();
+            estadoMovimiento.moverse(this, VELOCIDAD);
+            crearFantasma();
+        }
     }
 
     @Override
@@ -146,7 +147,7 @@ public class Calabaza extends Enemigo{
         if (tiempoActual - tiempoUltimoCambio >= INTERVALO_CAMBIO) {
             switch(movimientoActual){
                 case 1:
-                     estadoMovimiento = new EnemigoVoladorCaminandoIzquierda();
+                    estadoMovimiento = new EnemigoVoladorCaminandoIzquierda();
                     break;
                 case 2:
                     estadoMovimiento = new EnemigoVoladorCaminandoDerecha();

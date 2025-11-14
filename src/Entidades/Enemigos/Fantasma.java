@@ -59,15 +59,16 @@ public class Fantasma extends Enemigo{
 
     @Override
     public void moverse() {
-        if (detenidoGlobalmente) return;
-        if ( estadoInicial > ESTADO_INICIAL) {
-            estadoMovimiento = new EnemigoQuieto();
-        } else {
-            cambiarEstado();
-        }
+        if (!detenidoGlobalmente) {
+            if (estadoInicial > ESTADO_INICIAL) {
+                estadoMovimiento = new EnemigoQuieto();
+            } else {
+                cambiarEstado();
+            }
 
-        verificarEstuneo();
-        estadoMovimiento.moverse(this, VELOCIDAD);
+            verificarEstuneo();
+            estadoMovimiento.moverse(this, VELOCIDAD);
+        }
     }
 
     @Override

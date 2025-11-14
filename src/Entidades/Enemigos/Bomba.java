@@ -69,99 +69,106 @@ public class Bomba extends Enemigo{
 
     @Override
     public void moverse() {
-        if (estadoActual == EstadoBomba.FINALIZADA) return;
+        if (estadoActual != EstadoBomba.FINALIZADA) {
 
-        if (estaSiendoEmpujado() && estaCompletamenteCongelado()) {
-            deslizarse();
-            return;
-        }
+            if (estaSiendoEmpujado() && estaCompletamenteCongelado()) {
+                deslizarse();
+            }
 
-        if (detenidoGlobalmente) {
-            notificarObserver();
-            return;
-        }
+            else if (detenidoGlobalmente) {
+                notificarObserver();
+            }
 
-        if (estadoNieve > ESTADO_INICIAL) {
-            estadoMovimiento = new EnemigoQuieto();
-            verificarDerretimiento();
-            notificarObserver();
-            return;
-        }
-
-        long tiempoActual = System.currentTimeMillis();
-        switch (estadoActual) {
-            case NORMAL:
-                if (tiempoActual - tiempoCambioEstado >= DURACION_NORMAL) {
-                    estadoActual = EstadoBomba.ENCENDIDA;
-                    tiempoCambioEstado = tiempoActual;
-                }
-                cambiarEstado();
-                break;
-
-            case ENCENDIDA:
-                if (tiempoActual - tiempoCambioEstado >= DURACION_ENCENDIDA) {
-                    explotarYMorir();
-                    return;
-                }
-                cambiarEstado();
-                break;
-
-            case EXPLOTANDO:
+            else if (estadoNieve > ESTADO_INICIAL) {
                 estadoMovimiento = new EnemigoQuieto();
-                if (tiempoActual - tiempoCambioEstado >= DURACION_EXPLOSION) {
-                    morir();
+                verificarDerretimiento();
+                notificarObserver();
+            }
+
+            else {
+                long tiempoActual = System.currentTimeMillis();
+                switch (estadoActual) {
+                    case NORMAL:
+                        if (tiempoActual - tiempoCambioEstado >= DURACION_NORMAL) {
+                            estadoActual = EstadoBomba.ENCENDIDA;
+                            tiempoCambioEstado = tiempoActual;
+                        }
+                        cambiarEstado();
+                        break;
+
+                    case ENCENDIDA:
+                        if (tiempoActual - tiempoCambioEstado >= DURACION_ENCENDIDA) {
+                            explotarYMorir();
+                            return;
+                        }
+                        cambiarEstado();
+                        break;
+
+                    case EXPLOTANDO:
+                        estadoMovimiento = new EnemigoQuieto();
+                        if (tiempoActual - tiempoCambioEstado >= DURACION_EXPLOSION) {
+                            morir();
+                        }
+                        break;
+
+                    case FINALIZADA:
+                        break;
                 }
-                break;
 
-            case FINALIZADA:
-                break;
+                if (estadoMovimiento != null) {
+                    estadoMovimiento.moverse(this, VELOCIDAD);
+                }
+
+                notificarObserver();
+            }
         }
-
-        if (estadoMovimiento != null) {
-            estadoMovimiento.moverse(this, VELOCIDAD);
-        }
-
-        notificarObserver();
     }
 
     public void deslizarse() {
-        if (getJuego() == null || getJuego().getNivel() == null) return;
-        ColisionManagerEntidades colisionManager = new ColisionManagerEntidades();
-        int nuevaX = getPosX() + velocidadDeslizamiento;
-        for (Estructura estructura : getJuego().getNivel().getMisEstructuras()) {
-            if (estructura.bloquearMovimientoHorizontal()) {
-                Hitbox hitboxFutura = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), nuevaX, getPosY());
-                if (colisionaAABB(hitboxFutura, estructura.getHitbox())) {
-                    morir();
-                    return;
+        if (getJuego() != null && getJuego().getNivel() != null) {
+
+            ColisionManagerEntidades colisionManager = new ColisionManagerEntidades();
+            int nuevaX = getPosX() + velocidadDeslizamiento;
+
+            for (Estructura estructura : getJuego().getNivel().getMisEstructuras()) {
+                if (estructura.bloquearMovimientoHorizontal() || estructura.destruyeBolaDeNieve()) {
+                    Hitbox hitboxFutura = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), nuevaX, getPosY());
+                    if (colisionaAABB(hitboxFutura, estructura.getHitbox())) {
+                        morir();
+                        return;
+                    }
                 }
             }
-        }
-        for (Enemigo otroEnemigo : getJuego().getNivel().getMisEnemigos()) {
-            if (otroEnemigo != this && otroEnemigo.estaVivo() && !otroEnemigo.estaCompletamenteCongelado()) {
-                if (colisionaAABB(getHitbox(), otroEnemigo.getHitbox())) {
-                    otroEnemigo.morir();
-                    return;
+
+            for (Enemigo otroEnemigo : getJuego().getNivel().getMisEnemigos()) {
+                if (otroEnemigo != this && otroEnemigo.estaVivo() && !otroEnemigo.estaCompletamenteCongelado()) {
+                    if (colisionaAABB(getHitbox(), otroEnemigo.getHitbox())) {
+                        otroEnemigo.morir();
+                        return;
+                    }
                 }
             }
+
+            if (!colisionManager.estaEnSuelo(this, getJuego().getNivel().getMisEstructuras())) {
+                velocidadVerticalDeslizamiento -= gravedadDeslizamiento;
+                setPosY(getPosY() + velocidadVerticalDeslizamiento);
+            } else {
+                velocidadVerticalDeslizamiento = 0;
+            }
+
+            setPosX(nuevaX);
+            notificarObserver();
         }
-        if (!colisionManager.estaEnSuelo(this, getJuego().getNivel().getMisEstructuras())) {
-            velocidadVerticalDeslizamiento -= gravedadDeslizamiento;
-            setPosY(getPosY() + velocidadVerticalDeslizamiento);
-        } else {
-            velocidadVerticalDeslizamiento = 0;
-        }
-        setPosX(nuevaX);
-        notificarObserver();
     }
 
     private void explotarYMorir() {
-        if (estadoActual == EstadoBomba.EXPLOTANDO || estadoActual == EstadoBomba.FINALIZADA) return;
-        estadoActual = EstadoBomba.EXPLOTANDO;
-        tiempoCambioEstado = System.currentTimeMillis();
-        misAspectos.setEstadoActual(5);
-        GestorSonidos.getInstancia().reproducirEfecto("explosion");
-        notificarObserver();
+        if (estadoActual != EstadoBomba.EXPLOTANDO || estadoActual != EstadoBomba.FINALIZADA) {
+            estadoActual = EstadoBomba.EXPLOTANDO;
+            tiempoCambioEstado = System.currentTimeMillis();
+            misAspectos.setEstadoActual(5);
+            GestorSonidos.getInstancia().reproducirEfecto("explosion");
+            notificarObserver();
+        }
     }
 
     @Override
@@ -255,39 +262,53 @@ public class Bomba extends Enemigo{
 
     @Override
     public void atacar(SnowBro s) { }
+
     @Override
     public void atacar(Enemigo e) { }
+
     @Override
     public void chocar(Colisionable c) { }
+
     @Override
     public void setEstado(EstadoEnemigo estado) { }
+
     @Override
-    public EstadoEnemigo getEstado() { return null; }
+    public EstadoEnemigo getEstado() {
+        return null;
+    }
+
     @Override
     public void cambiarEstadoInmediato() { }
+
     @Override
     public void moverHorizontalmente(int i) {
         setPosX(getPosX() + i);
         notificarObserver();
-     }
+    }
+
     @Override
     public void moverVerticalmente(int i) { 
         setPosY(getPosY()+i);
         notificarObserver();
     }
+
     @Override
     public void colisionarPowerUp(PowerUp p) { }
+
     @Override
     public void colisionarEnemigo(Enemigo e) { }
+
     @Override
     public void colisionarEstructura(Estructura e) { 
         boolean colisiona = this.colisionaAABB(this.miHitbox, e.getHitbox());
-        if (!colisiona) return;
-        afectar(e);
-        return;
+        if (colisiona) {
+            afectar(e);
+        }
     }
+
     @Override
     public void colisionarObstaculo(Obstaculo o) { }
+    
     @Override
     public void colisionarProyectil(Proyectil p) {
         if (this.colisionaAABB(miHitbox, p.getHitbox())) {

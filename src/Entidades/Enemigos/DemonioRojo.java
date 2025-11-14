@@ -99,13 +99,12 @@ public class DemonioRojo extends Enemigo {
     public void moverse() {
         if (estaSiendoEmpujado() && estaCompletamenteCongelado()) {
             deslizarse();
-            return;
-        }
-        if (detenidoGlobalmente) return;
-        if (estadoNieve > ESTADO_INICIAL) {
-            estadoMovimiento = new EnemigoQuieto();
-        } else {
-            cambiarEstado();
+        } else if (!detenidoGlobalmente) {
+            if (estadoNieve > ESTADO_INICIAL) {
+                estadoMovimiento = new EnemigoQuieto();
+            } else {
+                cambiarEstado();
+            }
         }
 
         verificarDerretimiento();
@@ -113,82 +112,86 @@ public class DemonioRojo extends Enemigo {
     }
 
     public void deslizarse() {
-        if (getJuego() == null || getJuego().getNivel() == null) {
-            return;
-        }
-        
-        ColisionManagerEntidades colisionManager = new ColisionManagerEntidades();
-        int nuevaX = getPosX() + velocidadDeslizamiento;
-        for (Estructura estructura : getJuego().getNivel().getMisEstructuras()) {
-            if (estructura.bloquearMovimientoHorizontal() || estructura.destruyeBolaDeNieve()) {
-                Hitbox hitboxFutura = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), nuevaX, getPosY());
-                if (colisionaAABB(hitboxFutura, estructura.getHitbox())) {
-                    destruirBolaDeNieve(); // Llamamos al nuevo método
-                    return;
-                }
-            }
-        }
-        for (Enemigo otroEnemigo : getJuego().getNivel().getMisEnemigos()) {
-            if (otroEnemigo != this && otroEnemigo.estaVivo() && !otroEnemigo.estaCompletamenteCongelado()) {
-                if (colisionaAABB(getHitbox(), otroEnemigo.getHitbox())) {
-                    otroEnemigo.morir(); // El otro enemigo muere
-                    return; // Salimos para no seguir procesando el deslizamiento
-                }
-            }
-        }
-        setPosX(nuevaX);
-        
-        boolean hayPlataformaDebajo = false;
-        Hitbox hitboxActual = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), getPosX(), getPosY());
-        Hitbox hitboxDeteccion = new Hitbox(
-            hitboxActual.getAncho(),
-            hitboxActual.getAlto() + 5, 
-            hitboxActual.getPosX(),
-            hitboxActual.getPosY() - 5
-        );
-        
-        for (Estructura estructura : getJuego().getNivel().getMisEstructuras()) {
-            if (colisionManager.colisionaAABB(hitboxDeteccion, estructura.getHitbox())) {
-                if (estructura.esSueloSolido()) {
-                    int pieEntidad = hitboxActual.getPosY();
-                    int techoEstructura = estructura.getHitbox().getPosY() + estructura.getHitbox().getAlto();
-                    if (Math.abs(pieEntidad - techoEstructura) <= 5) {
-                        hayPlataformaDebajo = true;
-                        setPosY(techoEstructura);
-                        break;
+        if (getJuego() != null && getJuego().getNivel() != null) {
+
+            ColisionManagerEntidades colisionManager = new ColisionManagerEntidades();
+            int nuevaX = getPosX() + velocidadDeslizamiento;
+
+            for (Estructura estructura : getJuego().getNivel().getMisEstructuras()) {
+                if (estructura.bloquearMovimientoHorizontal() || estructura.destruyeBolaDeNieve()) {
+                    Hitbox hitboxFutura = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), nuevaX, getPosY());
+                    if (colisionaAABB(hitboxFutura, estructura.getHitbox())) {
+                        destruirBolaDeNieve();
+                        return;
                     }
                 }
             }
-        }
-        
-        if (!hayPlataformaDebajo) {
-            velocidadVerticalDeslizamiento -= gravedadDeslizamiento;
-            int nuevaY = getPosY() + velocidadVerticalDeslizamiento;
-            boolean colisionaVertical = false;
-            for (Estructura estructura : getJuego().getNivel().getMisEstructuras()) {
-                if (!estructura.esSueloSolido()) {
-                    continue;
+
+            for (Enemigo otroEnemigo : getJuego().getNivel().getMisEnemigos()) {
+                if (otroEnemigo != this && otroEnemigo.estaVivo() && !otroEnemigo.estaCompletamenteCongelado()) {
+                    if (colisionaAABB(getHitbox(), otroEnemigo.getHitbox())) {
+                        otroEnemigo.morir();
+                        return;
+                    }
                 }
-                Hitbox hitboxFutura = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), getPosX(), nuevaY);
-                if (colisionaAABB(hitboxFutura, estructura.getHitbox())) {
-                    int techoEstructura = estructura.getHitbox().getPosY() + estructura.getHitbox().getAlto();
-                    int pieEnemigo = nuevaY;
-                    if (pieEnemigo >= techoEstructura - 5 && pieEnemigo <= techoEstructura + 10) {
-                        setPosY(techoEstructura);
-                        velocidadVerticalDeslizamiento = 0;
-                        colisionaVertical = true;
-                        break;
+            }
+
+            setPosX(nuevaX);
+            
+            boolean hayPlataformaDebajo = false;
+            Hitbox hitboxActual = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), getPosX(), getPosY());
+            Hitbox hitboxDeteccion = new Hitbox(
+                hitboxActual.getAncho(),
+                hitboxActual.getAlto() + 5, 
+                hitboxActual.getPosX(),
+                hitboxActual.getPosY() - 5
+            );
+            
+            for (Estructura estructura : getJuego().getNivel().getMisEstructuras()) {
+                if (colisionManager.colisionaAABB(hitboxDeteccion, estructura.getHitbox())) {
+                    if (estructura.esSueloSolido()) {
+                        int pieEntidad = hitboxActual.getPosY();
+                        int techoEstructura = estructura.getHitbox().getPosY() + estructura.getHitbox().getAlto();
+                        if (Math.abs(pieEntidad - techoEstructura) <= 5) {
+                            hayPlataformaDebajo = true;
+                            setPosY(techoEstructura);
+                            break;
+                        }
                     }
                 }
             }
             
-            if (!colisionaVertical) {
-                setPosY(nuevaY);
+            if (!hayPlataformaDebajo) {
+                velocidadVerticalDeslizamiento -= gravedadDeslizamiento;
+                int nuevaY = getPosY() + velocidadVerticalDeslizamiento;
+                boolean colisionaVertical = false;
+                for (Estructura estructura : getJuego().getNivel().getMisEstructuras()) {
+                    if (!estructura.esSueloSolido()) {
+                        continue;
+                    }
+                    Hitbox hitboxFutura = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), getPosX(), nuevaY);
+                    if (colisionaAABB(hitboxFutura, estructura.getHitbox())) {
+                        int techoEstructura = estructura.getHitbox().getPosY() + estructura.getHitbox().getAlto();
+                        int pieEnemigo = nuevaY;
+                        if (pieEnemigo >= techoEstructura - 5 && pieEnemigo <= techoEstructura + 10) {
+                            setPosY(techoEstructura);
+                            velocidadVerticalDeslizamiento = 0;
+                            colisionaVertical = true;
+                            break;
+                        }
+                    }
+                }
+                
+                if (!colisionaVertical) {
+                    setPosY(nuevaY);
+                }
+            } else {
+                velocidadVerticalDeslizamiento = 0;
             }
-        } else {
-            velocidadVerticalDeslizamiento = 0;
+            notificarObserver();
         }
-        notificarObserver();
+        
+        
     }
 
     @Override
@@ -246,9 +249,9 @@ public class DemonioRojo extends Enemigo {
 
     public void colisionarEstructura(Estructura e) {
         boolean colisiona = this.colisionaAABB(this.miHitbox, e.getHitbox());
-        if (!colisiona) return;
-        afectar(e);
-        return;
+        if (colisiona) {
+            afectar(e);
+        }
     }
 
      public void afectar(Estructura e) {
@@ -283,9 +286,7 @@ public class DemonioRojo extends Enemigo {
     }
 
     public void recibirDisparo() {
-        if (estadoNieve >= ESTADO_NIEVE_COMPLETO) {
-            return;
-        } else {
+        if (estadoNieve < ESTADO_NIEVE_COMPLETO) {
             estadoNieve += getJuego().getNivel().getSnowBro().getDañoProyectil();
             actualizarEstadoNieve();
         }

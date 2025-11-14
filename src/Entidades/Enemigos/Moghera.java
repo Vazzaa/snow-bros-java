@@ -69,10 +69,11 @@ public class Moghera extends Enemigo {
 
     @Override
     public void moverse() {
-        if (detenidoGlobalmente) return;
-        cambiarEstado();
-        if (estadoMovimiento != null) {
-            estadoMovimiento.moverse(this, VELOCIDAD);
+        if (!detenidoGlobalmente) {
+            cambiarEstado();
+            if (estadoMovimiento != null) {
+                estadoMovimiento.moverse(this, VELOCIDAD);
+            }
         }
     }
 
