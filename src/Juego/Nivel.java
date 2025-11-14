@@ -128,6 +128,13 @@ public class Nivel {
                         snowBro.colisionarEnemigo(enemigo);
                     }
                     enemigo.resetVelocidadPlataforma();
+                    if (misEstructuras != null) {
+                        for (Estructura estructura : misEstructuras) {
+                            if (enemigo.colisionaAABB(enemigo.getHitbox(), estructura.getHitbox())) {
+                                estructura.afectar(enemigo);
+                            }
+                        }
+                    }
                 }
             }
             if (misPowerUps != null) {

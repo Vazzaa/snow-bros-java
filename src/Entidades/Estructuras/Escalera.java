@@ -4,6 +4,8 @@ import Entidades.Enemigos.Enemigo;
 import Entidades.SnowBro.SnowBro;
 import Fabricas.Skin;
 import Juego.ModoDeJuego;
+import EstadoMovimiento.EnemigoQuieto;
+import EstadoMovimiento.EnemigoSubiendoEscalera;
 
 public class Escalera extends Obstaculo{
 
@@ -18,11 +20,29 @@ public class Escalera extends Obstaculo{
     }
 
     public void afectar (Enemigo e) {
-
+        if (e != null) {
+            e.setEnContactoConEscalera(true);
+            
+            if (e.getTiempoDecisionEscalera() == 0 || 
+                (System.currentTimeMillis() - e.getTiempoDecisionEscalera() >= Enemigo.getTiempoEsperaDecision())) {
+                
+                int decision = (int)(Math.random() * 2) + 1;
+                
+                if (decision == 2) {
+                    e.setDebeSubirEscalera(true);
+                    e.cambiarEstadoMovimiento(new EnemigoSubiendoEscalera(e.getEstadoMovimiento()));
+                } else {
+                    e.setDebeSubirEscalera(false);
+                    e.cambiarEstadoMovimiento(new EnemigoQuieto(e.getEstadoMovimiento()));
+                }
+                
+                e.setTiempoDecisionEscalera(System.currentTimeMillis());
+            }
+        }
     }
 
     public void setSkin (Skin s) {
-
+        //Lo hace la fabrica
     }
     @Override
     
