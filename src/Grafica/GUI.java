@@ -282,9 +282,9 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	}
 
 	@Override
-	public void actualizarTiempo(String timepo) {
+	public void actualizarTiempo(String tiempo) {
 		if (controlarJuego != null && controlarJuego.debeMostrarTiempo()) {
-			panelNivel.actualizarTiempo(timepo);
+			panelNivel.actualizarTiempo(tiempo);
 		}
 	}
 

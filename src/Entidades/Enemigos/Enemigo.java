@@ -32,7 +32,7 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
         vida = v;
         puntaje = p;
         skinOriginal = skins;
-        estadoEnemigo = new EstadoActivo();
+        estadoEnemigo = new EstadoNormal();
     }
 
     public void setVida(int v){

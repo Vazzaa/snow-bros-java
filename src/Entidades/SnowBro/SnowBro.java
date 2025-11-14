@@ -150,9 +150,9 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         verificarFinBoostRojo();
 
         if (derecha && estadoMovimiento.direccion != 0) {
-            estadoMovimiento.cambiar_direccion(ConstantesTeclado.DERECHA);
+            estadoMovimiento.cambiarDireccion(ConstantesTeclado.DERECHA);
         } else if (izquierda && estadoMovimiento.direccion != 180) {
-            estadoMovimiento.cambiar_direccion(ConstantesTeclado.IZQUIERDA);
+            estadoMovimiento.cambiarDireccion(ConstantesTeclado.IZQUIERDA);
         }
 
         estadoMovimiento.mover(derecha, izquierda, salto);

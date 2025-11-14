@@ -29,7 +29,7 @@ public class EstadoMovimietoSnowBro {
         enElSuelo = true;
     }
 
-    public void cambiar_direccion(int direccion){
+    public void cambiarDireccion(int direccion){
         if (direccion == ConstantesTeclado.DERECHA){
             this.direccion = 0;
         } else {
