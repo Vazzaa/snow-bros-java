@@ -98,16 +98,17 @@ public class DemonioRojo extends Enemigo {
     public void moverse() {
         if (estaSiendoEmpujado() && estaCompletamenteCongelado()) {
             deslizarse();
+
         } else if (!detenidoGlobalmente) {
             if (estadoNieve > ESTADO_INICIAL) {
                 estadoMovimiento = new EnemigoQuieto();
             } else {
                 cambiarEstado();
             }
+            
+            verificarDerretimiento();
+            estadoMovimiento.moverse(this, VELOCIDAD);
         }
-
-        verificarDerretimiento();
-        estadoMovimiento.moverse(this, VELOCIDAD);
     }
 
     public void deslizarse() {

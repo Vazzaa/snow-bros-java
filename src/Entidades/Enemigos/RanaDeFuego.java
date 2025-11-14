@@ -135,10 +135,10 @@ public class RanaDeFuego extends Enemigo {
             } else {
                 cambiarEstado();
             }
+            
+            verificarDerretimiento();
+            estadoMovimiento.moverse(this, VELOCIDAD);
         }
-
-        verificarDerretimiento();
-        estadoMovimiento.moverse(this, VELOCIDAD);
     }
 
     public void deslizarse() {
