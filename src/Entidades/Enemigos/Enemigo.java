@@ -25,7 +25,10 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
     protected boolean siendoEmpujado = false;  
     protected int velocidadPlataformaX = 0;
     protected int velocidadPlataformaY = 0;
-    
+    protected boolean enContactoConEscalera = false;
+    protected boolean debeSubirEscalera = false;
+    protected long tiempoDecisionEscalera = 0;
+    protected static final long TIEMPO_ESPERA_DECISION = 500;
     
     public Enemigo(Skin skins, ModoDeJuego juego , int posX, int posY, int v, int p) {
         super(skins,juego,posX,posY);
@@ -144,6 +147,38 @@ public abstract class Enemigo extends Entidad implements Colisionable, Movible, 
 
     public boolean estaEnPlataformaMovil() {
         return velocidadPlataformaX != 0 || velocidadPlataformaY != 0;
+    }
+
+    public void setEnContactoConEscalera(boolean enContacto) {
+        this.enContactoConEscalera = enContacto;
+    }
+    
+    public boolean estaEnContactoConEscalera() {
+        return enContactoConEscalera;
+    }
+    
+    public void setDebeSubirEscalera(boolean debeSubir) {
+        this.debeSubirEscalera = debeSubir;
+    }
+    
+    public boolean debeSubirEscalera() {
+        return debeSubirEscalera;
+    }
+    
+    public EstadoMovimientoEnemigo getEstadoMovimiento() {
+        return estadoMovimiento;
+    }
+    
+    public long getTiempoDecisionEscalera() {
+        return tiempoDecisionEscalera;
+    }
+    
+    public void setTiempoDecisionEscalera(long tiempo) {
+        this.tiempoDecisionEscalera = tiempo;
+    }
+    
+    public static long getTiempoEsperaDecision() {
+        return TIEMPO_ESPERA_DECISION;
     }
 
     public void afectar(Plataforma p) {
