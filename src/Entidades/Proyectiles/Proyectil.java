@@ -80,4 +80,8 @@ public abstract class Proyectil extends Entidad implements Colisionable{
     public long getTiempoCreacion() {
         return tiempoFinVida - alcance;
     }
+
+    public boolean puedeRomperParedDestructible() {
+        return false;
+    }
 }

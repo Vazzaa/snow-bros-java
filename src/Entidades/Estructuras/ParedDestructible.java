@@ -40,6 +40,10 @@ public class ParedDestructible extends Pared implements Destructible {
     }
 
     public void afectar(Proyectil p) {
+        if (!p.puedeRomperParedDestructible()) {
+            return;
+        }
+        
         long tiempoActual = System.currentTimeMillis();
         long tiempoCreacion = p.getTiempoCreacion();
         if (tiempoActual - tiempoCreacion > 50) {
@@ -50,13 +54,8 @@ public class ParedDestructible extends Pared implements Destructible {
                 if (Vida <= 0) {
                     this.destruir();
                 }
-                p.eliminar();
             }
         }  
-    }
-    public void afectar(BolaDeNieve b) {
-        this.destruir();
-        b.eliminar();
     }
 
     public void setSkin(Skin s) {
@@ -69,6 +68,10 @@ public class ParedDestructible extends Pared implements Destructible {
 
     @Override
     public boolean esSueloSolido() {
+        return true;
+    }
+
+    public boolean destruyeBolaDeNieve() {
         return true;
     }
 

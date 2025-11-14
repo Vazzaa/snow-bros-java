@@ -9,7 +9,7 @@ import Sonidos.GestorSonidos;
 public class VidaExtra extends PowerUp {
 
     public VidaExtra(Skin s,ModoDeJuego juego ,int x, int y) {
-        super(s, juego, x, y, 300, 10000);
+        super(s, juego, x, y, 300, 10);
     }
 
     public int getPuntaje() {
