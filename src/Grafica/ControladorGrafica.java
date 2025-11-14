@@ -22,4 +22,5 @@ public interface ControladorGrafica {
 	public void actualizarTiempo(String timepo);
 	public void setImagenDeFondoNivel(String rutaImagen);
 	public void agregarAlRanking(Jugador jugador);
+	public void limpiarNivel();
 }

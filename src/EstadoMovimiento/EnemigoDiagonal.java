@@ -53,19 +53,19 @@ public class EnemigoDiagonal implements EstadoMovimientoEnemigo{
 
     @Override
     public EstadoMovimientoEnemigo getEstadoOpuesto() {
-        // TODO Auto-generated method stub
+        // No aplica para este caso
         throw new UnsupportedOperationException("Unimplemented method 'getEstadoOpuesto'");
     }
 
     @Override
     public boolean permiteMovimiento() {
-        // TODO Auto-generated method stub
+        // No aplica para este caso
         throw new UnsupportedOperationException("Unimplemented method 'permiteMovimiento'");
     }
 
     @Override
     public EstadoMovimientoEnemigo getEstadoAnterior() {
-        // TODO Auto-generated method stub
+        // No aplica para este caso
         throw new UnsupportedOperationException("Unimplemented method 'getEstadoAnterior'");
     }
 

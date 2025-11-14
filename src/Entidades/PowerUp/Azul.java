@@ -36,7 +36,7 @@ public class Azul extends PowerUp {
     
     @Override
     public void afectar(Enemigo enemigo) {
-        throw new UnsupportedOperationException("Unimplemented method 'afectar'");
+        // No aplica para este caso
     }
     
     public void afectar(PowerUp p) {

@@ -54,26 +54,23 @@ public class Calabaza extends Enemigo{
 
     @Override
     public void atacar(Enemigo e) {
-        // TODO Auto-generated method stub
-        
+        // No aplica para este caso
     }
 
     @Override
     public void atacar(SnowBro s) {
-        // TODO Auto-generated method stub
-        
+        // No aplica para este caso
     }
 
     @Override
     public void chocar(Colisionable c) {
-        // TODO Auto-generated method stub
-        
+        // No aplica para este caso
     }
 
 
     @Override
     public EstadoEnemigo getEstado() {
-        // TODO Auto-generated method stub
+        // No aplica para este caso
         return null;
     }
 
@@ -119,8 +116,7 @@ public class Calabaza extends Enemigo{
 
     @Override
     public void setEstado(EstadoEnemigo estado) {
-        // TODO Auto-generated method stub
-        
+        // No aplica para este caso
     }
 
     @Override
@@ -195,13 +191,12 @@ public class Calabaza extends Enemigo{
 
     @Override
     public void colisionarEnemigo(Enemigo e) {
-        
+        // No aplica para este caso
     }
 
     @Override
     public void colisionarEstructura(Estructura e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'colisionarEstructura'");
+        // No aplica para este caso
     }
     public void colisionarPlataforma(Plataforma p) {
         if (p.getPosY() >= 8100) {
@@ -214,8 +209,7 @@ public class Calabaza extends Enemigo{
 
     @Override
     public void colisionarObstaculo(Obstaculo o) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'colisionarObstaculo'");
+        // No aplica para este caso
     }
 
     @Override

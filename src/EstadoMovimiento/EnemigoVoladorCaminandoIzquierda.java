@@ -49,6 +49,7 @@ public class EnemigoVoladorCaminandoIzquierda implements EstadoMovimientoEnemigo
     }
 
     public EstadoMovimientoEnemigo getEstadoAnterior() {
+        // No aplica para este caso
         throw new UnsupportedOperationException("Unimplemented method 'getEstadoAnterior'");
     }
 

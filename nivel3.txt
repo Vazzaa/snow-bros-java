@@ -305,7 +305,7 @@ ENEMIGO:demonioRojo,64,7890
 ENEMIGO:demonioRojo,336,7830
 ENEMIGO:demonioRojo,80,7750
 ENEMIGO:demonioRojo,304,7690
-
+ENEMIGO:moghera,580,7750
 
 # Obsculos
 

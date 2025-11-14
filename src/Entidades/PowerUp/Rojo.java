@@ -43,8 +43,7 @@ public class Rojo extends PowerUp {
 
     @Override
     public void afectar(Enemigo enemigo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'afectar'");
+        // No aplica para este caso
     }
 
     @Override
