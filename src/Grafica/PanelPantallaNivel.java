@@ -20,6 +20,8 @@ public class PanelPantallaNivel extends PanelVista{
     private JPanel panelNivel;
     private JPanel panelInformacion;
     private JLabel imagenFondo;
+    private JLabel labelNivel;
+    private JLabel labelTextNivel;
     private JLabel labelVida;
     private JLabel labelPuntaje;
     private JLabel labelTextPuntaje;
@@ -79,10 +81,15 @@ public class PanelPantallaNivel extends PanelVista{
         labelTextTiempo.setText(tiempo);
     }
 
+    public void actualizarNivel(int numeroNivel) {
+        labelTextNivel.setText(String.valueOf(numeroNivel));
+    }  
+
     public void reiniciarPanel() {
         labelTextPuntaje.setText("0");
         labelTextVida.setText("3");
         labelTextTiempo.setText("--:--");
+        labelTextNivel.setText("1");
     }
 
     public void setImagenDeFondo(String rutaImagen) {
@@ -142,6 +149,12 @@ public class PanelPantallaNivel extends PanelVista{
         labelTextTiempo = new JLabel("--:--");
         labelTextTiempo.setForeground(Color.WHITE);
 
+        labelNivel = new JLabel("Nivel:");
+        labelNivel.setForeground(Color.WHITE);
+
+        labelTextNivel = new JLabel("1");
+        labelTextNivel.setForeground(Color.WHITE);
+
         Font fuenteEstandar = new Font("Monospaced", Font.BOLD, 24);
 
         labelPuntaje.setFont(fuenteEstandar);
@@ -161,6 +174,12 @@ public class PanelPantallaNivel extends PanelVista{
         
         labelTextTiempo.setFont(fuenteEstandar);
         labelTextTiempo.setForeground(new Color(255, 0, 0));
+
+        labelNivel.setFont(fuenteEstandar);
+        labelNivel.setForeground(new Color(255, 0, 0));
+    
+        labelTextNivel.setFont(fuenteEstandar);
+        labelTextNivel.setForeground(new Color(255, 0, 0));
         
         panelInformacion.add(labelPuntaje);
         panelInformacion.add(labelTextPuntaje);
@@ -170,6 +189,9 @@ public class PanelPantallaNivel extends PanelVista{
         panelInformacion.add(Box.createHorizontalStrut(100)); 
         panelInformacion.add(labelVida);
         panelInformacion.add(labelTextVida);
+        panelInformacion.add(Box.createHorizontalStrut(100));
+        panelInformacion.add(labelNivel);
+        panelInformacion.add(labelTextNivel);
 
 
         this.add(panelInformacion, BorderLayout.NORTH);
