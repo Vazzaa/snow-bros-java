@@ -59,6 +59,8 @@ public class Clasico extends ModoDeJuego {
     @Override
     public void juegoCompletado() {
         detenerHilos();
+        Jugador jugadorFinal= nivelActual.getSnowBro().getJugador();
+        jugadorFinal.sumarPuntaje(nivelActual.getSnowBro().getPuntaje());
         actualizarRanking(nivelActual.getSnowBro().getJugador());
         controlaGrafica.mostrarPantallaGameOver();
         GestorSonidos.getInstancia().detenerMusica();
