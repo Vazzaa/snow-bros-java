@@ -23,7 +23,7 @@ public class Kamakichi extends Enemigo {
     protected int vida;
 
     private static final int VIDA_MAXIMA = 50;
-    private static final long INTERVALO_CAMBIO_KAMAKICHI = 2000;
+    private static final long INTERVALO_CAMBIO_KAMAKICHI = 1000;
 
     public Kamakichi(Skin skins, ModoDeJuego juego, int posX, int posY, FabricaEntidades fabParaBomba) {
         super(skins, juego, posX, posY, 5,300);
