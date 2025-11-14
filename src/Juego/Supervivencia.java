@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class Supervivencia extends ModoDeJuego {
 
-    private static final int PUNTUACION_OBJETIVO = 500;
+    private static final int PUNTUACION_OBJETIVO = 35000;
     private static final int ENEMIGOS_POR_OLEADA = 3;
     private static final long TIEMPO_ENTRE_OLEADAS = 10000;
 
