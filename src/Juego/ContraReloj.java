@@ -36,28 +36,28 @@ public class ContraReloj extends ModoDeJuego{
     }
 
     public void verificarNivelCompletado() {
-        if (nivelActual == null) return;
+        if (nivelActual != null) {
+            actualizarTiempo();
         
-        actualizarTiempo();
-        
-        if (tiempoAgotado) {
-            System.out.println("¡Tiempo agotado!");
-            GestorSonidos.getInstancia().reproducirEfecto("clock");
-            juegoCompletado();
-            return;
-        }
-        
-        if (nivelActual.estaCompletado()) {
-            System.out.println("Nivel " + numeroNivelActual + " completado.");
-            System.out.println("Tiempo restante: " + (tiempoRestante / 1000) + " segundos");
-            
-            try {
-                Thread.sleep(1500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            if (tiempoAgotado) {
+                System.out.println("Tiempo agotado.");
+                GestorSonidos.getInstancia().reproducirEfecto("clock");
+                juegoCompletado();
+                return;
             }
             
-            avanzarSiguienteNivel();
+            if (nivelActual.estaCompletado()) {
+                System.out.println("Nivel " + numeroNivelActual + " completado.");
+                System.out.println("Tiempo restante: " + (tiempoRestante / 1000) + " segundos");
+                
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                
+                avanzarSiguienteNivel();
+            }
         }
     }
 

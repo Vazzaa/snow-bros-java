@@ -23,7 +23,6 @@ public class EnemigoKamakichiBajando implements EstadoMovimientoEnemigo {
 
     @Override
     public void moverse(Enemigo enemigo, int velocidad) {
-        // Mantener centrado horizontalmente
         int posXActual = enemigo.getPosX();
         int centroX = CENTRO_PANTALLA_X - (enemigo.getHitbox().getAncho() / 2);
         

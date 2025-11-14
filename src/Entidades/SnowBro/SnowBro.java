@@ -165,7 +165,6 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     
     public void morir() {
         jugador.sumarPuntaje(puntaje);
-        System.out.println("SnowBro ha muerto");
         if (miJuego != null && miJuego.getControladoraGrafica() != null) {
             GestorSonidos.getInstancia().detenerMusica();
             GestorSonidos.getInstancia().reproducirEfecto("gameover");
@@ -380,14 +379,10 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
     }
 
 	public void moverHorizontalmente(int deltaX) {
-        // Este método ahora es solo para movimientos que no son de plataforma.
-		// setPosX(getPosX() + deltaX);
         notificarObserver();
 	}
 
     public void moverVerticalmente(int deltaY) {
-        // Este método ahora es solo para movimientos que no son de plataforma.
-        // setPosY(getPosY() + deltaY);
         notificarObserver();
     }
 
@@ -399,7 +394,6 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         return estaResbalando;
     }
     
-    // Nuevo método para resetear estados temporales al inicio de cada fotograma
     public void resetTemporaryStates() {
         this.enContactoConEscalera = false;
         this.estaResbalando = false;

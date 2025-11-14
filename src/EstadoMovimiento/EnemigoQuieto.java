@@ -49,26 +49,25 @@ public class EnemigoQuieto implements EstadoMovimientoEnemigo {
 
             int nuevaY = enemigo.getPosY() + velocidadVerticalActual;
 
-            // Comprobación de colisiones verticales para enemigos
             if (velocidadVerticalActual != 0) {
                 Hitbox hitboxFuturaVertical = new Hitbox(enemigo.getHitbox().getAncho(), enemigo.getHitbox().getAlto(), enemigo.getPosX(), nuevaY);
                 boolean colisionariaVertical = false;
                 for (Estructura estructura : enemigo.getJuego().getNivel().getMisEstructuras()) {
                     if (colisionManager.colisionaAABB(hitboxFuturaVertical, estructura.getHitbox())) {
-                        if (velocidadVerticalActual < 0) { // Moviéndose hacia abajo
+                        if (velocidadVerticalActual < 0) {
                             int techoEstructura = estructura.getHitbox().getPosY() + estructura.getHitbox().getAlto();
-                            enemigo.setPosY(techoEstructura); // Ajustar a la superficie
-                            velocidadVerticalActual = 0; // Detener movimiento vertical
+                            enemigo.setPosY(techoEstructura);
+                            velocidadVerticalActual = 0;
                             colisionariaVertical = true;
                             break;
                         }
                     }
                 }
                 if (!colisionariaVertical) {
-                    enemigo.setPosY(nuevaY); // Aplicar movimiento vertical si no hay colisión
+                    enemigo.setPosY(nuevaY);
                 }
             } else {
-                enemigo.setPosY(nuevaY); // Aplicar movimiento vertical incluso si es solo gravedad
+                enemigo.setPosY(nuevaY);
             }
         }
         
@@ -92,16 +91,13 @@ public class EnemigoQuieto implements EstadoMovimientoEnemigo {
         int pieEnemigo = enemigo.getPosY();
         int techoPlataforma = plataforma.getHitbox().getPosY() + plataforma.getHitbox().getAlto();
 
-        // Si el enemigo está encima de la plataforma (con una pequeña tolerancia)
         if (colisionManager.colisionaAABB(enemigo.getHitbox(), plataforma.getHitbox()) && Math.abs(pieEnemigo - techoPlataforma) < 5) {
-            // "Pega" al enemigo a la superficie para que no la atraviese por la gravedad
             enemigo.setPosY(techoPlataforma);
-            // Transfiere la velocidad de arrastre de la plataforma al enemigo
             enemigo.setVelocidadPlataforma(plataforma.getVelocidadDeArrastreX(), plataforma.getVelocidadDeArrastreY());
         }
     }
 
-        @Override
+    @Override
     public EstadoMovimientoEnemigo obtenerSiguienteEstado(Enemigo enemigo) {
         return null;
     }

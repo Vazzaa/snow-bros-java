@@ -35,7 +35,6 @@ public abstract class Proyectil extends Entidad implements Colisionable{
             miHitbox.setPosX(miHitbox.getPosX() - velocidad);
         }
 
-        // Futura lógica de colisiones y alcance puede ir aquí.
         verificarTemporizadorVida();
         notificarObserver();
     }

@@ -103,40 +103,43 @@ public class CreadorDeNivel {
                         if (sueloResbaladizo != null) {
                             estructuras.add(sueloResbaladizo);
                         }
-                } else if (linea.startsWith("PARED:")) {
-                    String[] coords = linea.substring(6).split(",");
-                    int x = Integer.parseInt(coords[0].trim());
-                    int y = Integer.parseInt(coords[1].trim());
-                    Estructura pared = fabEntidades.getPared(x, y, numeroNivel);
-                    if (pared != null) {
-                        estructuras.add(pared);
-                        System.out.println("DEBUG: Pared agregada - x=" + x + ", tipo=" + (x >= 700 ? "DERECHA" : "IZQUIERDA"));
-                    } 
-                } else if (linea.startsWith("PAREDDESTRUCTIBLE:")) {
-                    String[] coords = linea.substring(18).split(",");
-                    int x = Integer.parseInt(coords[0].trim());
-                    int y = Integer.parseInt(coords[1].trim());
-                    Estructura paredDestructible = fabEntidades.getParedDestructible(x, y);
-                    if (paredDestructible != null) {
-                        estructuras.add(paredDestructible);
-                    }
-                } else if (linea.startsWith("PINCHO:")) {
-                    String[] coords = linea.substring(7).split(",");
-                    int x = Integer.parseInt(coords[0].trim());
-                    int y = Integer.parseInt(coords[1].trim());
-                    Estructura pincho = fabEntidades.getPincho(x, y);
-                    if (pincho != null) {
-                        estructuras.add(pincho);
-                    }
-                }  else if (linea.startsWith("ESCALERA:")) {
-                        String[] coords = linea.substring(9).split(",");
+
+                    } else if (linea.startsWith("PARED:")) {
+                        String[] coords = linea.substring(6).split(",");
                         int x = Integer.parseInt(coords[0].trim());
                         int y = Integer.parseInt(coords[1].trim());
-                        Estructura escalera = fabEntidades.getEscalera(x, y);
-                        if (escalera != null) {
-                            estructuras.add(escalera);
+                        Estructura pared = fabEntidades.getPared(x, y, numeroNivel);
+                        if (pared != null) {
+                            estructuras.add(pared);
+                        } 
+
+                    } else if (linea.startsWith("PAREDDESTRUCTIBLE:")) {
+                        String[] coords = linea.substring(18).split(",");
+                        int x = Integer.parseInt(coords[0].trim());
+                        int y = Integer.parseInt(coords[1].trim());
+                        Estructura paredDestructible = fabEntidades.getParedDestructible(x, y);
+                        if (paredDestructible != null) {
+                            estructuras.add(paredDestructible);
                         }
-                        
+
+                    } else if (linea.startsWith("PINCHO:")) {
+                        String[] coords = linea.substring(7).split(",");
+                        int x = Integer.parseInt(coords[0].trim());
+                        int y = Integer.parseInt(coords[1].trim());
+                        Estructura pincho = fabEntidades.getPincho(x, y);
+                        if (pincho != null) {
+                            estructuras.add(pincho);
+                        }
+
+                    } else if (linea.startsWith("ESCALERA:")) {
+                            String[] coords = linea.substring(9).split(",");
+                            int x = Integer.parseInt(coords[0].trim());
+                            int y = Integer.parseInt(coords[1].trim());
+                            Estructura escalera = fabEntidades.getEscalera(x, y);
+                            if (escalera != null) {
+                                estructuras.add(escalera);
+                            }
+                            
                     } else if (linea.startsWith("ENEMIGO:")) {
                         String[] partes = linea.substring(8).split(",");
                         if (partes.length >= 3) {

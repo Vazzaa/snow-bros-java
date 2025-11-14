@@ -26,8 +26,7 @@ public class EnemigoVoladorCaminandoDerecha implements EstadoMovimientoEnemigo {
     
         int nuevaX = enemigo.getPosX() + velocidad;
         boolean colisionariaPared = false;
-    
-        // Verificar colisiones horizontales con paredes
+
         for (Estructura estructura : enemigo.getJuego().getNivel().getMisEstructuras()) {
             if (estructura.bloquearMovimientoHorizontal()) {
                 Hitbox hitboxFutura = new Hitbox(

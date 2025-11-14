@@ -44,7 +44,7 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	}
 
 	protected void configurarVentana(){
-		ventana = new JFrame("Tdp : SnowBros");
+		ventana = new JFrame("TdP : Snow Bros");
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setSize(ConstantesVistas.VENTANA_ANCHO, ConstantesVistas.VENTANA_ALTO);
 		ventana.setLocationRelativeTo(null);
@@ -56,25 +56,24 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 
 	protected void registrarOyenteVentana() {
 		ventana.addKeyListener(new KeyAdapter(){
-			public void keyPressed(KeyEvent e){
-				ConstantesTeclado.teclasPresionadas.add(e.getKeyCode());
-				// Debug temporal
-				if (e.getKeyCode() == KeyEvent.VK_A){
-					controlarJuego.cambiarDireccionJugador(ConstantesTeclado.IZQUIERDA);
-				}
-				if (e.getKeyCode() == KeyEvent.VK_D){
-					controlarJuego.cambiarDireccionJugador(ConstantesTeclado.DERECHA);
-				}
-				if (e.getKeyCode() == KeyEvent.VK_W){
-					controlarJuego.cambiarDireccionJugador(ConstantesTeclado.SALTAR);
-				}
-				if (e.getKeyCode() == KeyEvent.VK_SPACE){
-					System.out.println("Se lanzo un proyectil. ");
-					controlarJuego.lanzarProyectil();
+			public void keyPressed(KeyEvent e) {
+				if (controlarJuego != null) {
+					ConstantesTeclado.teclasPresionadas.add(e.getKeyCode());
+					if (e.getKeyCode() == KeyEvent.VK_A){
+						controlarJuego.cambiarDireccionJugador(ConstantesTeclado.IZQUIERDA);
+					}
+					if (e.getKeyCode() == KeyEvent.VK_D){
+						controlarJuego.cambiarDireccionJugador(ConstantesTeclado.DERECHA);
+					}
+					if (e.getKeyCode() == KeyEvent.VK_W){
+						controlarJuego.cambiarDireccionJugador(ConstantesTeclado.SALTAR);
+					}
+					if (e.getKeyCode() == KeyEvent.VK_SPACE){
+						controlarJuego.lanzarProyectil();
+					}
 				}
 			}
 			public void keyReleased(KeyEvent e){
-				// Remover la tecla de ConstantesTeclado
 				ConstantesTeclado.teclasPresionadas.remove(e.getKeyCode());
 			}
 		});

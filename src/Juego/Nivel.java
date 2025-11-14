@@ -283,7 +283,6 @@ public class Nivel {
             Enemigo calabaza = miFabrica.getCalabaza(100, 8000);
             agregarEnemigos(calabaza);
             miJuego.registrarObserver(calabaza);
-            System.out.println("¡Ha aparecido una calabaza!");
             tiempoParaAparecerCalabaza = System.currentTimeMillis() + TIEMPO_APARICION_CALABAZA;
         }
     }
@@ -296,7 +295,6 @@ public class Nivel {
             PowerUp vida = miFabrica.getVidaExtra(x, y);
             agregarPowerUps(vida);
             miJuego.registrarObserver(vida);
-            System.out.println("¡Ha aparecido un power-up de vida!");
             tiempoParaAparecerVida = System.currentTimeMillis() + TIEMPO_APARICION_VIDA;
         }
     }

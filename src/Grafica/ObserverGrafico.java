@@ -48,7 +48,6 @@ public class ObserverGrafico extends JLabel implements Observer {
 		}
 
 		if (rutaImagen != null && rutaImagen.contains("pared")) {
-			System.out.println("DEBUG IMAGEN: Imagen cargada - ancho=" + getIcon().getIconWidth() + ", alto=" + getIcon().getIconHeight() + ", ruta=" + rutaImagen);
 			if (getIcon().getIconWidth() == 0 || getIcon().getIconHeight() == 0) {
 				System.err.println("ERROR: La imagen tiene dimensiones 0x0 - " + rutaImagen);
 			}
@@ -59,41 +58,25 @@ public class ObserverGrafico extends JLabel implements Observer {
 		// TO-DO
 	}
 
-	// --- MÉTODO CORREGIDO ---
 	public void actualizarPosicionTamaño(){
-		// 1. Obtenemos las coordenadas lógicas
 		int x_logico = entidadObservada.getPosX();
 		int y_logico = entidadObservada.getPosY();
 		
-		// 2. Las transformamos a coordenadas de pantalla
 		int x_pantalla = AdaptadorPosicionPixel.transformar_x(x_logico);
 		int y_pantalla = AdaptadorPosicionPixel.transformar_y(y_logico);
 		
 		if (this.getIcon() != null) {
-			// 3. Obtenemos el tamaño (ya escalado por actualizarImagen())
 			int ancho = this.getIcon().getIconWidth();
 			int alto = this.getIcon().getIconHeight();
 
-			// --- INICIO DE LA CORRECCIÓN ---
-			
-			// 4. Verificamos si es una entidad con renderizado especial (Moghera)
-			//    consultando si definió un ancho de renderizado.
 			if (entidadObservada.getRenderAncho() > 0) {
-				// 5. Si es Moghera, asumimos que (x_pantalla, y_pantalla) es el CENTRO.
-				//    Debemos calcular el nuevo TOP-LEFT restando la mitad del tamaño.
 				x_pantalla = x_pantalla - (ancho / 2);
 				y_pantalla = y_pantalla - (alto / 2);
 			}
-			// 6. Si es una entidad normal, (x_pantalla, y_pantalla) ya es el TOP-LEFT,
-			//    así que no hacemos nada.
-			
-			// --- FIN DE LA CORRECCIÓN ---
-			
-			// 7. Aplicamos el setBounds con las coordenadas correctas.
+
 			setBounds(x_pantalla, y_pantalla, ancho, alto);
 			
-		}else {
-			// Fallback (asumiendo top-left)
+		} else {
 			setBounds(x_pantalla, y_pantalla, 32, 32);
 		}
 	}

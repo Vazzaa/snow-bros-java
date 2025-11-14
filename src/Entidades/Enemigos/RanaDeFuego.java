@@ -95,7 +95,6 @@ public class RanaDeFuego extends Enemigo {
         this.getJuego().registrarObserver(powerUp);
         this.getJuego().getNivelActual().agregarPowerUps(powerUp);
         int crearPocionONo = (int) (Math.random()*3+1);
-        System.out.println("numero tocado"+crearPocionONo);
         if(crearPocionONo == 2){
             PowerUp pocion = null;
             int color = (int) (Math.random()*3+1);

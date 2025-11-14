@@ -31,7 +31,6 @@ public class GestorSonidos {
     }
 
     private void cargarSonidos() {
-        // TODO: cargar todos los efectos de sonido.
         cargarEfecto("shoot", "src/Sonidos/Efectos/snowshot.wav");
         cargarEfecto("death", "src/Sonidos/Efectos/snowdead.wav");
         cargarEfecto("enemy_death", "src/Sonidos/Efectos/enemydead.wav");
@@ -47,9 +46,6 @@ public class GestorSonidos {
 
         cargarEfecto("gameover", "src/Sonidos/Background/10_GameOver.wav");
         cargarEfecto("bossintro", "src/Sonidos/Background/05_BossIntro.wav");
-        
-        
-        System.out.println("Sonidos cargados: " + efectosSonido.size() + " efectos");
     }
 
     private void cargarEfecto(String nombre, String ruta) {
@@ -76,46 +72,43 @@ public class GestorSonidos {
     }
 
     public void reproducirEfecto(String nombre) {
-        if (!efectosHabilitados)
-            return;
-
-        Clip clip = efectosSonido.get(nombre);
-        if (clip == null) {
-            System.err.println("Efecto de sonido no encontrado: " + nombre);
-            return;
-        }
-
-        if (clip.isRunning()) {
-            clip.stop();
-        }
-        clip.setFramePosition(0);
-        ajustarVolumen(clip, volumenEfectos);
-        clip.start();
-    }
-
-    public void reproducirMusica(String ruta) {
-        if (!musicaHabilitada)
-            return;
-
-        detenerMusica();
-
-        try {
-            File archivoMusica = new File(ruta);
-            if (!archivoMusica.exists()) {
-                System.err.println("Archivo de música no encontrado: " + ruta);
+        if (efectosHabilitados) {
+            Clip clip = efectosSonido.get(nombre);
+            if (clip == null) {
+                System.err.println("Efecto de sonido no encontrado: " + nombre);
                 return;
             }
 
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(archivoMusica);
-            musicaFondo = AudioSystem.getClip();
-            musicaFondo.open(audioStream);
+            if (clip.isRunning()) {
+                clip.stop();
+            }
+            clip.setFramePosition(0);
+            ajustarVolumen(clip, volumenEfectos);
+            clip.start();
+        }
+    }
 
-            ajustarVolumen(musicaFondo, volumenMusica);
-            musicaFondo.loop(Clip.LOOP_CONTINUOUSLY);
-            System.out.println("Música reproduciendo: " + ruta);
+    public void reproducirMusica(String ruta) {
+        if (musicaHabilitada) {
+            detenerMusica();
 
-        } catch (Exception e) {
-            System.err.println("Error al reproducir música: " + e.getMessage());
+            try {
+                File archivoMusica = new File(ruta);
+                if (!archivoMusica.exists()) {
+                    System.err.println("Archivo de música no encontrado: " + ruta);
+                    return;
+                }
+
+                AudioInputStream audioStream = AudioSystem.getAudioInputStream(archivoMusica);
+                musicaFondo = AudioSystem.getClip();
+                musicaFondo.open(audioStream);
+
+                ajustarVolumen(musicaFondo, volumenMusica);
+                musicaFondo.loop(Clip.LOOP_CONTINUOUSLY);
+
+            } catch (Exception e) {
+                System.err.println("Error al reproducir música: " + e.getMessage());
+            }
         }
     }
 

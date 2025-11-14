@@ -37,7 +37,7 @@ public class Supervivencia extends ModoDeJuego {
         controlaGrafica.mostrarPantallaNivel();
         iniciarHilos();
 
-        GestorSonidos.getInstancia().reproducirMusica("src/Sonidos/Background/06_Boss-Yade_(Boss).wav");
+        GestorSonidos.getInstancia().reproducirMusica("src/Sonidos/Background/04_Henshoku_(Item).wav");
 
         aparecioMoghera = false;
         aparecioKamakichi = false;
@@ -90,9 +90,8 @@ public class Supervivencia extends ModoDeJuego {
         if (nivelActual != null && miFabricaEntidades != null) {
             
             // Posiciones aleatorias dentro del nivel
-            // Ajusta estos valores según el tamaño de tu nivel
-            int x = 100 + random.nextInt(600); // Entre 100 y 700
-            int y = 7600 + random.nextInt(200); // Entre 7600 y 7800
+            int x = 100 + random.nextInt(600);
+            int y = 7600 + random.nextInt(200);
             
             String[] tiposEnemigos = {"demonioRojo", "trollAmarillo", "ranaDeFuego", "moghera", "kamakichi"};
             String tipoEnemigo = tiposEnemigos[random.nextInt(tiposEnemigos.length)];

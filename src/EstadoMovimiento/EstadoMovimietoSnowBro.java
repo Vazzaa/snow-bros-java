@@ -32,12 +32,12 @@ public class EstadoMovimietoSnowBro {
     public void cambiar_direccion(int direccion){
         if (direccion == ConstantesTeclado.DERECHA){
             this.direccion = 0;
-        }else{
+        } else {
             if (direccion == ConstantesTeclado.IZQUIERDA){
                 this.direccion=180;
-                }
-            }   
-        }
+            }
+        }   
+    }
     
     
     public void mover(boolean derecha, boolean izquierda, boolean salto) {
@@ -62,7 +62,7 @@ public class EstadoMovimietoSnowBro {
         boolean estabaEnEscalera = snowBro.estaEnEscalera();
         modoEscalera = false; 
         
-        if (snowBro.estaEnEscalera()) { // If currently colliding with a ladder
+        if (snowBro.estaEnEscalera()) {
             if (subirEscalera) {
                 modoEscalera = true;
                 velocidadVertical = 3;
@@ -70,50 +70,46 @@ public class EstadoMovimietoSnowBro {
                 modoEscalera = true;
                 velocidadVertical = -3;
             } else {
-                velocidadVertical = 0; // Stop vertical movement if on ladder but no input
+                velocidadVertical = 0;
             }
         } else {
-            // Si el jugador estaba en escalera pero ya no lo está, resetear velocidad vertical
             if (estabaEnEscalera && !snowBro.estaEnEscalera()) {
                 velocidadVertical = 0;
             }
             
-            if (salto && enElSuelo() && snowBro.puedeSaltar()) { // Only jump if not on ladder and on solid ground and can jump
+            if (salto && enElSuelo() && snowBro.puedeSaltar()) {
                 saltar();
-                // Resetear estado de resbalando al saltar
                 snowBro.setEstaResbalando(false);
             }
         }
-        // If not on ladder, not jumping, gravity will be applied in actualizar()
-    
-        // 3. Apply physics and update position
         actualizar();
     }
-        protected void moverDerecha() {
-            int velocidadBase = snowBro.getVelocidad();
-            if (snowBro.estaResbalando()) {
-                this.velocidadHorizontal = (int)(velocidadBase * 0.5); // 50% de velocidad
-            } else {
-                this.velocidadHorizontal = velocidadBase;
-            }
+
+    protected void moverDerecha() {
+        int velocidadBase = snowBro.getVelocidad();
+        if (snowBro.estaResbalando()) {
+            this.velocidadHorizontal = (int)(velocidadBase * 0.5);
+        } else {
+            this.velocidadHorizontal = velocidadBase;
         }
+    }
     
-        protected void moverIzquierda() {
-            int velocidadBase = snowBro.getVelocidad();
-            if (snowBro.estaResbalando()) {
-                this.velocidadHorizontal = -(int)(velocidadBase * 0.5); // 50% de velocidad
-            } else {
-                this.velocidadHorizontal = -velocidadBase;
-            }
+    protected void moverIzquierda() {
+        int velocidadBase = snowBro.getVelocidad();
+        if (snowBro.estaResbalando()) {
+            this.velocidadHorizontal = -(int)(velocidadBase * 0.5);
+        } else {
+            this.velocidadHorizontal = -velocidadBase;
         }
+    }
     
-        protected void saltar() {
-            if (enElSuelo()) {
-                this.velocidadVertical = fuerzaSalto;
-                enElSuelo = false;
-                snowBro.iniciarAnimacionSalto(); 
-            }
+    protected void saltar() {
+        if (enElSuelo()) {
+            this.velocidadVertical = fuerzaSalto;
+            enElSuelo = false;
+            snowBro.iniciarAnimacionSalto(); 
         }
+    }
     
     public boolean enElSuelo() {
         if (snowBro.getNivel() == null || snowBro.getNivel().getMisEstructuras() == null) {
@@ -131,45 +127,36 @@ public class EstadoMovimietoSnowBro {
 
     
     public void actualizar() {
-        // Sincronizar enElSuelo con la realidad ANTES de aplicar física
-        // Si el jugador tiene velocidad de plataforma vertical, verificar si realmente está en suelo
         boolean realmenteEnSuelo = enElSuelo();
-    if (snowBro.getVelocidadPlataformaY() != 0) {
-        // Si tiene velocidad de plataforma vertical, verificar si realmente está en contacto
-        if (!realmenteEnSuelo && enElSuelo) {
-            // El jugador pensaba que estaba en suelo pero no lo está
-            enElSuelo = false;
-        } else if (realmenteEnSuelo && !enElSuelo) {
-            // El jugador está en suelo pero la variable no lo refleja
-            enElSuelo = true;
+        if (snowBro.getVelocidadPlataformaY() != 0) {
+            if (!realmenteEnSuelo && enElSuelo) {
+                enElSuelo = false;
+            } else if (realmenteEnSuelo && !enElSuelo) {
+                enElSuelo = true;
+            }
+        } else {
+            if (!realmenteEnSuelo && enElSuelo) {
+                enElSuelo = false;
+            }
         }
-    } else {
-        // Si no tiene velocidad de plataforma, sincronizar normalmente
-        if (!realmenteEnSuelo && enElSuelo) {
-            enElSuelo = false;
+    
+        if (!snowBro.estaEnEscalera() && modoEscalera) {
+            velocidadVertical = 0;
+            modoEscalera = false;
         }
-    }
     
-    // Si el jugador se movió horizontalmente y ya no está en escalera, resetear velocidad vertical
-    if (!snowBro.estaEnEscalera() && modoEscalera) {
-        // El jugador se movió fuera de la escalera, resetear velocidad vertical
-        velocidadVertical = 0;
-        modoEscalera = false;
-    }
-    
-    if (!modoEscalera && !enElSuelo()) { // Apply gravity if not climbing and not on solid ground
-        velocidadVertical -= gravedad;
-    }
+        if (!modoEscalera && !enElSuelo()) {
+            velocidadVertical -= gravedad;
+        }
 
-    int velocidadHorizontalTotal = velocidadHorizontal + snowBro.getVelocidadPlataformaX();
-    int velocidadVerticalTotal = velocidadVertical + snowBro.getVelocidadPlataformaY();
+        int velocidadHorizontalTotal = velocidadHorizontal + snowBro.getVelocidadPlataformaX();
+        int velocidadVerticalTotal = velocidadVertical + snowBro.getVelocidadPlataformaY();
         
         if (snowBro.getNivel() != null && snowBro.getNivel().getMisEstructuras() != null && velocidadHorizontalTotal != 0) {
             int nuevaX = snowBro.getPosX() + velocidadHorizontal;
             boolean colisionaria = false;
             for (Estructura estructura : snowBro.getNivel().getMisEstructuras()) {
                 if (estructura.bloquearMovimientoHorizontal()){
-                    // Comprobación para evitar el bloqueo cuando SnowBro está encima de la estructura.
                     int pieSnowBro = snowBro.getPosY();
                     int techoEstructura = estructura.getHitbox().getPosY() + estructura.getHitbox().getAlto();
                     boolean estaEncima = Math.abs(pieSnowBro - techoEstructura) < 5;
@@ -183,7 +170,7 @@ public class EstadoMovimietoSnowBro {
             if (colisionaria) {
                 // No cambiamos la velocidad, solo no aplicamos el movimiento
             } else {
-                snowBro.setPosX(snowBro.getPosX() + velocidadHorizontalTotal); // Esta línea ya era correcta para X
+                snowBro.setPosX(snowBro.getPosX() + velocidadHorizontalTotal);
             }
         } else {
             snowBro.setPosX(snowBro.getPosX() + velocidadHorizontalTotal);
@@ -198,12 +185,11 @@ public class EstadoMovimietoSnowBro {
                     Hitbox hitboxFutura = new Hitbox(snowBro.getHitbox().getAncho(), snowBro.getHitbox().getAlto(), snowBro.getPosX(), y);
                     
                     for (Estructura estructura : snowBro.getNivel().getMisEstructuras()) {
-                        if (estructura.bloquearMovimientoHorizontal()) { // Paredes también bloquean verticalmente
+                        if (estructura.bloquearMovimientoHorizontal()) {
                             if (controladorColisiones.colisionaAABB(hitboxFutura, estructura.getHitbox())) {
                                 int cabezaSnowBro = y + snowBro.getHitbox().getAlto();
                                 int sueloEstructura = estructura.getHitbox().getPosY();
                                 
-                                // Si la cabeza choca con el suelo de la plataforma, detener el movimiento vertical (incluyendo la velocidad de la plataforma)
                                 if (cabezaSnowBro >= sueloEstructura - 5 && cabezaSnowBro <= sueloEstructura + 10) {
                                     snowBro.setPosY(sueloEstructura - snowBro.getHitbox().getAlto());
                                     velocidadVertical = 0;
@@ -225,28 +211,23 @@ public class EstadoMovimietoSnowBro {
                     Hitbox hitboxFutura = new Hitbox(snowBro.getHitbox().getAncho(), snowBro.getHitbox().getAlto(), snowBro.getPosX(), y);
                     
                     for (Estructura estructura : snowBro.getNivel().getMisEstructuras()) {
-                            if (controladorColisiones.colisionaAABB(hitboxFutura, estructura.getHitbox())) {
-                                int techoEstructura = estructura.getHitbox().getPosY() + estructura.getHitbox().getAlto();
-                                int pieSnowBro = y;
+                        if (controladorColisiones.colisionaAABB(hitboxFutura, estructura.getHitbox())) {
+                            int techoEstructura = estructura.getHitbox().getPosY() + estructura.getHitbox().getAlto();
+                            int pieSnowBro = y;
                                 
-                                if (pieSnowBro >= techoEstructura - 5 && pieSnowBro <= techoEstructura + 10) {
-                                    snowBro.setPosY(techoEstructura);
-                                    velocidadVertical = 0;
-                                    enElSuelo = true;
-                                    return; 
-                                }
-                            }   
-                        }
+                            if (pieSnowBro >= techoEstructura - 5 && pieSnowBro <= techoEstructura + 10) {
+                                snowBro.setPosY(techoEstructura);
+                                velocidadVertical = 0;
+                                enElSuelo = true;
+                                return; 
+                            }
+                        }   
                     }
                 }
             }
+        }
         
-        snowBro.setPosY(snowBro.getPosY() + velocidadVerticalTotal); // Aplicar la velocidad vertical total
-
-
-        // if (velocidadHorizontal != 0) {
-        //     System.out.println("ACTUALIZAR - PosX: " + posXAnterior + " -> " + snowBro.getPosX() + " (velocidad: " + velocidadHorizontal + ")");
-        // }
+        snowBro.setPosY(snowBro.getPosY() + velocidadVerticalTotal);
 
         if (!snowBro.estaEnEscalera() && enElSuelo() && velocidadVertical == 0) {
             enElSuelo = true;
@@ -263,13 +244,8 @@ public class EstadoMovimietoSnowBro {
         if (!snowBro.estaEnEscalera() && enElSuelo() && !ConstantesTeclado.estaPresionada(ConstantesTeclado.SALTAR)) {
             if (!enElSuelo()) {
                 enElSuelo = false;
-                // System.out.println("CAYENDO DE PLATAFORMA");
             }
         }
-
-        // if (velocidadVertical != 0) {
-        //     System.out.println("SALTO - PosY: " + posYAnterior + " -> " + snowBro.getPosY() + " (velocidad: " + velocidadVertical + ", enElSuelo: " + enElSuelo + ")");
-        // }
     }
 
     public boolean estaSubiendoEscalera() {

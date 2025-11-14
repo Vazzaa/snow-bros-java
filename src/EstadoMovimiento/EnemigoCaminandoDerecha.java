@@ -25,7 +25,6 @@ public class EnemigoCaminandoDerecha implements EstadoMovimientoEnemigo {
             enemigo.setPosX(enemigo.getPosX() + velocidad);
             enemigo.notificarObserver();
             return;
-        //TODO: cambiar la skin a caminando izquierda
         }
 
         if (!colisionManager.estaEnSuelo(enemigo, enemigo.getJuego().getNivel().getMisEstructuras())) {
@@ -33,7 +32,6 @@ public class EnemigoCaminandoDerecha implements EstadoMovimientoEnemigo {
         } 
 
         int velocidadHorizontalPropia = velocidad;
-        // Si el enemigo está sobre una plataforma móvil, su propio movimiento horizontal se suprime.
         if (enemigo.estaEnPlataformaMovil()) {
             velocidadHorizontalPropia = 0;
         }
@@ -51,44 +49,39 @@ public class EnemigoCaminandoDerecha implements EstadoMovimientoEnemigo {
 
         boolean colisionariaHorizontal = false;
 
-        // Comprobación de colisiones horizontales
-        // La variable 'colisionaria' se renombra a 'colisionariaHorizontal' para mayor claridad
-        // y se usa en el bucle de estructuras.
-
         for (Estructura estructura : enemigo.getJuego().getNivel().getMisEstructuras()) {
             if(estructura.bloquearMovimientoHorizontal()) {
                 Hitbox hitboxFutura = new Hitbox(enemigo.getHitbox().getAncho(), enemigo.getHitbox().getAlto(), nuevaX, enemigo.getPosY());
                 if (colisionManager.colisionaAABB(hitboxFutura, estructura.getHitbox())) {
                     enemigo.cambiarEstado();
-                    colisionariaHorizontal = true; // Actualizar la nueva bandera
+                    colisionariaHorizontal = true;
                     break;
                 }
             }
         }
         if (!colisionariaHorizontal) {
-            enemigo.setPosX(nuevaX); // Aplicar movimiento horizontal si no hay colisión
+            enemigo.setPosX(nuevaX);
         }
 
-        // Comprobación de colisiones verticales para enemigos
         if (velocidadVerticalActual != 0) {
             Hitbox hitboxFuturaVertical = new Hitbox(enemigo.getHitbox().getAncho(), enemigo.getHitbox().getAlto(), enemigo.getPosX(), nuevaY);
             boolean colisionariaVertical = false;
             for (Estructura estructura : enemigo.getJuego().getNivel().getMisEstructuras()) {
                 if (colisionManager.colisionaAABB(hitboxFuturaVertical, estructura.getHitbox())) {
-                    if (velocidadVerticalActual < 0) { // Moviéndose hacia abajo
+                    if (velocidadVerticalActual < 0) {
                         int techoEstructura = estructura.getHitbox().getPosY() + estructura.getHitbox().getAlto();
-                        enemigo.setPosY(techoEstructura); // Ajustar a la superficie
-                        velocidadVerticalActual = 0; // Detener movimiento vertical
+                        enemigo.setPosY(techoEstructura);
+                        velocidadVerticalActual = 0;
                         colisionariaVertical = true;
                         break;
                     }
                 }
             }
             if (!colisionariaVertical) {
-                enemigo.setPosY(nuevaY); // Aplicar movimiento vertical si no hay colisión
+                enemigo.setPosY(nuevaY);
             }
         } else {
-            enemigo.setPosY(nuevaY); // Aplicar movimiento vertical incluso si es solo gravedad
+            enemigo.setPosY(nuevaY);
         }
         enemigo.notificarObserver();
 
@@ -115,7 +108,7 @@ public class EnemigoCaminandoDerecha implements EstadoMovimientoEnemigo {
         int techoPlataforma = plataforma.getHitbox().getPosY() + plataforma.getHitbox().getAlto();
 
         if (colisionManager.colisionaAABB(enemigo.getHitbox(), plataforma.getHitbox()) && Math.abs(pieEnemigo - techoPlataforma) < 5) {
-            enemigo.setPosY(techoPlataforma); // Ajusta la posición Y del enemigo
+            enemigo.setPosY(techoPlataforma);
             enemigo.setVelocidadPlataforma(plataforma.getVelocidadDeArrastreX(), plataforma.getVelocidadDeArrastreY());
         }
     }

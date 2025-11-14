@@ -21,7 +21,6 @@ public class Pincho extends Obstaculo{
         s.resetVelocidad();
         s.notificarObserver();
         GestorSonidos.getInstancia().reproducirEfecto("death");
-        System.out.println("Pincho: SnowBro afectado");
         if (s.getVida() <= 0) {
             s.morir();
         }

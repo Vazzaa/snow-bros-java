@@ -54,7 +54,6 @@ public class ColisionManagerEntidades {
         int distanciaMinima = Integer.MAX_VALUE;
         
         for (Estructura estructura : estructuras) {
-            // Solo considerar estructuras que sean suelo sólido (excluir escaleras)
             if (!estructura.esSueloSolido()) {
                 continue;
             }

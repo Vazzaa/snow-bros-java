@@ -96,7 +96,6 @@ public abstract class ModoDeJuego implements ControladorJuego {
 		creador.setFrabricaEntidades(miFabricaEntidades);
 		nivelActual = creador.leerArchivo(archivoNivel);
 
-		// Lógica para cambiar el fondo según el número de nivel
 		String rutaFondo;
 		if (numeroNivel >= 4 && numeroNivel <= 6) {
 			rutaFondo = "/Imagenes/Background/Fondo3.png"; // Ruta para niveles 4, 5, 6
@@ -104,7 +103,6 @@ public abstract class ModoDeJuego implements ControladorJuego {
 			rutaFondo = "/Imagenes/Background/Fondo1.png"; // Ruta para niveles 1, 2, 3
 		}
 		controlaGrafica.setImagenDeFondoNivel(rutaFondo);
-		// Fin de la lógica de cambio de fondo
 
 		nivelActual.setJuego(this);
 
@@ -117,19 +115,19 @@ public abstract class ModoDeJuego implements ControladorJuego {
 	}
 
 	protected void limpiarNivelActual() {
-		if(nivelActual == null)
-			return;
-		if (nivelActual.getSnowBro() != null)
-			controlaGrafica.sacarJugador(nivelActual.getSnowBro());
+		if(nivelActual != null) {
+			if (nivelActual.getSnowBro() != null)
+				controlaGrafica.sacarJugador(nivelActual.getSnowBro());
 
-		for(Estructura es : nivelActual.getMisEstructuras()){
-			controlaGrafica.sacarEntidad(es);
-		}
-		for(Enemigo en : nivelActual.getMisEnemigos()){
-			controlaGrafica.sacarEntidad(en);
-		}
-		for(PowerUp pu : nivelActual.getMisPowerUps()){
-			controlaGrafica.sacarEntidad(pu);
+			for(Estructura es : nivelActual.getMisEstructuras()){
+				controlaGrafica.sacarEntidad(es);
+			}
+			for(Enemigo en : nivelActual.getMisEnemigos()){
+				controlaGrafica.sacarEntidad(en);
+			}
+			for(PowerUp pu : nivelActual.getMisPowerUps()){
+				controlaGrafica.sacarEntidad(pu);
+			}
 		}
 	}
 
@@ -207,7 +205,8 @@ public abstract class ModoDeJuego implements ControladorJuego {
 
 	@Override
 	public void lanzarProyectil() {
-		nivelActual.getSnowBro().disparar();
+		if (nivelActual != null && nivelActual.getSnowBro() != null)
+			nivelActual.getSnowBro().disparar();
 	}
 
 	@Override
