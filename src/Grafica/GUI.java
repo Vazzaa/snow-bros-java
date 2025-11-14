@@ -205,7 +205,7 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 	
 	@Override
 	public boolean verificarColisiones(Entidad e) {
-		// TODO Auto-generated method stub
+		// No aplica en este caso
 		return false;
 	}
 

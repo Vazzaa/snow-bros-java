@@ -93,7 +93,7 @@ public class EnemigoCaminandoIzquierda implements EstadoMovimientoEnemigo {
 
     @Override
     public EstadoMovimientoEnemigo getEstadoAnterior() {
-        // TODO Auto-generated method stub
+        // No aplica para este caso
         throw new UnsupportedOperationException("Unimplemented method 'getEstadoAnterior'");
     }
     

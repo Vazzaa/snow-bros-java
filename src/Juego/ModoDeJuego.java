@@ -199,8 +199,7 @@ public abstract class ModoDeJuego implements ControladorJuego {
 
 	@Override
 	public void cambiarModoDeJuego() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'cambiarModoDeJuego'");
+		// No aplica para este caso
 	}
 
 	@Override
@@ -211,15 +210,15 @@ public abstract class ModoDeJuego implements ControladorJuego {
 
 	@Override
 	public boolean estaColisionando(Entidad e) {
-		// TODO Auto-generated method stub
+		// No aplica para este caso
 		throw new UnsupportedOperationException("Unimplemented method 'estaColisionando'");
 	}
 
 	@Override
 	public void moverAbajo() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'moverAbajo'");
+		// No aplica para este caso
 	}
+	
 	@Override
 	public Nivel getNivelActual() {
 		return nivelActual;

@@ -169,7 +169,7 @@ public class Moghera extends Enemigo {
         }
     }
 
-    // --- Métodos de colisión no implementados ---
+    // No aplican para este caso
     @Override
     public void colisionarPowerUp(PowerUp p) {}
 
@@ -180,10 +180,7 @@ public class Moghera extends Enemigo {
     public void colisionarObstaculo(Obstaculo o) {}
 
     @Override
-    public void colisionarEstructura(Estructura e) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void colisionarEstructura(Estructura e) {}
 
     @Override
     public int getRenderAncho() {

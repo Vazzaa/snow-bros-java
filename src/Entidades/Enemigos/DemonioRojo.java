@@ -48,20 +48,19 @@ public class DemonioRojo extends Enemigo {
 
     @Override
     public void atacar(Enemigo e) {
-        // TODO Auto-generated method stub
-        
+        // No aplica para este caso
     }
 
     @Override
     public void atacar(SnowBro s) {
-        // TODO Auto-generated method stub
-        
+        // No aplica para este caso
     }
+
     @Override
     public void chocar(Colisionable c) {
-        // TODO Auto-generated method stub
-        
+        // No aplica para este caso
     }
+
     protected void crearPowerUp() {
         this.getJuego().getControladoraGrafica().sacarEntidad(this);
         PowerUp powerUp = this.getJuego().getNivelActual().getMiFabrica().getFruta(miHitbox.getPosX(), miHitbox.getPosY());
@@ -90,7 +89,7 @@ public class DemonioRojo extends Enemigo {
 
     @Override
     public EstadoEnemigo getEstado() {
-        // TODO Auto-generated method stub
+        // No aplica para este caso
         return null;
     }
 
@@ -196,8 +195,7 @@ public class DemonioRojo extends Enemigo {
 
     @Override
     public void setEstado(EstadoEnemigo estado) {
-        // TODO Auto-generated method stub
-        
+        // No aplica para este caso
     }
 
     @Override
@@ -274,8 +272,7 @@ public class DemonioRojo extends Enemigo {
 
     @Override
     public void colisionarObstaculo(Obstaculo o) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'colisionarObstaculo'");
+        // No aplica para este caso
     }
 
     @Override

@@ -5,7 +5,7 @@ import Entidades.Enemigos.Enemigo;
 public class EstadoActivo implements EstadoEnemigo {
     @Override
     public void recibirDisparo(Enemigo enemigo) {
-        // TODO Auto-generated method stub
+        // No aplica para este caso
         throw new UnsupportedOperationException("Unimplemented method 'recibirDisparo'");
     }
     
