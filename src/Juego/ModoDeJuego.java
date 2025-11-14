@@ -48,11 +48,11 @@ public abstract class ModoDeJuego implements ControladorJuego {
 	}
 	
 	public void cambiarModoDeJuego(int modo) {
-		// TODO
+		// No aplica en este caso
 	}
 	
 	public void cambiarDireccionJugador(int direccion) {
-		//nivelActual.getSnowBro().setDireccion(direccion);
+		// No aplica en este caso
 	}
 
 	public Nivel getNivel(){

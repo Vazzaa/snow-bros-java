@@ -20,7 +20,7 @@ public class BolaDeNieve extends Proyectil{
 
     @Override
     public void afectar(Enemigo enemigo) {
-        //TODO: Donde esta el comportamiento al afectar a un enemigo?
+        // No aplica en este caso
     }
 
     @Override
