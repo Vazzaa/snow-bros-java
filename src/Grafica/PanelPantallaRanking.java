@@ -153,7 +153,7 @@ public class PanelPantallaRanking extends PanelVista{
 
     private void mostrarRanking(JPanel panel, Jugador[] puntajes) {
         if(puntajes != null){
-            Font fuenteEstandar = new Font("Monospaced", Font.BOLD, 24);
+            Font fuenteEstandar = new Font("Monospaced", Font.BOLD, 20);
             for (int i = 0; i < puntajes.length; i++) {
                 Jugador j = puntajes[i];
                 if (j != null) {
