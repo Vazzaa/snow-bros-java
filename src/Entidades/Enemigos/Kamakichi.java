@@ -118,6 +118,8 @@ public class Kamakichi extends Enemigo {
                 case 4:
                     dispararBombas();
                     dispararBombas();
+                    dispararBombasArriba();
+                    dispararBombasArriba();
                     break;
             }
             tiempoUltimoCambio = tiempoActual;
@@ -130,8 +132,14 @@ public class Kamakichi extends Enemigo {
             miJuego.registrarObserver(enemigoBomba);
             miJuego.getNivel().agregarEnemigos(enemigoBomba);
         }
+    }
 
-
+    protected void dispararBombasArriba(){
+        if (miJuego != null && miJuego.getNivel() != null) {
+            Bomba enemigoBomba = fabParaBomba.getBomba(miHitbox.getPosX(), miHitbox.getPosY()+50);
+            miJuego.registrarObserver(enemigoBomba);
+            miJuego.getNivel().agregarEnemigos(enemigoBomba);
+        }
     }
 
     public void cambiarEstadoInmediato() {

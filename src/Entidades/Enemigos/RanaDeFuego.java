@@ -157,20 +157,20 @@ public class RanaDeFuego extends Enemigo {
             for (Enemigo otroEnemigo : getJuego().getNivel().getMisEnemigos()) {
                 if (otroEnemigo != this && otroEnemigo.estaVivo() && !otroEnemigo.estaCompletamenteCongelado()) {
                     if (colisionaAABB(getHitbox(), otroEnemigo.getHitbox())) {
-                        otroEnemigo.morir(); // El otro enemigo muere
-                        return; // Salimos para no seguir procesando el deslizamiento
+                        otroEnemigo.morir();
+                        destruirBolaDeNieve();
+                        return; 
                     }
                 }
             }
 
             setPosX(nuevaX);
             
-            // Verificar si hay una plataforma sólida directamente debajo en la nueva posición
             boolean hayPlataformaDebajo = false;
             Hitbox hitboxActual = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), getPosX(), getPosY());
             Hitbox hitboxDeteccion = new Hitbox(
                 hitboxActual.getAncho(),
-                hitboxActual.getAlto() + 5, // TOLERANCIA_SUELO
+                hitboxActual.getAlto() + 5, 
                 hitboxActual.getPosX(),
                 hitboxActual.getPosY() - 5
             );
@@ -182,7 +182,6 @@ public class RanaDeFuego extends Enemigo {
                         int techoEstructura = estructura.getHitbox().getPosY() + estructura.getHitbox().getAlto();
                         if (Math.abs(pieEntidad - techoEstructura) <= 5) {
                             hayPlataformaDebajo = true;
-                            // Ajustar posición Y para mantenerla pegada a la plataforma
                             setPosY(techoEstructura);
                             break;
                         }
@@ -191,7 +190,6 @@ public class RanaDeFuego extends Enemigo {
             }
             
             if (!hayPlataformaDebajo) {
-                // No hay plataforma sólida debajo, aplicar gravedad
                 velocidadVerticalDeslizamiento -= gravedadDeslizamiento;
                 int nuevaY = getPosY() + velocidadVerticalDeslizamiento;
                 boolean colisionaVertical = false;
@@ -217,7 +215,6 @@ public class RanaDeFuego extends Enemigo {
                 }
 
             } else {
-                // Hay plataforma debajo, mantener velocidad vertical en 0
                 velocidadVerticalDeslizamiento = 0;
             }
             

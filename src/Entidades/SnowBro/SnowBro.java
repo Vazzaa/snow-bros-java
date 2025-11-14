@@ -250,9 +250,9 @@ public class SnowBro extends Entidad implements EntidadJugador, Colisionador {
         
         switch (estadoMovimiento.direccion) {
             case 0: 
-                return 2;
+                return velocidad!=6 ? 2 : 5;
             case 180: 
-                return 3;
+                return velocidad!=6 ? 3 : 6;
             default:
                 return 1; 
         }
