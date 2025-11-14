@@ -9,6 +9,7 @@ import java.util.Iterator;
 import Entidades.SnowBro.SnowBro;
 import EstadoMovimiento.Movible;
 import Fabricas.FabricaEntidades;
+import Sonidos.GestorSonidos;
 import Entidades.Enemigos.*;
 import Entidades.PowerUp.*;
 import Entidades.Proyectiles.Proyectil;
@@ -32,6 +33,9 @@ public class Nivel {
     private static final int TIEMPO_APARICION_CALABAZA = 60000;
     private static final int TIEMPO_APARICION_VIDA = 30000;
 
+    protected boolean aparecioMoghera;
+    protected boolean aparecioKamakichi;
+
     public Nivel(int num, List<Estructura> misEstructuras, List<Enemigo> misEnemigos, SnowBro snowBro, FabricaEntidades miFabrica) {
         numero = num;
         this.snowBro = snowBro;
@@ -43,6 +47,8 @@ public class Nivel {
         miJuego = null;
         tiempoParaAparecerCalabaza = System.currentTimeMillis() + TIEMPO_APARICION_CALABAZA;
         tiempoParaAparecerVida = System.currentTimeMillis() + TIEMPO_APARICION_VIDA;
+        aparecioMoghera = false;
+        aparecioKamakichi = false;
     }
 
     public int getNumero() {
@@ -305,4 +311,15 @@ public class Nivel {
             tiempoParaAparecerVida = System.currentTimeMillis() + TIEMPO_APARICION_VIDA;
         }
     }
+
+    public void spawnMoghera() {
+        if (!aparecioMoghera && numero == 3 && misEnemigos.isEmpty()) {
+            Enemigo moghera = miFabrica.getMoghera(580, 7750);
+            agregarEnemigos(moghera);
+            miJuego.registrarObserver(moghera);
+            GestorSonidos.getInstancia().reproducirEfecto("bossintro");
+            aparecioMoghera = true;
+        }
+    }
+
 }

@@ -6,6 +6,9 @@ import Sonidos.GestorSonidos;
 
 public class Clasico extends ModoDeJuego {
 
+    protected long tiempoInicio;
+    protected long tiempoTranscurrido;
+
     public Clasico (ControladorGrafica controladorGrafica) {
         super(controladorGrafica);
     }
@@ -16,19 +19,41 @@ public class Clasico extends ModoDeJuego {
         cargarNivel(1, 0);
         controlaGrafica.mostrarPantallaNivel();
         iniciarHilos();
+        tiempoInicio = System.currentTimeMillis();
+        tiempoTranscurrido = 0;
         System.out.println("Modo Clásico iniciado - Nivel 1");
     }
 
     @Override
     public void verificarNivelCompletado() {
-        if (nivelActual != null && nivelActual.estaCompletado()) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        if (nivelActual != null) {
+
+            actualizarTiempo();
+
+            if (numeroNivelActual == 3 && nivelActual.getMisEnemigos().isEmpty())
+                nivelActual.spawnMoghera();
+                
+            if (nivelActual.estaCompletado()) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                avanzarSiguienteNivel();
             }
-            avanzarSiguienteNivel();
         }
+    }
+
+    private void actualizarTiempo() {
+        tiempoTranscurrido = System.currentTimeMillis() - tiempoInicio;
+        controlaGrafica.actualizarTiempo(getTiempoTranscurridoFormateado());
+    }
+
+    public String getTiempoTranscurridoFormateado() {
+        int segundosTotales = (int) tiempoTranscurrido / 1000;
+        int minutos = segundosTotales / 60;
+        int segundos = segundosTotales % 60;
+        return String.format("%02d:%02d", minutos, segundos);
     }
 
     public void avanzarSiguienteNivel() {
@@ -47,7 +72,7 @@ public class Clasico extends ModoDeJuego {
             System.out.println("Nivel " + siguienteNivel + " cargado.");
             cargarNivel(siguienteNivel, puntajeActual);
             iniciarHilos();
-            if (numeroNivelActual == 3 || numeroNivelActual == 6)
+            if (numeroNivelActual == 6)
                 GestorSonidos.getInstancia().reproducirEfecto("bossintro");
 		} else {
             System.out.println("No hay mas niveles. Fin.");
@@ -65,5 +90,10 @@ public class Clasico extends ModoDeJuego {
         controlaGrafica.mostrarPantallaVictoria();
         GestorSonidos.getInstancia().detenerMusica();
         GestorSonidos.getInstancia().reproducirMusica("src/Sonidos/Background/09_Yoh_(Ending).wav");
+    }
+
+    @Override
+    public boolean debeMostrarTiempo() {
+        return true;
     }
 }

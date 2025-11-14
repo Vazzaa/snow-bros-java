@@ -132,13 +132,13 @@ public class CreadorDeNivel {
                         }
 
                     } else if (linea.startsWith("ESCALERA:")) {
-                            String[] coords = linea.substring(9).split(",");
-                            int x = Integer.parseInt(coords[0].trim());
-                            int y = Integer.parseInt(coords[1].trim());
-                            Estructura escalera = fabEntidades.getEscalera(x, y);
-                            if (escalera != null) {
-                                estructuras.add(escalera);
-                            }
+                        String[] coords = linea.substring(9).split(",");
+                        int x = Integer.parseInt(coords[0].trim());
+                        int y = Integer.parseInt(coords[1].trim());
+                        Estructura escalera = fabEntidades.getEscalera(x, y);
+                        if (escalera != null) {
+                            estructuras.add(escalera);
+                        }
                             
                     } else if (linea.startsWith("ENEMIGO:")) {
                         String[] partes = linea.substring(8).split(",");

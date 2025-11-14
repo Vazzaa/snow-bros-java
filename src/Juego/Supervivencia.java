@@ -17,6 +17,7 @@ public class Supervivencia extends ModoDeJuego {
     protected boolean aparecioKamakichi;
 
     protected long tiempoInicio;
+    protected long tiempoTranscurrido;
     protected long tiempoRestante;
 
     protected int numeroOleada;
@@ -44,6 +45,7 @@ public class Supervivencia extends ModoDeJuego {
 
         tiempoInicio = System.currentTimeMillis();
         tiempoRestante = TIEMPO_ENTRE_OLEADAS;
+        tiempoTranscurrido = 0;
         
         System.out.println("Modo Supervivencia iniciado");
         System.out.println("Objetivo: Alcanzar " + PUNTUACION_OBJETIVO + " puntos");
@@ -75,8 +77,9 @@ public class Supervivencia extends ModoDeJuego {
     }
 
     private void actualizarTiempo() {
-        long tiempoTranscurrido = System.currentTimeMillis() - tiempoInicio;
+        tiempoTranscurrido = System.currentTimeMillis() - tiempoInicio;
         tiempoRestante = TIEMPO_ENTRE_OLEADAS - tiempoTranscurrido;
+        controlaGrafica.actualizarTiempo(getTiempoTranscurridoFormateado());
         
         if (tiempoRestante <= 0) {
             tiempoRestante = 0;
@@ -85,6 +88,13 @@ public class Supervivencia extends ModoDeJuego {
             tiempoInicio = System.currentTimeMillis();
             tiempoRestante = TIEMPO_ENTRE_OLEADAS;
         }
+    }
+
+    public String getTiempoTranscurridoFormateado() {
+        int segundosTotales = (int) tiempoTranscurrido / 1000;
+        int minutos = segundosTotales / 60;
+        int segundos = segundosTotales % 60;
+        return String.format("%02d:%02d", minutos, segundos);
     }
 
     private void crearEnemigoAleatorio() {
@@ -142,5 +152,10 @@ public class Supervivencia extends ModoDeJuego {
         controlaGrafica.mostrarPantallaVictoria();
         GestorSonidos.getInstancia().detenerMusica();
         GestorSonidos.getInstancia().reproducirMusica("src/Sonidos/Background/09_Yoh_(Ending).wav");
+    }
+
+    @Override
+    public boolean debeMostrarTiempo() {
+        return true;
     }
 }
