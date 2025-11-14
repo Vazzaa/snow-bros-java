@@ -14,6 +14,11 @@ import Sonidos.GestorSonidos;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 
 public class PanelPantallaRanking extends PanelVista{
@@ -27,12 +32,16 @@ public class PanelPantallaRanking extends PanelVista{
     protected Ranking rankingContrarreloj;
     protected Ranking rankingSupervivencia;
 
+    private static final String RUTA_RANKING_CLASICO = "ranking_clasico.dat";
+    private static final String RUTA_RANKING_CONTRARRELOJ = "ranking_contrarreloj.dat";
+    private static final String RUTA_RANKING_SUPERVIVENCIA = "ranking_supervivencia.dat";
+
     // Constructor
     public PanelPantallaRanking(ControladorVistas c){
         super(c);
-        rankingClasico = new Ranking();
-        rankingContrarreloj = new Ranking();
-        rankingSupervivencia = new Ranking();
+        rankingClasico = cargarRanking(RUTA_RANKING_CLASICO);
+        rankingContrarreloj = cargarRanking(RUTA_RANKING_CONTRARRELOJ);
+        rankingSupervivencia = cargarRanking(RUTA_RANKING_SUPERVIVENCIA);
         iniciarComponentes();
     }
 
@@ -82,12 +91,15 @@ public class PanelPantallaRanking extends PanelVista{
             switch (ModoDeJuego) {
                 case 1:
                     rankingClasico.agregarJugador(nombre, puntaje);
+                    guardarRanking(rankingClasico, RUTA_RANKING_CLASICO);
                     break;
                 case 2:
                     rankingContrarreloj.agregarJugador(nombre, puntaje);
+                    guardarRanking(rankingContrarreloj, RUTA_RANKING_CONTRARRELOJ);
                     break;
                 case 3:
                     rankingSupervivencia.agregarJugador(nombre, puntaje);
+                    guardarRanking(rankingSupervivencia, RUTA_RANKING_SUPERVIVENCIA);
                     break;
             }
             refrescarRankingsEnPantalla();
@@ -156,6 +168,29 @@ public class PanelPantallaRanking extends PanelVista{
         }
     }
 
+    private void guardarRanking(Ranking ranking, String rutaArchivo) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(rutaArchivo))) {
+            oos.writeObject(ranking);
+        } catch (Exception e) {
+            System.err.println("Error al guardar el ranking en " + rutaArchivo);
+            e.printStackTrace();
+        }
+    }
+
+    private Ranking cargarRanking(String rutaArchivo) {
+        File archivo = new File(rutaArchivo);
+        if (archivo.exists()) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(rutaArchivo))) {
+                Ranking ranking = (Ranking) ois.readObject();
+                if (ranking != null) {
+                    return ranking;
+                }
+            } catch (Exception e) {
+                System.err.println("Error al cargar el ranking desde " + rutaArchivo + ". Se creará uno nuevo.");
+                e.printStackTrace();
+            }
+        }
+        return new Ranking();
+    }
+
 }
-
-

@@ -10586,6 +10586,24 @@
 											"height": 13,
 											"text": "+puntaje: int",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGag3EVScamaZc=",
+											"_parent": {
+												"$ref": "AAAAAAGZgrzV82vIE/4="
+											},
+											"model": {
+												"$ref": "AAAAAAGag3EVAcajE7E="
+											},
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 831,
+											"top": 708,
+											"width": 303,
+											"height": 13,
+											"text": "+serialVersionUID: int",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
@@ -10593,7 +10611,7 @@
 									"left": 826,
 									"top": 673,
 									"width": 313,
-									"height": 38
+									"height": 53
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -10617,7 +10635,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 831,
-											"top": 716,
+											"top": 731,
 											"width": 303,
 											"height": 13,
 											"text": "+Jugador(n: String, p: int)",
@@ -10635,7 +10653,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 831,
-											"top": 731,
+											"top": 746,
 											"width": 303,
 											"height": 13,
 											"text": "+getNombre(): String",
@@ -10653,7 +10671,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 831,
-											"top": 746,
+											"top": 761,
 											"width": 303,
 											"height": 13,
 											"text": "+getPuntaje(): int",
@@ -10671,7 +10689,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 831,
-											"top": 761,
+											"top": 776,
 											"width": 303,
 											"height": 13,
 											"text": "+setNombre(n: String): void",
@@ -10689,7 +10707,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 831,
-											"top": 776,
+											"top": 791,
 											"width": 303,
 											"height": 13,
 											"text": "+sumarPuntaje(): void",
@@ -10699,7 +10717,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 826,
-									"top": 711,
+									"top": 726,
 									"width": 313,
 									"height": 83
 								},
@@ -10744,7 +10762,7 @@
 							"left": 826,
 							"top": 648,
 							"width": 312,
-							"height": 146,
+							"height": 161,
 							"nameCompartment": {
 								"$ref": "AAAAAAGZgrzV8mvD4NQ="
 							},
@@ -16306,6 +16324,24 @@
 											"height": 13,
 											"text": "+cantJugadores: int",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGag3WxIcbjXVE=",
+											"_parent": {
+												"$ref": "AAAAAAGZgsmn53HI2w8="
+											},
+											"model": {
+												"$ref": "AAAAAAGag3Ww4MbgE0s="
+											},
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 831,
+											"top": 876,
+											"width": 303,
+											"height": 13,
+											"text": "+serialVersionUID: int",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
@@ -16313,7 +16349,7 @@
 									"left": 826,
 									"top": 841,
 									"width": 313,
-									"height": 38
+									"height": 53
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -16337,7 +16373,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 831,
-											"top": 884,
+											"top": 899,
 											"width": 303,
 											"height": 13,
 											"text": "+Ranking()",
@@ -16355,7 +16391,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 831,
-											"top": 899,
+											"top": 914,
 											"width": 303,
 											"height": 13,
 											"text": "+agregarJugador(nombre: String, puntaje: int): void",
@@ -16373,7 +16409,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 831,
-											"top": 914,
+											"top": 929,
 											"width": 303,
 											"height": 13,
 											"text": "+getPuntajes(): Jugador",
@@ -16391,7 +16427,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 831,
-											"top": 929,
+											"top": 944,
 											"width": 303,
 											"height": 13,
 											"text": "+getCantJugadores(): int",
@@ -16401,7 +16437,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 826,
-									"top": 879,
+									"top": 894,
 									"width": 313,
 									"height": 68
 								},
@@ -16446,7 +16482,7 @@
 							"left": 826,
 							"top": 816,
 							"width": 312,
-							"height": 131,
+							"height": 146,
 							"nameCompartment": {
 								"$ref": "AAAAAAGZgsmn53HD7Ew="
 							},
@@ -25923,7 +25959,7 @@
 											"top": 151,
 											"width": 426.2802734375,
 											"height": 13,
-											"text": "+ventana: JFrame",
+											"text": "+ventana",
 											"horizontalAlignment": 0
 										},
 										{
@@ -26742,7 +26778,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4512,
-											"top": 2048,
+											"top": 1984,
 											"height": 13
 										},
 										{
@@ -26754,7 +26790,7 @@
 											"font": "Arial;13;1",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1399,
+											"top": 1367,
 											"width": 423,
 											"height": 13,
 											"text": "PanelPantallaRanking"
@@ -26769,7 +26805,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4512,
-											"top": 2048,
+											"top": 1984,
 											"width": 73.67724609375,
 											"height": 13,
 											"text": "(from Model)"
@@ -26784,7 +26820,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4512,
-											"top": 2048,
+											"top": 1984,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
@@ -26792,7 +26828,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 4544,
-									"top": 1392,
+									"top": 1360,
 									"width": 433,
 									"height": 25,
 									"stereotypeLabel": {
@@ -26830,10 +26866,10 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1422,
+											"top": 1390,
 											"width": 423,
 											"height": 13,
-											"text": "+botonParaAtr: JButton",
+											"text": "+botonParaAtr",
 											"horizontalAlignment": 0
 										},
 										{
@@ -26848,10 +26884,10 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1437,
+											"top": 1405,
 											"width": 423,
 											"height": 13,
-											"text": "+panelRankingClasico: JPanel",
+											"text": "+panelRankingClasico",
 											"horizontalAlignment": 0
 										},
 										{
@@ -26866,10 +26902,10 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1452,
+											"top": 1420,
 											"width": 423,
 											"height": 13,
-											"text": "+panelRankingContrarreloj: JPanel",
+											"text": "+panelRankingContrarreloj",
 											"horizontalAlignment": 0
 										},
 										{
@@ -26884,10 +26920,10 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1467,
+											"top": 1435,
 											"width": 423,
 											"height": 13,
-											"text": "+panelRankingSupervivencia: JPanel",
+											"text": "+panelRankingSupervivencia",
 											"horizontalAlignment": 0
 										},
 										{
@@ -26902,7 +26938,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1482,
+											"top": 1450,
 											"width": 423,
 											"height": 13,
 											"text": "+rankingClasico: Ranking",
@@ -26920,7 +26956,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1497,
+											"top": 1465,
 											"width": 423,
 											"height": 13,
 											"text": "+rankingSupervivencia: Ranking",
@@ -26938,19 +26974,73 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1512,
+											"top": 1480,
 											"width": 423,
 											"height": 13,
 											"text": "+rankingContraReloj: Ranking",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGag3HtUsaxE0w=",
+											"_parent": {
+												"$ref": "AAAAAAGZsTk1LKkr+Wk="
+											},
+											"model": {
+												"$ref": "AAAAAAGag3Hs/8aupZg="
+											},
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 4549,
+											"top": 1495,
+											"width": 423,
+											"height": 13,
+											"text": "+RUTA_RANKING_CLASICO: String",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGag3Hwrsa3i0I=",
+											"_parent": {
+												"$ref": "AAAAAAGZsTk1LKkr+Wk="
+											},
+											"model": {
+												"$ref": "AAAAAAGag3HwX8a03qY="
+											},
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 4549,
+											"top": 1510,
+											"width": 423,
+											"height": 13,
+											"text": "+RUTA_RANKING_CONTRARELOJ: String",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGag3H0O8a99f0=",
+											"_parent": {
+												"$ref": "AAAAAAGZsTk1LKkr+Wk="
+											},
+											"model": {
+												"$ref": "AAAAAAGag3Hz7sa65Ag="
+											},
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 4549,
+											"top": 1525,
+											"width": 423,
+											"height": 13,
+											"text": "+RUTA_RANKING_SUPERVIVENCIA: String",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 4544,
-									"top": 1417,
+									"top": 1385,
 									"width": 433,
-									"height": 113
+									"height": 158
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -26974,7 +27064,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1535,
+											"top": 1548,
 											"width": 423,
 											"height": 13,
 											"text": "+PanelPantallaRanking(c: ControladorVistas)",
@@ -26992,7 +27082,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1550,
+											"top": 1563,
 											"width": 423,
 											"height": 13,
 											"text": "+iniciarComponentes(): void",
@@ -27010,7 +27100,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1565,
+											"top": 1578,
 											"width": 423,
 											"height": 13,
 											"text": "+agregarImagenFondo(): void",
@@ -27028,7 +27118,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1580,
+											"top": 1593,
 											"width": 423,
 											"height": 13,
 											"text": "+crearPanelesRanking(): void",
@@ -27046,7 +27136,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1595,
+											"top": 1608,
 											"width": 423,
 											"height": 13,
 											"text": "+agregarJugadores(ModoDeJuego: int, j: Jugador): void",
@@ -27064,7 +27154,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1610,
+											"top": 1623,
 											"width": 423,
 											"height": 13,
 											"text": "+agregarPanelesRankng(): void",
@@ -27082,7 +27172,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1625,
+											"top": 1638,
 											"width": 423,
 											"height": 13,
 											"text": "+agregarBotonParaAtr(): void",
@@ -27100,7 +27190,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1640,
+											"top": 1653,
 											"width": 423,
 											"height": 13,
 											"text": "+decorarBotonParaAtr(): void",
@@ -27118,10 +27208,10 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1655,
+											"top": 1668,
 											"width": 423,
 											"height": 13,
-											"text": "+transparentarBoton(boton: JButton): void",
+											"text": "+transparentarBoton(boton): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -27136,7 +27226,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1670,
+											"top": 1683,
 											"width": 423,
 											"height": 13,
 											"text": "+registrarOyenteBotonParaAtr(): void",
@@ -27154,7 +27244,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1685,
+											"top": 1698,
 											"width": 423,
 											"height": 13,
 											"text": "+refrescarRankingsEnPantalla(): void",
@@ -27172,19 +27262,55 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1700,
+											"top": 1713,
 											"width": 423,
 											"height": 13,
-											"text": "+mostrarRanking(panel: JPanel, puntajes: Jugador): void",
+											"text": "+mostrarRanking(panel, puntajes: Jugador): void",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGag3PiTsbJ61o=",
+											"_parent": {
+												"$ref": "AAAAAAGZsTk1LKksKwU="
+											},
+											"model": {
+												"$ref": "AAAAAAGag3Ph+8bGizU="
+											},
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 4549,
+											"top": 1728,
+											"width": 423,
+											"height": 13,
+											"text": "+guardarRanking(ranking: Ranking, rutaArchivo: String): void",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGag3Rvn8bXLTM=",
+											"_parent": {
+												"$ref": "AAAAAAGZsTk1LKksKwU="
+											},
+											"model": {
+												"$ref": "AAAAAAGag3RvVMbUeSY="
+											},
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 4549,
+											"top": 1743,
+											"width": 423,
+											"height": 13,
+											"text": "+cargarRanking(rutaArchivo: String): Ranking",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 4544,
-									"top": 1530,
+									"top": 1543,
 									"width": 433,
-									"height": 188
+									"height": 218
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -27199,7 +27325,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 2256,
-									"top": 1024,
+									"top": 992,
 									"width": 10,
 									"height": 10
 								},
@@ -27216,7 +27342,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 2256,
-									"top": 1024,
+									"top": 992,
 									"width": 10,
 									"height": 10
 								}
@@ -27225,9 +27351,9 @@
 							"parentStyle": false,
 							"containerChangeable": true,
 							"left": 4544,
-							"top": 1392,
+							"top": 1360,
 							"width": 432,
-							"height": 326,
+							"height": 401,
 							"nameCompartment": {
 								"$ref": "AAAAAAGZsTk1LKkmVT0="
 							},
@@ -27274,7 +27400,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4512,
-											"top": 1280,
+											"top": 1216,
 											"height": 13
 										},
 										{
@@ -27286,7 +27412,7 @@
 											"font": "Arial;13;1",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1151,
+											"top": 1119,
 											"width": 423,
 											"height": 13,
 											"text": "PanelPantallaPrincipal"
@@ -27301,7 +27427,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4512,
-											"top": 1280,
+											"top": 1216,
 											"width": 73.67724609375,
 											"height": 13,
 											"text": "(from Model)"
@@ -27316,7 +27442,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4512,
-											"top": 1280,
+											"top": 1216,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
@@ -27324,7 +27450,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 4544,
-									"top": 1144,
+									"top": 1112,
 									"width": 433,
 									"height": 25,
 									"stereotypeLabel": {
@@ -27362,7 +27488,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1174,
+											"top": 1142,
 											"width": 423,
 											"height": 13,
 											"text": "+botonEmpezar: BotonEmpezarJuego",
@@ -27380,7 +27506,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1189,
+											"top": 1157,
 											"width": 423,
 											"height": 13,
 											"text": "+botonRanking: BotonRanking",
@@ -27398,17 +27524,17 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1204,
+											"top": 1172,
 											"width": 423,
 											"height": 13,
-											"text": "+imagenFondo: JLabel",
+											"text": "+imagenFondo",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 4544,
-									"top": 1169,
+									"top": 1137,
 									"width": 433,
 									"height": 53
 								},
@@ -27434,7 +27560,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1227,
+											"top": 1195,
 											"width": 423,
 											"height": 13,
 											"text": "+PanelPantallaPrincipal(c: ControladorVistas)",
@@ -27452,7 +27578,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1242,
+											"top": 1210,
 											"width": 423,
 											"height": 13,
 											"text": "+iniciarComponentes(): void",
@@ -27470,7 +27596,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1257,
+											"top": 1225,
 											"width": 423,
 											"height": 13,
 											"text": "+agregarImagenFondo(): void",
@@ -27488,7 +27614,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1272,
+											"top": 1240,
 											"width": 423,
 											"height": 13,
 											"text": "+agregarBotonIniciar(): void",
@@ -27506,7 +27632,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1287,
+											"top": 1255,
 											"width": 423,
 											"height": 13,
 											"text": "+agregarBotonRanking(): void",
@@ -27524,7 +27650,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1302,
+											"top": 1270,
 											"width": 423,
 											"height": 13,
 											"text": "+registrarOyenteBotonInicio(): void",
@@ -27542,7 +27668,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1317,
+											"top": 1285,
 											"width": 423,
 											"height": 13,
 											"text": "+registrarOyenteBotonRanking(): void",
@@ -27560,10 +27686,10 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1332,
+											"top": 1300,
 											"width": 423,
 											"height": 13,
-											"text": "+transparentarBoton(boton: JButton): void",
+											"text": "+transparentarBoton(boton): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -27578,7 +27704,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1347,
+											"top": 1315,
 											"width": 423,
 											"height": 13,
 											"text": "+decorarBotonInicio(): void",
@@ -27596,7 +27722,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1362,
+											"top": 1330,
 											"width": 423,
 											"height": 13,
 											"text": "+decorarBotonRanking(): void",
@@ -27606,7 +27732,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 4544,
-									"top": 1222,
+									"top": 1190,
 									"width": 433,
 									"height": 158
 								},
@@ -27623,7 +27749,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 2256,
-									"top": 640,
+									"top": 608,
 									"width": 10,
 									"height": 10
 								},
@@ -27640,7 +27766,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 2256,
-									"top": 640,
+									"top": 608,
 									"width": 10,
 									"height": 10
 								}
@@ -27649,7 +27775,7 @@
 							"parentStyle": false,
 							"containerChangeable": true,
 							"left": 4544,
-							"top": 1144,
+							"top": 1112,
 							"width": 432,
 							"height": 236,
 							"nameCompartment": {
@@ -27698,7 +27824,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4448,
-											"top": 2832,
+											"top": 2976,
 											"height": 13
 										},
 										{
@@ -27710,7 +27836,7 @@
 											"font": "Arial;13;1",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2047,
+											"top": 2119,
 											"width": 423,
 											"height": 13,
 											"text": "PanelPantallaElegirDominio"
@@ -27725,7 +27851,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4448,
-											"top": 2832,
+											"top": 2976,
 											"width": 73.67724609375,
 											"height": 13,
 											"text": "(from Model)"
@@ -27740,7 +27866,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4448,
-											"top": 2832,
+											"top": 2976,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
@@ -27748,7 +27874,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 4544,
-									"top": 2040,
+									"top": 2112,
 									"width": 433,
 									"height": 25,
 									"stereotypeLabel": {
@@ -27786,10 +27912,10 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2070,
+											"top": 2142,
 											"width": 423,
 											"height": 13,
-											"text": "+botonDominio1: JButton",
+											"text": "+botonDominio1",
 											"horizontalAlignment": 0
 										},
 										{
@@ -27804,10 +27930,10 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2085,
+											"top": 2157,
 											"width": 423,
 											"height": 13,
-											"text": "+botonDominio2: JButton",
+											"text": "+botonDominio2",
 											"horizontalAlignment": 0
 										},
 										{
@@ -27822,10 +27948,10 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2100,
+											"top": 2172,
 											"width": 423,
 											"height": 13,
-											"text": "+imagenFondo: JLabel",
+											"text": "+imagenFondo",
 											"horizontalAlignment": 0
 										},
 										{
@@ -27840,7 +27966,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2115,
+											"top": 2187,
 											"width": 423,
 											"height": 13,
 											"text": "+campoNombre: JTextField",
@@ -27858,17 +27984,17 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2130,
+											"top": 2202,
 											"width": 423,
 											"height": 13,
-											"text": "+botonParaAtr: JButton",
+											"text": "+botonParaAtr",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 4544,
-									"top": 2065,
+									"top": 2137,
 									"width": 433,
 									"height": 83
 								},
@@ -27894,7 +28020,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2153,
+											"top": 2225,
 											"width": 423,
 											"height": 13,
 											"text": "+PanelPantallaElegirDominio(c: ControladorVistas)",
@@ -27912,7 +28038,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2168,
+											"top": 2240,
 											"width": 423,
 											"height": 13,
 											"text": "+iniciarComponentes(): void",
@@ -27930,7 +28056,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2183,
+											"top": 2255,
 											"width": 423,
 											"height": 13,
 											"text": "+agregarImagenFondo(): void",
@@ -27948,7 +28074,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2198,
+											"top": 2270,
 											"width": 423,
 											"height": 13,
 											"text": "+agregarBotonDominio1(): void",
@@ -27966,7 +28092,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2213,
+											"top": 2285,
 											"width": 423,
 											"height": 13,
 											"text": "+agregarBotonDominio2(): void",
@@ -27984,7 +28110,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2228,
+											"top": 2300,
 											"width": 423,
 											"height": 13,
 											"text": "+agregarBotonParaAtr(): void",
@@ -28002,7 +28128,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2243,
+											"top": 2315,
 											"width": 423,
 											"height": 13,
 											"text": "+agregarCampoNombre(): void",
@@ -28020,7 +28146,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2258,
+											"top": 2330,
 											"width": 423,
 											"height": 13,
 											"text": "+registrarOyenteBotonParaAtr(): void",
@@ -28038,7 +28164,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2273,
+											"top": 2345,
 											"width": 423,
 											"height": 13,
 											"text": "+registrarOyenteBotonDominio1(): void",
@@ -28056,7 +28182,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2288,
+											"top": 2360,
 											"width": 423,
 											"height": 13,
 											"text": "+registrarOyenteBotonDominio2(): void",
@@ -28074,10 +28200,10 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2303,
+											"top": 2375,
 											"width": 423,
 											"height": 13,
-											"text": "+transparentarBoton(boton: JButton): void",
+											"text": "+transparentarBoton(boton): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -28092,7 +28218,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2318,
+											"top": 2390,
 											"width": 423,
 											"height": 13,
 											"text": "+transparentarCampoTexto(campo: JTextField): void",
@@ -28110,7 +28236,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2333,
+											"top": 2405,
 											"width": 423,
 											"height": 13,
 											"text": "+decorarBotonDominio1(): void",
@@ -28128,7 +28254,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2348,
+											"top": 2420,
 											"width": 423,
 											"height": 13,
 											"text": "+decorarBotonDominio2(): void",
@@ -28146,7 +28272,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2363,
+											"top": 2435,
 											"width": 423,
 											"height": 13,
 											"text": "+decorarBotonParaAtr(): void",
@@ -28164,7 +28290,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2378,
+											"top": 2450,
 											"width": 423,
 											"height": 13,
 											"text": "+agregarNombre(): void",
@@ -28174,7 +28300,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 4544,
-									"top": 2148,
+									"top": 2220,
 									"width": 433,
 									"height": 248
 								},
@@ -28191,7 +28317,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 2224,
-									"top": 1408,
+									"top": 1480,
 									"width": 10,
 									"height": 10
 								},
@@ -28208,7 +28334,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 2224,
-									"top": 1408,
+									"top": 1480,
 									"width": 10,
 									"height": 10
 								}
@@ -28217,7 +28343,7 @@
 							"parentStyle": false,
 							"containerChangeable": true,
 							"left": 4544,
-							"top": 2040,
+							"top": 2112,
 							"width": 432,
 							"height": 356,
 							"nameCompartment": {
@@ -28357,7 +28483,7 @@
 											"top": 806,
 											"width": 423,
 											"height": 13,
-											"text": "+panelNivel: JPanel",
+											"text": "+panelNivel",
 											"horizontalAlignment": 0
 										},
 										{
@@ -28375,7 +28501,7 @@
 											"top": 821,
 											"width": 423,
 											"height": 13,
-											"text": "+panelInformacion: JPanel",
+											"text": "+panelInformacion",
 											"horizontalAlignment": 0
 										},
 										{
@@ -28393,7 +28519,7 @@
 											"top": 836,
 											"width": 423,
 											"height": 13,
-											"text": "+imagenFondo: JLabel",
+											"text": "+imagenFondo",
 											"horizontalAlignment": 0
 										},
 										{
@@ -28411,7 +28537,7 @@
 											"top": 851,
 											"width": 423,
 											"height": 13,
-											"text": "+imagenFondoPanelInformacion: JLabel",
+											"text": "+imagenFondoPanelInformacion",
 											"horizontalAlignment": 0
 										},
 										{
@@ -28429,7 +28555,7 @@
 											"top": 866,
 											"width": 423,
 											"height": 13,
-											"text": "+labelVida: JLabel",
+											"text": "+labelVida",
 											"horizontalAlignment": 0
 										},
 										{
@@ -28447,7 +28573,7 @@
 											"top": 881,
 											"width": 423,
 											"height": 13,
-											"text": "+labelPuntaje: JLabel",
+											"text": "+labelPuntaje",
 											"horizontalAlignment": 0
 										},
 										{
@@ -28465,7 +28591,7 @@
 											"top": 896,
 											"width": 423,
 											"height": 13,
-											"text": "+labelTextPuntaje: JLabel",
+											"text": "+labelTextPuntaje",
 											"horizontalAlignment": 0
 										},
 										{
@@ -28483,7 +28609,7 @@
 											"top": 911,
 											"width": 423,
 											"height": 13,
-											"text": "+labelTextVida: JLabel",
+											"text": "+labelTextVida",
 											"horizontalAlignment": 0
 										}
 									],
@@ -29503,7 +29629,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 5552,
-											"top": 3568,
+											"top": 3712,
 											"height": 13
 										},
 										{
@@ -29515,7 +29641,7 @@
 											"font": "Arial;13;1",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2431,
+											"top": 2503,
 											"width": 423,
 											"height": 13,
 											"text": "PanelPantallaGameOver"
@@ -29530,7 +29656,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 5552,
-											"top": 3568,
+											"top": 3712,
 											"width": 73.67724609375,
 											"height": 13,
 											"text": "(from Model)"
@@ -29545,7 +29671,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 5552,
-											"top": 3568,
+											"top": 3712,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
@@ -29553,7 +29679,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 4544,
-									"top": 2424,
+									"top": 2496,
 									"width": 433,
 									"height": 25,
 									"stereotypeLabel": {
@@ -29591,10 +29717,10 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2454,
+											"top": 2526,
 											"width": 423,
 											"height": 13,
-											"text": "+botonVolverMenu: JButton",
+											"text": "+botonVolverMenu",
 											"horizontalAlignment": 0
 										},
 										{
@@ -29609,17 +29735,17 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2469,
+											"top": 2541,
 											"width": 423,
 											"height": 13,
-											"text": "+imagenFondo: JLabel",
+											"text": "+imagenFondo",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 4544,
-									"top": 2449,
+									"top": 2521,
 									"width": 433,
 									"height": 38
 								},
@@ -29645,7 +29771,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2492,
+											"top": 2564,
 											"width": 423,
 											"height": 13,
 											"text": "+PanelPantallaGameOver(c: ControladorVistas)",
@@ -29663,7 +29789,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2507,
+											"top": 2579,
 											"width": 423,
 											"height": 13,
 											"text": "+inciarComponentes(): void",
@@ -29681,7 +29807,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2522,
+											"top": 2594,
 											"width": 423,
 											"height": 13,
 											"text": "+agregarImagenFondo(): void",
@@ -29699,7 +29825,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2537,
+											"top": 2609,
 											"width": 423,
 											"height": 13,
 											"text": "+agregarBotonVolverMenu(): void",
@@ -29717,7 +29843,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2552,
+											"top": 2624,
 											"width": 423,
 											"height": 13,
 											"text": "+decorarBotonVolverMenu(): void",
@@ -29735,10 +29861,10 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2567,
+											"top": 2639,
 											"width": 423,
 											"height": 13,
-											"text": "+transparentarBoton(boton: JButton): void",
+											"text": "+transparentarBoton(boton): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -29753,7 +29879,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2582,
+											"top": 2654,
 											"width": 423,
 											"height": 13,
 											"text": "+registrarOyenteBotonVolverMenu(): void",
@@ -29763,7 +29889,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 4544,
-									"top": 2487,
+									"top": 2559,
 									"width": 433,
 									"height": 113
 								},
@@ -29780,7 +29906,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 2776,
-									"top": 1784,
+									"top": 1856,
 									"width": 10,
 									"height": 10
 								},
@@ -29797,7 +29923,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 2776,
-									"top": 1784,
+									"top": 1856,
 									"width": 10,
 									"height": 10
 								}
@@ -29806,7 +29932,7 @@
 							"parentStyle": false,
 							"containerChangeable": true,
 							"left": 4544,
-							"top": 2424,
+							"top": 2496,
 							"width": 432,
 							"height": 176,
 							"nameCompartment": {
@@ -31159,7 +31285,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3280,
-											"top": 2640,
+											"top": 2784,
 											"height": 13
 										},
 										{
@@ -31171,7 +31297,7 @@
 											"font": "Arial;13;1",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1743,
+											"top": 1815,
 											"width": 423,
 											"height": 13,
 											"text": "PanelPantallaElegirModoDeJuego"
@@ -31186,7 +31312,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3280,
-											"top": 2640,
+											"top": 2784,
 											"width": 73.67724609375,
 											"height": 13,
 											"text": "(from Model)"
@@ -31201,7 +31327,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3280,
-											"top": 2640,
+											"top": 2784,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
@@ -31209,7 +31335,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 4544,
-									"top": 1736,
+									"top": 1808,
 									"width": 433,
 									"height": 25,
 									"stereotypeLabel": {
@@ -31247,10 +31373,10 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1766,
+											"top": 1838,
 											"width": 423,
 											"height": 13,
-											"text": "+botonJugarClasico: JButton",
+											"text": "+botonJugarClasico",
 											"horizontalAlignment": 0
 										},
 										{
@@ -31265,10 +31391,10 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1781,
+											"top": 1853,
 											"width": 423,
 											"height": 13,
-											"text": "+botonJugarContrareloj: JButton",
+											"text": "+botonJugarContrareloj",
 											"horizontalAlignment": 0
 										},
 										{
@@ -31283,10 +31409,10 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1796,
+											"top": 1868,
 											"width": 423,
 											"height": 13,
-											"text": "+botonJugarSupervivencia: JButton",
+											"text": "+botonJugarSupervivencia",
 											"horizontalAlignment": 0
 										},
 										{
@@ -31301,17 +31427,17 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1811,
+											"top": 1883,
 											"width": 423,
 											"height": 13,
-											"text": "+imagenFondo: JLabel",
+											"text": "+imagenFondo",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 4544,
-									"top": 1761,
+									"top": 1833,
 									"width": 433,
 									"height": 68
 								},
@@ -31337,7 +31463,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1834,
+											"top": 1906,
 											"width": 423,
 											"height": 13,
 											"text": "+PanelPantallaElegirModoDeJuego(c: ControladorVistas)",
@@ -31355,7 +31481,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1849,
+											"top": 1921,
 											"width": 423,
 											"height": 13,
 											"text": "+inciarComponentes(): void",
@@ -31373,7 +31499,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1864,
+											"top": 1936,
 											"width": 423,
 											"height": 13,
 											"text": "+agregarImagenFondo(): void",
@@ -31391,7 +31517,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1879,
+											"top": 1951,
 											"width": 423,
 											"height": 13,
 											"text": "+agregarBotonClasico(): void",
@@ -31409,7 +31535,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1894,
+											"top": 1966,
 											"width": 423,
 											"height": 13,
 											"text": "+agregarBotonContrareloj(): void",
@@ -31427,7 +31553,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1909,
+											"top": 1981,
 											"width": 423,
 											"height": 13,
 											"text": "+agregarBotonSupervivencia(): void",
@@ -31445,7 +31571,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1924,
+											"top": 1996,
 											"width": 423,
 											"height": 13,
 											"text": "+registrarOyenteBotonClasico(): void",
@@ -31463,7 +31589,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1939,
+											"top": 2011,
 											"width": 423,
 											"height": 13,
 											"text": "+registrarOyenteBotonContrarelojs(): void",
@@ -31481,7 +31607,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1954,
+											"top": 2026,
 											"width": 423,
 											"height": 13,
 											"text": "+registrarOyenteBotonSupervivencia(): void",
@@ -31499,10 +31625,10 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1969,
+											"top": 2041,
 											"width": 423,
 											"height": 13,
-											"text": "+transparentarBoton(boton: JButton): void",
+											"text": "+transparentarBoton(boton): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -31517,7 +31643,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1984,
+											"top": 2056,
 											"width": 423,
 											"height": 13,
 											"text": "+decorarBotonClasico(): void",
@@ -31535,7 +31661,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 1999,
+											"top": 2071,
 											"width": 423,
 											"height": 13,
 											"text": "+decorarBotonContrareloj(): void",
@@ -31553,7 +31679,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 4549,
-											"top": 2014,
+											"top": 2086,
 											"width": 423,
 											"height": 13,
 											"text": "+decorarBotonSupervivencia(): void",
@@ -31563,7 +31689,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 4544,
-									"top": 1829,
+									"top": 1901,
 									"width": 433,
 									"height": 203
 								},
@@ -31580,7 +31706,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 1640,
-									"top": 1320,
+									"top": 1392,
 									"width": 10,
 									"height": 10
 								},
@@ -31597,7 +31723,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 1640,
-									"top": 1320,
+									"top": 1392,
 									"width": 10,
 									"height": 10
 								}
@@ -31606,7 +31732,7 @@
 							"parentStyle": false,
 							"containerChangeable": true,
 							"left": 4544,
-							"top": 1736,
+							"top": 1808,
 							"width": 432,
 							"height": 296,
 							"nameCompartment": {
@@ -50410,6 +50536,15 @@
 							},
 							"name": "puntaje",
 							"type": "int"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGag3EVAcajE7E=",
+							"_parent": {
+								"$ref": "AAAAAAGZgrzV8mvAsD4="
+							},
+							"name": "serialVersionUID",
+							"type": "int"
 						}
 					],
 					"operations": [
@@ -55553,6 +55688,15 @@
 							},
 							"name": "cantJugadores",
 							"type": "int"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGag3Ww4MbgE0s=",
+							"_parent": {
+								"$ref": "AAAAAAGZgsmn53HA4Cs="
+							},
+							"name": "serialVersionUID",
+							"type": "int"
 						}
 					],
 					"operations": [
@@ -55793,7 +55937,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGZgsrv8XIn6h4="
 							},
-							"name": "tiempoParaAparecerVida"
+							"name": "tiempoParaAparecerVida",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -62612,10 +62757,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZsTjy5Kj2Msk="
 							},
-							"name": "ventana",
-							"type": {
-								"$ref": "AAAAAAGZsTbIa6ieglM="
-							}
+							"name": "ventana"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -63531,10 +63673,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZsTk1LKkjejI="
 							},
-							"name": "botonParaAtr",
-							"type": {
-								"$ref": "AAAAAAGZ8/Uqt8nLgz4="
-							}
+							"name": "botonParaAtr"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -63542,10 +63681,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZsTk1LKkjejI="
 							},
-							"name": "panelRankingClasico",
-							"type": {
-								"$ref": "AAAAAAGZsTw1iqn5y6o="
-							}
+							"name": "panelRankingClasico"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -63553,10 +63689,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZsTk1LKkjejI="
 							},
-							"name": "panelRankingContrarreloj",
-							"type": {
-								"$ref": "AAAAAAGZsTw1iqn5y6o="
-							}
+							"name": "panelRankingContrarreloj"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -63564,10 +63697,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZsTk1LKkjejI="
 							},
-							"name": "panelRankingSupervivencia",
-							"type": {
-								"$ref": "AAAAAAGZsTw1iqn5y6o="
-							}
+							"name": "panelRankingSupervivencia"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -63601,6 +63731,33 @@
 							"type": {
 								"$ref": "AAAAAAGZgsmn53HA4Cs="
 							}
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGag3Hs/8aupZg=",
+							"_parent": {
+								"$ref": "AAAAAAGZsTk1LKkjejI="
+							},
+							"name": "RUTA_RANKING_CLASICO",
+							"type": "String"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGag3HwX8a03qY=",
+							"_parent": {
+								"$ref": "AAAAAAGZsTk1LKkjejI="
+							},
+							"name": "RUTA_RANKING_CONTRARELOJ",
+							"type": "String"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGag3Hz7sa65Ag=",
+							"_parent": {
+								"$ref": "AAAAAAGZsTk1LKkjejI="
+							},
+							"name": "RUTA_RANKING_SUPERVIVENCIA",
+							"type": "String"
 						}
 					],
 					"operations": [
@@ -63792,10 +63949,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGaKF0H+OeThak="
 									},
-									"name": "boton",
-									"type": {
-										"$ref": "AAAAAAGZ8/Uqt8nLgz4="
-									}
+									"name": "boton"
 								},
 								{
 									"_type": "UMLParameter",
@@ -63860,10 +64014,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGagri2wANtkkg="
 									},
-									"name": "panel",
-									"type": {
-										"$ref": "AAAAAAGZsTw1iqn5y6o="
-									}
+									"name": "panel"
 								},
 								{
 									"_type": "UMLParameter",
@@ -63883,6 +64034,75 @@
 										"$ref": "AAAAAAGagri2wANtkkg="
 									},
 									"type": "void",
+									"direction": "return"
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAGag3Ph+8bGizU=",
+							"_parent": {
+								"$ref": "AAAAAAGZsTk1LKkjejI="
+							},
+							"name": "guardarRanking",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGag3ReCcbO0u8=",
+									"_parent": {
+										"$ref": "AAAAAAGag3Ph+8bGizU="
+									},
+									"name": "ranking",
+									"type": {
+										"$ref": "AAAAAAGZgsmn53HA4Cs="
+									}
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGag3ReCsbPok0=",
+									"_parent": {
+										"$ref": "AAAAAAGag3Ph+8bGizU="
+									},
+									"name": "rutaArchivo",
+									"type": "String"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGag3ReDcbQq5k=",
+									"_parent": {
+										"$ref": "AAAAAAGag3Ph+8bGizU="
+									},
+									"type": "void",
+									"direction": "return"
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAGag3RvVMbUeSY=",
+							"_parent": {
+								"$ref": "AAAAAAGZsTk1LKkjejI="
+							},
+							"name": "cargarRanking",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGag3S7jsbcr3o=",
+									"_parent": {
+										"$ref": "AAAAAAGag3RvVMbUeSY="
+									},
+									"name": "rutaArchivo",
+									"type": "String"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGag3S7ksbdEr4=",
+									"_parent": {
+										"$ref": "AAAAAAGag3RvVMbUeSY="
+									},
+									"type": {
+										"$ref": "AAAAAAGZgsmn53HA4Cs="
+									},
 									"direction": "return"
 								}
 							]
@@ -63925,10 +64145,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZsTllxKlN/4Y="
 							},
-							"name": "imagenFondo",
-							"type": {
-								"$ref": "AAAAAAGZsTNk+6f/6RA="
-							}
+							"name": "imagenFondo"
 						}
 					],
 					"operations": [
@@ -64081,10 +64298,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGaKFbuiOcJ51Y="
 									},
-									"name": "boton",
-									"type": {
-										"$ref": "AAAAAAGZ8/Uqt8nLgz4="
-									}
+									"name": "boton"
 								},
 								{
 									"_type": "UMLParameter",
@@ -64151,10 +64365,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZsTn5Wql3AvM="
 							},
-							"name": "botonDominio1",
-							"type": {
-								"$ref": "AAAAAAGZ8/Uqt8nLgz4="
-							}
+							"name": "botonDominio1"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -64162,10 +64373,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZsTn5Wql3AvM="
 							},
-							"name": "botonDominio2",
-							"type": {
-								"$ref": "AAAAAAGZ8/Uqt8nLgz4="
-							}
+							"name": "botonDominio2"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -64173,10 +64381,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZsTn5Wql3AvM="
 							},
-							"name": "imagenFondo",
-							"type": {
-								"$ref": "AAAAAAGZsTNk+6f/6RA="
-							}
+							"name": "imagenFondo"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -64193,10 +64398,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZsTn5Wql3AvM="
 							},
-							"name": "botonParaAtr",
-							"type": {
-								"$ref": "AAAAAAGZ8/Uqt8nLgz4="
-							}
+							"name": "botonParaAtr"
 						}
 					],
 					"operations": [
@@ -64406,10 +64608,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGaKGCglOgN3Io="
 									},
-									"name": "boton",
-									"type": {
-										"$ref": "AAAAAAGZ8/Uqt8nLgz4="
-									}
+									"name": "boton"
 								},
 								{
 									"_type": "UMLParameter",
@@ -64542,10 +64741,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZsTtn3amj1Ks="
 							},
-							"name": "panelNivel",
-							"type": {
-								"$ref": "AAAAAAGZsTw1iqn5y6o="
-							}
+							"name": "panelNivel"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -64553,10 +64749,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZsTtn3amj1Ks="
 							},
-							"name": "panelInformacion",
-							"type": {
-								"$ref": "AAAAAAGZsTw1iqn5y6o="
-							}
+							"name": "panelInformacion"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -64564,10 +64757,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZsTtn3amj1Ks="
 							},
-							"name": "imagenFondo",
-							"type": {
-								"$ref": "AAAAAAGZsTNk+6f/6RA="
-							}
+							"name": "imagenFondo"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -64575,10 +64765,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZsTtn3amj1Ks="
 							},
-							"name": "imagenFondoPanelInformacion",
-							"type": {
-								"$ref": "AAAAAAGZsTNk+6f/6RA="
-							}
+							"name": "imagenFondoPanelInformacion"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -64586,10 +64773,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZsTtn3amj1Ks="
 							},
-							"name": "labelVida",
-							"type": {
-								"$ref": "AAAAAAGZsTNk+6f/6RA="
-							}
+							"name": "labelVida"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -64597,10 +64781,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZsTtn3amj1Ks="
 							},
-							"name": "labelPuntaje",
-							"type": {
-								"$ref": "AAAAAAGZsTNk+6f/6RA="
-							}
+							"name": "labelPuntaje"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -64608,10 +64789,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZsTtn3amj1Ks="
 							},
-							"name": "labelTextPuntaje",
-							"type": {
-								"$ref": "AAAAAAGZsTNk+6f/6RA="
-							}
+							"name": "labelTextPuntaje"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -64619,10 +64797,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZsTtn3amj1Ks="
 							},
-							"name": "labelTextVida",
-							"type": {
-								"$ref": "AAAAAAGZsTNk+6f/6RA="
-							}
+							"name": "labelTextVida"
 						}
 					],
 					"operations": [
@@ -65532,10 +65707,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZu8iiKtjWKj0="
 							},
-							"name": "botonVolverMenu",
-							"type": {
-								"$ref": "AAAAAAGZ8/Uqt8nLgz4="
-							}
+							"name": "botonVolverMenu"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -65543,10 +65715,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZu8iiKtjWKj0="
 							},
-							"name": "imagenFondo",
-							"type": {
-								"$ref": "AAAAAAGZsTNk+6f/6RA="
-							}
+							"name": "imagenFondo"
 						}
 					],
 					"operations": [
@@ -65661,10 +65830,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGaKG83PukYkmY="
 									},
-									"name": "boton",
-									"type": {
-										"$ref": "AAAAAAGZ8/Uqt8nLgz4="
-									}
+									"name": "boton"
 								},
 								{
 									"_type": "UMLParameter",
@@ -66667,10 +66833,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZ8/tol8vEZpk="
 							},
-							"name": "botonJugarClasico",
-							"type": {
-								"$ref": "AAAAAAGZ8/Uqt8nLgz4="
-							}
+							"name": "botonJugarClasico"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -66678,10 +66841,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZ8/tol8vEZpk="
 							},
-							"name": "botonJugarContrareloj",
-							"type": {
-								"$ref": "AAAAAAGZ8/Uqt8nLgz4="
-							}
+							"name": "botonJugarContrareloj"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -66689,10 +66849,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZ8/tol8vEZpk="
 							},
-							"name": "botonJugarSupervivencia",
-							"type": {
-								"$ref": "AAAAAAGZ8/Uqt8nLgz4="
-							}
+							"name": "botonJugarSupervivencia"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -66700,10 +66857,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGZ8/tol8vEZpk="
 							},
-							"name": "imagenFondo",
-							"type": {
-								"$ref": "AAAAAAGZsTNk+6f/6RA="
-							}
+							"name": "imagenFondo"
 						}
 					],
 					"operations": [
@@ -66894,10 +67048,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGaKHPuiemhIf8="
 									},
-									"name": "boton",
-									"type": {
-										"$ref": "AAAAAAGZ8/Uqt8nLgz4="
-									}
+									"name": "boton"
 								},
 								{
 									"_type": "UMLParameter",

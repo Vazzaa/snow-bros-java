@@ -1,6 +1,10 @@
 package Entidades.Jugador;
 
-public class Jugador {
+import java.io.Serializable;
+
+public class Jugador implements Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     protected String nombre;
     protected int puntaje;
