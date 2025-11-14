@@ -32,12 +32,11 @@ public class EstadoMovimietoSnowBro {
     public void cambiarDireccion(int direccion){
         if (direccion == ConstantesTeclado.DERECHA){
             this.direccion = 0;
-        } else {
-            if (direccion == ConstantesTeclado.IZQUIERDA){
-                this.direccion=180;
-            }
-        }   
-    }
+        } else if (direccion == ConstantesTeclado.IZQUIERDA){
+            this.direccion=180;
+        }
+    }   
+    
     
     
     public void mover(boolean derecha, boolean izquierda, boolean salto) {
