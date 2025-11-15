@@ -82,14 +82,20 @@ public class PanelPantallaNivel extends PanelVista{
     }
 
     public void actualizarNivel(int numeroNivel) {
-        labelTextNivel.setText(String.valueOf(numeroNivel));
+        if (numeroNivel > 0) {
+            int dominio = ((numeroNivel - 1) / 3) + 1;
+            int subNivel = ((numeroNivel - 1) % 3) + 1;
+            labelTextNivel.setText(dominio + "." + subNivel);
+        } else {
+            labelTextNivel.setText(String.valueOf(numeroNivel));
+        }
     }  
 
     public void reiniciarPanel() {
         labelTextPuntaje.setText("0");
         labelTextVida.setText("3");
         labelTextTiempo.setText("--:--");
-        labelTextNivel.setText("1");
+        actualizarNivel(1);
     }
 
     public void setImagenDeFondo(String rutaImagen) {
@@ -125,7 +131,7 @@ public class PanelPantallaNivel extends PanelVista{
         panelNivel.setBounds(0, 0, ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
         panelNivel.setLayout(null);
         panelNivel.add(imagenFondo);
-        this.add(panelNivel);
+        this.add(panelNivel, BorderLayout.CENTER);
     }
 
     protected void agregarPanelInformacion() {
@@ -183,19 +189,19 @@ public class PanelPantallaNivel extends PanelVista{
         
         panelInformacion.add(labelPuntaje);
         panelInformacion.add(labelTextPuntaje);
-        panelInformacion.add(Box.createHorizontalStrut(100));
+        panelInformacion.add(Box.createHorizontalStrut(40));
         panelInformacion.add(labelTiempo);
         panelInformacion.add(labelTextTiempo);
-        panelInformacion.add(Box.createHorizontalStrut(100)); 
+        panelInformacion.add(Box.createHorizontalStrut(40)); 
         panelInformacion.add(labelVida);
         panelInformacion.add(labelTextVida);
-        panelInformacion.add(Box.createHorizontalStrut(100));
+        panelInformacion.add(Box.createHorizontalStrut(40));
         panelInformacion.add(labelNivel);
         panelInformacion.add(labelTextNivel);
-
-
         this.add(panelInformacion, BorderLayout.NORTH);
     }
+
+
     public void limpiarPanel() {
         imagenFondo.removeAll();
         imagenFondo.revalidate();
