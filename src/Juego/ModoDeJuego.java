@@ -112,6 +112,7 @@ public abstract class ModoDeJuego implements ControladorJuego {
 		nivelActual.getSnowBro().sumarPuntaje(puntaje);
 
 		numeroNivelActual = numeroNivel;
+		controlaGrafica.actualizarNivel(numeroNivel);
 		registrarObservers();
 	}
 

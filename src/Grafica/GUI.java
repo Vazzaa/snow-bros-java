@@ -295,6 +295,13 @@ public class GUI implements ControladorGrafica, ControladorVistas {
 		}
 	}
 
+	@Override
+	public void actualizarNivel(int numeroNivel) {
+    	if (panelNivel != null) {
+        	panelNivel.actualizarNivel(numeroNivel);
+   		}
+	}
+
 	public void setImagenDeFondoNivel(String rutaImagen) {
 		panelNivel.setImagenDeFondo(rutaImagen);
 		refrescar();

@@ -21,6 +21,7 @@ public interface ControladorGrafica {
 	public void sacarJugador(EntidadJugador e);
 	public boolean verificarColisiones(Entidad e);
 	public void actualizarTiempo(String timepo);
+	public void actualizarNivel(int numeroNivel);
 	public void setImagenDeFondoNivel(String rutaImagen);
 	public void agregarAlRanking(Jugador jugador);
 	public void limpiarNivel();
