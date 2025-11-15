@@ -325,7 +325,7 @@ public class Nivel {
     }
 
     public void spawnMoghera() {
-        if (!aparecioMoghera && numero == 3 && misEnemigos.isEmpty()) {
+        if (!aparecioMoghera && numero == 3) {
             Enemigo moghera = miFabrica.getMoghera(580, 7750);
             agregarEnemigos(moghera);
             miJuego.registrarObserver(moghera);

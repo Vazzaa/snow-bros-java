@@ -10,7 +10,9 @@ public class ContraReloj extends ModoDeJuego{
 
     protected long tiempoInicio;
     protected long tiempoRestante;
+    protected long tiempoInicioNivel;
     protected boolean tiempoAgotado;
+    protected boolean aparecioMoghera;
 
     public ContraReloj(ControladorGrafica controladorGrafica) {
         super(controladorGrafica);
@@ -22,8 +24,10 @@ public class ContraReloj extends ModoDeJuego{
         jugador = new Jugador(nombreJugador, 0);
         
         tiempoInicio = System.currentTimeMillis();
+        tiempoInicioNivel = System.currentTimeMillis();
         tiempoRestante = TIEMPO_LIMITE_MS;
         tiempoAgotado = false;
+        aparecioMoghera = false;
 
         GestorSonidos.getInstancia().reproducirMusica("src/Sonidos/Background/03_Yukida-March_(Stage2_4).wav");
         cargarNivel(1, 0);
@@ -69,9 +73,12 @@ public class ContraReloj extends ModoDeJuego{
             tiempoRestante = 0;
             tiempoAgotado = true;
         }
-        
-        if (numeroNivelActual == 3 && (tiempoTranscurrido >= 20000 || nivelActual.getMisEnemigos().isEmpty()))
+
+        long tiempoTranscurridoNivel = System.currentTimeMillis() - tiempoInicioNivel;;
+        if (numeroNivelActual == 3 && !aparecioMoghera && (tiempoTranscurridoNivel >= 20000 || nivelActual.getMisEnemigos().isEmpty())) {
+            aparecioMoghera = true;
             nivelActual.spawnMoghera();
+        }
 
         controlaGrafica.actualizarTiempo(getTiempoRestanteFormateado());
 
@@ -127,6 +134,8 @@ public class ContraReloj extends ModoDeJuego{
             System.out.println("Cargando nivel " + siguienteNivel + "...");
             cargarNivel(siguienteNivel, puntajeActual);
             iniciarHilos();
+            tiempoInicioNivel = System.currentTimeMillis();
+            aparecioMoghera = false;
             if (numeroNivelActual == 6)
                 GestorSonidos.getInstancia().reproducirEfecto("bossintro");
         } else {
