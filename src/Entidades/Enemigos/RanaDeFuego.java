@@ -148,6 +148,7 @@ public class RanaDeFuego extends Enemigo {
                 if (estructura.bloquearMovimientoHorizontal() || estructura.destruyeBolaDeNieve()) {
                     Hitbox hitboxFutura = new Hitbox(getHitbox().getAncho(), getHitbox().getAlto(), nuevaX, getPosY());
                     if (colisionaAABB(hitboxFutura, estructura.getHitbox())) {
+                        estructura.destruir();
                         destruirBolaDeNieve();
                         return;
                     }

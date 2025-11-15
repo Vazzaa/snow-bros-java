@@ -39,23 +39,26 @@ public class ParedDestructible extends Pared implements Destructible {
         //No afecta a enemigos
     }
 
+    @Override
     public void afectar(Proyectil p) {
+        System.out.println("Pared Destructible afectada por Proyectil");
         if (!p.puedeRomperParedDestructible()) {
-            return;
-        }
-        
-        long tiempoActual = System.currentTimeMillis();
-        long tiempoCreacion = p.getTiempoCreacion();
-        if (tiempoActual - tiempoCreacion > 50) {
-            int pieProyectil = miHitbox.getPosY();
-            int techoPared = this.miHitbox.getPosY() + this.miHitbox.getAlto();
-            if (pieProyectil <= techoPared + 5) {
+
+            long tiempoActual = System.currentTimeMillis();
+            long tiempoCreacion = p.getTiempoCreacion();
+    
+            if (tiempoActual - tiempoCreacion > 50) {
                 Vida -= 1;
-                if (Vida <= 0) {
-                    this.destruir();
-                }
             }
-        }  
+            p.eliminar(); 
+        }
+    }
+
+
+    public void afectar(BolaDeNieve b) {
+        System.out.println("Pared Destructible afectada por Bola de Nieve");
+        this.destruir();
+        actualizar();
     }
 
     public void setSkin(Skin s) {
